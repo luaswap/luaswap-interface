@@ -324,7 +324,7 @@ export default function AddLiquidity({
             )}
             pendingText={pendingText}
           />
-          <AutoColumn gap="20px">
+          <AutoColumn gap="20px" style={{ padding: '1em' }}>
             {noLiquidity ||
               (isCreate && (
                 <ColumnCenter>
@@ -389,9 +389,12 @@ export default function AddLiquidity({
                 </LightCard>
               </>
             )}
-
+          </AutoColumn>
+          <AutoColumn>
             {!account ? (
-              <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+              <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
+                <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+              </div>
             ) : (
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||
