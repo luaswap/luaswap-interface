@@ -18,7 +18,6 @@ export interface ListsState {
   readonly lastInitializedDefaultListOfLists?: string[]
   readonly selectedListUrl: string | undefined
 }
-
 type ListState = ListsState['byUrl'][string]
 
 const NEW_LIST_STATE: ListState = {

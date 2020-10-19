@@ -190,6 +190,9 @@ export default function Swap() {
     if (!swapCallback) {
       return
     }
+    // console.log(tradeToConfirm)
+    // console.log(showConfirm)
+
     setSwapState({ attemptingTxn: true, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: undefined })
     swapCallback()
       .then(hash => {
