@@ -50,7 +50,6 @@ export default function AddressClaimModal({ isOpen, onDismiss }: { isOpen: boole
   function handleRecipientType(val: string) {
     setTyped(val)
   }
-
   // monitor for third party recipient of claim
   const { address: parsedAddress } = useENS(typed)
 

@@ -190,6 +190,9 @@ export default function Swap() {
     if (!swapCallback) {
       return
     }
+    // console.log(tradeToConfirm)
+    // console.log(showConfirm)
+
     setSwapState({ attemptingTxn: true, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: undefined })
     swapCallback()
       .then(hash => {
@@ -288,7 +291,7 @@ export default function Swap() {
             onDismiss={handleConfirmDismiss}
           />
 
-          <AutoColumn gap={'md'}>
+          <AutoColumn gap={'md'} style={{ padding: '2em 1em 0 1em' }}>
             <CurrencyInputPanel
               label={independentField === Field.OUTPUT && !showWrap && trade ? 'From (estimated)' : 'From'}
               value={formattedAmounts[Field.INPUT]}

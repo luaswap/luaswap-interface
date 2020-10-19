@@ -64,8 +64,8 @@ export const ButtonPrimary = styled(Base)`
 `
 
 export const ButtonLight = styled(Base)`
-  background-color: ${({ theme }) => theme.primary5};
-  color: ${({ theme }) => theme.primaryText1};
+  background-color: ${({ theme }) => theme.primary1};
+  color: ${({ theme }) => theme.text1};
   font-size: 16px;
   font-weight: 500;
   &:focus {
@@ -160,7 +160,7 @@ export const ButtonPink = styled(Base)`
 `
 
 export const ButtonOutlined = styled(Base)`
-  border: 1px solid ${({ theme }) => theme.bg2};
+  border: 1px solid ${({ theme }) => theme.bg3};
   background-color: transparent;
   color: ${({ theme }) => theme.text1};
 
