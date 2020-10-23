@@ -1,7 +1,7 @@
 import useENS from '../../hooks/useENS'
 import { Version } from '../../hooks/useToggledVersion'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade } from '@uniswap/sdk'
+import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade } from '@luaswap/sdk'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -89,9 +89,9 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
 }
 
 const BAD_RECIPIENT_ADDRESSES: string[] = [
-  '0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f', // v2 factory
-  '0xf164fC0Ec4E93095b804a4795bBe1e041497b92a', // v2 router 01
-  '0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D' // v2 router 02
+  '0x0160835743D9bbd788321dfEff9f58F231677d6A', // v2 factory 0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f
+  // '0xf164fC0Ec4E93095b804a4795bBe1e041497b92a', // v2 router 01
+  '0x623E6248Ba61f8aB694b1e2FD0aac7965cF3F5C4' // v2 router 02 0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D
 ]
 
 /**
