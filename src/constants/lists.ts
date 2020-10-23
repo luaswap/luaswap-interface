@@ -1,8 +1,14 @@
 // the Uniswap Default token list lives here
-export const DEFAULT_TOKEN_LIST_URL = 'tokens.uniswap.eth'
+const COMMIT_HASH = '30542b5be8c6c6950f41c8736a0d2ea7c6cf8ca'
+
+export const DEFAULT_TOKEN_LIST_URL =
+  'https://raw.githubusercontent.com/tomochain/luaswap-token-list/' +
+  COMMIT_HASH +
+  '/build/luaswap-default.tokenlist.json'
 
 export const DEFAULT_LIST_OF_LISTS: string[] = [
   DEFAULT_TOKEN_LIST_URL
+  //'tokens.uniswap.eth'
   // 't2crtokens.eth', // kleros
   // 'tokens.1inch.eth', // 1inch
   // 'synths.snx.eth',
