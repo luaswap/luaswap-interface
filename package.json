@@ -118,6 +118,6 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@luaswap/sdk": "^1.2.0"
+    "@luaswap/sdk": "^1.2.3"
   }
 }

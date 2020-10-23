@@ -1972,10 +1972,10 @@
     "@babel/runtime" "^7.7.2"
     core-js "^3.4.1"
 
-"@luaswap/sdk@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@luaswap/sdk/-/sdk-1.2.0.tgz#927ed589c9bf794940bd8654ebff73197d584c3e"
-  integrity sha512-voawY3y2xbGA6lDZ8/Nt8LTtGhAMDo7X79lPCp5IzEpgy5jaAU+oW5n+jUc+qItpvr7s+BgOlbCms0c1cbMo4Q==
+"@luaswap/sdk@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@luaswap/sdk/-/sdk-1.2.3.tgz#930c8c57decbb434de6ff794169d7ae259a89394"
+  integrity sha512-0ymNON9uHz+fXcqARP5xZrCVF7WePZXGBSta045WpuO3RHLfwPSaPTSXnwcQ0dkEWEx4neiBbb6Oug0FGz+AOw==
   dependencies:
     "@uniswap/v2-core" "^1.0.0"
     big.js "^5.2.2"
