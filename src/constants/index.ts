@@ -80,9 +80,7 @@ export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
-  [ChainId.MAINNET]: [
-    [USDC, USDT]
-  ]
+  [ChainId.MAINNET]: [[USDC, USDT]]
 }
 
 export interface WalletInfo {

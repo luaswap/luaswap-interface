@@ -550,9 +550,10 @@ export default function RemoveLiquidity({
                       </RowFixed>
                     </RowBetween>
                     {pair && (
-                        <RowRight color={ theme.text3 }>
-                            1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
-                        </RowRight>
+                      <RowRight color={theme.text3}>
+                        1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'}{' '}
+                        {currencyB?.symbol}
+                      </RowRight>
                     )}
                     <RowBetween>
                       <Text fontSize={24} fontWeight={500}>
@@ -566,9 +567,10 @@ export default function RemoveLiquidity({
                       </RowFixed>
                     </RowBetween>
                     {pair && (
-                        <RowRight color={ theme.text3 }>
-                            1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
-                        </RowRight>
+                      <RowRight color={theme.text3}>
+                        1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'}{' '}
+                        {currencyA?.symbol}
+                      </RowRight>
                     )}
                     {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
@@ -611,12 +613,19 @@ export default function RemoveLiquidity({
                   id="liquidity-amount"
                 />
                 {pair && (
-                  <div style={{ padding:'0 20px 0 20px', display: 'flex', fontSize: '12px', justifyContent: 'space-between'}}>
-                    <RowBetween color={ theme.text3 }>
-                        1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
+                  <div
+                    style={{
+                      padding: '0 20px 0 20px',
+                      display: 'flex',
+                      fontSize: '12px',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <RowBetween color={theme.text3}>
+                      1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
                     </RowBetween>
-                    <RowRight color={ theme.text3 }>
-                        1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
+                    <RowRight color={theme.text3}>
+                      1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
                     </RowRight>
                   </div>
                 )}
@@ -634,7 +643,7 @@ export default function RemoveLiquidity({
                   onCurrencySelect={handleSelectCurrencyA}
                   id="remove-liquidity-tokena"
                 />
-                <ColumnCenter>                
+                <ColumnCenter>
                   <Plus size="16" color={theme.text2} />
                 </ColumnCenter>
                 <CurrencyInputPanel
@@ -655,13 +664,19 @@ export default function RemoveLiquidity({
                 <RowBetween>
                   Withdraw Fee:
                   <div>
-                    {formattedAmounts[Field.CURRENCY_A] ? (parseFloat( formattedAmounts[Field.CURRENCY_A] ) * BASE_WITHDRAW_FEE).toFixed(6) : 0 } {currencyA?.symbol}
+                    {formattedAmounts[Field.CURRENCY_A]
+                      ? (parseFloat(formattedAmounts[Field.CURRENCY_A]) * BASE_WITHDRAW_FEE).toFixed(6)
+                      : 0}{' '}
+                    {currencyA?.symbol}
                   </div>
                 </RowBetween>
                 <RowBetween>
                   <div />
                   <div>
-                  {formattedAmounts[Field.CURRENCY_B] ? (parseFloat( formattedAmounts[Field.CURRENCY_B] ) * BASE_WITHDRAW_FEE).toFixed(6) : 0 } {currencyB?.symbol}
+                    {formattedAmounts[Field.CURRENCY_B]
+                      ? (parseFloat(formattedAmounts[Field.CURRENCY_B]) * BASE_WITHDRAW_FEE).toFixed(6)
+                      : 0}{' '}
+                    {currencyB?.symbol}
                   </div>
                 </RowBetween>
               </div>

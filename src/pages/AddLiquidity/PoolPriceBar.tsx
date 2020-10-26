@@ -35,7 +35,7 @@ export function PoolPriceBar({
             {currencies[Field.CURRENCY_A]?.symbol} per {currencies[Field.CURRENCY_B]?.symbol}
           </Text>
         </AutoColumn>
-        <AutoColumn justify="center" >
+        <AutoColumn justify="center">
           <TYPE.black>
             {noLiquidity && price
               ? '100'
