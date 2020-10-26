@@ -102,7 +102,7 @@ export default function SwapModalFooter({
               Liquidity Provider Fee
             </TYPE.black>
             <QuestionHelper
-              text={`A portion of each trade (${BASE_EXCHANGE_FEE}%) goes to liquidity providers as a protocol incentive.`}
+              text={`A portion of each trade (${BASE_EXCHANGE_FEE}) goes to liquidity providers as a protocol incentive.`}
             />
           </RowFixed>
           <TYPE.black fontSize={14}>

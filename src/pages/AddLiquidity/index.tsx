@@ -390,7 +390,7 @@ export default function AddLiquidity({
               </>
             )}
           </AutoColumn>
-          <AutoColumn>
+          <AutoColumn style={{ padding: '1em' }}>
             {!account ? (
               <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>

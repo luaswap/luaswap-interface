@@ -3,8 +3,11 @@ import { CurrencyAmount, Fraction, JSBI, Percent, TokenAmount, Trade } from '@lu
 import { ALLOWED_PRICE_IMPACT_HIGH, ALLOWED_PRICE_IMPACT_LOW, ALLOWED_PRICE_IMPACT_MEDIUM } from '../constants'
 import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
-export const BASE_EXCHANGE_FEE = 0.4
+
+export const BASE_EXCHANGE_FEE = '0.4%' // Only used for display on string
+export const BASE_WITHDRAW_FEE = 0.001 // Withdraw Fee (remove liquidity)
 export const BASE_FEE = new Percent(JSBI.BigInt(40), JSBI.BigInt(10000)) // 30 -> 40
+
 const ONE_HUNDRED_PERCENT = new Percent(JSBI.BigInt(10000), JSBI.BigInt(10000))
 const INPUT_FRACTION_AFTER_FEE = ONE_HUNDRED_PERCENT.subtract(BASE_FEE)
 

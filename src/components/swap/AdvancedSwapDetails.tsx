@@ -65,7 +65,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
               Liquidity Provider Fee
             </TYPE.black>
             <QuestionHelper
-              text={`A portion of each trade (${BASE_EXCHANGE_FEE}%) goes to liquidity providers as a protocol incentive.`}
+              text={`A portion of each trade (${BASE_EXCHANGE_FEE}) goes to liquidity providers as a protocol incentive.`}
             />
           </RowFixed>
           <TYPE.black fontSize={14} color={theme.text1}>
