@@ -124,7 +124,7 @@ export default function Pool() {
               </RowBetween>
               <RowBetween>
                 <TYPE.white fontSize={14}>
-                  {`Liquidity providers earn a ${ BASE_EXCHANGE_FEE } % fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
+                  {`Liquidity providers earn a ${ BASE_EXCHANGE_FEE } fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
                 </TYPE.white>
               </RowBetween>
               {/* <ExternalLink
@@ -153,7 +153,7 @@ export default function Pool() {
                   Create a pair
                 </ResponsiveButtonSecondary>
                 <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 8px" to="/add/ETH">
-                  <Text fontWeight={500} fontSize={16}>
+                  <Text fontWeight={500} fontSize={16} color={theme.text5}>
                     Add Liquidity
                   </Text>
                 </ResponsiveButtonPrimary>

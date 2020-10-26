@@ -390,13 +390,13 @@ export default function AddLiquidity({
               </>
             )}
           </AutoColumn>
-          <AutoColumn>
+          <AutoColumn style={{ padding: '1em' }}>
             {!account ? (
               <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
               </div>
             ) : (
-              <AutoColumn gap={'md'}>
+              <AutoColumn gap={'md'} >
                 {(approvalA === ApprovalState.NOT_APPROVED ||
                   approvalA === ApprovalState.PENDING ||
                   approvalB === ApprovalState.NOT_APPROVED ||

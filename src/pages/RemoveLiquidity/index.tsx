@@ -16,7 +16,7 @@ import CurrencyInputPanel from '../../components/CurrencyInputPanel'
 import DoubleCurrencyLogo from '../../components/DoubleLogo'
 import { AddRemoveTabs } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
-import Row, { RowBetween, RowFixed } from '../../components/Row'
+import Row, { RowBetween, RowFixed, RowRight } from '../../components/Row'
 
 import Slider from '../../components/Slider'
 import CurrencyLogo from '../../components/CurrencyLogo'
@@ -33,6 +33,7 @@ import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '
 import { currencyId } from '../../utils/currencyId'
 import useDebouncedChangeHandler from '../../utils/useDebouncedChangeHandler'
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
+import { BASE_WITHDRAW_FEE } from '../../utils/prices'
 import AppBody from '../AppBody'
 import { ClickableText, MaxButton, Wrapper } from '../Pool/styleds'
 import { useApproveCallback, ApprovalState } from '../../hooks/useApproveCallback'
@@ -470,7 +471,6 @@ export default function RemoveLiquidity({
     Number.parseInt(parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0)),
     liquidityPercentChangeCallback
   )
-
   return (
     <>
       <AppBody>
@@ -549,6 +549,11 @@ export default function RemoveLiquidity({
                         </Text>
                       </RowFixed>
                     </RowBetween>
+                    {pair && (
+                        <RowRight color={ theme.text3 }>
+                            1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
+                        </RowRight>
+                    )}
                     <RowBetween>
                       <Text fontSize={24} fontWeight={500}>
                         {formattedAmounts[Field.CURRENCY_B] || '-'}
@@ -560,6 +565,11 @@ export default function RemoveLiquidity({
                         </Text>
                       </RowFixed>
                     </RowBetween>
+                    {pair && (
+                        <RowRight color={ theme.text3 }>
+                            1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
+                        </RowRight>
+                    )}
                     {chainId && (oneCurrencyIsWETH || oneCurrencyIsETH) ? (
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
@@ -600,6 +610,16 @@ export default function RemoveLiquidity({
                   pair={pair}
                   id="liquidity-amount"
                 />
+                {pair && (
+                  <div style={{ padding:'0 20px 0 20px', display: 'flex', fontSize: '12px', justifyContent: 'space-between'}}>
+                    <RowBetween color={ theme.text3 }>
+                        1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
+                    </RowBetween>
+                    <RowRight color={ theme.text3 }>
+                        1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
+                    </RowRight>
+                  </div>
+                )}
                 <ColumnCenter>
                   <ArrowDown size="16" color={theme.text2} />
                 </ColumnCenter>
@@ -614,7 +634,7 @@ export default function RemoveLiquidity({
                   onCurrencySelect={handleSelectCurrencyA}
                   id="remove-liquidity-tokena"
                 />
-                <ColumnCenter>
+                <ColumnCenter>                
                   <Plus size="16" color={theme.text2} />
                 </ColumnCenter>
                 <CurrencyInputPanel
@@ -631,22 +651,22 @@ export default function RemoveLiquidity({
               </>
             )}
             {pair && (
-              <div style={{ padding: '10px 20px' }}>
+              <div style={{ padding: '10px 20px', fontSize: '14px' }}>
                 <RowBetween>
-                  Price:
+                  Withdraw Fee:
                   <div>
-                    1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
+                    {formattedAmounts[Field.CURRENCY_A] ? (parseFloat( formattedAmounts[Field.CURRENCY_A] ) * BASE_WITHDRAW_FEE).toFixed(6) : 0 } {currencyA?.symbol}
                   </div>
                 </RowBetween>
                 <RowBetween>
                   <div />
                   <div>
-                    1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
+                  {formattedAmounts[Field.CURRENCY_B] ? (parseFloat( formattedAmounts[Field.CURRENCY_B] ) * BASE_WITHDRAW_FEE).toFixed(6) : 0 } {currencyB?.symbol}
                   </div>
                 </RowBetween>
               </div>
             )}
-            <div style={{ position: 'relative' }}>
+            <div style={{ position: 'relative', padding: '20px' }}>
               {!account ? (
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
               ) : (
