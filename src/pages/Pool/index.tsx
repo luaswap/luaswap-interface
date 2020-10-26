@@ -4,7 +4,7 @@ import { Pair } from '@luaswap/sdk'
 import { Link } from 'react-router-dom'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 
-import { BASE_FEE } from '../../utils/prices'
+import { BASE_EXCHANGE_FEE } from '../../utils/prices'
 
 import FullPositionCard from '../../components/PositionCard'
 import { useUserHasLiquidityInAllTokens } from '../../data/V1'
@@ -124,7 +124,7 @@ export default function Pool() {
               </RowBetween>
               <RowBetween>
                 <TYPE.white fontSize={14}>
-                  {`Liquidity providers earn a ${BASE_FEE} fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
+                  {`Liquidity providers earn a ${ BASE_EXCHANGE_FEE } % fee on all trades proportional to their share of the pool. Fees are added to the pool, accrue in real time and can be claimed by withdrawing your liquidity.`}
                 </TYPE.white>
               </RowBetween>
               {/* <ExternalLink
@@ -176,7 +176,7 @@ export default function Pool() {
               <>
                 <ButtonSecondary>
                   <RowBetween>
-                    <ExternalLink href={'https://uniswap.info/account/' + account}>
+                    <ExternalLink href={'https://info.luaswap.org/account/' + account}>
                       Account analytics and accrued fees
                     </ExternalLink>
                     <span> ↗</span>
@@ -197,7 +197,7 @@ export default function Pool() {
 
             <AutoColumn justify={'center'} gap="md">
               <Text textAlign="center" fontSize={14} style={{ padding: '.5rem 0 .5rem 0' }}>
-                {hasV1Liquidity ? 'Uniswap V1 liquidity found!' : "Don't see a pool you joined?"}{' '}
+                {hasV1Liquidity ? 'LuaSwap V1 liquidity found!' : "Don't see a pool you joined?"}{' '}
                 <StyledInternalLink id="import-pool-link" to={hasV1Liquidity ? '/migrate/v1' : '/find'}>
                   {hasV1Liquidity ? 'Migrate now.' : 'Import it.'}
                 </StyledInternalLink>

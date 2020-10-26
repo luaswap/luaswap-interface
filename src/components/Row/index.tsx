@@ -14,6 +14,10 @@ const Row = styled(Box)<{ align?: string; padding?: string; border?: string; bor
 export const RowBetween = styled(Row)`
   justify-content: space-between;
 `
+export const RowRight = styled(Row)`
+  justify-content: flex-end;
+  font-size: 12px;
+`
 
 export const RowFlat = styled.div`
   display: flex;
