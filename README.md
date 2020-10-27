@@ -1,8 +1,8 @@
 # LuaSwap Interface
 
-# [![Lint](https://github.com/tomochain/tomochain-interface/workflows/Lint/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ALint)
-# [![Tests](https://github.com/tomochain/tomochain-interface/workflows/Tests/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ATests)
-# [![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
+[![Lint](https://github.com/tomochain/tomochain-interface/workflows/Lint/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ALint)
+[![Tests](https://github.com/tomochain/tomochain-interface/workflows/Tests/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ATests)
+[![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
 An open source interface for LuaSwap -- a protocol for decentralized exchange of Ethereum tokens.
 
@@ -16,11 +16,6 @@ An open source interface for LuaSwap -- a protocol for decentralized exchange of
 To access the LuaSwap Interface, use an IPFS gateway link from the
 [latest release](https://github.com/tomochain/luaswap-interface/releases), 
 or visit [app.luaswap.org](https://app.luaswap.org).
-
-## Listing a token
-
-# Please see the
-# [@luaswap/default-token-list](https://github.com/luaswap/default-token-list) repository.
 
 ## Development
 
