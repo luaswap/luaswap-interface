@@ -320,7 +320,7 @@ describe('list reducer', () => {
       store.dispatch(removeList('fake-url'))
       expect(store.getState()).toEqual({
         byUrl: {},
-        selectedListUrl: 'tokens.uniswap.eth'
+        selectedListUrl: 'https://raw.githubusercontent.com/tomochain/luaswap-token-list/30542b5be8c6c6950f41c8736a0d2ea7c6cf8ca/build/luaswap-default.tokenlist.json'
       })
     })
   })
