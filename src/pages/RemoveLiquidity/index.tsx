@@ -282,7 +282,6 @@ export default function RemoveLiquidity({
     } else {
       throw new Error('Attempting to confirm without approval or a signature. Please contact support.')
     }
-
     const safeGasEstimates: (BigNumber | undefined)[] = await Promise.all(
       methodNames.map(methodName =>
         router.estimateGas[methodName](...args)
@@ -382,7 +381,7 @@ export default function RemoveLiquidity({
       <>
         <RowBetween>
           <Text color={theme.text2} fontWeight={500} fontSize={16}>
-            {'UNI ' + currencyA?.symbol + '/' + currencyB?.symbol} Burned
+            {currencyA?.symbol + '/' + currencyB?.symbol} Burned
           </Text>
           <RowFixed>
             <DoubleCurrencyLogo currency0={currencyA} currency1={currencyB} margin={true} />
@@ -392,22 +391,26 @@ export default function RemoveLiquidity({
           </RowFixed>
         </RowBetween>
         {pair && (
-          <>
+          <div style={{ padding: '20px 0px', fontSize: '14px' }}>
             <RowBetween>
-              <Text color={theme.text2} fontWeight={500} fontSize={16}>
-                Price
-              </Text>
-              <Text fontWeight={500} fontSize={16} color={theme.text1}>
-                1 {currencyA?.symbol} = {tokenA ? pair.priceOf(tokenA).toSignificant(6) : '-'} {currencyB?.symbol}
-              </Text>
+              Withdraw Fee:
+              <div>
+                {formattedAmounts[Field.CURRENCY_A]
+                  ? (parseFloat(formattedAmounts[Field.CURRENCY_A]) * BASE_WITHDRAW_FEE).toFixed(6)
+                  : 0}{' '}
+                {currencyA?.symbol}
+              </div>
             </RowBetween>
             <RowBetween>
               <div />
-              <Text fontWeight={500} fontSize={16} color={theme.text1}>
-                1 {currencyB?.symbol} = {tokenB ? pair.priceOf(tokenB).toSignificant(6) : '-'} {currencyA?.symbol}
-              </Text>
+              <div>
+                {formattedAmounts[Field.CURRENCY_B]
+                  ? (parseFloat(formattedAmounts[Field.CURRENCY_B]) * BASE_WITHDRAW_FEE).toFixed(6)
+                  : 0}{' '}
+                {currencyB?.symbol}
+              </div>
             </RowBetween>
-          </>
+          </div>
         )}
         <ButtonPrimary disabled={!(approval === ApprovalState.APPROVED || signatureData !== null)} onClick={onRemove}>
           <Text fontWeight={500} fontSize={20}>
