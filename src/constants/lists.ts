@@ -1,5 +1,5 @@
 // the Uniswap Default token list lives here
-const COMMIT_HASH = '30542b5be8c6c6950f41c8736a0d2ea7c6cf8ca'
+const COMMIT_HASH = 'c42ce8340241467404a2124c1714d77b48d33ac0'
 
 export const DEFAULT_TOKEN_LIST_URL =
   'https://raw.githubusercontent.com/tomochain/luaswap-token-list/' +

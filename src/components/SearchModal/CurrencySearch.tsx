@@ -205,7 +205,7 @@ export function CurrencySearch({
             onClick={onChangeList}
             id="currency-search-change-list-button"
           >
-            {selectedListInfo.current ? 'Change' : 'Select a list'}
+            {/* {selectedListInfo.current ? 'Change' : 'Select a list'} */}
           </LinkStyledButton>
         </RowBetween>
       </Card>
