@@ -85,7 +85,7 @@ const MenuItem = styled(ExternalLink)`
   }
 `
 
-const CODE_LINK = 'https://github.com/tomochain/luaswap-interface'
+const CODE_LINK = 'https://github.com/tomochain/'
 
 export default function Menu() {
   // const { account } = useActiveWeb3React()
@@ -109,7 +109,7 @@ export default function Menu() {
             <Info size={14} />
             About
           </MenuItem>
-          {/* <MenuItem id="link" href="https://uniswap.org/docs/v2">
+          {/* <MenuItem id="link" href="https://luaswap.org/docs/">
             <BookOpen size={14} />
             Docs
           </MenuItem> */}
@@ -117,7 +117,7 @@ export default function Menu() {
             <Code size={14} />
             Code
           </MenuItem>
-          {/* <MenuItem id="link" href="https://discord.gg/EwFs3Pp">
+          {/* <MenuItem id="link" href="https://discord.gg/">
             <MessageCircle size={14} />
             Discord
           </MenuItem> */}
@@ -127,7 +127,7 @@ export default function Menu() {
           </MenuItem>
           {/* {account && (
             <ButtonPrimary onClick={openClaimModal} padding="8px 16px" width="100%" borderRadius="12px" mt="0.5rem">
-              Claim UNI
+              Claim LUA
             </ButtonPrimary>
           )} */}
         </MenuFlyout>
