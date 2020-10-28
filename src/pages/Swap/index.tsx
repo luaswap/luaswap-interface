@@ -467,9 +467,7 @@ export default function Swap() {
               </Column>
             )}
             {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
-            {betterTradeLinkVersion ? ( null
-              // <BetterTradeLink version={betterTradeLinkVersion} />
-            ) : toggledVersion !== DEFAULT_VERSION && defaultTrade ? (
+            {betterTradeLinkVersion ? null : toggledVersion !== DEFAULT_VERSION && defaultTrade ? ( // <BetterTradeLink version={betterTradeLinkVersion} />
               <DefaultVersionLink />
             ) : null}
           </BottomGrouping>
