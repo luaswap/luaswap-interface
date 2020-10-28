@@ -1,4 +1,4 @@
-// the Uniswap Default token list lives here
+// the LuaSwap Default token list lives here
 const COMMIT_HASH = 'c42ce8340241467404a2124c1714d77b48d33ac0'
 
 export const DEFAULT_TOKEN_LIST_URL =
