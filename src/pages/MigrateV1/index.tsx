@@ -42,7 +42,9 @@ export default function MigrateV1() {
   const V1Exchanges = useAllTokenV1Exchanges()
   const V1LiquidityTokens: Token[] = useMemo(() => {
     return chainId
-      ? Object.keys(V1Exchanges).map(exchangeAddress => new Token(chainId, exchangeAddress, 18, 'LUA-V1', 'LuaSwap LP Token V1'))
+      ? Object.keys(V1Exchanges).map(
+          exchangeAddress => new Token(chainId, exchangeAddress, 18, 'LUA-V1', 'LuaSwap LP Token V1')
+        )
       : []
   }, [chainId, V1Exchanges])
   const [V1LiquidityBalances, V1LiquidityBalancesLoading] = useTokenBalancesWithLoadingIndicator(
