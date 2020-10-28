@@ -269,7 +269,7 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
-          <StyledExternalLink id={`stake-nav-link`} href={'https://farm.luaswap.org'}>
+          <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
             Farming
           </StyledExternalLink>
           <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>

@@ -202,8 +202,8 @@ export default function RemoveLiquidity({
     const router = getRouterContract(chainId, library, account)
 
     const amountsMin = {
-      [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage)[0],
-      [Field.CURRENCY_B]: calculateSlippageAmount(currencyAmountB, allowedSlippage)[0]
+      [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage + 10)[0],
+      [Field.CURRENCY_B]: calculateSlippageAmount(currencyAmountB, allowedSlippage + 10)[0]
     }
 
     if (!currencyA || !currencyB) throw new Error('missing tokens')
