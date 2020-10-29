@@ -1,7 +1,7 @@
 # LuaSwap Interface
 
-[![Lint](https://github.com/tomochain/tomochain-interface/workflows/Lint/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ALint)
-[![Tests](https://github.com/tomochain/tomochain-interface/workflows/Tests/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ATests)
+[![Lint](https://github.com/tomochain/luaswap-interface/workflows/Lint/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ALint)
+<!-- [![Tests](https://github.com/tomochain/tomochain-interface/workflows/Tests/badge.svg)](https://github.com/tomochain/luaswap-interface/actions?query=workflow%3ATests) -->
 [![Styled With Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io/)
 
 An open source interface for LuaSwap -- a protocol for decentralized exchange of Ethereum tokens.
