@@ -54,6 +54,5 @@ export const portis = new PortisConnector({
 export const walletlink = new WalletLinkConnector({
   url: NETWORK_URL,
   appName: 'LuaSwap',
-  appLogoUrl:
-    'https://raw.githubusercontent.com/tomochain/luaswap-interface/master/public/images/512x512_App_Icon.png'
+  appLogoUrl: 'https://raw.githubusercontent.com/tomochain/luaswap-interface/master/public/images/512x512_App_Icon.png'
 })
