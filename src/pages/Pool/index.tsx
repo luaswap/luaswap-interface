@@ -22,6 +22,8 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { Dots } from '../../components/swap/styleds'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 
+import { useFarmingPool, useFarmingStaked } from '../../hooks/useFarming'
+
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
   width: 100%;
@@ -78,6 +80,8 @@ export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
 
+  const { farmingPools } = useFarmingPool()
+
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
   const tokenPairsWithLiquidityTokens = useMemo(
@@ -106,6 +110,13 @@ export default function Pool() {
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
 
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
+  let userFarmingPools: any[] = []
+
+  allV2PairsWithLiquidity.map(pair => {
+    userFarmingPools.push(farmingPools.find(({ lpAddresses }) => lpAddresses[1] === pair.liquidityToken.address))
+  })
+
+  userFarmingPools = useFarmingStaked(userFarmingPools)
 
   const hasV1Liquidity = useUserHasLiquidityInAllTokens()
 
