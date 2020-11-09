@@ -117,6 +117,8 @@ export default function Pool() {
   })
 
   userFarmingPools = useFarmingStaked(userFarmingPools)
+  console.log(userFarmingPools, '===========================')
+  
 
   const hasV1Liquidity = useUserHasLiquidityInAllTokens()
 
