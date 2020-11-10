@@ -112,9 +112,12 @@ export default function Pool() {
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
   let userFarmingPools: any[] = []
 
-  allV2PairsWithLiquidity.map(pair => {
-    userFarmingPools.push(farmingPools.find(({ lpAddresses }) => lpAddresses[1] === pair.liquidityToken.address))
-  })
+  if (allV2PairsWithLiquidity.length > 0 && farmingPools.length > 0) {
+    allV2PairsWithLiquidity.map(pair => {
+      const pool = farmingPools.find(({ lpAddresses }) => lpAddresses[1] === pair.liquidityToken.address)
+      userFarmingPools = pool ? [...userFarmingPools, pool] : userFarmingPools
+    })
+  }
 
   userFarmingPools = useFarmingStaked(userFarmingPools)
   const hasV1Liquidity = useUserHasLiquidityInAllTokens()

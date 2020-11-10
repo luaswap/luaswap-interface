@@ -181,7 +181,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
 
-  const [showMore, setShowMore] = useState(true)
+  const [showMore, setShowMore] = useState(false)
 
   // total user lp balance (include staked and available)
   const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
@@ -227,12 +227,17 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
   const farmingContract = useFarmingContract()
   const [harvest, setHarvest] = useState(false)
 
+  // subscribe and unsubscribe events
   useEffect(() => {
     if (!farmingContract) return
 
     farmingContract.on('SendLuaReward', () => {
       setHarvest(false)
     })
+
+    return () => {
+      farmingContract.removeAllListeners()
+    }
   }, [farmingContract])
 
   const harvestReward = () => {
