@@ -117,9 +117,6 @@ export default function Pool() {
   })
 
   userFarmingPools = useFarmingStaked(userFarmingPools)
-  console.log(userFarmingPools, '===========================')
-  
-
   const hasV1Liquidity = useUserHasLiquidityInAllTokens()
 
   return (
@@ -196,8 +193,8 @@ export default function Pool() {
                   </RowBetween>
                 </ButtonSecondary>
 
-                {allV2PairsWithLiquidity.map(v2Pair => (
-                  <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
+                {allV2PairsWithLiquidity.map((v2Pair, idx) => (
+                  <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} farm={userFarmingPools[idx]} />
                 ))}
               </>
             ) : (
