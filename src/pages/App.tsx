@@ -28,6 +28,7 @@ import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 import Swap from './Swap'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // OpenClaimAddressModalAndRedirectToSwap
+import SafePage from './Safe'
 
 // import Vote from './Vote'
 // import VotePage from './Vote/VotePage'
@@ -112,6 +113,8 @@ export default function App() {
               <Route exact strict path="/migrate/v1/:address" component={MigrateV1Exchange} />
               {/* <Route exact strict path="/uni/:currencyIdA/:currencyIdB" component={Manage} /> */}
               {/* <Route exact strict path="/vote/:id" component={VotePage} /> */}
+              <Route exact strict path="/lua-safe" component={SafePage} />
+              <Route exact strict path="/lua-safe/:pool" component={SafePage} />
               <Route component={RedirectPathToSwapOnly} />
             </Switch>
           </Web3ReactManager>

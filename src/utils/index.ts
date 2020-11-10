@@ -110,3 +110,9 @@ export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currenc
   if (currency === ETHER) return true
   return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
 }
+
+export const reduceFractionDigit = (number: string | number, digitAmount: number): string =>
+  Number(number).toLocaleString(undefined, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: digitAmount || 0
+  })

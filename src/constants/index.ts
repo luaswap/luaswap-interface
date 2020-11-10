@@ -160,3 +160,28 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 // used to ensure the user doesn't send so much ETH so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
+
+export const SAFE_POOLS = [
+  {
+    key: 'lua-xlua',
+    name: 'LUA - xLUA',
+    description: 'Deposit LUA-xLUA LUA-V1 LP to earn xLUA',
+    longSymbol: 'LUA-xLUA LUA-V1 LP',
+    shortSymbol: 'LUA-xLUA',
+    token: 'LUA',
+    token2: 'xLUA',
+    icon: 'https://luaswap.org/favicon.png',
+    icon2: 'https://luaswap.org/favicon.png'
+  },
+  {
+    key: 'xlua-tomo',
+    name: 'xLUA - TOMO',
+    description: 'Deposit xLUA-TOMO LUA-V1 LP to earn TOMO',
+    longSymbol: 'xLUA-TOMO LUA-V1 LP',
+    shortSymbol: 'xLUA-TOMO',
+    token: 'xLUA',
+    token2: 'TOMO',
+    icon: 'https://luaswap.org/favicon.png',
+    icon2: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png'
+  }
+]
