@@ -39,9 +39,14 @@ export const HoverCard = styled(Card)`
   }
 `
 
-const RowFixedStyled = styled(RowFixed)`
+const RowFixedValue = styled(RowFixed)`
   min-width: 130px;
   justify-content: space-between;
+`
+
+const RowFixedTitle = styled(RowFixed)`
+  position: relative;
+  z-index: 1;
 `
 
 const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
@@ -345,42 +350,41 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                   Farming pool tokens:
                 </Text>
               </RowFixed>
-              <RowFixedStyled>
+              <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
                   {userFarmBalance ? userFarmBalance.toSignificant(4) : '-'}
                 </Text>
                 <ButtonSecondary padding="3px 10px" borderRadius="8px" fontSize="12px" width="fit-content">
                   Unstake
                 </ButtonSecondary>
-              </RowFixedStyled>
+              </RowFixedValue>
             </FixedHeightRow>
 
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
                 Your farming pool share:
               </Text>
-              <RowFixedStyled>
+              <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
                   {farmingTokenPercentage ? farmingTokenPercentage.toFixed(2) + '%' : '-'}
                 </Text>
-              </RowFixedStyled>
+              </RowFixedValue>
             </FixedHeightRow>
 
             <FixedHeightRow>
-              <RowFixed>
+              <RowFixedTitle>
                 <Text fontSize={16} fontWeight={500}>
-                  Available pool tokens:
+                  Available pool tokens <QuestionHelper text="Stake pool tokens to earn LUA tokens" />:
                 </Text>
-                <QuestionHelper text="availbe................." />
-              </RowFixed>
-              <RowFixedStyled>
+              </RowFixedTitle>
+              <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
                   {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
                 </Text>
                 <ButtonSecondary padding="3px 10px" borderRadius="8px" fontSize="12px" width="fit-content">
                   Stake
                 </ButtonSecondary>
-              </RowFixedStyled>
+              </RowFixedValue>
             </FixedHeightRow>
 
             <FixedHeightRow>
@@ -389,7 +393,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                   Reward:
                 </Text>
               </RowFixed>
-              <RowFixedStyled>
+              <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
                   {pendingReward ? pendingReward.toSignificant(4) : '-'}
                 </Text>
@@ -403,7 +407,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 >
                   Harvest
                 </ButtonSecondary>
-              </RowFixedStyled>
+              </RowFixedValue>
             </FixedHeightRow>
 
             <ButtonSecondary padding="8px" borderRadius="8px">
