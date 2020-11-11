@@ -29,12 +29,11 @@ export function useFarmingStaked(pools: any[]) {
   const { library, account } = useActiveWeb3React()
   const farmingContract: Contract | null = useFarmingContract()
 
-  const initFarmingPool: any[] = []
-  const [farmingPools, setFarmingPools] = useState(initFarmingPool)
+  const [farmingPools, setFarmingPools] = useState({})
 
   useEffect(() => {
     async function fetchData() {
-      let poolsWithStaked: any[] = []
+      const poolsWithStaked: { [key: string]: any } = {}
 
       // user lp token staked in farming pool
       const stakedPromises = pools.map(pool => getUserStaked(farmingContract, pool.pid, account))
@@ -57,14 +56,14 @@ export function useFarmingStaked(pools: any[]) {
       for (let index = 0; index < pools.length; index++) {
         const pool = pools[index]
 
-        pool.userStaked = userStakeds[index]
-        pool.totalStaked = poolStakeds[index]
-        pool.pendingReward = pendingRewards[index]
+        if (+userStakeds[index] > 0) {
+          pool.userStaked = userStakeds[index]
+          pool.totalStaked = poolStakeds[index]
+          pool.pendingReward = pendingRewards[index]
 
-        poolsWithStaked = [...poolsWithStaked, pool]
+          poolsWithStaked[pool.lpAddresses[1]] = pool
+        }
       }
-
-      poolsWithStaked = poolsWithStaked.filter(pool => Number(pool.userStaked) > 0)
 
       setFarmingPools(poolsWithStaked)
     }

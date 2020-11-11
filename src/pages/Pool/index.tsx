@@ -81,8 +81,7 @@ export default function Pool() {
   const { account } = useActiveWeb3React()
 
   const { farmingPools } = useFarmingPool()
-  const userFarmingPools = useFarmingStaked(farmingPools)
-  const userFarmingPoolAddresses = userFarmingPools.map(pool => pool.lpAddresses[1])
+  const userFarmingMap: { [key: string]: any } = useFarmingStaked(farmingPools)
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -104,9 +103,9 @@ export default function Pool() {
       tokenPairsWithLiquidityTokens.filter(
         ({ liquidityToken }) =>
           v2PairsBalances[liquidityToken.address]?.greaterThan('0') ||
-          userFarmingPoolAddresses.includes(liquidityToken.address)
+          Object.keys(userFarmingMap).includes(liquidityToken.address)
       ),
-    [tokenPairsWithLiquidityTokens, v2PairsBalances, userFarmingPoolAddresses]
+    [tokenPairsWithLiquidityTokens, v2PairsBalances, userFarmingMap]
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
@@ -190,8 +189,12 @@ export default function Pool() {
                   </RowBetween>
                 </ButtonSecondary>
 
-                {allV2PairsWithLiquidity.map((v2Pair, idx) => (
-                  <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} farm={userFarmingPools[idx]} />
+                {allV2PairsWithLiquidity.map(v2Pair => (
+                  <FullPositionCard
+                    key={v2Pair.liquidityToken.address}
+                    pair={v2Pair}
+                    farm={userFarmingMap[v2Pair.liquidityToken.address]}
+                  />
                 ))}
               </>
             ) : (
