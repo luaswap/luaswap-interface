@@ -1,5 +1,5 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { Flex, Box, Button } from 'rebass'
 import styled from 'styled-components'
 import { colors } from '../../theme'
@@ -37,9 +37,10 @@ const StyledAccessButton = styled(Button)`
   cursor: pointer;
 `
 
-const StakingList = ({ history, items = [] }: StakingListProps) => {
+const StakingList = ({ items = [] }: StakingListProps) => {
+  const { push } = useHistory()
   const handleOpenStakingPool = (key: string | '') => {
-    history.push({
+    push({
       pathname: '/lua-safe',
       search: new URLSearchParams({
         pool: key
@@ -54,7 +55,7 @@ const StakingList = ({ history, items = [] }: StakingListProps) => {
           key={poolIdx + 1}
           m={3}
           p={4}
-          width={['calc(100% - 32px)', 'calc(50% - 32px)', 'calc(100% / 3 - 32px)']}
+          width={['calc(100% - 32px)', 'calc(50% - 32px)']}
           onClick={() => handleOpenStakingPool(pool.key)}
         >
           <Flex justifyContent="center">
@@ -68,7 +69,7 @@ const StakingList = ({ history, items = [] }: StakingListProps) => {
           </Box>
         </StyledPoolCard>
       ))}
-      <StyledPoolCard
+      {/* <StyledPoolCard
         m={3}
         p={4}
         width={['calc(100% - 32px)', 'calc(50% - 32px)', 'calc(100% / 3 - 32px)']}
@@ -92,14 +93,13 @@ const StakingList = ({ history, items = [] }: StakingListProps) => {
       </StyledPoolCard>
       <StyledPoolCard m={3} p={4} width={['calc(100% - 32px)', 'calc(50% - 32px)', 'calc(100% / 3 - 32px)']}>
         wgpwjag
-      </StyledPoolCard>
+      </StyledPoolCard> */}
     </Flex>
   )
 }
 
 interface StakingListProps {
-  history: any
   items?: any[]
 }
 
-export default withRouter(StakingList)
+export default StakingList

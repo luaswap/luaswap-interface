@@ -54,7 +54,7 @@ const LoaderContainer = styled.div`
 
 const SafePage = ({ location }: SafePageProps) => {
   const [poolKey, setPoolKey] = useState('')
-  const [pools, setPools] = useState([{}])
+  const [pools, setPools] = useState<object[]>([])
 
   const getTotalSupply = (): number => {
     return 0
@@ -65,7 +65,6 @@ const SafePage = ({ location }: SafePageProps) => {
   }, [])
 
   useEffect(() => {
-    setPools([])
     if (location && location.search) {
       const searchParams: any = new URLSearchParams(location.search)
 
