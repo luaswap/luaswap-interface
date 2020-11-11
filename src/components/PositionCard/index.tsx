@@ -1,6 +1,6 @@
 import { JSBI, Pair, Percent, TokenAmount, ChainId, Token } from '@luaswap/sdk'
 import { darken } from 'polished'
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -40,7 +40,7 @@ export const HoverCard = styled(Card)`
 `
 
 const RowFixedValue = styled(RowFixed)`
-  min-width: 130px;
+  min-width: 150px;
   justify-content: space-between;
 `
 
@@ -232,24 +232,17 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
   const farmingContract = useFarmingContract()
   const [harvest, setHarvest] = useState(false)
 
-  // subscribe and unsubscribe events
-  useEffect(() => {
-    if (!farmingContract) return
-
-    farmingContract.on('SendLuaReward', () => {
-      setHarvest(false)
-    })
-
-    return () => {
-      farmingContract.removeAllListeners()
-    }
-  }, [farmingContract])
-
-  const harvestReward = () => {
+  const harvestReward = async () => {
     if (!farmingContract || !farm || harvest) return
 
     setHarvest(true)
-    farmingContract.claimReward(farm.pid)
+
+    try {
+      await farmingContract.claimReward(farm.pid)
+      setHarvest(false)
+    } catch (e) {
+      setHarvest(false)
+    }
   }
 
   return (
@@ -402,7 +395,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
             <FixedHeightRow>
               <RowFixed>
                 <Text fontSize={16} fontWeight={500}>
-                  Reward:
+                  LUA reward:
                 </Text>
               </RowFixed>
               <RowFixedValue>
