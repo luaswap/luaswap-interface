@@ -81,6 +81,8 @@ export default function Pool() {
   const { account } = useActiveWeb3React()
 
   const { farmingPools } = useFarmingPool()
+  const userFarmingPools = useFarmingStaked(farmingPools)
+  const userFarmingPoolAddresses = userFarmingPools.map(pool => pool.lpAddresses[1])
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
@@ -99,10 +101,12 @@ export default function Pool() {
   // fetch the reserves for all V2 pools in which the user has a balance
   const liquidityTokensWithBalances = useMemo(
     () =>
-      tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken.address]?.greaterThan('0')
+      tokenPairsWithLiquidityTokens.filter(
+        ({ liquidityToken }) =>
+          v2PairsBalances[liquidityToken.address]?.greaterThan('0') ||
+          userFarmingPoolAddresses.includes(liquidityToken.address)
       ),
-    [tokenPairsWithLiquidityTokens, v2PairsBalances]
+    [tokenPairsWithLiquidityTokens, v2PairsBalances, userFarmingPoolAddresses]
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
@@ -110,16 +114,6 @@ export default function Pool() {
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
 
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
-  let userFarmingPools: any[] = []
-
-  if (allV2PairsWithLiquidity.length > 0 && farmingPools.length > 0) {
-    allV2PairsWithLiquidity.map(pair => {
-      const pool = farmingPools.find(({ lpAddresses }) => lpAddresses[1] === pair.liquidityToken.address)
-      userFarmingPools = pool ? [...userFarmingPools, pool] : userFarmingPools
-    })
-  }
-
-  userFarmingPools = useFarmingStaked(userFarmingPools)
   const hasV1Liquidity = useUserHasLiquidityInAllTokens()
 
   return (

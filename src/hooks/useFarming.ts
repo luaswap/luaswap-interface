@@ -64,6 +64,8 @@ export function useFarmingStaked(pools: any[]) {
         poolsWithStaked = [...poolsWithStaked, pool]
       }
 
+      poolsWithStaked = poolsWithStaked.filter(pool => Number(pool.userStaked) > 0)
+
       setFarmingPools(poolsWithStaked)
     }
 

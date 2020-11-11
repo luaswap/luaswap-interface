@@ -354,7 +354,13 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 <Text fontSize={16} fontWeight={500}>
                   {userFarmBalance ? userFarmBalance.toSignificant(4) : '-'}
                 </Text>
-                <ButtonSecondary padding="3px 10px" borderRadius="8px" fontSize="12px" width="fit-content">
+                <ButtonSecondary
+                  padding="3px 10px"
+                  borderRadius="8px"
+                  fontSize="12px"
+                  width="fit-content"
+                  disabled={!userFarmBalance?.greaterThan('0')}
+                >
                   Unstake
                 </ButtonSecondary>
               </RowFixedValue>
@@ -381,7 +387,13 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 <Text fontSize={16} fontWeight={500}>
                   {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
                 </Text>
-                <ButtonSecondary padding="3px 10px" borderRadius="8px" fontSize="12px" width="fit-content">
+                <ButtonSecondary
+                  padding="3px 10px"
+                  borderRadius="8px"
+                  fontSize="12px"
+                  width="fit-content"
+                  disabled={!userPoolBalance?.greaterThan(`0`)}
+                >
                   Stake
                 </ButtonSecondary>
               </RowFixedValue>
