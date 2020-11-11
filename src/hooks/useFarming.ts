@@ -18,7 +18,7 @@ export function useFarmingPool() {
     }
 
     fetchData()
-  }, [farmingPools.length])
+  }, [])
 
   return {
     farmingPools
@@ -28,23 +28,26 @@ export function useFarmingPool() {
 export function useFarmingStaked(pools: any[]) {
   const { library, account } = useActiveWeb3React()
   const farmingContract: Contract | null = useFarmingContract()
-
-  const [farmingPools, setFarmingPools] = useState({})
+  const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
 
   useEffect(() => {
     async function fetchData() {
-      const poolsWithStaked: { [key: string]: any } = {}
+      const poolsMap: { [key: string]: any } = {}
 
-      // user lp token staked in farming pool
+      // user lp token staked in all farming pools
       const stakedPromises = pools.map(pool => getUserStaked(farmingContract, pool.pid, account))
       const userStakeds = await Promise.all(stakedPromises)
 
-      // user pending reward
-      const pendingRewardPromies = pools.map(pool => getPendingReward(farmingContract, pool.pid, account))
-      const pendingRewards = await Promise.all(pendingRewardPromies)
+      // filter only user farming pools
+      const userFarmingPools = pools
+        .map((pool, idx) => {
+          pool.userStaked = userStakeds[idx]
+          return pool
+        })
+        .filter(pool => +pool.userStaked > 0)
 
-      // total lp token staked in farming pool
-      const poolBalancePromises = pools.map(pool => {
+      // total lp token staked in user farming pools
+      const poolBalancePromises = userFarmingPools.map(pool => {
         const lpContract = library
           ? getContract(pool.lpAddresses[1], IUniswapV2PairABI, library, account ? account : undefined)
           : null
@@ -53,23 +56,24 @@ export function useFarmingStaked(pools: any[]) {
       })
       const poolStakeds = await Promise.all(poolBalancePromises)
 
-      for (let index = 0; index < pools.length; index++) {
-        const pool = pools[index]
+      // user pending reward
+      const pendingRewardPromies = userFarmingPools.map(pool => getPendingReward(farmingContract, pool.pid, account))
+      const pendingRewards = await Promise.all(pendingRewardPromies)
 
-        if (+userStakeds[index] > 0) {
-          pool.userStaked = userStakeds[index]
-          pool.totalStaked = poolStakeds[index]
-          pool.pendingReward = pendingRewards[index]
+      for (let index = 0; index < userFarmingPools.length; index++) {
+        const pool = userFarmingPools[index]
 
-          poolsWithStaked[pool.lpAddresses[1]] = pool
-        }
+        pool.totalStaked = poolStakeds[index]
+        pool.pendingReward = pendingRewards[index]
+
+        poolsMap[pool.lpAddresses[1]] = pool
       }
 
-      setFarmingPools(poolsWithStaked)
+      setUserFarmingPoolsMap(poolsMap)
     }
 
     if (pools.length > 0) fetchData()
-  }, [farmingContract, pools, account, library, pools.length])
+  })
 
-  return farmingPools
+  return userFarmingPoolsMap
 }
