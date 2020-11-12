@@ -4,7 +4,8 @@ import { ALLOWED_PRICE_IMPACT_HIGH, ALLOWED_PRICE_IMPACT_LOW, ALLOWED_PRICE_IMPA
 import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
-export const BASE_EXCHANGE_FEE = '0.4%' // Only used for display on string
+export const BASE_EXCHANGE_FEE = '0.4%' // Shown on swap page	// TODO need to update swap page for better description e.g. Swap Fee instead of Liquidity Provider Fee
+export const LP_PCT_SWAP_FEE = '0.35%' // Shown on add liquidity page (position card) and pool page
 export const BASE_WITHDRAW_FEE = 0.001 // Withdraw Fee (remove liquidity)
 export const BASE_FEE = new Percent(JSBI.BigInt(40), JSBI.BigInt(10000)) // 30 -> 40
 
