@@ -1,8 +1,9 @@
-import { Trade, TradeType } from '@uniswap/sdk'
+import { Trade, TradeType } from '@luaswap/sdk'
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { Field } from '../../state/swap/actions'
 import { useUserSlippageTolerance } from '../../state/user/hooks'
+import { BASE_EXCHANGE_FEE } from '../../utils/prices'
 import { TYPE, ExternalLink } from '../../theme'
 import { computeSlippageAdjustedAmounts, computeTradePriceBreakdown } from '../../utils/prices'
 import { AutoColumn } from '../Column'
@@ -63,7 +64,9 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
               Liquidity Provider Fee
             </TYPE.black>
-            <QuestionHelper text="A portion of each trade (0.30%) goes to liquidity providers as a protocol incentive." />
+            <QuestionHelper
+              text={`A portion of each trade (${BASE_EXCHANGE_FEE}) goes to liquidity providers as a protocol incentive.`}
+            />
           </RowFixed>
           <TYPE.black fontSize={14} color={theme.text1}>
             {realizedLPFee ? `${realizedLPFee.toSignificant(4)} ${trade.inputAmount.currency.symbol}` : '-'}
@@ -105,7 +108,10 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
             </>
           )}
           <AutoColumn style={{ padding: '0 24px' }}>
-            <InfoLink href={'https://uniswap.info/pair/' + trade.route.pairs[0].liquidityToken.address} target="_blank">
+            <InfoLink
+              href={'https://info.luaswap.org/pair/' + trade.route.pairs[0].liquidityToken.address}
+              target="_blank"
+            >
               View pair analytics ↗
             </InfoLink>
           </AutoColumn>

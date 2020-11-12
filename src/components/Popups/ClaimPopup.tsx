@@ -1,4 +1,4 @@
-import { TokenAmount } from '@uniswap/sdk'
+import { TokenAmount } from '@luaswap/sdk'
 import React, { useEffect } from 'react'
 import { X } from 'react-feather'
 import styled, { keyframes } from 'styled-components'
@@ -86,24 +86,24 @@ export default function ClaimPopup() {
           <AutoColumn style={{ padding: '2rem 0', zIndex: 10 }} justify="center">
             <UniToken width="48px" src={tokenLogo} />{' '}
             <TYPE.white style={{ marginTop: '1rem' }} fontSize={36} fontWeight={600}>
-              {unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} UNI
+              {unclaimedAmount?.toFixed(0, { groupSeparator: ',' } ?? '-')} LUA
             </TYPE.white>
             <TYPE.white style={{ paddingTop: '1.25rem', textAlign: 'center' }} fontWeight={600} color="white">
               <span role="img" aria-label="party">
                 🎉
               </span>{' '}
-              UNI has arrived{' '}
+              LUA has arrived{' '}
               <span role="img" aria-label="party">
                 🎉
               </span>
             </TYPE.white>
             <TYPE.subHeader style={{ paddingTop: '0.5rem', textAlign: 'center' }} color="white">
-              {`Thanks for being part of the Uniswap community <3`}
+              {`Thanks for being part of the LuaSwap community <3`}
             </TYPE.subHeader>
           </AutoColumn>
           <AutoColumn style={{ zIndex: 10 }} justify="center">
             <ButtonPrimary padding="8px" borderRadius="8px" width={'fit-content'} onClick={toggleSelfClaimModal}>
-              Claim your UNI tokens
+              Claim your LUA tokens
             </ButtonPrimary>
           </AutoColumn>
         </StyledClaimPopup>

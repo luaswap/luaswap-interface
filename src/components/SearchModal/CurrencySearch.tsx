@@ -1,4 +1,4 @@
-import { Currency, ETHER, Token } from '@uniswap/sdk'
+import { Currency, ETHER, Token } from '@luaswap/sdk'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'
@@ -136,7 +136,6 @@ export function CurrencySearch({
   )
 
   const selectedListInfo = useSelectedListInfo()
-
   return (
     <Column style={{ width: '100%', flex: '1 1' }}>
       <PaddedColumn gap="14px">
@@ -201,11 +200,11 @@ export function CurrencySearch({
             </Row>
           ) : null}
           <LinkStyledButton
-            style={{ fontWeight: 500, color: theme.text2, fontSize: 16 }}
+            style={{ fontWeight: 500, color: theme.text2, fontSize: 16, backgroundColor: theme.bg3 }}
             onClick={onChangeList}
             id="currency-search-change-list-button"
           >
-            {selectedListInfo.current ? 'Change' : 'Select a list'}
+            {/* {selectedListInfo.current ? 'Change' : 'Select a list'} */}
           </LinkStyledButton>
         </RowBetween>
       </Card>

@@ -4,7 +4,9 @@ import { ALLOWED_PRICE_IMPACT_HIGH, ALLOWED_PRICE_IMPACT_LOW, ALLOWED_PRICE_IMPA
 import { Field } from '../state/swap/actions'
 import { basisPointsToPercent } from './index'
 
+
 export const BASE_EXCHANGE_FEE = '0.35%' // Only used for display on string
+
 export const BASE_WITHDRAW_FEE = 0.001 // Withdraw Fee (remove liquidity)
 export const BASE_FEE = new Percent(JSBI.BigInt(40), JSBI.BigInt(10000)) // 30 -> 40
 

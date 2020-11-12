@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@uniswap/sdk'
+import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@luaswap/sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -125,7 +125,6 @@ export default function AddLiquidity({
   async function onAdd() {
     if (!chainId || !library || !account) return
     const router = getRouterContract(chainId, library, account)
-
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
       return
@@ -324,7 +323,7 @@ export default function AddLiquidity({
             )}
             pendingText={pendingText}
           />
-          <AutoColumn gap="20px">
+          <AutoColumn gap="20px" style={{ padding: '1em' }}>
             {noLiquidity ||
               (isCreate && (
                 <ColumnCenter>
@@ -389,9 +388,12 @@ export default function AddLiquidity({
                 </LightCard>
               </>
             )}
-
+          </AutoColumn>
+          <AutoColumn style={{ padding: '1em' }}>
             {!account ? (
-              <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+              <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
+                <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
+              </div>
             ) : (
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||

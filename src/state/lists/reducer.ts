@@ -18,7 +18,6 @@ export interface ListsState {
   readonly lastInitializedDefaultListOfLists?: string[]
   readonly selectedListUrl: string | undefined
 }
-
 type ListState = ListsState['byUrl'][string]
 
 const NEW_LIST_STATE: ListState = {
@@ -58,6 +57,9 @@ export default createReducer(initialState, builder =>
 
       // no-op if update does nothing
       if (current) {
+        // Set default tokenList (Add custom code)
+        state.selectedListUrl = url
+        // End Custom
         const upgradeType = getVersionUpgrade(current.version, tokenList.version)
         if (upgradeType === VersionUpgrade.NONE) return
         if (loadingRequestId === null || loadingRequestId === requestId) {

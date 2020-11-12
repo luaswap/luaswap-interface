@@ -1,4 +1,4 @@
-import { Currency, ETHER, JSBI, TokenAmount } from '@uniswap/sdk'
+import { Currency, ETHER, JSBI, TokenAmount } from '@luaswap/sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'
@@ -79,7 +79,7 @@ export default function PoolFinder() {
   return (
     <AppBody>
       <FindPoolTabs />
-      <AutoColumn gap="md">
+      <AutoColumn gap="md" style={{ padding: '1rem' }}>
         <ButtonDropdownLight
           onClick={() => {
             setShowSearch(true)
