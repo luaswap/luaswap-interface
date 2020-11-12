@@ -11,13 +11,23 @@ export function useFarmingPool() {
   const [farmingPools, setFarmingPools] = useState([])
 
   useEffect(() => {
-    async function fetchData() {
-      const result = await getFarmingPools()
+    let isCancelled = false
 
-      setFarmingPools(result)
+    async function fetchData() {
+      let pools
+
+      if (!isCancelled) {
+        pools = await getFarmingPools()
+      }
+
+      !isCancelled && setFarmingPools(pools)
     }
 
     fetchData()
+
+    return () => {
+      isCancelled = true
+    }
   }, [])
 
   return {
@@ -31,12 +41,17 @@ export function useFarmingStaked(pools: any[]) {
   const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
 
   useEffect(() => {
+    let isCancelled = false
+
     async function fetchData() {
       const poolsMap: { [key: string]: any } = {}
 
       // user lp token staked in all farming pools
-      const stakedPromises = pools.map(pool => getUserStaked(farmingContract, pool.pid, account))
-      const userStakeds = await Promise.all(stakedPromises)
+      let userStakeds: any[]
+      if (!isCancelled) {
+        const stakedPromises = pools.map(pool => getUserStaked(farmingContract, pool.pid, account))
+        userStakeds = await Promise.all(stakedPromises)
+      }
 
       // filter only user farming pools
       const userFarmingPools = pools
@@ -47,32 +62,42 @@ export function useFarmingStaked(pools: any[]) {
         .filter(pool => +pool.userStaked > 0)
 
       // total lp token staked in user farming pools
-      const poolBalancePromises = userFarmingPools.map(pool => {
-        const lpContract = library
-          ? getContract(pool.lpAddresses[1], IUniswapV2PairABI, library, account ? account : undefined)
-          : null
+      let poolStakeds
+      if (!isCancelled) {
+        const poolBalancePromises = userFarmingPools.map(pool => {
+          const lpContract = library
+            ? getContract(pool.lpAddresses[1], IUniswapV2PairABI, library, account ? account : undefined)
+            : null
 
-        return getTotalStaked(lpContract)
-      })
-      const poolStakeds = await Promise.all(poolBalancePromises)
+          return getTotalStaked(lpContract)
+        })
+        poolStakeds = await Promise.all(poolBalancePromises)
+      }
 
       // user pending reward
-      const pendingRewardPromies = userFarmingPools.map(pool => getPendingReward(farmingContract, pool.pid, account))
-      const pendingRewards = await Promise.all(pendingRewardPromies)
+      let pendingRewards
+      if (!isCancelled) {
+        const pendingRewardPromies = userFarmingPools.map(pool => getPendingReward(farmingContract, pool.pid, account))
+        pendingRewards = await Promise.all(pendingRewardPromies)
+      }
 
       for (let index = 0; index < userFarmingPools.length; index++) {
         const pool = userFarmingPools[index]
 
-        pool.totalStaked = poolStakeds[index]
-        pool.pendingReward = pendingRewards[index]
+        pool.totalStaked = poolStakeds ? poolStakeds[index] : '0'
+        pool.pendingReward = pendingRewards ? pendingRewards[index] : '0'
 
         poolsMap[pool.lpAddresses[1]] = pool
       }
 
-      setUserFarmingPoolsMap(poolsMap)
+      !isCancelled && setUserFarmingPoolsMap(poolsMap)
     }
 
     if (pools.length > 0) fetchData()
+
+    return () => {
+      isCancelled = true
+    }
   })
 
   return userFarmingPoolsMap
