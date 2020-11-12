@@ -3,7 +3,7 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 import { Field } from '../../state/swap/actions'
 import { useUserSlippageTolerance } from '../../state/user/hooks'
-import { BASE_EXCHANGE_FEE } from '../../utils/prices'
+import { LP_FEE, SWAP_FEE, STAKE_FEE } from '../../utils/prices'
 import { TYPE, ExternalLink } from '../../theme'
 import { computeSlippageAdjustedAmounts, computeTradePriceBreakdown } from '../../utils/prices'
 import { AutoColumn } from '../Column'
@@ -62,10 +62,10 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-              Liquidity Provider Fee
+              Swap Fee
             </TYPE.black>
             <QuestionHelper
-              text={`A portion of each trade (${BASE_EXCHANGE_FEE}) goes to liquidity providers as a protocol incentive.`}
+              text={`The swap fee is set at ${SWAP_FEE}, of which ${STAKE_FEE} goes to LuaSafe stakers, and the remaining ${LP_FEE} goes to LPs.`}
             />
           </RowFixed>
           <TYPE.black fontSize={14} color={theme.text1}>
