@@ -164,7 +164,6 @@ function StatusIcon({ connector }: { connector: AbstractConnector }) {
 function Web3StatusInner() {
   const { t } = useTranslation()
   const { account, connector, error } = useWeb3React()
-
   const { ENSName } = useENSName(account ?? undefined)
 
   const allTransactions = useAllTransactions()

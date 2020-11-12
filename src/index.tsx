@@ -18,6 +18,13 @@ import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
 
+import { UseWalletProvider } from 'use-wallet'
+import config from './config'
+import SushiProvider from './contexts/SushiProvider'
+import FarmsProvider from './contexts/Farms'
+
+
+
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
 if ('ethereum' in window) {
@@ -60,12 +67,23 @@ ReactDOM.render(
       <Web3ProviderNetwork getLibrary={getLibrary}>
         <Provider store={store}>
           <Updaters />
-          <ThemeProvider>
-            <ThemedGlobalStyle />
-            <HashRouter>
-              <App />
-            </HashRouter>
-          </ThemeProvider>
+            <UseWalletProvider
+              chainId={config.chainId}
+              connectors={{
+                walletconnect: { rpcUrl: config.rpc },
+              }}
+            >
+              <ThemeProvider>
+                <ThemedGlobalStyle />
+                  <SushiProvider>
+                    <FarmsProvider>
+                      <HashRouter>
+                        <App />
+                      </HashRouter>
+                    </FarmsProvider>
+                  </SushiProvider>
+              </ThemeProvider>
+            </UseWalletProvider>
         </Provider>
       </Web3ProviderNetwork>
     </Web3ReactProvider>
