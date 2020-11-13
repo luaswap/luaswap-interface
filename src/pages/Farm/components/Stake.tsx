@@ -66,7 +66,6 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
       tokenName={tokenName}
     />,
   )
-
   const [onPresentWithdraw] = useModal(
     <WithdrawModal
       max={stakedBalance}
@@ -79,7 +78,6 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
     try {
       setRequestedApproval(true)
       const txHash = await onApprove()
-      console.log(txHash)
       // user rejected tx or didn't go thru
       if (!txHash) {
         setRequestedApproval(false)
@@ -104,7 +102,6 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
     totalToken2 = (stakedValue.token2Amount as any) * shareOfPool
     totalToken2 = parseFloat(totalToken2.toFixed(2))
   }
-
   return (
     <CardBox>
       <CardContent>

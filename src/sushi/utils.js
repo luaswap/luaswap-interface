@@ -348,7 +348,7 @@ export const unlock = async (sushi, account) => {
     })
 }
 export const enter = async (contract, amount, account) => {
-  debugger
+
   return contract.methods
       .enter(
           new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),

@@ -18,10 +18,10 @@ import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
 
-import { UseWalletProvider } from 'use-wallet'
-import config from './config'
 import SushiProvider from './contexts/SushiProvider'
+// import TransactionProvider from './contexts/Transactions'
 import FarmsProvider from './contexts/Farms'
+import ModalsProvider from './contexts/Modals'
 
 
 
@@ -67,23 +67,20 @@ ReactDOM.render(
       <Web3ProviderNetwork getLibrary={getLibrary}>
         <Provider store={store}>
           <Updaters />
-            <UseWalletProvider
-              chainId={config.chainId}
-              connectors={{
-                walletconnect: { rpcUrl: config.rpc },
-              }}
-            >
-              <ThemeProvider>
-                <ThemedGlobalStyle />
-                  <SushiProvider>
+            <ThemeProvider>
+              <ThemedGlobalStyle />
+                <SushiProvider>
+                  {/* <TransactionProvider> */}
                     <FarmsProvider>
                       <HashRouter>
-                        <App />
+                        <ModalsProvider>
+                          <App />
+                        </ModalsProvider>
                       </HashRouter>
                     </FarmsProvider>
-                  </SushiProvider>
-              </ThemeProvider>
-            </UseWalletProvider>
+                  {/* </TransactionProvider> */}
+                </SushiProvider>                  
+            </ThemeProvider>
         </Provider>
       </Web3ProviderNetwork>
     </Web3ReactProvider>

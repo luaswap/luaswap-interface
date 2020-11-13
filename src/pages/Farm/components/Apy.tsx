@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import styled from 'styled-components'
-// import { useWallet } from 'use-wallet'
 import { useWeb3React } from '@web3-react/core'
 import useSushi from '../../../hooks/farms/useSushi'
 import { BigNumber } from '../../../sushi'
@@ -23,14 +22,14 @@ interface ApyProps {
 
 const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol, token2Symbol }) => {
     const sushi = useSushi()
-    // const { ethereum } = useWallet()
     const { library: ethereum } = useWeb3React()
     
     // const block = useBlock()
     const stakedValue = useStakedValue(pid)
     const luaPrice = useLuaPrice()
     const lpContract = useMemo(() => {
-      return getContract(ethereum.provider as provider, lpTokenAddress)
+        let e_provider = ethereum && ethereum.provider ? ethereum.provider : null
+        return getContract(e_provider as provider, lpTokenAddress)
     }, [ethereum, lpTokenAddress])
 
     const newReward = useNewReward(pid + 1)

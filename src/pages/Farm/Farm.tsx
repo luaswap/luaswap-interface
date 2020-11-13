@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-// import { useWallet } from 'use-wallet'
 
 import { useWeb3React } from '@web3-react/core'
 // import { Web3ReactProvider } from '@web3-react/core'
@@ -70,12 +69,11 @@ const Farm: React.FC = () => {
   // const sushi = useSushi()
   const toggleWalletModal = useWalletModalToggle()
 
-  // const { ethereum } = useWallet()
   const { account, library : ethereum } = useWeb3React()
   // const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
-  console.log(ethereum)
   const lpContract = useMemo(() => {
-    return getContract(ethereum.provider as provider, lpTokenAddress)
+    let e_provider = ethereum && ethereum.provider ? ethereum.provider : null
+    return getContract(e_provider as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
 
   return (
