@@ -118,6 +118,9 @@
   },
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "@luaswap/sdk": "^1.4.0"
+    "@luaswap/sdk": "^1.4.0",
+    "axios": "^0.21.0",
+    "bignumber.js": "^9.0.1",
+    "use-wallet": "^0.8.0"
   }
 }

@@ -8,7 +8,11 @@ import { reduceFractionDigit } from '../../utils'
 import List from './List'
 import Details from './Details'
 import Loader from '../../components/Loader'
-import { SAFE_POOLS } from '../../constants'
+import { requestStakingPools } from '../../services'
+import useSushi from '../../hooks/useSushi'
+import BigNumber from 'bignumber.js'
+import { getXSushiSupply } from '../../sushi/utils'
+import { getBalanceNumber } from '../../utils/formatBalance'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 900px;
@@ -19,7 +23,7 @@ const Header = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 `
 
 const HeaderImg = styled.img`
@@ -35,7 +39,6 @@ const HeaderTitle = styled.div`
 `
 
 const HeaderSubTitle = styled.div`
-  margin-bottom: 40px;
   color: white;
   font-size: 22px;
   font-weight: bold;
@@ -54,14 +57,12 @@ const LoaderContainer = styled.div`
 
 const SafePage = ({ location }: SafePageProps) => {
   const [poolKey, setPoolKey] = useState('')
-  const [pools, setPools] = useState<object[]>([])
-
-  const getTotalSupply = (): number => {
-    return 0
-  }
+  const [pools, setPools] = useState<PoolItemProps[]>([])
+  const [totalSupply, setTotalSupply] = useState<BigNumber>()
+  const sushi = useSushi()
 
   useEffect(() => {
-    setPools(SAFE_POOLS)
+    requestStakingPools((data: any) => setPools(data))
   }, [])
 
   useEffect(() => {
@@ -74,6 +75,16 @@ const SafePage = ({ location }: SafePageProps) => {
     }
   }, [location])
 
+  useEffect(() => {
+    const fetchTotalSupply = async () => {
+      const supply = await getXSushiSupply(sushi)
+      setTotalSupply(supply)
+    }
+    if (sushi) {
+      fetchTotalSupply()
+    }
+  }, [sushi])
+
   return (
     <>
       <PageWrapper>
@@ -83,7 +94,7 @@ const SafePage = ({ location }: SafePageProps) => {
           <HeaderTitle>{'Welcome to the LuaSafe, stake LUA to earn tokens!'}</HeaderTitle>
           <HeaderSubTitle>
             {`LuaSafe Currently Has `}
-            <TotalSupplyText>{reduceFractionDigit(getTotalSupply(), 2)}</TotalSupplyText>
+            <TotalSupplyText>{reduceFractionDigit(getBalanceNumber(new BigNumber(totalSupply)), 2)}</TotalSupplyText>
             {` LUA Staked`}
           </HeaderSubTitle>
         </Header>
@@ -96,7 +107,6 @@ const SafePage = ({ location }: SafePageProps) => {
             <Loader size="40px" />
           </LoaderContainer>
         )}
-        <List />
       </PageWrapper>
     </>
   )
@@ -105,6 +115,17 @@ const SafePage = ({ location }: SafePageProps) => {
 interface SafePageProps {
   history: any
   location: any
+}
+
+interface PoolItemProps {
+  lpAddresses: string
+  lpBalance: number
+  token0Addresses: string
+  token0Balance: number
+  token0Symbol: keyof PoolItemProps
+  token1Addresses: string
+  token1Balance: number
+  token1Symbol: keyof PoolItemProps
 }
 
 export default withRouter(SafePage)
