@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react'
 
-import { useWallet } from 'use-wallet'
+import { useWeb3React } from '@web3-react/core'
 import config from '../../config'
 
 import { Sushi } from '../../sushi'
@@ -20,18 +20,18 @@ declare global {
 }
 
 const SushiProvider: React.FC = ({ children }) => {
-  const { ethereum }: { ethereum: any } = useWallet()
+  const { chainId, library: ethereum } = useWeb3React()
+
   const [sushi, setSushi] = useState<any>()
 
   // @ts-ignore
   window.sushi = sushi
   // @ts-ignore
-  window.eth = ethereum
+  window.eth = ethereum && ethereum.provider ? ethereum.provider : null
 
   useEffect(() => {
-    if (ethereum) {
-      const chainId = Number(ethereum.chainId)
-      const sushiLib = new Sushi(ethereum, chainId, false, {
+    if (ethereum && ethereum.provider) {
+      const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
         defaultAccount: ethereum.selectedAddress,
         defaultConfirmations: 1,
         autoGasMultiplier: 1.5,

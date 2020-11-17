@@ -6,7 +6,9 @@ import { ThemeContext } from 'styled-components'
 import { Field } from '../../state/swap/actions'
 import { TYPE } from '../../theme'
 import {
-  BASE_EXCHANGE_FEE,
+  STAKE_FEE,
+  LP_FEE,
+  SWAP_FEE,
   computeSlippageAdjustedAmounts,
   computeTradePriceBreakdown,
   formatExecutionPrice,
@@ -99,10 +101,10 @@ export default function SwapModalFooter({
         <RowBetween>
           <RowFixed>
             <TYPE.black fontSize={14} fontWeight={400} color={theme.text2}>
-              Liquidity Provider Fee
+              Swap Fee
             </TYPE.black>
             <QuestionHelper
-              text={`A portion of each trade (${BASE_EXCHANGE_FEE}) goes to liquidity providers as a protocol incentive.`}
+              text={`The swap fee is set at ${SWAP_FEE}, of which ${STAKE_FEE} goes to LuaSafe stakers, and the remaining ${LP_FEE} goes to LPs.`}
             />
           </RowFixed>
           <TYPE.black fontSize={14}>

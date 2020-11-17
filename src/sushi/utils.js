@@ -48,13 +48,6 @@ export const getSushiContract = sushi => {
 export const getXSushiStakingContract = sushi => {
   return sushi && sushi.contracts && sushi.contracts.xSushiStaking
 }
-export const getMakerContract = sushi => {
-  return sushi && sushi.contracts && sushi.contracts.maker
-}
-export const getMakerAddress = sushi => {
-  return sushi && sushi.makerAddress
-}
-
 export const getFarms = sushi => {
   return sushi
     ? sushi.contracts.pools.map(
@@ -79,8 +72,7 @@ export const getFarms = sushi => {
           protocal,
           iconProtocal,
           pairLink,
-          addLiquidityLink,
-          removeLiquidityLink
+          addLiquidityLink
         }) => ({
           pid,
           id: symbol,
@@ -106,8 +98,7 @@ export const getFarms = sushi => {
           protocal,
           iconProtocal,
           pairLink,
-          addLiquidityLink,
-          removeLiquidityLink
+          addLiquidityLink
         })
       )
     : []
@@ -237,7 +228,6 @@ export const stake = async (masterChefContract, pid, amount, account) => {
     .deposit(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send({ from: account })
     .on('transactionHash', tx => {
-      console.log(tx)
       return tx.transactionHash
     })
 }
@@ -247,7 +237,6 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
     .withdraw(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send({ from: account })
     .on('transactionHash', tx => {
-      console.log(tx)
       return tx.transactionHash
     })
 }
@@ -256,7 +245,6 @@ export const harvest = async (masterChefContract, pid, account) => {
     .claimReward(pid)
     .send({ from: account })
     .on('transactionHash', tx => {
-      console.log(tx)
       return tx.transactionHash
     })
 }
@@ -277,7 +265,6 @@ export const redeem = async (masterChefContract, account) => {
       .exit()
       .send({ from: account })
       .on('transactionHash', tx => {
-        console.log(tx)
         return tx.transactionHash
       })
   } else {
@@ -307,7 +294,6 @@ export const unlock = async (sushi, account) => {
     .unlock()
     .send({ from: account })
     .on('transactionHash', tx => {
-      console.log(tx)
       return tx.transactionHash
     })
 }
@@ -316,17 +302,6 @@ export const enter = async (contract, amount, account) => {
     .enter(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send({ from: account })
     .on('transactionHash', tx => {
-      console.log(tx)
-      return tx.transactionHash
-    })
-}
-
-export const makerConvert = async (contract, token0, token1, account) => {
-  return contract.methods
-    .convert(token0, token1)
-    .send({ from: account })
-    .on('transactionHash', tx => {
-      console.log(tx)
       return tx.transactionHash
     })
 }
@@ -336,7 +311,6 @@ export const leave = async (contract, amount, account) => {
     .leave(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send({ from: account })
     .on('transactionHash', tx => {
-      console.log(tx)
       return tx.transactionHash
     })
 }

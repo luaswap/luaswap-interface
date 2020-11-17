@@ -46,6 +46,7 @@ export function colors(): Colors {
     text3: '#6C7284',
     text4: '#565A69',
     text5: '#2C2F36',
+    text6: '#4F4937',
 
     // backgrounds / greys
     bg1: '#313535',
@@ -96,7 +97,18 @@ export function theme(darkMode: boolean): DefaultTheme {
       md: 12,
       lg: 24
     },
-
+    // Spacing
+    spacing: {
+      1: 4,
+      2: 8,
+      3: 16,
+      4: 24,
+      5: 32,
+      6: 48,
+      7: 64,
+    },
+    // siteWidth
+    siteWidth: 1200,
     //shadows
     shadow1: '#000',
 

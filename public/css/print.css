@@ -1,0 +1,17 @@
+@charset "UTF-8";
+/* ===================================================================
+CSS information
+
+ file name  : print.css
+ author     : Ability Consultant
+ style info : 印刷用
+=================================================================== */
+/* -----------------------------------------------------------
+	print
+----------------------------------------------------------- */
+@media -sass-debug-info{filename{font-family:file\:\/\/\/Users\/bongjun\/Desktop\/GitHub\/maintenance\/scss\/print\.scss}line{font-family:\0000314}}
+.view_tab,
+.view_sp,
+.view_tab-sp {
+  display: none !important;
+}

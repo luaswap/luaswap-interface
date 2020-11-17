@@ -1,0 +1,84 @@
+.social-links {
+  font-size: 0;
+  margin-left: 0;
+  margin-top: 30px;
+}
+.social-links .social-links__link {
+  transition: all .5s ease;
+}
+.social-links .social-links__link span {
+  display: none;
+}
+.social-links .social-links__link:hover {
+  color: #fff;
+}
+.social-links .social-links__items {
+  margin-bottom: 15px;
+}
+.social-links .social-links__items:not(:last-child) {
+  margin-right: 15px;
+}
+.social-links .social-links__items i {
+  font-size: 15px;
+}
+.site-mobile-menu-wrapper .social-links {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+.tomochain-social .social-links {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.tomochain-social .social-links .social-links__items {
+  margin-right: 7.5px;
+  margin-left: 7.5px;
+}
+.tomochain-social .social-links .social-links__items:hover .social-links__link:before {
+  opacity: 1;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+}
+.tomochain-social .social-links .social-links__items:hover .social-links__link:after {
+  opacity: 1;
+  visibility: visible;
+}
+.tomochain-social .social-links .social-links__link {
+  position: relative;
+  display: inline-block;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1px;
+}
+.tomochain-social .social-links .social-links__link:before, .tomochain-social .social-links .social-links__link:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: all .5s ease;
+}
+.tomochain-social .social-links .social-links__link:before {
+  z-index: 1;
+  background-color: #1b2038;
+}
+.tomochain-social .social-links .social-links__link:after {
+  z-index: 0;
+  background-image: linear-gradient(to bottom, #f78d7a 0%, #fac15e 100%);
+  transition-duration: 1s;
+}
+.tomochain-social .social-links .social-links__link i {
+  display: block;
+  position: relative;
+  font-size: 17px;
+  line-height: 40px;
+  z-index: 1;
+  color: #fff;
+  transition: all .5s ease;
+}

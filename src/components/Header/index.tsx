@@ -102,6 +102,16 @@ const HeaderLinks = styled(Row)`
 `};
 `
 
+const LogoText = styled.span`
+  margin-left: 10px;
+  font-size: 20px;
+  color: #fff;
+  font-weight: bold;
+  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+      display: none;
+  `}
+`
+
 const AccountElement = styled.div<{ active: boolean }>`
   display: flex;
   flex-direction: row;
@@ -150,6 +160,7 @@ const Title = styled.a`
   pointer-events: auto;
   justify-self: flex-start;
   margin-right: 12px;
+  text-decoration: none;
   ${({ theme }) => theme.mediaWidth.upToSmall`
     justify-self: center;
   `};
@@ -159,6 +170,8 @@ const Title = styled.a`
 `
 
 const UniIcon = styled.div`
+  display: flex;
+  align-items: center;
   transition: transform 0.3s ease;
   :hover {
     transform: rotate(-5deg);
@@ -219,10 +232,9 @@ const StyledExternalLink = styled(ExternalLink).attrs({
   :focus {
     color: ${({ theme }) => darken(0.1, theme.text1)};
   }
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-      display: none;
-`}
+  // ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+  //     display: none;
+  // `}
 `
 
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
@@ -250,6 +262,7 @@ export default function Header() {
         <Title href=".">
           <UniIcon>
             <img width={'40px'} src={Logo} alt="logo" />
+            <LogoText>LuaSwap</LogoText>
           </UniIcon>
         </Title>
         <HeaderLinks>
@@ -269,9 +282,12 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
-          <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
+          <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
             Farming
-          </StyledExternalLink>
+          </StyledNavLink>
+          {/* <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
+            Farming
+          </StyledExternalLink> */}
           <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
             Charts <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>

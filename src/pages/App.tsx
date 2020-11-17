@@ -27,6 +27,8 @@ import PoolFinder from './PoolFinder'
 import RemoveLiquidity from './RemoveLiquidity'
 import { RedirectOldRemoveLiquidityPathStructure } from './RemoveLiquidity/redirects'
 import Swap from './Swap'
+import Farms from './Farms'
+import Farm from './Farm'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // OpenClaimAddressModalAndRedirectToSwap
 import SafePage from './Safe'
 
@@ -99,6 +101,8 @@ export default function App() {
               <Route exact strict path="/pool" component={Pool} />
               {/* <Route exact strict path="/uni" component={Earn} /> */}
               {/* <Route exact strict path="/vote" component={Vote} /> */}
+              <Route exact strict path="/farming" component={Farms} />
+              <Route exact strict path="/farming/:farmId" component={Farm} />
               <Route exact strict path="/create" component={RedirectToAddLiquidity} />
               <Route exact path="/add" component={AddLiquidity} />
               <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
