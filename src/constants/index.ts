@@ -205,5 +205,6 @@ export const TOKEN_ICONS: TokenIconProps = {
   WBTC: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png',
   UNI: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7083.png',
   DAI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png',
-  BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png'
+  BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png',
+  RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png'
 }

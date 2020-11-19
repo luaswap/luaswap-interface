@@ -26,7 +26,7 @@ import Harvest from './components/Harvest'
 import Stake from './components/Stake'
 
 const Farm: React.FC = () => {
-  const { farmId } = (useParams() as any)
+  const { farmId } = useParams() as any
   const {
     pid,
     lpToken,
@@ -69,7 +69,7 @@ const Farm: React.FC = () => {
   // const sushi = useSushi()
   const toggleWalletModal = useWalletModalToggle()
 
-  const { account, library : ethereum } = useWeb3React()
+  const { account, library: ethereum } = useWeb3React()
   // const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
   const lpContract = useMemo(() => {
     let e_provider = ethereum && ethereum.provider ? ethereum.provider : null
@@ -80,8 +80,10 @@ const Farm: React.FC = () => {
     <>
       <PageHeader
         icon={
-          <div style={{display: 'flex'}}>
-            <img src={icon} height="80" />&nbsp;<img src={icon2} height="80" />
+          <div style={{ display: 'flex' }}>
+            <img src={icon} height="80" />
+            &nbsp;
+            <img src={icon2} height="80" />
           </div>
         }
         subtitle={description}
@@ -89,16 +91,17 @@ const Farm: React.FC = () => {
       />
       <StyledFarm>
         <StyledApyWrap>
-          <Apy 
-            pid={pid} 
-            lpTokenAddress={lpTokenAddress} 
+          <Apy
+            pid={pid}
+            lpTokenAddress={lpTokenAddress}
             symbolShort={symbolShort}
             tokenSymbol={tokenSymbol}
-            token2Symbol={token2Symbol}/>
+            token2Symbol={token2Symbol}
+          />
         </StyledApyWrap>
-        <Spacer size="md"/>
+        <Spacer size="md" />
         <StyledHeading>Your staking</StyledHeading>
-        {account &&
+        {account && (
           <StyledCardsWrapper>
             <StyledCardWrapper>
               <Harvest pid={pid} />
@@ -114,39 +117,52 @@ const Farm: React.FC = () => {
               />
             </StyledCardWrapper>
           </StyledCardsWrapper>
-        }
-        {!account && <StyledCardsWrapper>
+        )}
+        {!account && (
+          <StyledCardsWrapper>
             <div
               style={{
                 alignItems: 'center',
                 display: 'flex',
                 flex: 1,
-                justifyContent: 'center',
+                justifyContent: 'center'
               }}
             >
-              <Button variant="secondary"
+              <Button
+                variant="secondary"
                 onClick={toggleWalletModal} // onPresentWalletProviderModal
                 text="🔓 Unlock Wallet To Continue"
               />
             </div>
-        </StyledCardsWrapper>}
+          </StyledCardsWrapper>
+        )}
         <Spacer size="lg" />
-        <StyledInfo style={{color: '#ff9800'}}>
-          👉 Every time you stake and unstake LP tokens, the contract will<br/>
+        <StyledInfo style={{ color: '#ff9800' }}>
+          👉 Every time you stake and unstake LP tokens, the contract will
+          <br />
           automatically harvest LUA rewards for you!
         </StyledInfo>
         <Spacer size="lg" />
         <StyledCardsWrapper>
           <div>
-            <div style={{color: '#ffffff', fontWeight: 'bold', fontSize: 14, marginBottom: 10}}>
+            <div style={{ color: '#ffffff', fontWeight: 'bold', fontSize: 14, marginBottom: 10 }}>
               MAYBE YOU DON'T KNOW
             </div>
             <StyledInfoLP>
-              <img src={iconProtocal} height="50" style={{marginTop: 5}} />
-              <div style={{width: 'calc(100% - 70px', color: '#ffffff', fontSize: 16, marginLeft: 20, marginRight: 20}}>
-                <div>Add liquidity to <a style={{color: '#f6b944', textDecoration: 'none'}} href={pairLink} target="__blank"><b>{symbolShort} pair</b></a> on {protocal} to get <span style={{color: '#f6b944'}}>{lpToken}</span> tokens. Then deposit those LP tokens on LuaSwap to receive rewards</div>
+              <img src={iconProtocal} height="50" style={{ marginTop: 5 }} />
+              <div
+                style={{ width: 'calc(100% - 70px', color: '#ffffff', fontSize: 16, marginLeft: 20, marginRight: 20 }}
+              >
+                <div>
+                  Add liquidity to{' '}
+                  <a style={{ color: '#f6b944', textDecoration: 'none' }} href={pairLink} target="__blank">
+                    <b>{symbolShort} pair</b>
+                  </a>{' '}
+                  on {protocal} to get <span style={{ color: '#f6b944' }}>{lpToken}</span> tokens. Then deposit those LP
+                  tokens on LuaSwap to receive rewards
+                </div>
                 <Spacer size="sm" />
-                <a style={{color: '#f6b944'}} target="__blank" href={addLiquidityLink}>
+                <a style={{ color: '#f6b944' }} target="__blank" href={addLiquidityLink}>
                   <b>Add Liquidity on {protocal}</b>
                 </a>
               </div>
@@ -195,7 +211,7 @@ const StyledCardWrapper = styled.div`
 `
 
 const StyledInfo = styled.h3`
-  color: ${(props) => props.theme.text2};
+  color: ${props => props.theme.text2};
   font-size: 16px;
   font-weight: 400;
   margin: 0;
@@ -204,13 +220,13 @@ const StyledInfo = styled.h3`
   @media (max-width: 767px) {
     text-align: left;
     br {
-        display: none;
+      display: none;
     }
   }
 `
 
 const StyledHeading = styled.h2`
-  color: ${(props) => props.theme.white};
+  color: ${props => props.theme.white};
   opacity: 0.5;
   text-transform: uppercase;
   text-align: center;
