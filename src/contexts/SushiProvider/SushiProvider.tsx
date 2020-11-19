@@ -10,7 +10,7 @@ export interface SushiContext {
 }
 
 export const Context = createContext<SushiContext>({
-  sushi: undefined,
+  sushi: undefined
 })
 
 declare global {
@@ -39,12 +39,11 @@ const SushiProvider: React.FC = ({ children }) => {
         defaultGas: '6000000',
         defaultGasPrice: '1000000000000',
         accounts: [],
-        ethereumNodeTimeout: 10000,
+        ethereumNodeTimeout: 10000
       })
       setSushi(sushiLib)
       window.sushisauce = sushiLib
-    }
-    else {
+    } else {
       const chainId = config.chainId
       const sushiLib = new Sushi(config.rpc, chainId, false, {
         defaultAccount: '0x0000000000000000000000000000000000000000',
@@ -54,7 +53,7 @@ const SushiProvider: React.FC = ({ children }) => {
         defaultGas: '6000000',
         defaultGasPrice: '1000000000000',
         accounts: [],
-        ethereumNodeTimeout: 10000,
+        ethereumNodeTimeout: 10000
       })
       setSushi(sushiLib)
       window.sushisauce = sushiLib

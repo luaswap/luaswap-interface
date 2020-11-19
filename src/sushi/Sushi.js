@@ -11,15 +11,9 @@ export class Sushi {
     var realProvider
     if (typeof provider === 'string') {
       if (provider.includes('wss')) {
-        realProvider = new Web3.providers.WebsocketProvider(
-          provider,
-          options.ethereumNodeTimeout || 10000,
-        )
+        realProvider = new Web3.providers.WebsocketProvider(provider, options.ethereumNodeTimeout || 10000)
       } else {
-        realProvider = new Web3.providers.HttpProvider(
-          provider,
-          options.ethereumNodeTimeout || 10000,
-        )
+        realProvider = new Web3.providers.HttpProvider(provider, options.ethereumNodeTimeout || 10000)
       }
     } else {
       realProvider = provider
@@ -68,15 +62,9 @@ export class Sushi {
   loadAccount(account) {
     const newAccount = this.web3.eth.accounts.wallet.add(account.privateKey)
 
-    if (
-      !newAccount ||
-      (account.address &&
-        account.address.toLowerCase() !== newAccount.address.toLowerCase())
-    ) {
+    if (!newAccount || (account.address && account.address.toLowerCase() !== newAccount.address.toLowerCase())) {
       throw new Error(`Loaded account address mismatch.
-        Expected ${account.address}, got ${
-        newAccount ? newAccount.address : null
-      }`)
+        Expected ${account.address}, got ${newAccount ? newAccount.address : null}`)
     }
   }
 

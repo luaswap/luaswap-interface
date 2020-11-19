@@ -159,3 +159,52 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 // used to ensure the user doesn't send so much ETH so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
+
+export const STAKING_POOLS = [
+  {
+    key: 'lua-xlua',
+    name: 'LUA - xLUA',
+    description: 'Deposit LUA-xLUA LUA-V1 LP to earn xLUA',
+    longSymbol: 'LUA-xLUA LUA-V1 LP',
+    shortSymbol: 'LUA-xLUA',
+    token: 'LUA',
+    token2: 'xLUA',
+    icon: 'https://luaswap.org/favicon.png',
+    icon2: 'https://luaswap.org/favicon.png'
+  },
+  {
+    key: 'xlua-tomo',
+    name: 'xLUA - TOMO',
+    description: 'Deposit xLUA-TOMO LUA-V1 LP to earn TOMO',
+    longSymbol: 'xLUA-TOMO LUA-V1 LP',
+    shortSymbol: 'xLUA-TOMO',
+    token: 'xLUA',
+    token2: 'TOMO',
+    icon: 'https://luaswap.org/favicon.png',
+    icon2: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png'
+  }
+]
+
+type TokenIconProps = {
+  [index: string]: string
+}
+export const TOKEN_ICONS: TokenIconProps = {
+  LUA: 'https://luaswap.org/favicon.png',
+  'LUA-V1': 'https://luaswap.org/favicon.png',
+  USDC: 'https://s2.coinmarketcap.com/static/img/coins/128x128/3408.png',
+  TOMOE: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
+  ETH: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png',
+  USDT: 'https://s2.coinmarketcap.com/static/img/coins/128x128/825.png',
+  FRONT: 'https://s2.coinmarketcap.com/static/img/coins/128x128/5893.png',
+  SUSHI: 'https://s2.coinmarketcap.com/static/img/coins/128x128/6758.png',
+  SRM: 'https://s2.coinmarketcap.com/static/img/coins/128x128/6187.png',
+  'FTX Token': 'https://s2.coinmarketcap.com/static/img/coins/128x128/4195.png',
+  KAI:
+    'https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xD9Ec3ff1f8be459Bb9369b4E79e9Ebcf7141C093/logo.png',
+  OM: 'https://s2.coinmarketcap.com/static/img/coins/128x128/6536.png',
+  WBTC: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png',
+  UNI: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7083.png',
+  DAI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png',
+  BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png',
+  RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png'
+}
