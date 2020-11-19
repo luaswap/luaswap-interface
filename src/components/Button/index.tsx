@@ -11,6 +11,7 @@ const Base = styled(RebassButton)<{
   width?: string
   borderRadius?: string
   altDisabledStyle?: boolean
+  fontSize?: string
 }>`
   padding: ${({ padding }) => (padding ? padding : '18px')};
   width: ${({ width }) => (width ? width : '100%')};
@@ -113,7 +114,7 @@ export const ButtonSecondary = styled(Base)`
   border: 1px solid ${({ theme }) => theme.primary4};
   color: ${({ theme }) => theme.primary1};
   background-color: transparent;
-  font-size: 16px;
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : '16px')};
   border-radius: 12px;
   padding: ${({ padding }) => (padding ? padding : '10px')};
 
