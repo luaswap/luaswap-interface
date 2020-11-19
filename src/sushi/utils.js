@@ -319,11 +319,13 @@ export const leave = async (contract, amount, account) => {
 }
 
 export const makerConvert = async (contract, token0, token1, account) => {
-  return contract.methods
-    .convert(token0, token1)
-    .send({ from: account })
-    .on('transactionHash', tx => {
-      console.log(tx)
-      return tx.transactionHash
-    })
+  return (
+    contract &&
+    contract.methods
+      .convert(token0, token1)
+      .send({ from: account })
+      .on('transactionHash', tx => {
+        return tx.transactionHash
+      })
+  )
 }

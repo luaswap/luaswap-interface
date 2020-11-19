@@ -4,6 +4,7 @@ import ModalTitle from '../../components/ModalTitle'
 import styled from 'styled-components'
 import Button from '../../components/ButtonSushi'
 import Modal from '../../components/Modal/InstantModal'
+import { Box } from 'rebass'
 
 interface ConvertModalProps {
   onConfirm: (token0: string, token1: string) => void
@@ -23,12 +24,26 @@ const ConvertModal: React.FC<ConvertModalProps> = ({
   const [pendingTx, setPendingTx] = useState(false)
   return (
     <Modal>
-      <ModalTitle text={`Convert this pair: ${pair} `} />
-      <StyledNote>
-        This “CONVERT” button will trigger reward distribution for the selected pair. Anyone can trigger distribution at
-        any time by selecting the “CONVERT” buttons. Users need to pay the gas fee for the distribution if they choose
-        to do it themselves.
-      </StyledNote>
+      <ModalTitle
+        text={
+          <>
+            {'Convert This Pair: '}
+            <StyledPairText>{pair}</StyledPairText>
+          </>
+        }
+      />
+      <Box mb={[3, 4]}>
+        <StyledNote>
+          <ul>
+            <li>{'This “CONVERT” button will trigger reward distribution for the selected pair.'}</li>
+            <li>{'Anyone can trigger distribution at any time by selecting the “CONVERT” buttons.'}</li>
+            <li>{'Users need to pay the gas fee for the distribution if they choose to do it themselves.'}</li>
+          </ul>
+        </StyledNote>
+      </Box>
+      <Box px={4}>
+        <StyledNote>{`Are you sure you want to convert ${pair}?`}</StyledNote>
+      </Box>
       <ModalActions>
         <Button text="Cancel" variant="secondary" onClick={onDismiss} />
         <Button
@@ -46,12 +61,17 @@ const ConvertModal: React.FC<ConvertModalProps> = ({
   )
 }
 const StyledNote = styled.h3`
-  color: #bdbdbd;
-  font-size: 16px;
-  font-weight: 400;
   margin: 0;
   padding: 0;
-  text-align: center;
+  color: #bdbdbd;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+`
+
+const StyledPairText = styled.span`
+  margin-left: 10px;
+  color: ${props => props.theme.primary1};
 `
 
 export default ConvertModal
