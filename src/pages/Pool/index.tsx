@@ -22,6 +22,8 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { Dots } from '../../components/swap/styleds'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 
+import { useFarmingPool, useFarmingStaked } from '../../hooks/useFarming'
+
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
   width: 100%;
@@ -78,6 +80,9 @@ export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
 
+  const { farmingPools } = useFarmingPool()
+  const userFarmingMap: { [key: string]: any } = useFarmingStaked(farmingPools)
+
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()
   const tokenPairsWithLiquidityTokens = useMemo(
@@ -95,10 +100,12 @@ export default function Pool() {
   // fetch the reserves for all V2 pools in which the user has a balance
   const liquidityTokensWithBalances = useMemo(
     () =>
-      tokenPairsWithLiquidityTokens.filter(({ liquidityToken }) =>
-        v2PairsBalances[liquidityToken.address]?.greaterThan('0')
+      tokenPairsWithLiquidityTokens.filter(
+        ({ liquidityToken }) =>
+          v2PairsBalances[liquidityToken.address]?.greaterThan('0') ||
+          Object.keys(userFarmingMap).includes(liquidityToken.address)
       ),
-    [tokenPairsWithLiquidityTokens, v2PairsBalances]
+    [tokenPairsWithLiquidityTokens, v2PairsBalances, userFarmingMap]
   )
 
   const v2Pairs = usePairs(liquidityTokensWithBalances.map(({ tokens }) => tokens))
@@ -106,7 +113,6 @@ export default function Pool() {
     fetchingV2PairBalances || v2Pairs?.length < liquidityTokensWithBalances.length || v2Pairs?.some(V2Pair => !V2Pair)
 
   const allV2PairsWithLiquidity = v2Pairs.map(([, pair]) => pair).filter((v2Pair): v2Pair is Pair => Boolean(v2Pair))
-
   const hasV1Liquidity = useUserHasLiquidityInAllTokens()
 
   return (
@@ -184,7 +190,11 @@ export default function Pool() {
                 </ButtonSecondary>
 
                 {allV2PairsWithLiquidity.map(v2Pair => (
-                  <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
+                  <FullPositionCard
+                    key={v2Pair.liquidityToken.address}
+                    pair={v2Pair}
+                    farm={userFarmingMap[v2Pair.liquidityToken.address]}
+                  />
                 ))}
               </>
             ) : (

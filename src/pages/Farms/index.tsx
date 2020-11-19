@@ -6,6 +6,7 @@ import Balances from './components/Balances'
 // import CustomCountDown from './components/CustomCountDown'
 import Icon_Tip from '../../assets/images/pro-tip-icon.svg'
 import { START_REWARD_AT_BLOCK } from '../../sushi/lib/constants'
+import { EARN_LUA_REWARD, TIME_EARN_LUA_REWARD } from '../../constants/lists'
 import FarmCards from './components/FarmCards'
 import TotalLockValue from './components/TotalLockValue'
 
@@ -48,7 +49,7 @@ export default function Farms() {
             <StyledInfo>
                 <img src={Icon_Tip} alt="Pro Tip"/>
                 <div>
-				<b>Pro Tip</b>: Stake to any pool and earn <b>8x LUA</b> rewards until <a href="https://etherscan.io/block/countdown/11232600" target="_blank" style={{color: '#ffffff'}}>Nov 11</a>
+				<b>Pro Tip</b>: Stake to any pool and earn <b>{EARN_LUA_REWARD} LUA</b> rewards until <a href="https://etherscan.io/block/countdown/11232600" target="_blank" style={{color: '#ffffff'}}>{TIME_EARN_LUA_REWARD}</a>
                 </div>
             </StyledInfo>
             <Spacer size="lg" />

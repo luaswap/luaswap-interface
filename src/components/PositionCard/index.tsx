@@ -1,4 +1,4 @@
-import { JSBI, Pair, Percent } from '@luaswap/sdk'
+import { JSBI, Pair, Percent, TokenAmount, ChainId, Token } from '@luaswap/sdk'
 import { darken } from 'polished'
 import React, { useState } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
@@ -25,6 +25,8 @@ import CurrencyLogo from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { RowBetween, RowFixed } from '../Row'
 import { Dots } from '../swap/styleds'
+import QuestionHelper from '../QuestionHelper'
+import { useFarmingContract } from '../../hooks/useContract'
 
 export const FixedHeightRow = styled(RowBetween)`
   height: 24px;
@@ -36,6 +38,17 @@ export const HoverCard = styled(Card)`
     border: 1px solid ${({ theme }) => darken(0.06, theme.bg2)};
   }
 `
+
+const RowFixedValue = styled(RowFixed)`
+  min-width: 150px;
+  justify-content: space-between;
+`
+
+const RowFixedTitle = styled(RowFixed)`
+  position: relative;
+  z-index: 1;
+`
+
 const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
   border: none;
   background: ${({ theme, bgColor }) =>
@@ -44,8 +57,16 @@ const StyledPositionCard = styled(LightCard)<{ bgColor: any }>`
   overflow: hidden;
 `
 
+const Divider = styled.hr`
+  width: 100%;
+  border-width: 1px 0 0 0;
+  border-color: #5aa2ff70;
+  margin: 5px 0 3px;
+`
+
 interface PositionCardProps {
   pair: Pair
+  farm?: any
   showUnwrapped?: boolean
   border?: string
 }
@@ -158,7 +179,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
   )
 }
 
-export default function FullPositionCard({ pair, border }: PositionCardProps) {
+export default function FullPositionCard({ pair, border, farm }: PositionCardProps) {
   const { account } = useActiveWeb3React()
 
   const currency0 = unwrappedToken(pair.token0)
@@ -166,27 +187,62 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
 
   const [showMore, setShowMore] = useState(false)
 
+  // total user lp balance (include staked and available)
   const userPoolBalance = useTokenBalance(account ?? undefined, pair.liquidityToken)
+  const userFarmBalance = new TokenAmount(pair.liquidityToken, farm ? farm.userStaked : '0')
+  const totalUserBalance = userPoolBalance?.add(userFarmBalance)
+
+  // total user pool share (include staked and available)
   const totalPoolTokens = useTotalSupply(pair.liquidityToken)
 
   const poolTokenPercentage =
-    !!userPoolBalance && !!totalPoolTokens && JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
-      ? new Percent(userPoolBalance.raw, totalPoolTokens.raw)
+    !!totalUserBalance && !!totalPoolTokens && JSBI.greaterThanOrEqual(totalPoolTokens.raw, totalUserBalance.raw)
+      ? new Percent(totalUserBalance.raw, totalPoolTokens.raw)
       : undefined
 
+  // user farming pool share
+  const totalFarmingTokens = new TokenAmount(pair.liquidityToken, farm ? farm.totalStaked : '0')
+
+  const farmingTokenPercentage =
+    !!userFarmBalance && !!totalFarmingTokens && totalFarmingTokens.toSignificant(1) !== '0'
+      ? new Percent(userFarmBalance.raw, totalFarmingTokens.raw)
+      : undefined
+
+  // total user token deposited (include staked and available)
   const [token0Deposited, token1Deposited] =
     !!pair &&
     !!totalPoolTokens &&
-    !!userPoolBalance &&
+    !!totalUserBalance &&
     // this condition is a short-circuit in the case where useTokenBalance updates sooner than useTotalSupply
-    JSBI.greaterThanOrEqual(totalPoolTokens.raw, userPoolBalance.raw)
+    JSBI.greaterThanOrEqual(totalPoolTokens.raw, totalUserBalance.raw)
       ? [
-          pair.getLiquidityValue(pair.token0, totalPoolTokens, userPoolBalance, false),
-          pair.getLiquidityValue(pair.token1, totalPoolTokens, userPoolBalance, false)
+          pair.getLiquidityValue(pair.token0, totalPoolTokens, totalUserBalance, false),
+          pair.getLiquidityValue(pair.token1, totalPoolTokens, totalUserBalance, false)
         ]
       : [undefined, undefined]
 
+  // user pending reward
+  const LUA = new Token(ChainId.MAINNET, '0xB1f66997A5760428D3a87D68b90BfE0aE64121cC', 18, 'LUA', 'LUA')
+  const pendingReward = new TokenAmount(LUA, farm ? farm.pendingReward : '0')
+
   const backgroundColor = useColor(pair?.token0)
+
+  // stake, unstake, harvest
+  const farmingContract = useFarmingContract()
+  const [harvest, setHarvest] = useState(false)
+
+  const harvestReward = async () => {
+    if (!farmingContract || !farm || harvest) return
+
+    setHarvest(true)
+
+    try {
+      await farmingContract.claimReward(farm.pid)
+      setHarvest(false)
+    } catch (e) {
+      setHarvest(false)
+    }
+  }
 
   return (
     <StyledPositionCard border={border} bgColor={backgroundColor}>
@@ -227,10 +283,10 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
           <AutoColumn gap="8px">
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your pool tokens:
+                Your total pool tokens:
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
+                {totalUserBalance ? totalUserBalance.toSignificant(4) : '-'}
               </Text>
             </FixedHeightRow>
             <FixedHeightRow>
@@ -271,11 +327,91 @@ export default function FullPositionCard({ pair, border }: PositionCardProps) {
 
             <FixedHeightRow>
               <Text fontSize={16} fontWeight={500}>
-                Your pool share:
+                Your total pool share:
               </Text>
               <Text fontSize={16} fontWeight={500}>
                 {poolTokenPercentage ? poolTokenPercentage.toFixed(2) + '%' : '-'}
               </Text>
+            </FixedHeightRow>
+
+            <Divider />
+
+            <FixedHeightRow>
+              <RowFixed>
+                <Text fontSize={16} fontWeight={500}>
+                  Farming pool tokens:
+                </Text>
+              </RowFixed>
+              <RowFixedValue>
+                <Text fontSize={16} fontWeight={500}>
+                  {userFarmBalance ? userFarmBalance.toSignificant(4) : '-'}
+                </Text>
+                <ButtonSecondary
+                  padding="3px 10px"
+                  borderRadius="8px"
+                  fontSize="12px"
+                  width="fit-content"
+                  disabled={!userFarmBalance?.greaterThan('0')}
+                >
+                  Unstake
+                </ButtonSecondary>
+              </RowFixedValue>
+            </FixedHeightRow>
+
+            <FixedHeightRow>
+              <Text fontSize={16} fontWeight={500}>
+                Your farming pool share:
+              </Text>
+              <RowFixedValue>
+                <Text fontSize={16} fontWeight={500}>
+                  {farmingTokenPercentage ? farmingTokenPercentage.toFixed(2) + '%' : '-'}
+                </Text>
+              </RowFixedValue>
+            </FixedHeightRow>
+
+            <FixedHeightRow>
+              <RowFixedTitle>
+                <Text fontSize={16} fontWeight={500}>
+                  Available pool tokens <QuestionHelper text="Stake pool tokens to earn LUA tokens" />:
+                </Text>
+              </RowFixedTitle>
+              <RowFixedValue>
+                <Text fontSize={16} fontWeight={500}>
+                  {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
+                </Text>
+                <ButtonSecondary
+                  padding="3px 10px"
+                  borderRadius="8px"
+                  fontSize="12px"
+                  width="fit-content"
+                  disabled={!userPoolBalance?.greaterThan(`0`)}
+                >
+                  Stake
+                </ButtonSecondary>
+              </RowFixedValue>
+            </FixedHeightRow>
+
+            <FixedHeightRow>
+              <RowFixed>
+                <Text fontSize={16} fontWeight={500}>
+                  LUA reward:
+                </Text>
+              </RowFixed>
+              <RowFixedValue>
+                <Text fontSize={16} fontWeight={500}>
+                  {pendingReward ? pendingReward.toSignificant(4) : '-'}
+                </Text>
+                <ButtonSecondary
+                  padding="3px 10px"
+                  borderRadius="8px"
+                  fontSize="12px"
+                  width="fit-content"
+                  onClick={harvestReward}
+                  disabled={harvest}
+                >
+                  Harvest
+                </ButtonSecondary>
+              </RowFixedValue>
             </FixedHeightRow>
 
             <ButtonSecondary padding="8px" borderRadius="8px">

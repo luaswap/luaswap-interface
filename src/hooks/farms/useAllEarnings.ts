@@ -1,9 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
-
 import BigNumber from 'bignumber.js'
-
 import { useWeb3React } from '@web3-react/core'
-
 import { getEarned, getMasterChefContract, getFarms, checkPoolActive } from '../../sushi/utils'
 import useSushi from './useSushi'
 
