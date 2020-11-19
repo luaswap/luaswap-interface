@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
 
 import useSushi from './useSushi'
-import { useWallet } from 'use-wallet'
+import { useWeb3React } from '@web3-react/core'
 
 import { makerConvert, getMakerContract } from '../../sushi/utils'
 
 const useConvert = () => {
-  const { account } = useWallet()
+  const { account } = useWeb3React()
   const sushi = useSushi()
   const handle = useCallback(
     async (token0: string, token1: string) => {

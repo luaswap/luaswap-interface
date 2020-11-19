@@ -1,12 +1,12 @@
 import { useCallback } from 'react'
 
 import useSushi from './useSushi'
-import { useWallet } from 'use-wallet'
+import { useWeb3React } from '@web3-react/core'
 
 import { enter, getXSushiStakingContract } from '../../sushi/utils'
 
 const useEnter = () => {
-  const { account } = useWallet()
+  const { account } = useWeb3React()
   const sushi = useSushi()
 
   const handle = useCallback(
