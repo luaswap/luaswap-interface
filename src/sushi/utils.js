@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT } from './lib/constants'
+import { START_NEW_POOL_AT } from './lib/constants'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -218,7 +218,8 @@ export const getLuaCirculatingSupply = async (sushi) => {
 }
 
 export const checkPoolActive = async (pid) => {
-  var p = supportedPools.find(e => e.pid === pid)
+  // window.pools <=> supportedPools
+  var p = window.pools.find(e => e.pid === pid)
   if (p) {
     if (p.startAt >= new Date().getTime() / 1000) {
       return false

@@ -1,15 +1,17 @@
 import { createWeb3ReactRoot, Web3ReactProvider } from '@web3-react/core'
 import 'inter-ui'
-import React, { StrictMode } from 'react'
+import React, { StrictMode, useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import ReactDOM from 'react-dom'
 import ReactGA from 'react-ga'
 import { Provider } from 'react-redux'
 import { HashRouter } from 'react-router-dom'
+import styled from 'styled-components'
 import { NetworkContextName } from './constants'
 import './i18n'
 import App from './pages/App'
 import store from './state'
+import ImgLoader from './assets/images/loader.png'
 import ApplicationUpdater from './state/application/updater'
 import ListsUpdater from './state/lists/updater'
 import MulticallUpdater from './state/multicall/updater'
@@ -59,31 +61,84 @@ function Updaters() {
     </>
   )
 }
+const StyleLoader = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  img{
+    animation: spin 2s linear infinite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`
+function Loading() {
+  return (
+    <>
+      <StyleLoader>
+        <img src={ImgLoader} alt="Loading" />
+      </StyleLoader>
+    </>
+  )
+}
+
+function PoolData({ children }: { children: React.ReactNode }) {
+  const [pools, setPools] = useState([])
+
+  useEffect(() => {
+    async function poolSupport(){
+      let response
+      try {
+        response = await fetch('https://wallet.tomochain.com/api/luaswap/supportedPools')
+        const data = await response.json()
+        //@ts-ignore
+        window.pools = data
+        setPools(data)
+      } catch (error) {
+        console.debug(error)
+        //@ts-ignore
+        window.pools = []
+        // throw new Error(`Failed to download list ${url}`)    
+      }
+    }
+
+    poolSupport()
+  }, [])
+
+return pools.length > 0 ? (<>{children}</>) : (<Loading/>)
+}
 
 ReactDOM.render(
-  <StrictMode>
-    <FixedGlobalStyle />
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <Web3ProviderNetwork getLibrary={getLibrary}>
-        <Provider store={store}>
-          <Updaters />
-            <ThemeProvider>
-              <ThemedGlobalStyle />
-                <SushiProvider>
-                  {/* <TransactionProvider> */}
-                    <FarmsProvider>
-                      <HashRouter>
-                        <ModalsProvider>
-                          <App />
-                        </ModalsProvider>
-                      </HashRouter>
-                    </FarmsProvider>
-                  {/* </TransactionProvider> */}
-                </SushiProvider>                  
-            </ThemeProvider>
-        </Provider>
-      </Web3ProviderNetwork>
-    </Web3ReactProvider>
-  </StrictMode>,
+    <StrictMode>
+      <FixedGlobalStyle />
+      <Web3ReactProvider getLibrary={getLibrary}>
+        <Web3ProviderNetwork getLibrary={getLibrary}>
+          <Provider store={store}>
+            <Updaters />
+              <ThemeProvider>
+                <ThemedGlobalStyle />
+                  <PoolData>
+                    <SushiProvider>
+                      {/* <TransactionProvider> */}
+                        <FarmsProvider>
+                          <HashRouter>
+                            <ModalsProvider>
+                              <App />
+                            </ModalsProvider>
+                          </HashRouter>
+                        </FarmsProvider>
+                      {/* </TransactionProvider> */}
+                    </SushiProvider>
+                  </PoolData>
+              </ThemeProvider>
+          </Provider>
+        </Web3ProviderNetwork>
+      </Web3ReactProvider>
+    </StrictMode>,
   document.getElementById('root')
 )

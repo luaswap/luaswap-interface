@@ -7,3 +7,7 @@ export const DEFAULT_TOKEN_LIST_URL =
   '/build/luaswap-default.tokenlist.json'
 
 export const DEFAULT_LIST_OF_LISTS: string[] = [DEFAULT_TOKEN_LIST_URL]
+
+export const EARN_LUA_REWARD = '2x'
+
+export const TIME_EARN_LUA_REWARD = 'Nov 25'
