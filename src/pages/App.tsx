@@ -31,8 +31,6 @@ import Farms from './Farms'
 import Farm from './Farm'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // OpenClaimAddressModalAndRedirectToSwap
 import SafePage from './Safe'
-import config from '../config'
-
 // import Vote from './Vote'
 // import VotePage from './Vote/VotePage'
 
