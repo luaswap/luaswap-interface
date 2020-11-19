@@ -122,8 +122,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
         <CardContent>
           <StyledContent>
             <StyledTopIcon>
-              {farm.isHot && <StyledHotIcon>HOT</StyledHotIcon>}
-              {farm.isNew && <StyledNewIcon>NEW</StyledNewIcon>}
+              {farm.isHot && <StyledHotIcon>NO REWARD</StyledHotIcon>}
+              {farm.isNew && <StyledNewIcon>THIS WEEK</StyledNewIcon>}
             </StyledTopIcon>      
             <div style={{display: 'flex'}}>
               <CardIcon><img src={farm.icon} alt="" height="60"/></CardIcon>
@@ -148,24 +148,25 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               )}
             </Button>
             <br/>
-            <StyledInsight>
-              <span>Total Locked Value</span>
-              <span>
-                {farm.usdValue &&
-                  <><b>{parseFloat(farm.usdValue.toFixed(0)).toLocaleString('en-US')} USD</b></>
-                }
-              </span>
-            </StyledInsight>
-            <StyledInsight>
-              <span>Reward</span>
-              <span>
-                {newReward &&
-                  <><b>{getBalanceNumber(newReward).toFixed(2)} LUA</b> / block</>
-                }
-                {!newReward && "~"}
-              </span>
-            </StyledInsight>
-            <StyledInsight>
+            {!farm.isHot && <>
+              <StyledInsight>
+                <span>Total Locked Value</span>
+                <span>
+                  {farm.usdValue &&
+                    <><b>{parseFloat(farm.usdValue.toFixed(0)).toLocaleString('en-US')} USD</b></>
+                  }
+                </span>
+              </StyledInsight>
+              <StyledInsight>
+                <span>Reward</span>
+                <span>
+                  {newReward &&
+                    <><b>{getBalanceNumber(newReward).toFixed(2)} LUA</b> / block</>
+                  }
+                  {!newReward && "~"}
+                </span>
+              </StyledInsight>
+              <StyledInsight>
               <span>APY</span>
               <span style={{fontWeight: 'bold', color: '#4caf50'}}>
                 {newReward && farm.poolWeight && farm.luaPrice && farm.usdValue ?
@@ -179,6 +180,8 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                 }
               </span>
             </StyledInsight>
+              </>
+            }
           </StyledContent>
         </CardContent>
       </CardWrap>
@@ -281,28 +284,29 @@ const StyledTopIcon = styled.div`
 
 const StyledHotIcon = styled.div`
   position: absolute;
-  padding: 18px 40px 4px;
-  background-color: #D91F26;
-  top: -5px;
+  background-color: gray;
+  padding: 8px 40px 8px;
+  top: 12px;
   left: -40px;
   font-weight: bold;
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
   color: #fff;
+  font-size: 9px;
 `
-
 const StyledNewIcon = styled.div`
   position: absolute;
-  padding: 18px 40px 4px;
-  background-color: ${(props) => props.theme.primary1};
-  top: -5px;
+  padding: 8px 40px 8px;
+  top: 12px;
   left: -40px;
+  background-color: ${(props) => props.theme.primary1};
   font-weight: bold;
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
   transform: rotate(-45deg);
   color: #fff;
+  font-size: 9px;
 `
 
 const StyledSpacer = styled.div`

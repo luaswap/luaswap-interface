@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from 'react'
 
 import BigNumber from 'bignumber.js'
 import useSushi from './useSushi'
-import { useWallet } from 'use-wallet'
+import { useWeb3React } from '@web3-react/core'
 
 import { getAllowanceStaking } from '../../utils/erc20'
 import { getSushiContract, getXSushiStakingContract } from '../../sushi/utils'
 
 const useAllowanceStaking = () => {
   const [allowance, setAllowance] = useState(new BigNumber(0))
-  const { account } = useWallet()
+  const { account } = useWeb3React()
   const sushi = useSushi()
   const lpContract = getSushiContract(sushi)
   const stakingContract = getXSushiStakingContract(sushi)
