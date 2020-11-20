@@ -7,9 +7,7 @@ import Value from '../../components/Value'
 import { getBalanceNumber } from '../../sushi/format/formatBalance'
 import useSushi from '../../hooks/farms/useSushi'
 import useTokenBalance from '../../hooks/farms/useTokenBalance'
-import useTotalShares from '../../hooks/farms/useTotalShares'
 import { getSushiAddress, getXSushiSupply } from '../../sushi/utils'
-import useTokenBalanceOf from '../../hooks/farms/useTokenBalanceOf'
 import useLeave from '../../hooks/farms/useLeave'
 import useModal from '../../hooks/farms/useModal'
 import WithdrawModal from '../Farm/components/WithdrawModal'
@@ -50,10 +48,9 @@ const CardInsight = styled(Flex)`
 const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   const sushi = useSushi()
   const myXLua = useTokenBalance(xLuaAddress)
-  const totalLuaInSafe = useTotalShares(getSushiAddress(sushi), xLuaAddress)
+  const totalLuaInSafe = useTokenBalance(getSushiAddress(sushi))
   const [totalSupplyXLua, setTotalSupplyXLua] = useState<BigNumber>(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
-  const trackingAPYBalanceXLua = useTokenBalanceOf(xLuaAddress, '0xdEad000000000000000000000000000000000000')
 
   useEffect(() => {
     async function fetchTotalSupplyXLua() {
@@ -66,7 +63,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   }, [sushi, setTotalSupplyXLua])
 
   const xLuaToLua = myXLua.multipliedBy(totalLuaInSafe).dividedBy(totalSupplyXLua)
-  const trackingReward = trackingAPYBalanceXLua
+  const trackingReward = myXLua
     .multipliedBy(totalLuaInSafe)
     .dividedBy(totalSupplyXLua)
     .minus(10 * 10 ** 18)
