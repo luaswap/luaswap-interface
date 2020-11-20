@@ -168,7 +168,15 @@ export const getLPTokenStaked = async (sushi, lpContract) => {
 }
 
 export const approve = async (lpContract, masterChefContract, account) => {
-  return lpContract.methods.approve(masterChefContract.options.address, MaxUint256).send({ from: account })
+  console.log('approve', lpContract, masterChefContract, account)
+  return lpContract.methods
+    .approve(masterChefContract.options.address, MaxUint256)
+    .send({ from: account })
+    .then(tx => {
+      console.log('tx', tx)
+      return tx
+    })
+    .catch(err => console.error('[ERROR]:', err))
 }
 
 export const approveAddress = async (lpContract, address, account) => {

@@ -1,27 +1,31 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-
+import { provider } from 'web3-core'
 import { getBalance } from '../../sushi/format/erc20'
 import useBlock from './useBlock'
 
-
-const useTokenBalance = (tokenAddress: string) => {
+const useTokenBalance = (tokenAddress: string, account?: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
-  const { account, library: ethereum } = useWeb3React()
+  const { account: defaultAccount, library: ethereum } = useWeb3React()
   const block = useBlock()
-  const fetchBalance = useCallback(async () => {
-    // @ts-ignore
-    const balance = await getBalance(ethereum.provider as provider, tokenAddress, account)
+
+  const fetchBalance = async (_ethereum: any, _address: string, _account: string) => {
+    // console.log('fetchBalance', _ethereum, _address, _account)
+    const balance = await getBalance(_ethereum.provider as provider, _address, _account)
     setBalance(new BigNumber(balance))
-  }, [account, ethereum, tokenAddress])
+  }
 
   useEffect(() => {
-    if (account) {
-      fetchBalance()
+    if (ethereum && tokenAddress) {
+      if (account) {
+        fetchBalance(ethereum, tokenAddress, account)
+      } else if (defaultAccount) {
+        fetchBalance(ethereum, tokenAddress, defaultAccount)
+      }
     }
-  }, [account, ethereum, setBalance, block, tokenAddress])
+  }, [account, defaultAccount, ethereum, block, tokenAddress])
 
   return balance
 }
