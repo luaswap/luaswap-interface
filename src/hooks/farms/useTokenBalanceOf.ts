@@ -13,7 +13,8 @@ const useTokenBalanceOf = (tokenAddress: string, account: string) => {
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getBalance(ethereum.provider as provider, tokenAddress, account)
+    const e_provider = ethereum && ethereum.provider ? ethereum.provider : null
+    const balance = await getBalance(e_provider as provider, tokenAddress, account)
     setBalance(new BigNumber(balance))
   }, [account, ethereum, tokenAddress])
 
