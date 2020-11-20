@@ -22,7 +22,7 @@ import { toV2LiquidityToken, useTrackedTokenPairs } from '../../state/user/hooks
 import { Dots } from '../../components/swap/styleds'
 import { CardSection, DataCard, CardNoise, CardBGImage } from '../../components/earn/styled'
 
-import { useFarmingPool, useFarmingStaked } from '../../hooks/useFarming'
+import { useFarmingStaked } from '../../hooks/useFarming'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
@@ -80,8 +80,8 @@ export default function Pool() {
   const theme = useContext(ThemeContext)
   const { account } = useActiveWeb3React()
 
-  const { farmingPools } = useFarmingPool()
-  const userFarmingMap: { [key: string]: any } = useFarmingStaked(farmingPools)
+  //@ts-ignore
+  const userFarmingMap: { [key: string]: any } = useFarmingStaked(window.pools)
 
   // fetch the user's balances of all tracked V2 LP tokens
   const trackedTokenPairs = useTrackedTokenPairs()

@@ -87,20 +87,18 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
     }
   }, [onApprove, setRequestedApproval])
 
-  var shareOfPool = 0
+  let shareOfPool = 0
 
   if (totalStake && stakedBalance) {
     shareOfPool = stakedBalance.div(totalStake).toNumber()
   }
 
-  var totalToken = 0
-  var totalToken2 = 0
+  let totalToken = 0
+  let totalToken2 = 0
 
   if (stakedValue && stakedValue.tokenAmount && stakedValue.token2Amount && shareOfPool) {
-    totalToken = (stakedValue.tokenAmount as any) * shareOfPool 
-    totalToken = parseFloat(totalToken.toFixed(2))
+    totalToken = (stakedValue.tokenAmount as any) * shareOfPool
     totalToken2 = (stakedValue.token2Amount as any) * shareOfPool
-    totalToken2 = parseFloat(totalToken2.toFixed(2))
   }
   return (
     <CardBox>
@@ -111,11 +109,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
             <StyledValue>
               <Label text={`Tokens Staked`} />
               <br/>
-              <ValueStyled>{getBalanceNumber(stakedBalance).toFixed(8)}</ValueStyled>
+              <ValueStyled>{new BigNumber(getBalanceNumber(stakedBalance)).toFormat(6)}</ValueStyled>
               <br/>
               <StyledContent>
-                <div>{totalToken.toLocaleString('en-US')}<span style={{fontSize: 10}}> {tokenSymbol}</span></div>
-                <div>{totalToken2.toLocaleString('en-US')}<span style={{fontSize: 10}}> {token2Symbol}</span></div>
+                <div>{new BigNumber(totalToken).toFormat(6)}<span style={{fontSize: 10}}> {tokenSymbol}</span></div>
+                <div>{new BigNumber(totalToken2).toFormat(6)}<span style={{fontSize: 10}}> {token2Symbol}</span></div>
               </StyledContent>
             </StyledValue>
           </StyledCardHeader>

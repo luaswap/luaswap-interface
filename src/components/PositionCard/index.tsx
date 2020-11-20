@@ -5,6 +5,7 @@ import { ChevronDown, ChevronUp } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
 import styled from 'styled-components'
+import BigNumber from 'bignumber.js'
 import { useTotalSupply } from '../../data/TotalSupply'
 
 import { useActiveWeb3React } from '../../hooks'
@@ -40,7 +41,7 @@ export const HoverCard = styled(Card)`
 `
 
 const RowFixedValue = styled(RowFixed)`
-  min-width: 150px;
+  min-width: 200px;
   justify-content: space-between;
 `
 
@@ -286,7 +287,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 Your total pool tokens:
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {totalUserBalance ? totalUserBalance.toSignificant(4) : '-'}
+                {totalUserBalance ? new BigNumber(totalUserBalance.toFixed(6)).toFormat() : '-'}
               </Text>
             </FixedHeightRow>
             <FixedHeightRow>
@@ -298,7 +299,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
               {token0Deposited ? (
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token0Deposited?.toSignificant(6)}
+                    {new BigNumber(token0Deposited?.toFixed(6)).toFormat()}
                   </Text>
                   <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency0} />
                 </RowFixed>
@@ -316,7 +317,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
               {token1Deposited ? (
                 <RowFixed>
                   <Text fontSize={16} fontWeight={500} marginLeft={'6px'}>
-                    {token1Deposited?.toSignificant(6)}
+                    {new BigNumber(token1Deposited?.toFixed(6)).toFormat()}
                   </Text>
                   <CurrencyLogo size="20px" style={{ marginLeft: '8px' }} currency={currency1} />
                 </RowFixed>
@@ -330,7 +331,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 Your total pool share:
               </Text>
               <Text fontSize={16} fontWeight={500}>
-                {poolTokenPercentage ? poolTokenPercentage.toFixed(2) + '%' : '-'}
+                {poolTokenPercentage ? new BigNumber(poolTokenPercentage.toFixed(5)).toFormat() + '%' : '-'}
               </Text>
             </FixedHeightRow>
 
@@ -344,7 +345,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
               </RowFixed>
               <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
-                  {userFarmBalance ? userFarmBalance.toSignificant(4) : '-'}
+                  {userFarmBalance ? new BigNumber(userFarmBalance.toFixed(6)).toFormat() : '-'}
                 </Text>
                 <ButtonSecondary
                   padding="3px 10px"
@@ -364,7 +365,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
               </Text>
               <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
-                  {farmingTokenPercentage ? farmingTokenPercentage.toFixed(2) + '%' : '-'}
+                  {farmingTokenPercentage ? new BigNumber(farmingTokenPercentage.toFixed(5)).toFormat() + '%' : '-'}
                 </Text>
               </RowFixedValue>
             </FixedHeightRow>
@@ -377,7 +378,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
               </RowFixedTitle>
               <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
-                  {userPoolBalance ? userPoolBalance.toSignificant(4) : '-'}
+                  {userPoolBalance ? new BigNumber(userPoolBalance.toSignificant(8)).toFormat() : '-'}
                 </Text>
                 <ButtonSecondary
                   padding="3px 10px"
@@ -399,7 +400,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
               </RowFixed>
               <RowFixedValue>
                 <Text fontSize={16} fontWeight={500}>
-                  {pendingReward ? pendingReward.toSignificant(4) : '-'}
+                  {pendingReward ? new BigNumber(pendingReward.toFixed(3)).toFormat() : '-'}
                 </Text>
                 <ButtonSecondary
                   padding="3px 10px"
@@ -407,7 +408,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                   fontSize="12px"
                   width="fit-content"
                   onClick={harvestReward}
-                  disabled={harvest}
+                  disabled={harvest || pendingReward.equalTo('0')}
                 >
                   Harvest
                 </ButtonSecondary>
