@@ -34,6 +34,7 @@ export class Sushi {
     this.masterChefAddress = contractAddresses.masterChef[networkId]
     this.wethAddress = contractAddresses.weth[networkId]
     this.xSushiAddress = contractAddresses.xSushi[networkId]
+    this.makerAddress = contractAddresses.maker[networkId]
   }
 
   async resetEVM() {
