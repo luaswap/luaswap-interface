@@ -48,9 +48,10 @@ const CardInsight = styled(Flex)`
 const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   const sushi = useSushi()
   const myXLua = useTokenBalance(xLuaAddress)
-  const totalLuaInSafe = useTokenBalance(getSushiAddress(sushi))
+  const totalLuaInSafe = useTokenBalance(getSushiAddress(sushi), xLuaAddress)
   const [totalSupplyXLua, setTotalSupplyXLua] = useState<BigNumber>(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
+  const trackingAPYBalanceXLua = useTokenBalance(xLuaAddress, '0xdEad000000000000000000000000000000000000')
 
   useEffect(() => {
     async function fetchTotalSupplyXLua() {
@@ -63,7 +64,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   }, [sushi, setTotalSupplyXLua])
 
   const xLuaToLua = myXLua.multipliedBy(totalLuaInSafe).dividedBy(totalSupplyXLua)
-  const trackingReward = myXLua
+  const trackingReward = trackingAPYBalanceXLua
     .multipliedBy(totalLuaInSafe)
     .dividedBy(totalSupplyXLua)
     .minus(10 * 10 ** 18)

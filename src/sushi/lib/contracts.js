@@ -5,9 +5,8 @@ import XSushiAbi from './abi/xsushi.json'
 import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
-import {
-  contractAddresses,
-} from './constants.js'
+import makerAbi from './abi/maker.json'
+import { contractAddresses } from './constants.js'
 import * as Types from './types.js'
 
 export class Contracts {
@@ -15,8 +14,7 @@ export class Contracts {
     this.web3 = web3
     this.defaultConfirmations = options.defaultConfirmations
     this.autoGasMultiplier = options.autoGasMultiplier || 1.5
-    this.confirmationType =
-      options.confirmationType || Types.ConfirmationType.Confirmed
+    this.confirmationType = options.confirmationType || Types.ConfirmationType.Confirmed
     this.defaultGas = options.defaultGas
     this.defaultGasPrice = options.defaultGasPrice
 
@@ -24,16 +22,17 @@ export class Contracts {
     this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
     this.xSushiStaking = new this.web3.eth.Contract(XSushiAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
+    this.maker = new this.web3.eth.Contract(makerAbi)
     // window.pools <=> supportedPools
-     this.pools = window.pools.map((pool) =>
+    this.pools = window.pools.map(pool =>
       Object.assign(pool, {
         lpAddress: pool.lpAddresses[networkId],
         tokenAddress: pool.tokenAddresses[networkId],
         token2Address: pool.token2Addresses[networkId],
         lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
         tokenContract: new this.web3.eth.Contract(ERC20Abi),
-        token2Contract: new this.web3.eth.Contract(ERC20Abi),
-      }),
+        token2Contract: new this.web3.eth.Contract(ERC20Abi)
+      })
     )
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
@@ -48,20 +47,18 @@ export class Contracts {
 
     setProvider(this.sushi, contractAddresses.sushi[networkId])
     setProvider(this.masterChef, contractAddresses.masterChef[networkId])
-
+    setProvider(this.maker, contractAddresses.maker[networkId])
 
     // setProvider(this.sushi, contractAddresses.sushi[networkId])
     // setProvider(this.masterChef, contractAddresses.masterChef[networkId])
     setProvider(this.xSushiStaking, contractAddresses.xSushi[networkId])
     // setProvider(this.weth, contractAddresses.weth[networkId])
 
-    this.pools.forEach(
-      ({ lpContract, lpAddress, tokenContract, token2Contract, token2Address, tokenAddress }) => {
-        setProvider(lpContract, lpAddress)
-        setProvider(tokenContract, tokenAddress)
-        setProvider(token2Contract, token2Address)
-      },
-    )
+    this.pools.forEach(({ lpContract, lpAddress, tokenContract, token2Contract, token2Address, tokenAddress }) => {
+      setProvider(lpContract, lpAddress)
+      setProvider(tokenContract, tokenAddress)
+      setProvider(token2Contract, token2Address)
+    })
   }
 
   setDefaultAccount(account) {

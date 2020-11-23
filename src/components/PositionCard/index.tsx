@@ -347,15 +347,18 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 <Text fontSize={16} fontWeight={500}>
                   {userFarmBalance ? new BigNumber(userFarmBalance.toFixed(6)).toFormat() : '-'}
                 </Text>
-                <ButtonSecondary
-                  padding="3px 10px"
-                  borderRadius="8px"
-                  fontSize="12px"
-                  width="fit-content"
-                  disabled={!userFarmBalance?.greaterThan('0')}
-                >
-                  Unstake
-                </ButtonSecondary>
+                {farm && userFarmBalance?.greaterThan('0') && (
+                  <ButtonSecondary
+                    as={Link}
+                    to={`/farming/${farm.symbol}`}
+                    padding="3px 10px"
+                    borderRadius="8px"
+                    fontSize="12px"
+                    width="fit-content"
+                  >
+                    Unstake
+                  </ButtonSecondary>
+                )}
               </RowFixedValue>
             </FixedHeightRow>
 
@@ -380,15 +383,18 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 <Text fontSize={16} fontWeight={500}>
                   {userPoolBalance ? new BigNumber(userPoolBalance.toSignificant(8)).toFormat() : '-'}
                 </Text>
-                <ButtonSecondary
-                  padding="3px 10px"
-                  borderRadius="8px"
-                  fontSize="12px"
-                  width="fit-content"
-                  disabled={!userPoolBalance?.greaterThan(`0`)}
-                >
-                  Stake
-                </ButtonSecondary>
+                {farm && userPoolBalance?.greaterThan(`0`) && (
+                  <ButtonSecondary
+                    as={Link}
+                    to={`/farming/${farm.symbol}`}
+                    padding="3px 10px"
+                    borderRadius="8px"
+                    fontSize="12px"
+                    width="fit-content"
+                  >
+                    Stake
+                  </ButtonSecondary>
+                )}
               </RowFixedValue>
             </FixedHeightRow>
 
