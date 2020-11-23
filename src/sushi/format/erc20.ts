@@ -38,7 +38,6 @@ export const getBalance = async (provider: provider, tokenAddress: string, userA
   const lpContract = getContract(provider, tokenAddress)
   try {
     const balance: string = await lpContract.methods.balanceOf(userAddress).call()
-    console.log('getBalance', balance)
     return balance
   } catch (e) {
     return '0'
