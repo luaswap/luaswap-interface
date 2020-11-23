@@ -383,7 +383,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 <Text fontSize={16} fontWeight={500}>
                   {userPoolBalance ? new BigNumber(userPoolBalance.toSignificant(8)).toFormat() : '-'}
                 </Text>
-                {farm && userPoolBalance?.greaterThan(`0`) && (
+                {userPoolBalance?.greaterThan(`0`) && (
                   <ButtonSecondary
                     as={Link}
                     to={`/farming/${farm.symbol}`}
