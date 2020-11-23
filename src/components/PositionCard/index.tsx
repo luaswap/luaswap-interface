@@ -1,6 +1,6 @@
 import { JSBI, Pair, Percent, TokenAmount, ChainId, Token } from '@luaswap/sdk'
 import { darken } from 'polished'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp } from 'react-feather'
 import { Link } from 'react-router-dom'
 import { Text } from 'rebass'
@@ -245,6 +245,22 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
     }
   }
 
+  const [symbolLiquidityToken, setSymbolLiquidityToken] = useState('')
+  //@ts-ignore
+  const farmPools = window.pools
+
+  useEffect(() => {
+    if (farm) {
+      setSymbolLiquidityToken(farm.symbol)
+    } else {
+      for (let i = 0; i < farmPools.length; i++) {
+        if (pair.liquidityToken.address === farmPools[i].lpAddresses[1]) {
+          setSymbolLiquidityToken(farm.symbol)
+        }
+      }
+    }
+  }, [])
+
   return (
     <StyledPositionCard border={border} bgColor={backgroundColor}>
       <CardNoise />
@@ -350,7 +366,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 {farm && userFarmBalance?.greaterThan('0') && (
                   <ButtonSecondary
                     as={Link}
-                    to={`/farming/${farm.symbol}`}
+                    to={`/farming/${symbolLiquidityToken}`}
                     padding="3px 10px"
                     borderRadius="8px"
                     fontSize="12px"
@@ -386,7 +402,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                 {userPoolBalance?.greaterThan(`0`) && (
                   <ButtonSecondary
                     as={Link}
-                    to={`/farming/${farm.symbol}`}
+                    to={`/farming/${symbolLiquidityToken}`}
                     padding="3px 10px"
                     borderRadius="8px"
                     fontSize="12px"
