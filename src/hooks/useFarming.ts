@@ -36,7 +36,7 @@ export function useFarmingPool() {
 }
 
 export function useFarmingStaked(pools: any[]) {
-  const { library, account } = useActiveWeb3React()
+  const { library, account, chainId } = useActiveWeb3React()
   const farmingContract: Contract | null = useFarmingContract()
   const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
 
@@ -93,12 +93,12 @@ export function useFarmingStaked(pools: any[]) {
       !isCancelled && setUserFarmingPoolsMap(poolsMap)
     }
 
-    if (pools.length > 0) fetchData()
+    if (account && pools.length > 0) fetchData()
 
     return () => {
       isCancelled = true
     }
-  })
+  }, [pools, account, chainId])
 
   return userFarmingPoolsMap
 }

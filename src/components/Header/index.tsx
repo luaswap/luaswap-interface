@@ -288,12 +288,12 @@ export default function Header() {
           {/* <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
             Farming
           </StyledExternalLink> */}
-          <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
-            Charts <span style={{ fontSize: '11px' }}>↗</span>
-          </StyledExternalLink>
           <StyledNavLink id="pool-nav-link" to="/lua-safe">
             {t('LuaSafe')}
           </StyledNavLink>
+          <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+            Charts <span style={{ fontSize: '11px' }}>↗</span>
+          </StyledExternalLink>
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
