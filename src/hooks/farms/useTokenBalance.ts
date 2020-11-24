@@ -12,15 +12,14 @@ const useTokenBalance = (tokenAddress: string, account?: string) => {
   const block = useBlock()
 
   const fetchBalance = async (_ethereum: any, _address: string, _account: string) => {
-    // console.log('fetchBalance', _ethereum, _address, _account)
     const balance = await getBalance(_ethereum.provider as provider, _address, _account)
     setBalance(new BigNumber(balance))
   }
 
   useEffect(() => {
-    if (account) {
+    if (account && ethereum) {
       fetchBalance(ethereum, tokenAddress, account)
-    } else if (defaultAccount) {
+    } else if (defaultAccount && ethereum ) {
       fetchBalance(ethereum, tokenAddress, defaultAccount)
     }
   }, [account, defaultAccount, ethereum, block, tokenAddress])
