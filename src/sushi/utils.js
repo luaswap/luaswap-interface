@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js'
-import { ethers } from 'ethers'
+// import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { START_NEW_POOL_AT } from './lib/constants'
+// import { START_NEW_POOL_AT } from './lib/constants'
 
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -11,15 +11,15 @@ BigNumber.config({
 
 const MaxUint256 = '999999999900000000000000000000000000000'
 
-const GAS_LIMIT = {
-  STAKING: {
-    DEFAULT: 200000,
-    SNX: 850000
-  }
-}
+// const GAS_LIMIT = {
+//   STAKING: {
+//     DEFAULT: 200000,
+//     SNX: 850000
+//   }
+// }
 
 export async function UnknownBlock(address, method, params, cache) {
-  var { data } = await axios.post(`${config.api}/read/${address}`, {
+  const { data } = await axios.post(`${config.api}/read/${address}`, {
     method,
     params,
     cache
@@ -118,9 +118,9 @@ export const getEarned = async (masterChefContract, pid, account) => {
 }
 
 export const getLPValue = async (masterChefContract, lpContract, tokenContract, token2Contract, pid) => {
-  var usdtAddress = '0xdac17f958d2ee523a2206206994597c13d831ec7'
-  var usdcAddress = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-  var wethAddress = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
+  const usdtAddress = '0xdac17f958d2ee523a2206206994597c13d831ec7'
+  const usdcAddress = '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+  const wethAddress = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2'
   // Get balance of the token address
   const tokenAmountWholeLP = await tokenContract.methods.balanceOf(lpContract.options.address).call()
   const tokenDecimals = await tokenContract.methods.decimals().call()
@@ -140,12 +140,12 @@ export const getLPValue = async (masterChefContract, lpContract, tokenContract, 
 
   const token2Amount = new BigNumber(lpContractToken2).times(portionLp).div(new BigNumber(10).pow(token2Decimals))
 
-  var usdValue = 0
-  var totalToken2Value = totalLpToken2Value.div(new BigNumber(10).pow(token2Decimals))
+  const usdValue = 0
+  const totalToken2Value = totalLpToken2Value.div(new BigNumber(10).pow(token2Decimals))
   if (token2Contract._address.toLowerCase() == usdtAddress || token2Contract._address.toLowerCase() == usdcAddress) {
     usdValue = totalToken2Value
   } else if (token2Contract._address.toLowerCase() == wethAddress) {
-    var { data } = await axios.get(`${config.api}/price/ETH`)
+    const { data } = await axios.get(`${config.api}/price/ETH`)
     usdValue = totalToken2Value.times(data.usdPrice)
   }
 
@@ -161,7 +161,7 @@ export const getLPValue = async (masterChefContract, lpContract, tokenContract, 
 }
 
 export const getLPTokenStaked = async (sushi, lpContract) => {
-  var chef = getMasterChefContract(sushi)
+  const chef = getMasterChefContract(sushi)
   return new BigNumber(
     await UnknownBlock(lpContract._address, 'balanceOf(address):(uint256)', [chef.options.address], true)
   )
@@ -188,10 +188,10 @@ export const getSushiSupply = async sushi => {
 }
 
 export const getLuaCirculatingSupply = async sushi => {
-  var chef = getMasterChefContract(sushi)
-  var a = new BigNumber(await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true))
+  const chef = getMasterChefContract(sushi)
+  const a = new BigNumber(await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true))
 
-  var b = new BigNumber(
+  const b = new BigNumber(
     await UnknownBlock(sushi.contracts.sushi._address, 'balanceOf(address):(uint256)', [chef._address], true)
   )
   return a.minus(b)
@@ -199,7 +199,7 @@ export const getLuaCirculatingSupply = async sushi => {
 
 export const checkPoolActive = async pid => {
   // window.pools <=> supportedPools
-  var p = window.pools.find(e => e.pid === pid)
+  const p = window.pools.find(e => e.pid === pid)
   if (p) {
     if (p.startAt >= new Date().getTime() / 1000) {
       return false
@@ -209,7 +209,7 @@ export const checkPoolActive = async pid => {
       if (localStorage.getItem('POOLACTIVE' + pid + '-' + p.startAt)) {
         return true
       } else {
-        var { data } = await axios.get(`${config.api}/poolActive/${pid}`)
+        const { data } = await axios.get(`${config.api}/poolActive/${pid}`)
         if (data.active) {
           localStorage.setItem('POOLACTIVE' + pid + '-' + p.startAt, true)
         }
@@ -223,11 +223,11 @@ export const checkPoolActive = async pid => {
 
 export const getNewRewardPerBlock = async (sushi, pid1 = 0) => {
   if (pid1 === 0) {
-    var chef = getMasterChefContract(sushi)
+    const chef = getMasterChefContract(sushi)
     return new BigNumber(await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true))
   } else {
     if (await checkPoolActive(pid1 - 1)) {
-      var chef = getMasterChefContract(sushi)
+      const chef = getMasterChefContract(sushi)
       return new BigNumber(await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true))
     } else {
       return new BigNumber('0')
@@ -271,7 +271,7 @@ export const getStaked = async (masterChefContract, pid, account) => {
 }
 
 export const redeem = async (masterChefContract, account) => {
-  let now = new Date().getTime() / 1000
+  const now = new Date().getTime() / 1000
   if (now >= 1597172400) {
     return masterChefContract.methods
       .exit()
@@ -285,23 +285,29 @@ export const redeem = async (masterChefContract, account) => {
 }
 
 export const getCanUnlockLua = async (sushi, account) => {
-  var lua = getSushiContract(sushi)
+  const lua = getSushiContract(sushi)
 
   return new BigNumber(await lua.methods.canUnlockAmount(account).call())
 }
 
 export const getXSushiSupply = async sushi => {
-  return new BigNumber(await sushi.contracts.xSushiStaking.methods.totalSupply().call())
+  try {
+    const rawTotalSupply = await sushi.contracts.xSushiStaking.methods.totalSupply().call()
+    return new BigNumber(rawTotalSupply)
+  } catch (err) {
+    console.error('[ERROR]:', err)
+    return new BigNumber(0)
+  }
 }
 
 export const getLockOf = async (sushi, account) => {
-  var lua = getSushiContract(sushi)
+  const lua = getSushiContract(sushi)
 
   return new BigNumber(await lua.methods.lockOf(account).call())
 }
 
 export const unlock = async (sushi, account) => {
-  var lua = getSushiContract(sushi)
+  const lua = getSushiContract(sushi)
   return lua.methods
     .unlock()
     .send({ from: account })
