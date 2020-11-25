@@ -87,7 +87,7 @@ function Loading() {
   )
 }
 
-function PoolData({ children }: { children: React.ReactNode }) {
+function PoolsData({ children }: { children: React.ReactNode }) {
   const [pools, setPools] = useState([])
 
   useEffect(() => {
@@ -103,7 +103,6 @@ function PoolData({ children }: { children: React.ReactNode }) {
         console.debug(error)
         //@ts-ignore
         window.pools = []
-        // throw new Error(`Failed to download list ${url}`)    
       }
     }
 
@@ -122,7 +121,7 @@ ReactDOM.render(
             <Updaters />
               <ThemeProvider>
                 <ThemedGlobalStyle />
-                  <PoolData>
+                  <PoolsData>
                     <SushiProvider>
                       {/* <TransactionProvider> */}
                         <FarmsProvider>
@@ -134,7 +133,7 @@ ReactDOM.render(
                         </FarmsProvider>
                       {/* </TransactionProvider> */}
                     </SushiProvider>
-                  </PoolData>
+                  </PoolsData>
               </ThemeProvider>
           </Provider>
         </Web3ProviderNetwork>
