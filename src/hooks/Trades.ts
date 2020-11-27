@@ -2,16 +2,20 @@ import { Currency, CurrencyAmount, Pair, Token, Trade } from '@luaswap/sdk'
 import flatMap from 'lodash.flatmap'
 import { useMemo } from 'react'
 
-import { BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants'
+import { BASES_TO_CHECK_TRADES_AGAINST, CROSS_BASES_TO_CHECK_TRADES_AGAINST, CUSTOM_BASES } from '../constants'
 import { PairState, usePairs } from '../data/Reserves'
 import { wrappedCurrency } from '../utils/wrappedCurrency'
 
 import { useActiveWeb3React } from './index'
 
-function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
+function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency, protocol = 'luaswap'): Pair[] {
   const { chainId } = useActiveWeb3React()
 
-  const bases: Token[] = chainId ? BASES_TO_CHECK_TRADES_AGAINST[chainId] : []
+  const bases: Token[] = chainId
+    ? (protocol === 'luaswap'
+      ? BASES_TO_CHECK_TRADES_AGAINST[chainId]
+      : CROSS_BASES_TO_CHECK_TRADES_AGAINST[chainId])
+    : []
 
   const [tokenA, tokenB] = chainId
     ? [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)]
@@ -59,7 +63,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
     [tokenA, tokenB, bases, basePairs, chainId]
   )
 
-  const allPairs = usePairs(allPairCombinations)
+  const allPairs = usePairs(allPairCombinations, protocol)
 
   // only pass along valid pairs, non-duplicated pairs
   return useMemo(
@@ -81,8 +85,13 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency): Pair[] {
 /**
  * Returns the best trade for the exact amount of tokens in to the given token out
  */
-export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?: Currency): Trade | null {
-  const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut)
+export function useTradeExactIn(
+  currencyAmountIn?: CurrencyAmount,
+  currencyOut?: Currency,
+  protocol = 'luaswap'
+): Trade | null {
+  const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut, protocol)
+  if (protocol === 'uniswap') console.log(allowedPairs)
   return useMemo(() => {
     if (currencyAmountIn && currencyOut && allowedPairs.length > 0) {
       return (
@@ -96,8 +105,12 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 /**
  * Returns the best trade for the token in to the exact amount of token out
  */
-export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: CurrencyAmount): Trade | null {
-  const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency)
+export function useTradeExactOut(
+  currencyIn?: Currency,
+  currencyAmountOut?: CurrencyAmount,
+  protocol = 'luaswap'
+): Trade | null {
+  const allowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency, protocol)
 
   return useMemo(() => {
     if (currencyIn && currencyAmountOut && allowedPairs.length > 0) {

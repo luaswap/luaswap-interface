@@ -143,6 +143,33 @@ export function useDerivedSwapInfo(): {
   const bestTradeExactIn = useTradeExactIn(isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined)
   const bestTradeExactOut = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
 
+  // get trade input -> USDT, USDC, WETH on luaswap
+  const crossbaseCurrencies = [
+    useCurrency('0xdAC17F958D2ee523a2206206994597C13D831ec7'),
+    useCurrency('0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48'),
+    useCurrency('ETH')
+  ]
+  const luaswapBestTradeExactIns = []
+  const uniswapBestTradeExactIns = []
+
+  for (let i = 0; i < crossbaseCurrencies.length; i++) {
+    luaswapBestTradeExactIns.push(
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useTradeExactIn(isExactIn ? parsedAmount : undefined, crossbaseCurrencies[i] ?? undefined)
+    )
+  }
+
+  for (let i = 0; i < luaswapBestTradeExactIns.length; i++) {
+    uniswapBestTradeExactIns.push(
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      useTradeExactIn(
+        luaswapBestTradeExactIns[i] ? luaswapBestTradeExactIns[i]?.outputAmount : undefined,
+        outputCurrency ?? undefined,
+        'uniswap'
+      )
+    )
+  }
+
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
 
   const currencyBalances = {

@@ -16,7 +16,10 @@ export enum PairState {
   INVALID
 }
 
-export function usePairs(currencies: [Currency | undefined, Currency | undefined][]): [PairState, Pair | null][] {
+export function usePairs(
+  currencies: [Currency | undefined, Currency | undefined][],
+  protocol = 'luaswap'
+): [PairState, Pair | null][] {
   const { chainId } = useActiveWeb3React()
 
   const tokens = useMemo(
@@ -31,11 +34,13 @@ export function usePairs(currencies: [Currency | undefined, Currency | undefined
   const pairAddresses = useMemo(
     () =>
       tokens.map(([tokenA, tokenB]) => {
-        return tokenA && tokenB && !tokenA.equals(tokenB) ? Pair.getAddress(tokenA, tokenB) : undefined
+        return tokenA && tokenB && !tokenA.equals(tokenB) ? Pair.getAddress(tokenA, tokenB, protocol) : undefined
       }),
     [tokens]
   )
 
+  if (protocol === 'uniswap') console.log(pairAddresses, '================================')
+  
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
 
   return useMemo(() => {

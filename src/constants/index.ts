@@ -51,6 +51,11 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE]
 }
 
+export const CROSS_BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
+  ...WETH_ONLY,
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], USDC, USDT]
+}
+
 /**
  * Some tokens can only be swapped via certain pairs, so we override the list of bases that are considered for these
  * tokens.
