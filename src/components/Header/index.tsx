@@ -6,6 +6,10 @@ import { darken } from 'polished'
 import { useTranslation } from 'react-i18next'
 
 import styled from 'styled-components'
+import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
+import { ApplicationModal } from '../../state/application/actions'
+import { useModalOpen, useToggleModal } from '../../state/application/hooks'
+import { useWindowSize } from '../../hooks/useWindowSize'
 
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
@@ -100,6 +104,49 @@ const HeaderLinks = styled(Row)`
     padding: 1rem 0 1rem 1rem;
     justify-content: flex-end;
 `};
+`
+const StyleNavBox = styled.ul`
+  display: flex;
+  padding-left: 0;
+`
+const StyleNavSub = styled.ul`
+  position: absolute;
+  top: 5em;
+  background-color: ${({ theme }) => theme.bg3};;
+  padding: 0 5px;
+  border-radius: 8px;
+  a{
+    padding: 0.5rem 0.5rem;
+  }
+`
+const StyledMenuButton = styled.button`
+  width: 50px;
+  border: none;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  height: 35px;
+  background-color: ${({ theme }) => theme.bg3};
+
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.5rem;
+
+  :hover,
+  :focus {
+    cursor: pointer;
+    outline: none;
+    background-color: ${({ theme }) => theme.bg4};
+  }
+
+  svg {
+    margin-top: 2px;
+  }
+`
+
+const StyledMenuIcon = styled(MenuIcon)`
+  path {
+    stroke: ${({ theme }) => theme.text1};
+  }
 `
 
 const LogoText = styled.span`
@@ -246,12 +293,15 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
-  const { t } = useTranslation()
-
+  const { t } = useTranslation()  
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
 
+  const { width } = useWindowSize()
+  const open = useModalOpen(ApplicationModal.MENULEFT)
+  const toggle = useToggleModal(ApplicationModal.MENULEFT)
+  
   return (
     <HeaderFrame>
       <ClaimModal />
@@ -266,34 +316,60 @@ export default function Header() {
           </UniIcon>
         </Title>
         <HeaderLinks>
-          <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-            {t('swap')}
-          </StyledNavLink>
-          <StyledNavLink
-            id={`pool-nav-link`}
-            to={'/pool'}
-            isActive={(match, { pathname }) =>
-              Boolean(match) ||
-              pathname.startsWith('/add') ||
-              pathname.startsWith('/remove') ||
-              pathname.startsWith('/create') ||
-              pathname.startsWith('/find')
-            }
-          >
-            {t('pool')}
-          </StyledNavLink>
-          <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-            Farming
-          </StyledNavLink>
-          {/* <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
-            Farming
-          </StyledExternalLink> */}
-          <StyledNavLink id="pool-nav-link" to="/lua-safe">
-            {t('LuaSafe')}
-          </StyledNavLink>
-          <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
-            Charts <span style={{ fontSize: '11px' }}>↗</span>
-          </StyledExternalLink>
+          <StyleNavBox>
+            <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+              {t('swap')}
+            </StyledNavLink>
+            <StyledNavLink
+              id={`pool-nav-link`}
+              to={'/pool'}
+              isActive={(match, { pathname }) =>
+                Boolean(match) ||
+                pathname.startsWith('/add') ||
+                pathname.startsWith('/remove') ||
+                pathname.startsWith('/create') ||
+                pathname.startsWith('/find')
+              }
+            >
+              {t('pool')}
+            </StyledNavLink>
+          </StyleNavBox>
+          { width && width < 767 ? (
+            <>
+              <StyledMenuButton onClick={toggle}>
+                <StyledMenuIcon/>
+              </StyledMenuButton>
+              { open && (
+                <StyleNavSub>
+                  <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                    Farming
+                  </StyledNavLink>
+                  <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                    {t('LuaSafe')}
+                  </StyledNavLink>
+                  <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                    Charts <span style={{ fontSize: '11px' }}>↗</span>
+                  </StyledExternalLink>
+                </StyleNavSub>
+              )}
+            </>
+          ) : (
+            <StyleNavBox>
+              <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                Farming
+              </StyledNavLink>
+              {/* <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
+                Farming
+              </StyledExternalLink> */}
+              <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                {t('LuaSafe')}
+              </StyledNavLink>
+              <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                Charts <span style={{ fontSize: '11px' }}>↗</span>
+              </StyledExternalLink>
+            </StyleNavBox>
+          )}          
+          
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
