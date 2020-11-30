@@ -404,7 +404,6 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
                     as={Link}
                     to={`/farming/${symbolLiquidityToken}`}
                     padding="3px 10px"
-                    borderRadius="8px"
                     fontSize="12px"
                     width="fit-content"
                   >
