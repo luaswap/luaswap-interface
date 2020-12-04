@@ -12,7 +12,7 @@ function useAllCommonPairs(currencyA?: Currency, currencyB?: Currency, protocol 
   const { chainId } = useActiveWeb3React()
 
   const bases: Token[] = chainId
-    ? (protocol === 'luaswap'
+    ? (protocol === 'luaswap-'
       ? BASES_TO_CHECK_TRADES_AGAINST[chainId]
       : CROSS_BASES_TO_CHECK_TRADES_AGAINST[chainId])
     : []
@@ -91,7 +91,6 @@ export function useTradeExactIn(
   protocol = 'luaswap'
 ): Trade | null {
   const allowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut, protocol)
-  if (protocol === 'uniswap') console.log(allowedPairs)
   return useMemo(() => {
     if (currencyAmountIn && currencyOut && allowedPairs.length > 0) {
       return (

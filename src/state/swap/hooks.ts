@@ -1,7 +1,8 @@
+//@ts-nocheck
 import useENS from '../../hooks/useENS'
 import { Version } from '../../hooks/useToggledVersion'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade } from '@luaswap/sdk'
+import { Currency, CurrencyAmount, ETHER, JSBI, Token, TokenAmount, Trade, tradeComparator } from '@luaswap/sdk'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -150,25 +151,52 @@ export function useDerivedSwapInfo(): {
     useCurrency('ETH')
   ]
   const luaswapBestTradeExactIns = []
-  const uniswapBestTradeExactIns = []
+  let uniswapBestTradeIn: Trade | null = null
+  let luaSwapBestTradeIn: Trade | null = null
 
   for (let i = 0; i < crossbaseCurrencies.length; i++) {
     luaswapBestTradeExactIns.push(
       // eslint-disable-next-line react-hooks/rules-of-hooks
-      useTradeExactIn(isExactIn ? parsedAmount : undefined, crossbaseCurrencies[i] ?? undefined)
+      useTradeExactIn(isExactIn ? parsedAmount : undefined, crossbaseCurrencies[i] ?? undefined, 'luaswap')
     )
   }
 
   for (let i = 0; i < luaswapBestTradeExactIns.length; i++) {
-    uniswapBestTradeExactIns.push(
-      // eslint-disable-next-line react-hooks/rules-of-hooks
-      useTradeExactIn(
-        luaswapBestTradeExactIns[i] ? luaswapBestTradeExactIns[i]?.outputAmount : undefined,
-        outputCurrency ?? undefined,
-        'uniswap'
-      )
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const trade = useTradeExactIn(
+      luaswapBestTradeExactIns[i] ? luaswapBestTradeExactIns[i]?.outputAmount : undefined,
+      outputCurrency ?? undefined,
+      'uniswap'
     )
+
+    if (i === 0 || !uniswapBestTradeIn) {
+      uniswapBestTradeIn = trade
+    } else if (trade && uniswapBestTradeIn && trade.outputAmount.greaterThan(uniswapBestTradeIn.outputAmount)) {
+      uniswapBestTradeIn = trade
+    }
   }
+
+  for (let i = 0; i < luaswapBestTradeExactIns.length; i++) {
+    if (
+      luaswapBestTradeExactIns[i] &&
+      uniswapBestTradeIn &&
+      luaswapBestTradeExactIns[i].route.output.symbol === uniswapBestTradeIn.route.input.symbol
+    ) {
+      luaSwapBestTradeIn = luaswapBestTradeExactIns[i]
+    }
+  }
+
+  const luaswapBestTradePairs = luaSwapBestTradeIn ? luaSwapBestTradeIn.route.pairs : []
+  const uniswapBestTradePairs = uniswapBestTradeIn ? uniswapBestTradeIn.route.pairs : []
+  const crossPairs = [...luaswapBestTradePairs, ...uniswapBestTradePairs]
+
+  const crossTrade =
+    crossPairs.length > 0
+      ? Trade.bestTradeExactIn(crossPairs, isExactIn ? parsedAmount : undefined, outputCurrency ?? undefined, {
+          maxHops: 3,
+          maxNumResults: 1
+        })[0]
+      : null
 
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
 
@@ -238,7 +266,7 @@ export function useDerivedSwapInfo(): {
     currencies,
     currencyBalances,
     parsedAmount,
-    v2Trade: v2Trade ?? undefined,
+    v2Trade: crossTrade ?? undefined,
     inputError,
     v1Trade
   }

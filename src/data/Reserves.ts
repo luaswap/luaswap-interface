@@ -39,8 +39,6 @@ export function usePairs(
     [tokens]
   )
 
-  if (protocol === 'uniswap') console.log(pairAddresses, '================================')
-  
   const results = useMultipleContractSingleData(pairAddresses, PAIR_INTERFACE, 'getReserves')
 
   return useMemo(() => {
@@ -56,7 +54,7 @@ export function usePairs(
       const [token0, token1] = tokenA.sortsBefore(tokenB) ? [tokenA, tokenB] : [tokenB, tokenA]
       return [
         PairState.EXISTS,
-        new Pair(new TokenAmount(token0, reserve0.toString()), new TokenAmount(token1, reserve1.toString()))
+        new Pair(new TokenAmount(token0, reserve0.toString()), new TokenAmount(token1, reserve1.toString()), protocol)
       ]
     })
   }, [results, tokens])

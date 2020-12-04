@@ -4,6 +4,7 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
+export const CROSS_ROUTER_ADDRESS = '0xBCF9cB98bdEe36e5D2F049bAcE7cFf47bF2d64e8'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
