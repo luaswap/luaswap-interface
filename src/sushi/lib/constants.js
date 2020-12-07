@@ -50,7 +50,7 @@ export const contractAddresses = {
     1: '0x9abf23f4e439d695a7fd341a1b25873c50cfa52e'
   },
   maker: {
-    1: '0xe11a87506FE17F9Fb5EEcaB14E85Af27A7C10e19'
+    1: '0x0FCB3b6232a2AD0af2f0602Acd759D634743579f'
   },
   masterChef: {
     1: '0xb67D7a6644d9E191Cac4DA2B88D6817351C7fF62',
