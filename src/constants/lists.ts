@@ -1,5 +1,5 @@
 // the LuaSwap Default token list lives here
-const COMMIT_HASH = '226e0994228a15b60695d5e15ac11cd6dda10eb2'
+const COMMIT_HASH = '3ee14dc50ac4983c108e7c7bacf178d409cd8afa'
 
 export const DEFAULT_TOKEN_LIST_URL =
   'https://raw.githubusercontent.com/tomochain/luaswap-token-list/' +
