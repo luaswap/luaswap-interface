@@ -138,12 +138,14 @@ export function useSwapCallback(
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
         const estimatedCalls: EstimatedSwapCall[] = await Promise.all(
-          swapCalls.map(call => {
+          swapCalls.map((call, idx) => {
             const {
               parameters: { methodName, args, value },
               contract
             } = call
             const options = !value || isZero(value) ? {} : { value }
+            console.log(methodName, idx, '====================================')
+            
 
             return contract.estimateGas[methodName](...args, options)
               .then(gasEstimate => {
