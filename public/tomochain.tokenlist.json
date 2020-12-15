@@ -18,6 +18,15 @@
       "decimals": 6,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png",
       "tags": ["defi"]
+    },
+    {
+      "chainId": 89,
+      "address": "0x11c2cAF973db997b8a9b5689b33962E1AedEA968",
+      "symbol": "BTC",
+      "name": "Bitcoin",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png",
+      "tags": ["defi"]
     }
   ],
   "version": {
