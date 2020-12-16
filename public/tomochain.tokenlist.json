@@ -23,8 +23,8 @@
       "chainId": 89,
       "address": "0x11c2cAF973db997b8a9b5689b33962E1AedEA968",
       "symbol": "BTC",
-      "name": "Bitcoin",
-      "decimals": 18,
+      "name": "Wrapped BTC",
+      "decimals": 8,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png",
       "tags": ["defi"]
     }
