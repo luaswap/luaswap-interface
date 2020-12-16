@@ -27,6 +27,15 @@
       "decimals": 8,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png",
       "tags": ["defi"]
+    },
+    {
+      "chainId": 89,
+      "address": "0xc5B1d4a89dAEc412d52C8b10fff8C671Df64eFeE",
+      "symbol": "POZD",
+      "name": "POZ Dubai",
+      "decimals": 18,
+      "logoURI": "",
+      "tags": ["defi"]
     }
   ],
   "version": {
