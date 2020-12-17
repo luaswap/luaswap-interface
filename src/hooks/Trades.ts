@@ -146,29 +146,33 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 
         const crossTradesOnUniswap = crossTradesOnLuaswap.map(trade => {
           //@ts-ignore
-          return Trade.bestTradeExactIn(uniswapAllowedPairs, trade.outputAmount, currencyOut, options)[0]
+          return trade ? Trade.bestTradeExactIn(uniswapAllowedPairs, trade.outputAmount, currencyOut, options)[0] : null
         })
 
-        let bestTradeOnUniswap: Trade
+        let bestTradeOnUniswap: Trade | null
 
         crossTradesOnUniswap.forEach(trade => {
           if (!bestTradeOnUniswap) {
             bestTradeOnUniswap = trade
           } else {
-            bestTradeOnUniswap = bestTradeOnUniswap.outputAmount.greaterThan(trade.outputAmount)
-              ? trade
-              : bestTradeOnUniswap
+            bestTradeOnUniswap =
+              trade && bestTradeOnUniswap.outputAmount.greaterThan(trade.outputAmount) ? trade : bestTradeOnUniswap
           }
         })
 
         const bestTradeOnLuaswap = crossTradesOnLuaswap.find(
-          trade => trade.route.output.symbol === bestTradeOnUniswap.route.input.symbol
+          trade => trade && bestTradeOnUniswap && trade.route.output.symbol === bestTradeOnUniswap.route.input.symbol
         )
 
-        //@ts-ignore
-        const crossPairs = [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
+        const crossPairs =
+          //@ts-ignore
+          bestTradeOnLuaswap && bestTradeOnUniswap
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap?.route.pairs]
+            : []
 
-        return Trade.bestTradeExactIn(crossPairs, currencyAmountIn, currencyOut, { maxHops: 4, maxNumResults: 1 })[0]
+        return crossPairs.length > 0
+          ? Trade.bestTradeExactIn(crossPairs, currencyAmountIn, currencyOut, { maxHops: 4, maxNumResults: 1 })[0]
+          : null
       }
 
       // cross swap on uniswap => luaswap
@@ -185,29 +189,32 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
         })
 
         const crossTradesOnLuaswap = crossTradesOnUniswap.map(trade => {
-          //@ts-ignore
-          return Trade.bestTradeExactIn(luaswapAllowedPairs, trade.outputAmount, currencyOut, options)[0]
+          return trade ? Trade.bestTradeExactIn(luaswapAllowedPairs, trade.outputAmount, currencyOut, options)[0] : null
         })
 
-        let bestTradeOnLuaswap: Trade
+        let bestTradeOnLuaswap: Trade | null
 
         crossTradesOnLuaswap.forEach(trade => {
           if (!bestTradeOnLuaswap) {
             bestTradeOnLuaswap = trade
           } else {
-            bestTradeOnLuaswap = bestTradeOnLuaswap.outputAmount.greaterThan(trade.outputAmount)
-              ? trade
-              : bestTradeOnLuaswap
+            bestTradeOnLuaswap =
+              trade && bestTradeOnLuaswap.outputAmount.greaterThan(trade.outputAmount) ? trade : bestTradeOnLuaswap
           }
         })
 
         const bestTradeOnUniswap = crossTradesOnUniswap.find(
-          trade => trade && trade.route.output.symbol === bestTradeOnLuaswap.route.input.symbol
+          trade => trade && bestTradeOnLuaswap && trade.route.output.symbol === bestTradeOnLuaswap.route.input.symbol
         )
 
-        //@ts-ignore
-        const crossPairs = [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
-        return Trade.bestTradeExactIn(crossPairs, currencyAmountIn, currencyOut, { maxHops: 4, maxNumResults: 1 })[0]
+        const crossPairs =
+          //@ts-ignore
+          bestTradeOnLuaswap && bestTradeOnUniswap
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap?.route.pairs]
+            : []
+        return crossPairs.length > 0
+          ? Trade.bestTradeExactIn(crossPairs, currencyAmountIn, currencyOut, { maxHops: 4, maxNumResults: 1 })[0]
+          : null
       }
     }
     return null
@@ -291,13 +298,18 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
         })
 
         const bestTradeOnUniswap = crossTradesOnUniswap.find(
-          trade => trade.route.input.symbol === bestTradeOnLuaswap.route.output.symbol
+          trade => trade && bestTradeOnLuaswap && trade.route.input.symbol === bestTradeOnLuaswap.route.output.symbol
         )
 
-        //@ts-ignore
-        const crossPairs = [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
+        const crossPairs =
+          //@ts-ignore
+          bestTradeOnLuaswap && bestTradeOnUniswap
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
+            : []
 
-        return Trade.bestTradeExactOut(crossPairs, currencyIn, currencyAmountOut, { maxHops: 4, maxNumResults: 1 })[0]
+        return crossPairs.length
+          ? Trade.bestTradeExactOut(crossPairs, currencyIn, currencyAmountOut, { maxHops: 4, maxNumResults: 1 })[0]
+          : null
       }
 
       // cross swap on uniswap => luaswap
@@ -332,9 +344,14 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
           trade => trade && trade.route.input.symbol === bestTradeOnUniswap.route.output.symbol
         )
 
-        //@ts-ignore
-        const crossPairs = [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
-        return Trade.bestTradeExactOut(crossPairs, currencyIn, currencyAmountOut, { maxHops: 4, maxNumResults: 1 })[0]
+        const crossPairs =
+          //@ts-ignore
+          bestTradeOnLuaswap && bestTradeOnUniswap
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
+            : []
+        return crossPairs.length > 0
+          ? Trade.bestTradeExactOut(crossPairs, currencyIn, currencyAmountOut, { maxHops: 4, maxNumResults: 1 })[0]
+          : null
       }
     }
     return null
