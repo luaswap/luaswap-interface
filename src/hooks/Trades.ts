@@ -97,6 +97,7 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
   ]
   const luaswapAllowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut, 'luaswap')
   const uniswapAllowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut, 'uniswap')
+  const sushiswapAllowedPairs = useAllCommonPairs(currencyAmountIn?.currency, currencyOut, 'sushiswap')
   const luaswapDefaultTokenList = useSelectedTokenList()
 
   return useMemo(() => {
@@ -120,25 +121,42 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
         return Trade.bestTradeExactIn(luaswapAllowedPairs, currencyAmountIn, currencyOut, options)[0] ?? null
       }
 
-      // swap on uniswap
+      // swap on other protocols
       if (
         ((!isTokenInOnLuaswap && !isTokenOutOnLuaswap) ||
           (isTokenInOnCrossBase && !isTokenOutOnLuaswap) ||
           (!isTokenInOnLuaswap && isTokenOutOnCrossBase)) &&
         uniswapAllowedPairs.length > 0
       ) {
-        console.log('===============swap on uniswap===============')
-        return Trade.bestTradeExactIn(uniswapAllowedPairs, currencyAmountIn, currencyOut, options)[0] ?? null
+        console.log('===============swap on other protocols===============')
+        const uniswapTrade =
+          Trade.bestTradeExactIn(uniswapAllowedPairs, currencyAmountIn, currencyOut, options)[0] ?? null
+        const sushiswapTrade =
+          Trade.bestTradeExactIn(sushiswapAllowedPairs, currencyAmountIn, currencyOut, options)[0] ?? null
+
+        switch (true) {
+          //@ts-ignore
+          case !uniswapTrade && !sushiswapTrade:
+            return null
+          //@ts-ignore
+          case !uniswapTrade && sushiswapTrade:
+            return sushiswapTrade
+          //@ts-ignore
+          case uniswapTrade && !sushiswapTrade:
+            return uniswapTrade
+          default:
+            return uniswapTrade.outputAmount.greaterThan(sushiswapTrade.outputAmount) ? uniswapTrade : sushiswapTrade
+        }
       }
 
-      // cross swap on luaswap => uniswap
+      // cross swap on luaswap => other protocols
       if (
         isTokenInOnLuaswap &&
         !isTokenOutOnLuaswap &&
         luaswapAllowedPairs.length > 0 &&
-        uniswapAllowedPairs.length > 0
+        (uniswapAllowedPairs.length > 0 || sushiswapAllowedPairs.length > 0)
       ) {
-        console.log('===============cross swap on luaswap => uniswap===============')
+        console.log('===============cross swap on luaswap => other protocols===============')
         const crossTradesOnLuaswap = crossBases.map(base => {
           //@ts-ignore
           return Trade.bestTradeExactIn(luaswapAllowedPairs, currencyAmountIn, base, options)[0]
@@ -146,28 +164,43 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
 
         const crossTradesOnUniswap = crossTradesOnLuaswap.map(trade => {
           //@ts-ignore
-          return trade ? Trade.bestTradeExactIn(uniswapAllowedPairs, trade.outputAmount, currencyOut, options)[0] : null
+          return trade && uniswapAllowedPairs.length > 0
+            ? Trade.bestTradeExactIn(uniswapAllowedPairs, trade.outputAmount, currencyOut, options)[0]
+            : null
         })
 
-        let bestTradeOnUniswap: Trade | null
+        const crossTradesOnSushiswap = crossTradesOnLuaswap.map(trade => {
+          //@ts-ignore
+          return trade && sushiswapAllowedPairs.length > 0
+            ? Trade.bestTradeExactIn(sushiswapAllowedPairs, trade.outputAmount, currencyOut, options)[0]
+            : null
+        })
 
-        crossTradesOnUniswap.forEach(trade => {
-          if (!bestTradeOnUniswap) {
-            bestTradeOnUniswap = trade
+        const crossTrades = [...crossTradesOnUniswap, ...crossTradesOnSushiswap]
+
+        let bestCrossTrade: Trade | null
+
+        crossTrades.forEach(trade => {
+          if (!bestCrossTrade) {
+            bestCrossTrade = trade
           } else {
-            bestTradeOnUniswap =
-              trade && bestTradeOnUniswap.outputAmount.greaterThan(trade.outputAmount) ? trade : bestTradeOnUniswap
+            bestCrossTrade =
+              trade && bestCrossTrade.outputAmount.greaterThan(trade.outputAmount) ? trade : bestCrossTrade
           }
         })
 
         const bestTradeOnLuaswap = crossTradesOnLuaswap.find(
-          trade => trade && bestTradeOnUniswap && trade.route.output.symbol === bestTradeOnUniswap.route.input.symbol
+          trade =>
+            trade &&
+            bestCrossTrade &&
+            trade.route.output.symbol === bestCrossTrade.route.input.symbol &&
+            trade.outputAmount.equalTo(bestCrossTrade.inputAmount)
         )
 
         const crossPairs =
           //@ts-ignore
-          bestTradeOnLuaswap && bestTradeOnUniswap
-            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap?.route.pairs]
+          bestTradeOnLuaswap && bestCrossTrade
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestCrossTrade?.route.pairs]
             : []
 
         return crossPairs.length > 0
@@ -175,20 +208,27 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
           : null
       }
 
-      // cross swap on uniswap => luaswap
+      // cross swap on other protocols => luaswap
       if (
         !isTokenInOnLuaswap &&
         isTokenOutOnLuaswap &&
         luaswapAllowedPairs.length > 0 &&
         uniswapAllowedPairs.length > 0
       ) {
-        console.log('===============cross swap on uniswap => luaswap===============')
+        console.log('===============cross swap on other protocols => luaswap===============')
         const crossTradesOnUniswap = crossBases.map(base => {
           //@ts-ignore
           return Trade.bestTradeExactIn(uniswapAllowedPairs, currencyAmountIn, base, options)[0]
         })
 
-        const crossTradesOnLuaswap = crossTradesOnUniswap.map(trade => {
+        const crossTradesOnSushiswap = crossBases.map(base => {
+          //@ts-ignore
+          return Trade.bestTradeExactIn(uniswapAllowedPairs, currencyAmountIn, base, options)[0]
+        })
+
+        const crossTrades = [...crossTradesOnUniswap, ...crossTradesOnSushiswap]
+
+        const crossTradesOnLuaswap = crossTrades.map(trade => {
           return trade ? Trade.bestTradeExactIn(luaswapAllowedPairs, trade.outputAmount, currencyOut, options)[0] : null
         })
 
@@ -203,8 +243,12 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
           }
         })
 
-        const bestTradeOnUniswap = crossTradesOnUniswap.find(
-          trade => trade && bestTradeOnLuaswap && trade.route.output.symbol === bestTradeOnLuaswap.route.input.symbol
+        const bestTradeOnUniswap = crossTrades.find(
+          trade =>
+            trade &&
+            bestTradeOnLuaswap &&
+            trade.route.output.symbol === bestTradeOnLuaswap.route.input.symbol &&
+            trade.outputAmount.equalTo(bestTradeOnLuaswap.inputAmount)
         )
 
         const crossPairs =
@@ -234,6 +278,7 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
   ]
   const luaswapAllowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency, 'luaswap')
   const uniswapAllowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency, 'uniswap')
+  const sushiswapAllowedPairs = useAllCommonPairs(currencyIn, currencyAmountOut?.currency, 'sushiswap')
   const luaswapDefaultTokenList = useSelectedTokenList()
 
   return useMemo(() => {
@@ -257,15 +302,32 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
         return Trade.bestTradeExactOut(luaswapAllowedPairs, currencyIn, currencyAmountOut, options)[0] ?? null
       }
 
-      // swap on uniswap
+      // swap on other protocols
       if (
         ((!isTokenInOnLuaswap && !isTokenOutOnLuaswap) ||
           (isTokenInOnCrossBase && !isTokenOutOnLuaswap) ||
           (!isTokenInOnLuaswap && isTokenOutOnCrossBase)) &&
-        uniswapAllowedPairs.length > 0
+        (uniswapAllowedPairs.length > 0 || sushiswapAllowedPairs.length > 0)
       ) {
-        console.log('===============swap on uniswap===============')
-        return Trade.bestTradeExactOut(uniswapAllowedPairs, currencyIn, currencyAmountOut, options)[0] ?? null
+        console.log('===============swap on other protocols===============')
+        const uniswapTrade =
+          Trade.bestTradeExactOut(uniswapAllowedPairs, currencyIn, currencyAmountOut, options)[0] ?? null
+        const sushiswapTrade =
+          Trade.bestTradeExactOut(sushiswapAllowedPairs, currencyIn, currencyAmountOut, options)[0] ?? null
+
+        switch (true) {
+          //@ts-ignore
+          case !uniswapTrade && !sushiswapTrade:
+            return null
+          //@ts-ignore
+          case !uniswapTrade && sushiswapTrade:
+            return sushiswapTrade
+          //@ts-ignore
+          case uniswapTrade && !sushiswapTrade:
+            return uniswapTrade
+          default:
+            return uniswapTrade.inputAmount.lessThan(sushiswapTrade.inputAmount) ? uniswapTrade : sushiswapTrade
+        }
       }
 
       // cross swap on luaswap => uniswap
@@ -282,7 +344,14 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
           return Trade.bestTradeExactOut(uniswapAllowedPairs, base, currencyAmountOut, options)[0] ?? null
         })
 
-        const crossTradesOnLuaswap = crossTradesOnUniswap.map(trade => {
+        const crossTradesOnSushiswap = crossBases.map(base => {
+          //@ts-ignore
+          return Trade.bestTradeExactOut(sushiswapAllowedPairs, base, currencyAmountOut, options)[0] ?? null
+        })
+
+        const crossTrades = [...crossTradesOnUniswap, ...crossTradesOnSushiswap]
+
+        const crossTradesOnLuaswap = crossTrades.map(trade => {
           //@ts-ignore
           return Trade.bestTradeExactOut(luaswapAllowedPairs, currencyIn, trade.inputAmount, options)[0] ?? null
         })
@@ -297,14 +366,18 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
           }
         })
 
-        const bestTradeOnUniswap = crossTradesOnUniswap.find(
-          trade => trade && bestTradeOnLuaswap && trade.route.input.symbol === bestTradeOnLuaswap.route.output.symbol
+        const bestCrossTrade = crossTrades.find(
+          trade =>
+            trade &&
+            bestTradeOnLuaswap &&
+            trade.route.input.symbol === bestTradeOnLuaswap.route.output.symbol &&
+            trade.inputAmount.equalTo(bestTradeOnLuaswap.outputAmount)
         )
 
         const crossPairs =
           //@ts-ignore
-          bestTradeOnLuaswap && bestTradeOnUniswap
-            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
+          bestTradeOnLuaswap && bestCrossTrade
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestCrossTrade.route.pairs]
             : []
 
         return crossPairs.length
@@ -317,7 +390,7 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
         !isTokenInOnLuaswap &&
         isTokenOutOnLuaswap &&
         luaswapAllowedPairs.length > 0 &&
-        uniswapAllowedPairs.length > 0
+        (uniswapAllowedPairs.length > 0 || sushiswapAllowedPairs.length > 0)
       ) {
         console.log('===============cross swap on uniswap => luaswap===============')
         const crossTradesOnLuaswap = crossBases.map(base => {
@@ -330,24 +403,35 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
           return Trade.bestTradeExactOut(uniswapAllowedPairs, currencyIn, trade.inputAmount, options)[0]
         })
 
-        let bestTradeOnUniswap: Trade
+        const crossTradesOnSushiswap = crossTradesOnLuaswap.map(trade => {
+          //@ts-ignore
+          return Trade.bestTradeExactOut(sushiswapAllowedPairs, currencyIn, trade.inputAmount, options)[0]
+        })
 
-        crossTradesOnUniswap.forEach(trade => {
-          if (!bestTradeOnUniswap) {
-            bestTradeOnUniswap = trade
+        const crossTrades = [...crossTradesOnUniswap, ...crossTradesOnSushiswap]
+
+        let bestCrossTrade: Trade
+
+        crossTrades.forEach(trade => {
+          if (!bestCrossTrade) {
+            bestCrossTrade = trade
           } else {
-            bestTradeOnUniswap = bestTradeOnUniswap.inputAmount.lessThan(trade.inputAmount) ? trade : bestTradeOnUniswap
+            bestCrossTrade = bestCrossTrade.inputAmount.lessThan(trade.inputAmount) ? trade : bestCrossTrade
           }
         })
 
         const bestTradeOnLuaswap = crossTradesOnLuaswap.find(
-          trade => trade && trade.route.input.symbol === bestTradeOnUniswap.route.output.symbol
+          trade =>
+            trade &&
+            bestCrossTrade &&
+            trade.route.input.symbol === bestCrossTrade.route.output.symbol &&
+            trade.inputAmount.equalTo(bestCrossTrade.outputAmount)
         )
 
         const crossPairs =
           //@ts-ignore
-          bestTradeOnLuaswap && bestTradeOnUniswap
-            ? [...bestTradeOnLuaswap?.route.pairs, ...bestTradeOnUniswap.route.pairs]
+          bestTradeOnLuaswap && bestCrossTrade
+            ? [...bestTradeOnLuaswap?.route.pairs, ...bestCrossTrade.route.pairs]
             : []
         return crossPairs.length > 0
           ? Trade.bestTradeExactOut(crossPairs, currencyIn, currencyAmountOut, { maxHops: 4, maxNumResults: 1 })[0]
