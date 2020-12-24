@@ -163,14 +163,12 @@ export function useTradeExactIn(currencyAmountIn?: CurrencyAmount, currencyOut?:
         })
 
         const crossTradesOnUniswap = crossTradesOnLuaswap.map(trade => {
-          //@ts-ignore
           return trade && uniswapAllowedPairs.length > 0
             ? Trade.bestTradeExactIn(uniswapAllowedPairs, trade.outputAmount, currencyOut, options)[0]
             : null
         })
 
         const crossTradesOnSushiswap = crossTradesOnLuaswap.map(trade => {
-          //@ts-ignore
           return trade && sushiswapAllowedPairs.length > 0
             ? Trade.bestTradeExactIn(sushiswapAllowedPairs, trade.outputAmount, currencyOut, options)[0]
             : null
@@ -330,14 +328,14 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
         }
       }
 
-      // cross swap on luaswap => uniswap
+      // cross swap on luaswap => other protocols
       if (
         isTokenInOnLuaswap &&
         !isTokenOutOnLuaswap &&
         luaswapAllowedPairs.length > 0 &&
         uniswapAllowedPairs.length > 0
       ) {
-        console.log('===============cross swap on luaswap => uniswap===============')
+        console.log('===============cross swap on luaswap => other protocols===============')
 
         const crossTradesOnUniswap = crossBases.map(base => {
           //@ts-ignore
@@ -352,17 +350,17 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
         const crossTrades = [...crossTradesOnUniswap, ...crossTradesOnSushiswap]
 
         const crossTradesOnLuaswap = crossTrades.map(trade => {
-          //@ts-ignore
-          return Trade.bestTradeExactOut(luaswapAllowedPairs, currencyIn, trade.inputAmount, options)[0] ?? null
+          return trade ? Trade.bestTradeExactOut(luaswapAllowedPairs, currencyIn, trade.inputAmount, options)[0] : null
         })
 
-        let bestTradeOnLuaswap: Trade
+        let bestTradeOnLuaswap: Trade | null
 
         crossTradesOnLuaswap.forEach(trade => {
           if (!bestTradeOnLuaswap) {
             bestTradeOnLuaswap = trade
           } else {
-            bestTradeOnLuaswap = bestTradeOnLuaswap.inputAmount.lessThan(trade.inputAmount) ? trade : bestTradeOnLuaswap
+            bestTradeOnLuaswap =
+              trade && bestTradeOnLuaswap.inputAmount.lessThan(trade.inputAmount) ? trade : bestTradeOnLuaswap
           }
         })
 
@@ -385,38 +383,38 @@ export function useTradeExactOut(currencyIn?: Currency, currencyAmountOut?: Curr
           : null
       }
 
-      // cross swap on uniswap => luaswap
+      // cross swap on other protocols => luaswap
       if (
         !isTokenInOnLuaswap &&
         isTokenOutOnLuaswap &&
         luaswapAllowedPairs.length > 0 &&
         (uniswapAllowedPairs.length > 0 || sushiswapAllowedPairs.length > 0)
       ) {
-        console.log('===============cross swap on uniswap => luaswap===============')
+        console.log('===============cross swap on other protocols => luaswap===============')
         const crossTradesOnLuaswap = crossBases.map(base => {
           //@ts-ignore
           return Trade.bestTradeExactOut(luaswapAllowedPairs, base, currencyAmountOut, options)[0]
         })
 
         const crossTradesOnUniswap = crossTradesOnLuaswap.map(trade => {
-          //@ts-ignore
-          return Trade.bestTradeExactOut(uniswapAllowedPairs, currencyIn, trade.inputAmount, options)[0]
+          return trade ? Trade.bestTradeExactOut(uniswapAllowedPairs, currencyIn, trade.inputAmount, options)[0] : null
         })
 
         const crossTradesOnSushiswap = crossTradesOnLuaswap.map(trade => {
-          //@ts-ignore
-          return Trade.bestTradeExactOut(sushiswapAllowedPairs, currencyIn, trade.inputAmount, options)[0]
+          return trade
+            ? Trade.bestTradeExactOut(sushiswapAllowedPairs, currencyIn, trade.inputAmount, options)[0]
+            : null
         })
 
         const crossTrades = [...crossTradesOnUniswap, ...crossTradesOnSushiswap]
 
-        let bestCrossTrade: Trade
+        let bestCrossTrade: Trade | null
 
         crossTrades.forEach(trade => {
           if (!bestCrossTrade) {
             bestCrossTrade = trade
           } else {
-            bestCrossTrade = bestCrossTrade.inputAmount.lessThan(trade.inputAmount) ? trade : bestCrossTrade
+            bestCrossTrade = trade && bestCrossTrade.inputAmount.lessThan(trade.inputAmount) ? trade : bestCrossTrade
           }
         })
 
