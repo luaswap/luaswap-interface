@@ -2,9 +2,45 @@ import { Trade } from '@luaswap/sdk'
 import React, { Fragment, memo, useContext } from 'react'
 import { ChevronRight } from 'react-feather'
 import { Flex } from 'rebass'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import { TYPE } from '../../theme'
 import CurrencyLogo from '../CurrencyLogo'
+import { useToken } from '../../hooks/Tokens'
+
+const Path = styled.div`
+  display: inline-block;
+  position: relative;
+  margin: 0 3px 0 10px;
+`
+
+const ProtocolIcon = styled.div`
+  position: absolute;
+  top: 42%;
+  left: -5px;
+  transform: translateY(-50%);
+`
+
+interface ProtocolProps {
+  type: string
+}
+
+function Protocol({ type }: ProtocolProps) {
+  const luaToken = useToken('0xB1f66997A5760428D3a87D68b90BfE0aE64121cC')
+  const uniToken = useToken('0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984')
+  const sushiToken = useToken('0x6B3595068778DD592e39A122f4f5a5cF09C90fE2')
+
+  switch (true) {
+    case type === 'uniswap':
+      //@ts-ignore
+      return <CurrencyLogo currency={uniToken} size="0.65rem" />
+    case type === 'sushiswap':
+      //@ts-ignore
+      return <CurrencyLogo currency={sushiToken} size="0.65rem" />
+    default:
+      //@ts-ignore
+      return <CurrencyLogo currency={luaToken} size="0.65rem" />
+  }
+}
 
 export default memo(function SwapRoute({ trade }: { trade: Trade }) {
   const theme = useContext(ThemeContext)
@@ -29,7 +65,16 @@ export default memo(function SwapRoute({ trade }: { trade: Trade }) {
                 {token.symbol}
               </TYPE.black>
             </Flex>
-            {isLastItem ? null : <ChevronRight color={theme.text2} />}
+            {isLastItem ? null : (
+              <Path>
+                {trade.route.pairs[i] && (
+                  <ProtocolIcon>
+                    <Protocol type={trade.route.pairs[i].protocol} />
+                  </ProtocolIcon>
+                )}
+                <ChevronRight color={theme.text2} />
+              </Path>
+            )}
           </Fragment>
         )
       })}
