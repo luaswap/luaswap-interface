@@ -27,29 +27,7 @@
       "decimals": 8,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png",
       "tags": ["defi"]
-    }
-  ],
-  "version": {
-    "major": 1,
-    "minor": 0,
-    "patch": 3
-  }
-},
-{
-  "name": "LuaSwap Default List",
-  "timestamp": "2020-11-26T02:38:53.850Z",
-  "version": {
-    "major": 1,
-    "minor": 0,
-    "patch": 0
-  },
-  "tags": {},
-  "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png",
-  "keywords": [
-    "luaswap",
-    "default"
-  ],
-  "tokens": [
+    },
     {
       "name": "Frontier Token",
       "address": "0xf8C3527CC04340b208C854E985240c02F7B7793f",
@@ -170,5 +148,10 @@
       "chainId": 1,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
     }
-  ]
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 3
+  }
 }
