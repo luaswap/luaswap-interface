@@ -8,14 +8,14 @@ import CurrencyLogo from '../CurrencyLogo'
 import { useToken } from '../../hooks/Tokens'
 
 const Path = styled.div`
-  display: inline-block;
+  display: flex;
   position: relative;
   margin: 0 3px 0 10px;
 `
 
 const ProtocolIcon = styled.div`
   position: absolute;
-  top: 42%;
+  top: 45%;
   left: -5px;
   transform: translateY(-50%);
 `
