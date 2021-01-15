@@ -1,7 +1,7 @@
-import { ChainId, Currency, CurrencyAmount, ETHER, Token, TokenAmount, WETH } from '@luaswap/sdk'
+import { ChainId, Currency, CurrencyAmount, ETHER, TOMO, Token, TokenAmount, WETH } from '@luaswap/sdk'
 
 export function wrappedCurrency(currency: Currency | undefined, chainId: ChainId | undefined): Token | undefined {
-  return chainId && currency === ETHER ? WETH[chainId] : currency instanceof Token ? currency : undefined
+  return chainId && (currency === ETHER || currency === TOMO ) ? WETH[chainId] : currency instanceof Token ? currency : undefined
 }
 
 export function wrappedCurrencyAmount(
@@ -13,6 +13,13 @@ export function wrappedCurrencyAmount(
 }
 
 export function unwrappedToken(token: Token): Currency {
-  if (token.equals(WETH[token.chainId])) return ETHER
+
+  if (token.equals(WETH[token.chainId]) && token.chainId === 1){
+    console.log('ETH unwrapped')
+    return ETHER
+  }else if(token.equals(WETH[token.chainId]) && (token.chainId === 88 || token.chainId === 89 || token.chainId === 99) ){
+    console.log('TOMO unwrapped')
+    return TOMO
+  }
   return token
 }

@@ -1,5 +1,5 @@
 import { parseBytes32String } from '@ethersproject/strings'
-import { Currency, ETHER, Token, currencyEquals } from '@luaswap/sdk'
+import { Currency, ETHER, TOMO, Token, currencyEquals } from '@luaswap/sdk'
 import { useMemo } from 'react'
 import { useSelectedTokenList } from '../state/lists/hooks'
 import { NEVER_RELOAD, useSingleCallResult } from '../state/multicall/hooks'
@@ -103,6 +103,7 @@ export function useToken(tokenAddress?: string): Token | undefined | null {
 
 export function useCurrency(currencyId: string | undefined): Currency | null | undefined {
   const isETH = currencyId?.toUpperCase() === 'ETH'
-  const token = useToken(isETH ? undefined : currencyId)
-  return isETH ? ETHER : token
+  const isTOMO = currencyId?.toUpperCase() === 'TOMO'
+  const token = useToken(isETH || isTOMO ? undefined : currencyId)
+  return isETH ? ETHER : isTOMO ? TOMO :token
 }

@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, ETHER, TokenAmount, WETH } from '@luaswap/sdk'
+import { Currency, currencyEquals, ETHER, TOMO, TokenAmount, WETH } from '@luaswap/sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -47,7 +47,7 @@ export default function AddLiquidity({
 }: RouteComponentProps<{ currencyIdA?: string; currencyIdB?: string }>) {
   const { account, chainId, library } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
-
+  
   const currencyA = useCurrency(currencyIdA)
   const currencyB = useCurrency(currencyIdB)
 
@@ -105,7 +105,6 @@ export default function AddLiquidity({
     },
     {}
   )
-
   const atMaxAmounts: { [field in Field]?: TokenAmount } = [Field.CURRENCY_A, Field.CURRENCY_B].reduce(
     (accumulator, field) => {
       return {
@@ -121,26 +120,26 @@ export default function AddLiquidity({
   const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], chainId === 89 ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
 
   const addTransaction = useTransactionAdder()
-
+    // Add Pool
   async function onAdd() {
+    debugger
     if (!chainId || !library || !account) return
     const router = getRouterContract(chainId, library, account)
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
       return
     }
-
     const amountsMin = {
       [Field.CURRENCY_A]: calculateSlippageAmount(parsedAmountA, noLiquidity ? 0 : allowedSlippage)[0],
       [Field.CURRENCY_B]: calculateSlippageAmount(parsedAmountB, noLiquidity ? 0 : allowedSlippage)[0]
     }
-
     let estimate,
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    if (currencyA === ETHER || currencyB === ETHER) {
-      const tokenBIsETH = currencyB === ETHER
+    
+    if (currencyA === ETHER || currencyB === ETHER || currencyA === TOMO || currencyB === TOMO) {
+      const tokenBIsETH = currencyB === ETHER || currencyB === TOMO
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
       args = [

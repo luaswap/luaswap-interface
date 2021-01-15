@@ -38,6 +38,7 @@ export function computeTradePriceBreakdown(
     : undefined
 
   // the amount of the input that accrues to LPs
+  // if(trade) console.log(trade.inputAmount)
   const realizedLPFeeAmount =
     realizedLPFee &&
     trade &&

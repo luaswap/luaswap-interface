@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, ETHER, Token } from '@luaswap/sdk'
+import { Currency, CurrencyAmount, currencyEquals, ETHER, TOMO, Token } from '@luaswap/sdk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -18,7 +18,7 @@ import Loader from '../Loader'
 import { isTokenOnList } from '../../utils'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : ''
+  return currency instanceof Token ? currency.address : (currency === ETHER ? 'ETHER' : currency === TOMO ? 'TOMO' : '')
 }
 
 const StyledBalanceText = styled(Text)`
@@ -171,7 +171,9 @@ export default function CurrencyList({
   fixedListRef?: MutableRefObject<FixedSizeList | undefined>
   showETH: boolean
 }) {
-  const itemData = useMemo(() => (showETH ? [Currency.ETHER, ...currencies] : currencies), [currencies, showETH])
+  const { chainId } = useActiveWeb3React()
+  const NATIVE_TOKEN = (chainId === 88 || chainId === 89 || chainId === 99) ? Currency.TOMO : Currency.ETHER
+  const itemData = useMemo(() => (showETH ? [NATIVE_TOKEN, ...currencies] : currencies), [currencies, showETH])
 
   const Row = useCallback(
     ({ data, index, style }) => {

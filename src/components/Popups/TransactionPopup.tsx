@@ -7,6 +7,7 @@ import { ExternalLink } from '../../theme/components'
 import { getEtherscanLink } from '../../utils'
 import { AutoColumn } from '../Column'
 import { AutoRow } from '../Row'
+import { NETWORK_SCAN } from '../../constants'
 
 const RowNoFlex = styled(AutoRow)`
   flex-wrap: nowrap;
@@ -33,7 +34,7 @@ export default function TransactionPopup({
       <AutoColumn gap="8px">
         <TYPE.body fontWeight={500}>{summary ?? 'Hash: ' + hash.slice(0, 8) + '...' + hash.slice(58, 65)}</TYPE.body>
         {chainId && (
-          <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>View on Etherscan</ExternalLink>
+          <ExternalLink href={getEtherscanLink(chainId, hash, 'transaction')}>{NETWORK_SCAN[chainId]}</ExternalLink>
         )}
       </AutoColumn>
     </RowNoFlex>

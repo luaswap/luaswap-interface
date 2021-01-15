@@ -153,6 +153,28 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   }
 }
 
+export const NETWORK_SCAN : { [chainId in ChainId]: string } = {
+  1: 'View Etherscan',
+  3: 'View Etherscan',
+  4: 'View Etherscan',
+  5: 'View Etherscan',
+  42: 'View Etherscan',
+  99: 'View TomoScan',
+  89: 'View TomoScan',
+  88: 'View TomoScan'
+}
+
+export const TokenTextSupport: { [chainId in ChainId]: string } = {
+  1: 'ETH',
+  3: 'ETH',
+  4: 'ETH',
+  5: 'ETH',
+  42: 'ETH',
+  99: 'TOMO',
+  89: 'TOMO',
+  88: 'TOMO'
+}
+
 export const NetworkContextName = 'NETWORK'
 
 // default allowed slippage, in bips
