@@ -54,6 +54,7 @@ export function colors(): Colors {
     bg3: '#2C3030', //#40444F
     bg4: '#565A69',
     bg5: '#6C7284',
+    bg6: '#FFFFFF',
 
     //specialty colors
     modalBG: 'rgba(0,0,0,.425)',
@@ -80,11 +81,33 @@ export function colors(): Colors {
     green1: '#27AE60',
     yellow1: '#FFE270',
     yellow2: '#F3841E',
-    blue1: '#2172E5'
+    blue1: '#2172E5',
 
     // dont wanna forget these blue yet
     // blue4: '#153d6f70' : '#C4D9F8',
     // blue5: '#153d6f70' : '#EBF4FF',
+
+    textColor: 'black',
+
+    panelColor: 'rgba(255, 255, 255, 0)',
+    backgroundColor: '#F7F8FA',
+
+    uniswapPink: 'black',
+
+    concreteGray: '#FAFAFA',
+    inputBackground: '#FAFAFA',
+    shadowColor: '#2F80ED',
+    mercuryGray: '#E1E1E1',
+
+    //specialty colors
+    onlyLight: 'transparent',
+    divider: 'rgba(43, 43, 43, 0.035)',
+
+    // other
+    link: '#2172E5',
+    blue: '2f80ed',
+
+    background: 'radial-gradient(50% 50% at 50% 50%, #ff007a30 0%, #fff 0%)'
   }
 }
 
@@ -105,7 +128,7 @@ export function theme(darkMode: boolean): DefaultTheme {
       4: 24,
       5: 32,
       6: 48,
-      7: 64,
+      7: 64
     },
     // siteWidth
     siteWidth: 1200,
@@ -182,8 +205,56 @@ export const TYPE = {
   },
   error({ error, ...props }: { error: boolean } & TextProps) {
     return <TextWrapper fontWeight={500} color={error ? 'red1' : 'text2'} {...props} />
+  },
+  light(props: TextProps) {
+    return <TextWrapper fontWeight={400} color={'text3'} fontSize={14} {...props} />
   }
 }
+
+export const Hover = styled.div`
+  :hover {
+    cursor: pointer;
+  }
+`
+
+export const Link = styled.a.attrs({
+  target: '_blank',
+  rel: 'noopener noreferrer'
+})`
+  text-decoration: none;
+  cursor: pointer;
+  color: ${({ theme }) => theme.primary1};
+  font-weight: 500;
+  :hover {
+    text-decoration: underline;
+  }
+  :focus {
+    outline: none;
+    text-decoration: underline;
+  }
+  :active {
+    text-decoration: none;
+  }
+`
+
+export const ThemedBackground = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: none;
+  max-width: 100vw !important;
+  height: 200vh;
+  mix-blend-mode: color;
+  background: ${({ backgroundColor }: { backgroundColor: string }) =>
+    `radial-gradient(50% 50% at 50% 50%, ${backgroundColor} 0%, rgba(255, 255, 255, 0) 100%)`};
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 9999;
+
+  transform: translateY(-110vh);
+`
 
 export const FixedGlobalStyle = createGlobalStyle`
 html, input, textarea, button {

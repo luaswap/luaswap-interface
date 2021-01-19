@@ -20,6 +20,7 @@ export interface Colors {
   bg3: Color
   bg4: Color
   bg5: Color
+  bg6: Color
 
   modalBG: Color
   advancedBG: Color
@@ -44,7 +45,21 @@ export interface Colors {
   green1: Color
   yellow1: Color
   yellow2: Color
-  blue1: Color  
+  blue1: Color
+
+  textColor: Color
+  panelColor: Color
+  backgroundColor: Color
+  uniswapPink: Color
+  concreteGray: Color
+  inputBackground: Color
+  shadowColor: Color
+  mercuryGray: Color
+  onlyLight: Color
+  divider: Color
+  link: Color
+  blue: Color
+  background: Color
 }
 
 export interface Grids {
@@ -72,9 +87,9 @@ declare module 'styled-components' {
 
     // spacing
     spacing: Spacing
-    
+
     // SiteWidth
-    
+
     siteWidth: number
 
     // media queries

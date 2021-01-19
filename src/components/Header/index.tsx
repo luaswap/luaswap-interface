@@ -14,7 +14,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
 import { useETHBalances } from '../../state/wallet/hooks'
-import { ExternalLink } from '../../theme'
+// import { ExternalLink } from '../../theme'
 
 import { YellowCard } from '../Card'
 import Settings from '../Settings'
@@ -112,10 +112,10 @@ const StyleNavBox = styled.ul`
 const StyleNavSub = styled.ul`
   position: absolute;
   top: 5em;
-  background-color: ${({ theme }) => theme.bg3};;
+  background-color: ${({ theme }) => theme.bg3};
   padding: 0 5px;
   border-radius: 8px;
-  a{
+  a {
     padding: 0.5rem 0.5rem;
   }
 `
@@ -254,35 +254,35 @@ const StyledNavLink = styled(NavLink).attrs({
   }
 `
 
-const StyledExternalLink = styled(ExternalLink).attrs({
-  activeClassName
-})<{ isActive?: boolean }>`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
+// const StyledExternalLink = styled(ExternalLink).attrs({
+//   activeClassName
+// })<{ isActive?: boolean }>`
+//   ${({ theme }) => theme.flexRowNoWrap}
+//   align-items: left;
+//   border-radius: 3rem;
+//   outline: none;
+//   cursor: pointer;
+//   text-decoration: none;
+//   color: ${({ theme }) => theme.text2};
+//   font-size: 1rem;
+//   width: fit-content;
+//   margin: 0 12px;
+//   font-weight: 500;
 
-  &.${activeClassName} {
-    border-radius: 12px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
+//   &.${activeClassName} {
+//     border-radius: 12px;
+//     font-weight: 600;
+//     color: ${({ theme }) => theme.text1};
+//   }
 
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-  // ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-  //     display: none;
-  // `}
-`
+//   :hover,
+//   :focus {
+//     color: ${({ theme }) => darken(0.1, theme.text1)};
+//   }
+//   // ${({ theme }) => theme.mediaWidth.upToExtraSmall`
+//   //     display: none;
+//   // `}
+// `
 
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.RINKEBY]: 'Rinkeby',
@@ -293,7 +293,7 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
-  const { t } = useTranslation()  
+  const { t } = useTranslation()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
@@ -301,7 +301,7 @@ export default function Header() {
   const { width } = useWindowSize()
   const open = useModalOpen(ApplicationModal.MENULEFT)
   const toggle = useToggleModal(ApplicationModal.MENULEFT)
-  
+
   return (
     <HeaderFrame>
       <ClaimModal />
@@ -334,12 +334,12 @@ export default function Header() {
               {t('pool')}
             </StyledNavLink>
           </StyleNavBox>
-          { width && width < 767 ? (
+          {width && width < 767 ? (
             <>
               <StyledMenuButton onClick={toggle}>
-                <StyledMenuIcon/>
+                <StyledMenuIcon />
               </StyledMenuButton>
-              { open && (
+              {open && (
                 <StyleNavSub>
                   <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                     Farming
@@ -347,9 +347,13 @@ export default function Header() {
                   <StyledNavLink id="pool-nav-link" to="/lua-safe">
                     {t('LuaSafe')}
                   </StyledNavLink>
-                  <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                  <StyledNavLink
+                    id={`stake-nav-link`}
+                    to="/info"
+                    // href={'https://info.luaswap.org'}
+                  >
                     Charts <span style={{ fontSize: '11px' }}>↗</span>
-                  </StyledExternalLink>
+                  </StyledNavLink>
                 </StyleNavSub>
               )}
             </>
@@ -364,12 +368,15 @@ export default function Header() {
               <StyledNavLink id="pool-nav-link" to="/lua-safe">
                 {t('LuaSafe')}
               </StyledNavLink>
-              <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+              <StyledNavLink
+                id={`stake-nav-link`}
+                to="/info"
+                // href={'https://info.luaswap.org'}
+              >
                 Charts <span style={{ fontSize: '11px' }}>↗</span>
-              </StyledExternalLink>
+              </StyledNavLink>
             </StyleNavBox>
-          )}          
-          
+          )}
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>

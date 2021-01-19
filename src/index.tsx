@@ -19,13 +19,16 @@ import TransactionUpdater from './state/transactions/updater'
 import UserUpdater from './state/user/updater'
 import ThemeProvider, { FixedGlobalStyle, ThemedGlobalStyle } from './theme'
 import getLibrary from './utils/getLibrary'
-
 import SushiProvider from './contexts/SushiProvider'
 // import TransactionProvider from './contexts/Transactions'
 import FarmsProvider from './contexts/Farms'
 import ModalsProvider from './contexts/Modals'
-
-
+import LocalStorageContextProvider, { Updater as LocalStorageContextUpdater } from './contexts/LocalStorage'
+import TokenDataContextProvider, { Updater as TokenDataContextUpdater } from './contexts/TokenData'
+import GlobalDataContextProvider from './contexts/GlobalData'
+import PairDataContextProvider, { Updater as PairDataContextUpdater } from './contexts/PairData'
+import ApplicationContextProvider from './contexts/Application'
+import UserContextProvider from './contexts/User'
 
 const Web3ProviderNetwork = createWeb3ReactRoot(NetworkContextName)
 
@@ -58,6 +61,9 @@ function Updaters() {
       <ApplicationUpdater />
       <TransactionUpdater />
       <MulticallUpdater />
+      <LocalStorageContextUpdater />
+      <PairDataContextUpdater />
+      <TokenDataContextUpdater />
     </>
   )
 }
@@ -65,7 +71,7 @@ const StyleLoader = styled.div`
   position: relative;
   width: 100%;
   height: 100vh;
-  img{
+  img {
     animation: spin 2s linear infinite;
     position: absolute;
     top: 50%;
@@ -73,8 +79,12 @@ const StyleLoader = styled.div`
     transform: translate(-50%, -50%);
   }
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `
 function Loading() {
@@ -91,7 +101,7 @@ function PoolsData({ children }: { children: React.ReactNode }) {
   const [pools, setPools] = useState([])
 
   useEffect(() => {
-    async function poolSupport(){
+    async function poolSupport() {
       let response
       try {
         response = await fetch('https://wallet.tomochain.com/api/luaswap/supportedPools')
@@ -109,35 +119,47 @@ function PoolsData({ children }: { children: React.ReactNode }) {
     poolSupport()
   }, [])
 
-return pools.length > 0 ? (<>{children}</>) : (<Loading/>)
+  return pools.length > 0 ? <>{children}</> : <Loading />
 }
 
 ReactDOM.render(
-    <StrictMode>
-      <FixedGlobalStyle />
-      <Web3ReactProvider getLibrary={getLibrary}>
-        <Web3ProviderNetwork getLibrary={getLibrary}>
-          <Provider store={store}>
-            <Updaters />
-              <ThemeProvider>
-                <ThemedGlobalStyle />
-                  <PoolsData>
-                    <SushiProvider>
-                      {/* <TransactionProvider> */}
-                        <FarmsProvider>
-                          <HashRouter>
-                            <ModalsProvider>
-                              <App />
-                            </ModalsProvider>
-                          </HashRouter>
-                        </FarmsProvider>
-                      {/* </TransactionProvider> */}
-                    </SushiProvider>
-                  </PoolsData>
-              </ThemeProvider>
-          </Provider>
-        </Web3ProviderNetwork>
-      </Web3ReactProvider>
-    </StrictMode>,
+  <StrictMode>
+    <FixedGlobalStyle />
+    <Web3ReactProvider getLibrary={getLibrary}>
+      <Web3ProviderNetwork getLibrary={getLibrary}>
+        <Provider store={store}>
+          <Updaters />
+          <ThemeProvider>
+            <ThemedGlobalStyle />
+            <PoolsData>
+              <SushiProvider>
+                {/* <TransactionProvider> */}
+                <FarmsProvider>
+                  <HashRouter>
+                    <ModalsProvider>
+                      <LocalStorageContextProvider>
+                        <ApplicationContextProvider>
+                          <TokenDataContextProvider>
+                            <GlobalDataContextProvider>
+                              <PairDataContextProvider>
+                                <UserContextProvider>
+                                  <App />
+                                </UserContextProvider>
+                              </PairDataContextProvider>
+                            </GlobalDataContextProvider>
+                          </TokenDataContextProvider>
+                        </ApplicationContextProvider>
+                      </LocalStorageContextProvider>
+                    </ModalsProvider>
+                  </HashRouter>
+                </FarmsProvider>
+                {/* </TransactionProvider> */}
+              </SushiProvider>
+            </PoolsData>
+          </ThemeProvider>
+        </Provider>
+      </Web3ProviderNetwork>
+    </Web3ReactProvider>
+  </StrictMode>,
   document.getElementById('root')
 )

@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ToggleElement = styled.span<{ isActive?: boolean; isOnSwitch?: boolean }>`
+  width: 50px;
   padding: 0.25rem 0.5rem;
   border-radius: 14px;
   background: ${({ theme, isActive, isOnSwitch }) => (isActive ? (isOnSwitch ? theme.primary1 : theme.text4) : 'none')};
@@ -40,17 +41,31 @@ export interface ToggleProps {
   id?: string
   isActive: boolean
   toggle: () => void
+  labels?: any[]
 }
 
-export default function Toggle({ id, isActive, toggle }: ToggleProps) {
+export default function Toggle({ id, isActive, toggle, labels }: ToggleProps) {
   return (
     <StyledToggle id={id} isActive={isActive} onClick={toggle}>
-      <ToggleElement isActive={isActive} isOnSwitch={true}>
-        On
-      </ToggleElement>
-      <ToggleElement isActive={!isActive} isOnSwitch={false}>
-        Off
-      </ToggleElement>
+      {labels && labels.length > 0 ? (
+        <>
+          <ToggleElement isActive={isActive} isOnSwitch={true}>
+            {labels[0]}
+          </ToggleElement>
+          <ToggleElement isActive={!isActive} isOnSwitch={false}>
+            {labels[1]}
+          </ToggleElement>
+        </>
+      ) : (
+        <>
+          <ToggleElement isActive={isActive} isOnSwitch={true}>
+            On
+          </ToggleElement>
+          <ToggleElement isActive={!isActive} isOnSwitch={false}>
+            Off
+          </ToggleElement>
+        </>
+      )}
     </StyledToggle>
   )
 }
