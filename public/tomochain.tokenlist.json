@@ -32,6 +32,15 @@
       "tags": ["defi"]
     },
     {
+      "chainId": 89,
+      "address": "0xB837c744A16A7f133A750254270Dce792dBBAE77",
+      "symbol": "WTOMO",
+      "name": "Wrapped TOMO",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png",
+      "tags": ["defi"]
+    },
+    {
       "name": "Frontier Token",
       "address": "0xf8C3527CC04340b208C854E985240c02F7B7793f",
       "symbol": "FRONT",
