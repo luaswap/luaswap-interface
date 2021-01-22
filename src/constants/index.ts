@@ -1,7 +1,7 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@luaswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
-import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
+import { injected, walletconnect, walletlink, tomoWalletconnect } from '../connectors' // remove portis, fortmatic
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
 
@@ -134,6 +134,15 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     color: '#4196FC',
     mobile: true
   },
+  WALLET_CONNECT_TOMO: {
+    connector: tomoWalletconnect,
+    name: 'WalletConnect',
+    iconName: 'walletConnectIcon.svg',
+    description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
+    href: null,
+    color: '#4196FC',
+    mobile: true
+  },
   WALLET_LINK: {
     connector: walletlink,
     name: 'Coinbase Wallet',
@@ -249,3 +258,6 @@ export const TOKEN_ICONS: TokenIconProps = {
   BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png',
   RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png'
 }
+
+// Todo: remove when have function switch chain
+export const CHAIN = 'tomochain'

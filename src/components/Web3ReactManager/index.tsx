@@ -3,7 +3,7 @@ import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 
-import { network } from '../../connectors'
+import { network, tomoNetwork } from '../../connectors'
 import { useEagerConnect, useInactiveListener } from '../../hooks'
 import { NetworkContextName } from '../../constants'
 import Loader from '../Loader'
@@ -21,7 +21,7 @@ const Message = styled.h2`
 
 export default function Web3ReactManager({ children }: { children: JSX.Element }) {
   const { t } = useTranslation()
-  const { active } = useWeb3React()
+  const { active, chainId } = useWeb3React()
   const { active: networkActive, error: networkError, activate: activateNetwork } = useWeb3React(NetworkContextName)
 
   // try to eagerly connect to an injected provider, if it exists and has granted access already
@@ -30,7 +30,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   // after eagerly trying injected, if the network connect ever isn't active or in an error state, activate itd
   useEffect(() => {
     if (triedEager && !networkActive && !networkError && !active) {
-      activateNetwork(network)
+      ;[1, 3, 4, 5, 42].includes(chainId ?? 1) ? activateNetwork(network) : activateNetwork(tomoNetwork)
     }
   }, [triedEager, networkActive, networkError, activateNetwork, active])
 
