@@ -13,6 +13,7 @@
     "default"
   ],
   "tokens": [
+    
     {
       "name": "LuaToken",
       "address": "0x7262fa193e9590b2e075c3c16170f3f2f32f5c74",
