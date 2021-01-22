@@ -8,7 +8,7 @@ import { getTradeVersion, useV1TradeExchangeAddress } from '../data/V1'
 import { Field } from '../state/swap/actions'
 import { useTransactionAdder, useHasPendingApproval } from '../state/transactions/hooks'
 import { computeSlippageAdjustedAmounts } from '../utils/prices'
-import { calculateGasMargin } from '../utils'
+import { calculateGasMargin, IsTomoChain } from '../utils'
 import { useTokenContract } from './useContract'
 import { useActiveWeb3React } from './index'
 import { Version } from './useToggledVersion'
@@ -102,11 +102,12 @@ export function useApproveCallback(
 // wraps useApproveCallback in the context of a swap
 export function useApproveCallbackFromTrade(trade?: Trade, allowedSlippage = 0) {
   const { chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const amountToApprove = useMemo(
     () => (trade ? computeSlippageAdjustedAmounts(trade, allowedSlippage)[Field.INPUT] : undefined),
     [trade, allowedSlippage]
   )
   const tradeIsV1 = getTradeVersion(trade) === Version.v1
   const v1ExchangeAddress = useV1TradeExchangeAddress(trade)
-  return useApproveCallback(amountToApprove, tradeIsV1 ? v1ExchangeAddress : (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  return useApproveCallback(amountToApprove, tradeIsV1 ? v1ExchangeAddress : IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
 }

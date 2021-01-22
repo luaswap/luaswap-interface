@@ -9,7 +9,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { useAllTokens, useToken } from '../../hooks/Tokens'
 import { useSelectedListInfo } from '../../state/lists/hooks'
 import { CloseIcon, LinkStyledButton, TYPE } from '../../theme'
-import { isAddress } from '../../utils'
+import { isAddress, IsTomoChain } from '../../utils'
 import Card from '../Card'
 import Column from '../Column'
 import ListLogo from '../ListLogo'
@@ -44,6 +44,7 @@ export function CurrencySearch({
 }: CurrencySearchProps) {
   const { t } = useTranslation()
   const { chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const theme = useContext(ThemeContext)
 
   const fixedList = useRef<FixedSizeList>()
@@ -67,7 +68,7 @@ export function CurrencySearch({
 
   const showETH: boolean = useMemo(() => {
     const s = searchQuery.toLowerCase().trim()
-    if( chainId === 88 || chainId === 89 || chainId === 99 ){
+    if( IsTomo ){
       return s === '' || s === 't' || s === 'to' || s === 'tom' || s === 'tomo'
     } else {
       return s === '' || s === 'e' || s === 'et' || s === 'eth'
@@ -126,7 +127,7 @@ export function CurrencySearch({
         const s = searchQuery.toLowerCase().trim()
         if (s === 'eth') {
           handleCurrencySelect(ETHER)
-        } else if (s === 'tomo' && (chainId === 88 || chainId === 89 || chainId === 99)) {
+        } else if ( s === 'tomo' && IsTomo ) {
           handleCurrencySelect(TOMO)
         } else if (filteredSortedTokens.length > 0) {
           if (

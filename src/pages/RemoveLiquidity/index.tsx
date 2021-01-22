@@ -44,7 +44,7 @@ import { Field } from '../../state/burn/actions'
 import { useWalletModalToggle } from '../../state/application/hooks'
 import { useUserSlippageTolerance } from '../../state/user/hooks'
 import { BigNumber } from '@ethersproject/bignumber'
-import { getTextNativeToken } from '../../utils'
+import { getTextNativeToken, IsTomoChain } from '../../utils'
 
 export default function RemoveLiquidity({
   history,
@@ -55,6 +55,7 @@ export default function RemoveLiquidity({
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
   const { account, chainId, library } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
+  const IsTomo = IsTomoChain(chainId)
   const [tokenA, tokenB] = useMemo(() => [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)], [
     currencyA,
     currencyB,
@@ -101,7 +102,7 @@ export default function RemoveLiquidity({
 
   // allowance handling
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
-  const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
 
   const isArgentWallet = useIsArgentWallet()
 
@@ -138,7 +139,7 @@ export default function RemoveLiquidity({
     ]
     const message = {
       owner: account,
-      spender: (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS,
+      spender: IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS,
       value: liquidityAmount.raw.toString(),
       nonce: nonce.toHexString(),
       deadline: deadline.toNumber()
@@ -588,12 +589,12 @@ export default function RemoveLiquidity({
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WETH[chainId]) && (chainId === 88 || chainId === 89 || chainId === 99 )
+                              currencyA && currencyEquals(currencyA, WETH[chainId]) && IsTomo
                               ? 'TOMO'
                               : currencyA && currencyEquals(currencyA, WETH[chainId])
                               ? 'ETH' 
                               : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) && (chainId === 88 || chainId === 89 || chainId === 99 )
+                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) && IsTomo
                               ? 'TOMO'
                               : currencyB && currencyEquals(currencyB, WETH[chainId])
                               ? 'ETH'

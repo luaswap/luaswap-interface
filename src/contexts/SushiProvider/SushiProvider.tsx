@@ -30,7 +30,6 @@ const SushiProvider: React.FC = ({ children }) => {
   window.eth = ethereum && ethereum.provider ? ethereum.provider : null
 
   useEffect(() => {
-    if(chainId !== 89){
       if (ethereum && ethereum.provider) {
         const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
           defaultAccount: ethereum.selectedAddress,
@@ -59,7 +58,6 @@ const SushiProvider: React.FC = ({ children }) => {
         setSushi(sushiLib)
         window.sushisauce = sushiLib
       }
-    }
   }, [ethereum])
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>
