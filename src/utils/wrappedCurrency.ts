@@ -15,10 +15,8 @@ export function wrappedCurrencyAmount(
 export function unwrappedToken(token: Token): Currency {
 
   if (token.equals(WETH[token.chainId]) && token.chainId === 1){
-    console.log('ETH unwrapped')
     return ETHER
   }else if(token.equals(WETH[token.chainId]) && (token.chainId === 88 || token.chainId === 89 || token.chainId === 99) ){
-    console.log('TOMO unwrapped')
     return TOMO
   }
   return token

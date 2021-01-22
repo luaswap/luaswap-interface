@@ -116,13 +116,12 @@ export default function AddLiquidity({
   )
 
   // check whether the user has approved the router on the tokens
-  const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], chainId === 89 ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
-  const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], chainId === 89 ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
 
   const addTransaction = useTransactionAdder()
     // Add Pool
   async function onAdd() {
-    debugger
     if (!chainId || !library || !account) return
     const router = getRouterContract(chainId, library, account)
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
