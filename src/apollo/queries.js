@@ -451,10 +451,11 @@ export const GLOBAL_CHART = gql`
 // }
 
 export const GLOBAL_DATA = block => {
+  const factoryAddress = FACTORY_ADDRESSES[sessionStorage.getItem('chosenNetwork') || 'ETH']
   const queryString = ` query uniswapFactories {
       uniswapFactories(
        ${block ? `block: { number: ${block}}` : ``} 
-       where: { id: "${FACTORY_ADDRESSES.TOMO}" }) {
+       where: { id: "${factoryAddress}" }) {
         id
         totalVolumeUSD
         totalVolumeETH

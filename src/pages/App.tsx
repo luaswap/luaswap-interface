@@ -36,7 +36,7 @@ import { isAddress } from '../utils'
 // import Vote from './Vote'
 // import VotePage from './Vote/VotePage'
 import SideNav from '../components/SideNav'
-import PinnedData from '../components/PinnedData'
+// import PinnedData from '../components/PinnedData'
 import TokenPage from '../pages/TokenPage'
 import PairPage from '../pages/PairPage'
 import AccountPage from '../pages/AccountPage'
@@ -104,19 +104,19 @@ const Center = styled.div`
   background-color: ${({ theme }) => theme.onlyLight};
 `
 
-const Right = styled.div`
-  position: fixed;
-  right: 0;
-  bottom: 0rem;
-  z-index: 99;
-  width: ${({ open }: { open: boolean }) => (open ? '220px' : '64px')};
-  height: ${({ open }) => (open ? 'fit-content' : '64px')};
-  overflow: auto;
-  background-color: ${({ theme }) => theme.bg1};
-  @media screen and (max-width: 1400px) {
-    display: none;
-  }
-`
+// const Right = styled.div`
+//   position: fixed;
+//   right: 0;
+//   bottom: 0rem;
+//   z-index: 99;
+//   width: ${({ open }: { open: boolean }) => (open ? '220px' : '64px')};
+//   height: ${({ open }) => (open ? 'fit-content' : '64px')};
+//   overflow: auto;
+//   background-color: ${({ theme }) => theme.bg1};
+//   @media screen and (max-width: 1400px) {
+//     display: none;
+//   }
+// `
 
 // function TopLevelModals() {
 //   const open = useModalOpen(ApplicationModal.ADDRESS_CLAIM)
@@ -133,14 +133,33 @@ interface LayoutProps {
   setSavedOpen: Function
 }
 const LayoutWrapper = ({ children, savedOpen, setSavedOpen }: LayoutProps) => {
+  const [chosenNetwork, setChosenNetwork] = useState(sessionStorage.getItem('chosenNetwork') || 'ETH')
+
+  const handleSetChosenNetwork = (value: string) => {
+    console.log('handleSetChosenNetwork', value)
+
+    setChosenNetwork(value)
+    sessionStorage.setItem('chosenNetwork', value)
+  }
+
+  const updatedChildren = React.Children.map(children, child => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, {
+        chosenNetwork,
+        setChosenNetwork: handleSetChosenNetwork
+      })
+    }
+    return child
+  })
+
   return (
     <>
       <ContentWrapper open={savedOpen}>
-        <SideNav />
-        <Center id="center">{children}</Center>
-        <Right open={savedOpen}>
+        <SideNav {...{ chosenNetwork, setChosenNetwork: handleSetChosenNetwork }} />
+        <Center id="center">{updatedChildren}</Center>
+        {/* <Right open={savedOpen}>
           <PinnedData {...{ open: savedOpen, setSavedOpen }} />
-        </Right>
+        </Right> */}
       </ContentWrapper>
     </>
   )

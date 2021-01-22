@@ -2,17 +2,17 @@ import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { HttpLink } from 'apollo-link-http'
 
-// export const client = new ApolloClient({
-//   link: new HttpLink({
-//     uri: 'https://api.thegraph.com/subgraphs/name/phucngh/luaswap'
-//   }),
-//   cache: new InMemoryCache(),
-//   shouldBatch: true
-// })
-
 export const client = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.thegraph.com/subgraphs/name/uniswap/uniswap-v2'
+    uri: 'https://api.thegraph.com/subgraphs/name/phucngh/luaswap'
+  }),
+  cache: new InMemoryCache(),
+  shouldBatch: true
+})
+
+export const clientTomo = new ApolloClient({
+  link: new HttpLink({
+    uri: 'http://45.32.120.73/subgraphs/name/phucnhg/Luaswap'
   }),
   cache: new InMemoryCache(),
   shouldBatch: true

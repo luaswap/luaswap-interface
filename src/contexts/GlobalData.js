@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useReducer, useMemo, useCallback, useEffect, useState } from 'react'
-import { client } from '../apollo/client'
+import { client, clientTomo } from '../apollo/client'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import { useTimeframe } from './Application'
@@ -232,34 +232,42 @@ async function getGlobalData(ethPrice, oldEthPrice) {
       utcTwoWeeksBack
     ])
 
+    let clientApi = null
+    if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+      clientApi = clientTomo
+    } else {
+      clientApi = client
+    }
+
     // fetch the global data
-    let result = await client.query({
+    let result = await clientApi.query({
       query: GLOBAL_DATA(),
       fetchPolicy: 'cache-first'
     })
     data = result.data.uniswapFactories[0]
 
     // fetch the historical data
-    let oneDayResult = await client.query({
+    let oneDayResult = await clientApi.query({
       query: GLOBAL_DATA(oneDayBlock?.number),
       fetchPolicy: 'cache-first'
     })
     oneDayData = oneDayResult.data.uniswapFactories[0]
 
-    let twoDayResult = await client.query({
+    let twoDayResult = await clientApi.query({
       query: GLOBAL_DATA(twoDayBlock?.number),
       fetchPolicy: 'cache-first'
     })
     twoDayData = twoDayResult.data.uniswapFactories[0]
 
-    let oneWeekResult = await client.query({
+    let oneWeekResult = await clientApi.query({
       query: GLOBAL_DATA(oneWeekBlock?.number),
       fetchPolicy: 'cache-first'
     })
     let oneWeekData = oneWeekResult.data.uniswapFactories[0]
     oneWeekData = oneWeekData || { totalVolumeUSD: 0 }
+    console.log('getGlobalData', oneDayData.totalVolumeUSD, oneWeekData.totalVolumeUSD)
 
-    let twoWeekResult = await client.query({
+    let twoWeekResult = await clientApi.query({
       query: GLOBAL_DATA(twoWeekBlock?.number),
       fetchPolicy: 'cache-first'
     })
@@ -267,10 +275,10 @@ async function getGlobalData(ethPrice, oldEthPrice) {
     twoWeekData = twoWeekData || { totalVolumeUSD: 0 }
 
     if (data && oneDayData && twoDayData && twoWeekData) {
-      let [oneDayVolumeUSD, volumeChangeUSD] = get2DayPercentChange(
+      const [oneDayVolumeUSD, volumeChangeUSD] = get2DayPercentChange(
         data.totalVolumeUSD,
-        oneDayData.totalVolumeUSD ? oneDayData.totalVolumeUSD : 0,
-        twoDayData.totalVolumeUSD ? twoDayData.totalVolumeUSD : 0
+        oneDayData.totalVolumeUSD || 0,
+        twoDayData.totalVolumeUSD || 0
       )
 
       const [oneWeekVolume, weeklyVolumeChange] = get2DayPercentChange(
@@ -320,9 +328,16 @@ const getChartData = async oldestDateToFetch => {
   let skip = 0
   let allFound = false
 
+  let clientApi = null
+  if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+    clientApi = clientTomo
+  } else {
+    clientApi = client
+  }
+
   try {
     while (!allFound) {
-      let result = await client.query({
+      let result = await clientApi.query({
         query: GLOBAL_CHART,
         variables: {
           startTime: oldestDateToFetch,
@@ -401,8 +416,15 @@ const getChartData = async oldestDateToFetch => {
 const getGlobalTransactions = async () => {
   let transactions = {}
 
+  let clientApi = null
+  if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+    clientApi = clientTomo
+  } else {
+    clientApi = client
+  }
+
   try {
-    let result = await client.query({
+    let result = await clientApi.query({
       query: GLOBAL_TXNS,
       fetchPolicy: 'cache-first'
     })
@@ -449,6 +471,13 @@ const getEthPrice = async () => {
   let ethPriceOneDay = 0
   let priceChangeETH = 0
 
+  let clientApi = null
+  if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+    clientApi = clientTomo
+  } else {
+    clientApi = client
+  }
+
   try {
     let oneDayBlock = await getBlockFromTimestamp(utcOneDayBack)
     let result = await client.query({
@@ -482,8 +511,16 @@ async function getAllPairsOnUniswap() {
     let allFound = false
     let pairs = []
     let skipCount = 0
+
+    let clientApi = null
+    if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+      clientApi = clientTomo
+    } else {
+      clientApi = client
+    }
+
     while (!allFound) {
-      let result = await client.query({
+      let result = await clientApi.query({
         query: ALL_PAIRS,
         variables: {
           skip: skipCount
@@ -510,8 +547,16 @@ async function getAllTokensOnUniswap() {
     let allFound = false
     let skipCount = 0
     let tokens = []
+
+    let clientApi = null
+    if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+      clientApi = clientTomo
+    } else {
+      clientApi = client
+    }
+
     while (!allFound) {
-      let result = await client.query({
+      let result = await clientApi.query({
         query: ALL_TOKENS,
         variables: {
           skip: skipCount
@@ -550,10 +595,18 @@ export function useGlobalData() {
       let allTokens = await getAllTokensOnUniswap()
       updateAllTokensInUniswap(allTokens)
     }
-    if (!data && ethPrice && oldEthPrice) {
+    if (ethPrice && oldEthPrice) {
       fetchData()
     }
-  }, [ethPrice, oldEthPrice, update, data, updateAllPairsInUniswap, updateAllTokensInUniswap])
+  }, [
+    ethPrice,
+    oldEthPrice,
+    update,
+    data,
+    updateAllPairsInUniswap,
+    updateAllTokensInUniswap,
+    sessionStorage.getItem('chosenNetwork')
+  ])
 
   return data || {}
 }
@@ -661,11 +714,18 @@ export function useTopLps() {
         ?.slice(0, 99)
         .map(pair => pair)
 
+      let clientApi = null
+      if (sessionStorage.getItem('chosenNetwork') === 'TOMO') {
+        clientApi = clientTomo
+      } else {
+        clientApi = client
+      }
+
       let topLpLists = await Promise.all(
         topPairs.map(async pair => {
           // for each one, fetch top LPs
           try {
-            const { data: results } = await client.query({
+            const { data: results } = await clientApi.query({
               query: TOP_LPS_PER_PAIRS,
               variables: {
                 pair: pair.toString()
@@ -707,7 +767,7 @@ export function useTopLps() {
     if (!topLps && allPairs && Object.keys(allPairs).length > 0) {
       fetchData()
     }
-  })
+  }, [sessionStorage.getItem('chosenNetwork')])
 
   return topLps
 }

@@ -15,6 +15,17 @@ import menu from '../../assets/menu.svg'
 import { TYPE } from '../../theme'
 import { Box, Flex } from 'rebass'
 
+const NETWORK_TABS = [
+  {
+    key: 'ETH',
+    label: 'Ethereum Network'
+  },
+  {
+    key: 'TOMO',
+    label: 'TomoChain Network'
+  }
+]
+
 const Wrapper = styled.div`
   height: ${({ isMobile }) => (isMobile ? 'initial' : '100vh')};
   background-color: ${({ theme }) => transparentize(0.4, theme.bg1)};
@@ -122,6 +133,8 @@ const MenuMobileWrapper = styled.div`
   display: ${props => props.hide && 'none'};
 `
 
+const NetworkDropdown = styled.select``
+
 function MenuContent({ history, toggleMenu }) {
   return (
     <>
@@ -180,14 +193,14 @@ function MenuContent({ history, toggleMenu }) {
   )
 }
 
-function SideNav({ history }) {
+function SideNav({ history, chosenNetwork, setChosenNetwork }) {
   const below1080 = useMedia('(max-width: 1080px)')
 
   const below1180 = useMedia('(max-width: 1180px)')
 
   const seconds = useSessionStart()
 
-  const [isDark, toggleDarkMode] = useDarkModeManager()
+  // const [isDark, toggleDarkMode] = useDarkModeManager()
 
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
@@ -221,6 +234,15 @@ function SideNav({ history }) {
         <DesktopWrapper>
           <AutoColumn gap="1rem" style={{ marginLeft: '.75rem', marginTop: '1.5rem' }}>
             {/* <Title /> */}
+            <Box mb={2}>
+              <NetworkDropdown value={chosenNetwork} onChange={event => setChosenNetwork(event.target.value)}>
+                {NETWORK_TABS.map((opt, optIdx) => (
+                  <option key={`network_option_${optIdx}`} value={opt.key}>
+                    {opt.label}
+                  </option>
+                ))}
+              </NetworkDropdown>
+            </Box>
             {!below1080 && <MenuContent history={history} />}
           </AutoColumn>
           <AutoColumn gap="0.5rem" style={{ marginLeft: '.75rem', marginBottom: '4rem' }}>

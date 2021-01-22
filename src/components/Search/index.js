@@ -14,7 +14,7 @@ import { useAllPairsInUniswap, useAllTokensInUniswap } from '../../contexts/Glob
 import { OVERVIEW_TOKEN_BLACKLIST, PAIR_BLACKLIST } from '../../constants'
 
 import { transparentize } from 'polished'
-import { client } from '../../apollo/client'
+import { client, clientTomo } from '../../apollo/client'
 import { PAIR_SEARCH, TOKEN_SEARCH } from '../../apollo/queries'
 import FormattedName from '../FormattedName'
 import { TYPE } from '../../theme'
@@ -182,9 +182,17 @@ export const Search = ({ small = false }) => {
 
   useEffect(() => {
     async function fetchData() {
+      let clientApi = null
+      const storedNetwork = sessionStorage.getItem('chosenNetwork')
+      if (storedNetwork === 'TOMO') {
+        clientApi = clientTomo
+      } else {
+        clientApi = client
+      }
+
       try {
         if (value?.length > 0) {
-          let tokens = await client.query({
+          let tokens = await clientApi.query({
             variables: {
               value: value ? value.toUpperCase() : '',
               id: value
@@ -192,7 +200,7 @@ export const Search = ({ small = false }) => {
             query: TOKEN_SEARCH
           })
 
-          let pairs = await client.query({
+          let pairs = await clientApi.query({
             query: PAIR_SEARCH,
             variables: {
               tokens: tokens.data.asSymbol?.map(t => t.id),
@@ -208,7 +216,7 @@ export const Search = ({ small = false }) => {
       }
     }
     fetchData()
-  }, [value])
+  }, [value, sessionStorage.getItem('chosenNetwork')])
 
   function escapeRegExp(string) {
     return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') // $& means the whole matched string
