@@ -45,7 +45,6 @@ export function useDerivedBurnInfo(
     [Field.CURRENCY_B]: tokenB,
     [Field.LIQUIDITY]: pair?.liquidityToken
   }
-
   // liquidity values
   const totalSupply = useTotalSupply(pair?.liquidityToken)
   const liquidityValueA =

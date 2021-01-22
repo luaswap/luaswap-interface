@@ -5,6 +5,8 @@ import { injected, walletconnect, walletlink } from '../connectors' // remove po
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
 
+export const TOMO_ROUTER_ADDRESS = '0x6f7425954a609bc4f585A13664c414D543B676d8'
+
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
 // a list of tokens by chain
@@ -12,6 +14,10 @@ type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
 
+// Base Token on TomoChain NetWork
+export const TUSDT = new Token(ChainId.TOMOCHAIN_TESTNET, '0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c', 6, 'USDT', 'Tether USD')
+export const TBTC = new Token(ChainId.TOMOCHAIN_TESTNET, '0x11c2cAF973db997b8a9b5689b33962E1AedEA968', 8, 'BTC', 'Wrapped BTC')
+// Base Token on ETH NetWork
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
 export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 18, 'WBTC', 'Wrapped BTC')
@@ -29,7 +35,10 @@ export const UNI: { [chainId in ChainId]: Token } = {
   [ChainId.RINKEBY]: new Token(ChainId.RINKEBY, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
   [ChainId.ROPSTEN]: new Token(ChainId.ROPSTEN, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
   [ChainId.GÖRLI]: new Token(ChainId.GÖRLI, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
-  [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, 'UNI', 'Uniswap')
+  [ChainId.KOVAN]: new Token(ChainId.KOVAN, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
+  [ChainId.TOMOCHAIN_MAINNET]: new Token(ChainId.TOMOCHAIN_MAINNET, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
+  [ChainId.TOMOCHAIN_DEVNET]: new Token(ChainId.TOMOCHAIN_DEVNET, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
+  [ChainId.TOMOCHAIN_TESTNET]: new Token(ChainId.TOMOCHAIN_TESTNET, UNI_ADDRESS, 18, 'UNI', 'Uniswap')
 }
 
 // TODO: specify merkle distributor for mainnet
@@ -42,13 +51,17 @@ const WETH_ONLY: ChainTokenList = {
   [ChainId.ROPSTEN]: [WETH[ChainId.ROPSTEN]],
   [ChainId.RINKEBY]: [WETH[ChainId.RINKEBY]],
   [ChainId.GÖRLI]: [WETH[ChainId.GÖRLI]],
-  [ChainId.KOVAN]: [WETH[ChainId.KOVAN]]
+  [ChainId.KOVAN]: [WETH[ChainId.KOVAN]],
+  [ChainId.TOMOCHAIN_DEVNET]: [WETH[ChainId.TOMOCHAIN_DEVNET]],
+  [ChainId.TOMOCHAIN_TESTNET]: [WETH[ChainId.TOMOCHAIN_TESTNET]],
+  [ChainId.TOMOCHAIN_MAINNET]: [WETH[ChainId.TOMOCHAIN_MAINNET]]
 }
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE],
+  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TBTC, TUSDT]
 }
 
 /**
@@ -58,23 +71,28 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
   [ChainId.MAINNET]: {
     // [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
-  }
+  },
+  [ChainId.TOMOCHAIN_TESTNET]: {}
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [LUA, USDC, USDT, TOMOE]
+  [ChainId.MAINNET]: [LUA, USDC, USDT, TOMOE],
+  [ChainId.TOMOCHAIN_TESTNET]: [TUSDT, TBTC]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE]
+  [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE],
+  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TUSDT, TBTC]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
-  [ChainId.MAINNET]: [[USDC, USDT]]
+  [ChainId.MAINNET]: [[USDC, USDT]],
+  [ChainId.TOMOCHAIN_TESTNET]: [[TUSDT, TBTC]]
+  
 }
 
 export interface WalletInfo {
@@ -135,6 +153,28 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   }
 }
 
+export const NETWORK_SCAN : { [chainId in ChainId]: string } = {
+  1: 'View Etherscan',
+  3: 'View Etherscan',
+  4: 'View Etherscan',
+  5: 'View Etherscan',
+  42: 'View Etherscan',
+  99: 'View TomoScan',
+  89: 'View TomoScan',
+  88: 'View TomoScan'
+}
+
+export const TokenTextSupport: { [chainId in ChainId]: string } = {
+  1: 'ETH',
+  3: 'ETH',
+  4: 'ETH',
+  5: 'ETH',
+  42: 'ETH',
+  99: 'TOMO',
+  89: 'TOMO',
+  88: 'TOMO'
+}
+
 export const NetworkContextName = 'NETWORK'
 
 // default allowed slippage, in bips
@@ -158,6 +198,7 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 
 // used to ensure the user doesn't send so much ETH so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
+// export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
 
 export const STAKING_POOLS = [

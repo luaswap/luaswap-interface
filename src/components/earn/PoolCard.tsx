@@ -4,7 +4,7 @@ import { RowBetween } from '../Row'
 import styled from 'styled-components'
 import { TYPE, StyledInternalLink } from '../../theme'
 import DoubleCurrencyLogo from '../DoubleLogo'
-import { ETHER, JSBI, TokenAmount } from '@luaswap/sdk'
+import { JSBI, TokenAmount } from '@luaswap/sdk'
 import { ButtonPrimary } from '../Button'
 import { StakingInfo } from '../../state/stake/hooks'
 import { useColor } from '../../hooks/useColor'
@@ -14,6 +14,8 @@ import { unwrappedToken } from '../../utils/wrappedCurrency'
 import { useTotalSupply } from '../../data/TotalSupply'
 import { usePair } from '../../data/Reserves'
 import useUSDCPrice from '../../utils/useUSDCPrice'
+import { useActiveWeb3React } from '../../hooks'
+import { getNativeToken } from '../../utils'
 
 const StatContainer = styled.div`
   display: flex;
@@ -82,8 +84,10 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
   const isStaking = Boolean(stakingInfo.stakedAmount.greaterThan('0'))
 
   // get the color of the token
-  const token = currency0 === ETHER ? token1 : token0
-  const WETH = currency0 === ETHER ? token0 : token1
+  const { chainId } = useActiveWeb3React()
+  const NATIVE_TOKEN = getNativeToken( chainId )
+  const token = currency0 === NATIVE_TOKEN ? token1 : token0
+  const WETH = currency0 === NATIVE_TOKEN ? token0 : token1
   const backgroundColor = useColor(token)
 
   const totalSupplyOfStakingToken = useTotalSupply(stakingInfo.stakedAmount.token)

@@ -1,4 +1,4 @@
-import { CurrencyAmount, ETHER, JSBI } from '@luaswap/sdk'
+import { CurrencyAmount, ETHER, TOMO, JSBI } from '@luaswap/sdk'
 import { MIN_ETH } from '../constants'
 
 /**
@@ -12,6 +12,12 @@ export function maxAmountSpend(currencyAmount?: CurrencyAmount): CurrencyAmount 
       return CurrencyAmount.ether(JSBI.subtract(currencyAmount.raw, MIN_ETH))
     } else {
       return CurrencyAmount.ether(JSBI.BigInt(0))
+    }
+  } else if(currencyAmount.currency === TOMO){
+    if (JSBI.greaterThan(currencyAmount.raw, MIN_ETH)) {
+      return CurrencyAmount.tomo(JSBI.subtract(currencyAmount.raw, MIN_ETH))
+    } else {
+      return CurrencyAmount.tomo(JSBI.BigInt(0))
     }
   }
   return currencyAmount

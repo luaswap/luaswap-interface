@@ -13,6 +13,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
+import { getTextNativeToken } from '../../utils'
 import { useETHBalances } from '../../state/wallet/hooks'
 import { ExternalLink } from '../../theme'
 
@@ -288,11 +289,14 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.GÖRLI]: 'Görli',
-  [ChainId.KOVAN]: 'Kovan'
+  [ChainId.KOVAN]: 'Kovan',
+  [ChainId.TOMOCHAIN_DEVNET]: 'TomoDevnet',
+  [ChainId.TOMOCHAIN_TESTNET]: 'TomoTestnet'
 }
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
+  const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
   const { t } = useTranslation()  
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
@@ -382,7 +386,7 @@ export default function Header() {
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(4)} ETH
+                {userEthBalance?.toSignificant(4)} {NATIVE_TOKEN_TEXT}
               </BalanceText>
             ) : null}
             <Web3Status />

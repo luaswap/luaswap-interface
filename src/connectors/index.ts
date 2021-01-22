@@ -39,7 +39,7 @@ export function getTomoNetworkLibrary(): Web3Provider {
 }
 
 export const injected = new InjectedConnector({
-  supportedChainIds: [99, 89, 88, 1, 3, 4, 5, 42]
+  supportedChainIds: [1, 3, 4, 5, 42, 88, 89, 99]
 })
 
 // mainnet only
