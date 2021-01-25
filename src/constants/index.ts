@@ -20,9 +20,9 @@ export const TUSDT = new Token(ChainId.TOMOCHAIN_TESTNET, '0xc7ecCc9da22aBAAf9cf
 export const TBTC = new Token(ChainId.TOMOCHAIN_TESTNET, '0x11c2cAF973db997b8a9b5689b33962E1AedEA968', 8, 'BTC', 'Wrapped BTC')
 // MAINNET
 export const MLUA = new Token(ChainId.TOMOCHAIN_MAINNET, '0x7262fa193e9590b2e075c3c16170f3f2f32f5c74', 18, 'LUA', 'LuaToken')
-export const MBTC = new Token(ChainId.TOMOCHAIN_MAINNET, '0xAE44807D8A9CE4B30146437474Ed6fAAAFa1B809', 8, 'WBTC', 'Wrapped BTC')
-export const METH = new Token(ChainId.TOMOCHAIN_MAINNET, '0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b', 18, 'WETH', 'Wrapped ETH')
-export const MUSDT = new Token(ChainId.TOMOCHAIN_MAINNET, '0x381B31409e4D220919B2cFF012ED94d70135A59e', 6, 'USDT', 'Tether USD')
+export const MBTC = new Token(ChainId.TOMOCHAIN_MAINNET, '0xAE44807D8A9CE4B30146437474Ed6fAAAFa1B809', 8, 'BTC', 'Wrapped BTC')
+export const METH = new Token(ChainId.TOMOCHAIN_MAINNET, '0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b', 18, 'ETH', 'Wrapped ETH')
+export const MUSDT = new Token(ChainId.TOMOCHAIN_MAINNET, '0x381B31409e4D220919B2cFF012ED94d70135A59e', 6, 'USDT', 'Wrapped Tether USD')
 // Base Token on ETH NetWork
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
 export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
