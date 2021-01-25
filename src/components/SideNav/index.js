@@ -14,6 +14,7 @@ import Toggle from '../Toggle'
 import menu from '../../assets/menu.svg'
 import { TYPE } from '../../theme'
 import { Box, Flex } from 'rebass'
+import Select from '../Select'
 
 const NETWORK_TABS = [
   {
@@ -235,13 +236,14 @@ function SideNav({ history, chosenNetwork, setChosenNetwork }) {
           <AutoColumn gap="1rem" style={{ marginLeft: '.75rem', marginTop: '1.5rem' }}>
             {/* <Title /> */}
             <Box mb={2}>
-              <NetworkDropdown value={chosenNetwork} onChange={event => setChosenNetwork(event.target.value)}>
+              <Select options={NETWORK_TABS} onChange={opt => setChosenNetwork(opt.key)} />
+              {/* <NetworkDropdown value={chosenNetwork} onChange={event => setChosenNetwork(event.target.value)}>
                 {NETWORK_TABS.map((opt, optIdx) => (
                   <option key={`network_option_${optIdx}`} value={opt.key}>
                     {opt.label}
                   </option>
                 ))}
-              </NetworkDropdown>
+              </NetworkDropdown> */}
             </Box>
             {!below1080 && <MenuContent history={history} />}
           </AutoColumn>

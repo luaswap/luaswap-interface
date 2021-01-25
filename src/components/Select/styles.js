@@ -1,5 +1,4 @@
-import theme from '../Theme/theme'
-const color = theme.colors
+import theme from '../../theme'
 
 export const customStyles = {
   control: (styles, state) => ({
@@ -13,7 +12,7 @@ export const customStyles = {
     border: 'none',
     boxShadow: 'none',
     ':hover': {
-      borderColor: color.zircon,
+      borderColor: theme.white,
       cursor: 'pointer',
       overflow: 'hidden'
     }
@@ -74,7 +73,7 @@ export const customStyles = {
   }),
   menuList: styles => ({
     ...styles,
-    color: color.text,
+    color: theme.text1,
     padding: 0
   })
 }
@@ -90,7 +89,7 @@ export const customStylesMobile = {
     padding: 0,
     boxShadow: 'none',
     ':hover': {
-      borderColor: color.zircon,
+      borderColor: theme.white,
       cursor: 'pointer'
     }
   }),
@@ -145,7 +144,7 @@ export const customStylesMobile = {
   }),
   menuList: styles => ({
     ...styles,
-    color: color.text,
+    color: theme.text1,
     padding: '8px'
   })
 }
@@ -162,7 +161,7 @@ export const customStylesTime = {
     border: 'none',
     boxShadow: 'none',
     ':hover': {
-      borderColor: color.zircon,
+      borderColor: theme.white,
       cursor: 'pointer'
     }
   }),
@@ -221,7 +220,7 @@ export const customStylesTime = {
   }),
   menuList: styles => ({
     ...styles,
-    color: color.text,
+    color: theme.text1,
     padding: 0
   })
 }

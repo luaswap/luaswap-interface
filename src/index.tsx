@@ -128,7 +128,6 @@ ReactDOM.render(
     <Web3ReactProvider getLibrary={getLibrary}>
       <Web3ProviderNetwork getLibrary={getLibrary}>
         <Provider store={store}>
-          <Updaters />
           <ThemeProvider>
             <ThemedGlobalStyle />
             <PoolsData>
@@ -143,6 +142,7 @@ ReactDOM.render(
                             <GlobalDataContextProvider>
                               <PairDataContextProvider>
                                 <UserContextProvider>
+                                  <Updaters />
                                   <App />
                                 </UserContextProvider>
                               </PairDataContextProvider>

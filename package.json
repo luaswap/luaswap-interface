@@ -134,6 +134,7 @@
     "prop-types": "^15.7.2",
     "react-countdown": "^2.3.1",
     "react-countup": "^4.3.3",
+    "react-select": "^4.0.2",
     "react-use": "^15.3.8",
     "recharts": "^2.0.3",
     "toformat": "^2.0.0",

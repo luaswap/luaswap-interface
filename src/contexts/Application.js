@@ -4,8 +4,8 @@ import Web3 from 'web3'
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
 import getTokenList from '../utils/tokenLists'
-import { healthClient } from '../apollo/client'
 import { SUBGRAPH_HEALTH } from '../apollo/queries'
+import { getHealthClient } from '../utils/apollo'
 dayjs.extend(utc)
 
 const UPDATE = 'UPDATE'
@@ -167,7 +167,7 @@ export function useLatestBlock() {
   useEffect(() => {
     async function fetch() {
       try {
-        const res = await healthClient.query({
+        const res = await getHealthClient().query({
           query: SUBGRAPH_HEALTH
         })
         const block = res.data.indexingStatusForCurrentVersion.chains[0].latestBlock.number

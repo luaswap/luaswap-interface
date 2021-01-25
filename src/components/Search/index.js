@@ -14,10 +14,10 @@ import { useAllPairsInUniswap, useAllTokensInUniswap } from '../../contexts/Glob
 import { OVERVIEW_TOKEN_BLACKLIST, PAIR_BLACKLIST } from '../../constants'
 
 import { transparentize } from 'polished'
-import { client, clientTomo } from '../../apollo/client'
 import { PAIR_SEARCH, TOKEN_SEARCH } from '../../apollo/queries'
 import FormattedName from '../FormattedName'
 import { TYPE } from '../../theme'
+import { getClient } from '../../utils/apollo'
 
 const Container = styled.div`
   height: 48px;
@@ -113,7 +113,7 @@ const Menu = styled.div`
   overflow: auto;
   left: 0;
   padding-bottom: 20px;
-  background: ${({ theme }) => theme.bg6};
+  background: ${({ theme }) => theme.bg1};
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04),
@@ -182,17 +182,9 @@ export const Search = ({ small = false }) => {
 
   useEffect(() => {
     async function fetchData() {
-      let clientApi = null
-      const storedNetwork = sessionStorage.getItem('chosenNetwork')
-      if (storedNetwork === 'TOMO') {
-        clientApi = clientTomo
-      } else {
-        clientApi = client
-      }
-
       try {
         if (value?.length > 0) {
-          let tokens = await clientApi.query({
+          let tokens = await getClient().query({
             variables: {
               value: value ? value.toUpperCase() : '',
               id: value
@@ -200,7 +192,7 @@ export const Search = ({ small = false }) => {
             query: TOKEN_SEARCH
           })
 
-          let pairs = await clientApi.query({
+          let pairs = await getClient().query({
             query: PAIR_SEARCH,
             variables: {
               tokens: tokens.data.asSymbol?.map(t => t.id),

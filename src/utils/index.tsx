@@ -14,9 +14,9 @@ import utc from 'dayjs/plugin/utc'
 import _Decimal from 'decimal.js-light'
 import { ROUTER_ADDRESS } from '../constants'
 import { TokenAddressMap } from '../state/lists/hooks'
-import { client, blockClient } from '../apollo/client'
 import { GET_BLOCK, GET_BLOCKS, SHARE_VALUE } from '../apollo/queries'
 import { timeframeOptions } from '../constants'
+import { getBlockClient, getClient } from './apollo'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -269,7 +269,7 @@ export async function splitQuery(query: any, localClient: any, vars: any, list: 
  * @param {Int} timestamp in seconds
  */
 export async function getBlockFromTimestamp(timestamp: any) {
-  const result = await blockClient.query({
+  const result = await getBlockClient().query({
     query: GET_BLOCK,
     variables: {
       timestampFrom: timestamp,
@@ -292,7 +292,7 @@ export async function getBlocksFromTimestamps(timestamps: any, skipCount = 500) 
     return []
   }
 
-  const fetchedData = await splitQuery(GET_BLOCKS, blockClient, [], timestamps, skipCount)
+  const fetchedData = await splitQuery(GET_BLOCKS, getBlockClient(), [], timestamps, skipCount)
 
   const blocks = []
   if (fetchedData) {
@@ -313,7 +313,7 @@ export async function getLiquidityTokenBalanceOvertime(account: any, timestamps:
   const blocks = await getBlocksFromTimestamps(timestamps)
 
   // get historical share values with time travel queries
-  const result = await client.query({
+  const result = await getClient().query({
     query: SHARE_VALUE(account, blocks),
     fetchPolicy: 'cache-first'
   })
@@ -362,7 +362,7 @@ export async function getShareValueOverTime(pairAddress: any, timestamps: any) {
   const blocks = await getBlocksFromTimestamps(timestamps)
 
   // get historical share values with time travel queries
-  const result = await client.query({
+  const result = await getClient().query({
     query: SHARE_VALUE(pairAddress, blocks),
     fetchPolicy: 'cache-first'
   })
