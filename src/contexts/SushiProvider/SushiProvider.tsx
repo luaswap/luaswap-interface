@@ -4,6 +4,7 @@ import { useWeb3React } from '@web3-react/core'
 import config from '../../config'
 
 import { Sushi } from '../../sushi'
+import { IsTomoChain } from '../../utils'
 
 export interface SushiContext {
   sushi?: typeof Sushi
@@ -21,6 +22,7 @@ declare global {
 
 const SushiProvider: React.FC = ({ children }) => {
   const { chainId, library: ethereum } = useWeb3React()
+  const IsTomo = IsTomoChain(chainId)
 
   const [sushi, setSushi] = useState<any>()
 
@@ -30,6 +32,7 @@ const SushiProvider: React.FC = ({ children }) => {
   window.eth = ethereum && ethereum.provider ? ethereum.provider : null
 
   useEffect(() => {
+    if(!IsTomo){
       if (ethereum && ethereum.provider) {
         const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
           defaultAccount: ethereum.selectedAddress,
@@ -58,6 +61,7 @@ const SushiProvider: React.FC = ({ children }) => {
         setSushi(sushiLib)
         window.sushisauce = sushiLib
       }
+    }
   }, [ethereum])
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>

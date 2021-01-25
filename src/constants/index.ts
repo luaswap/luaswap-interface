@@ -4,8 +4,8 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
-
-export const TOMO_ROUTER_ADDRESS = '0x6f7425954a609bc4f585A13664c414D543B676d8'
+// Tomo router address testnet: 0x6f7425954a609bc4f585A13664c414D543B676d8
+export const TOMO_ROUTER_ADDRESS = '0x0b792a01Fd3E8b3e23aaaA28561c3E774A82AA7b'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -15,14 +15,18 @@ type ChainTokenList = {
 }
 
 // Base Token on TomoChain NetWork
+// TESTNET
 export const TUSDT = new Token(ChainId.TOMOCHAIN_TESTNET, '0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c', 6, 'USDT', 'Tether USD')
 export const TBTC = new Token(ChainId.TOMOCHAIN_TESTNET, '0x11c2cAF973db997b8a9b5689b33962E1AedEA968', 8, 'BTC', 'Wrapped BTC')
+// MAINNET
+export const MLUA = new Token(ChainId.TOMOCHAIN_MAINNET, '0x7262fa193e9590b2e075c3c16170f3f2f32f5c74', 18, 'LUA', 'LuaToken')
+// export const TBTC = new Token(ChainId.TOMOCHAIN_TESTNET, '0x11c2cAF973db997b8a9b5689b33962E1AedEA968', 8, 'BTC', 'Wrapped BTC')
 // Base Token on ETH NetWork
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
 export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
 export const WBTC = new Token(ChainId.MAINNET, '0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599', 18, 'WBTC', 'Wrapped BTC')
 export const TOMOE = new Token(ChainId.MAINNET, '0x05D3606d5c81EB9b7B18530995eC9B29da05FaBa', 18, 'TOMOE', 'TomoChain')
-export const LUA = new Token(ChainId.MAINNET, '0xB1f66997A5760428D3a87D68b90BfE0aE64121cC', 18, 'LUA', 'LuaSwap')
+export const LUA = new Token(ChainId.MAINNET, '0xB1f66997A5760428D3a87D68b90BfE0aE64121cC', 18, 'LUA', 'LuaToken')
 
 // TODO this is only approximate, it's actually based on blocks
 export const PROPOSAL_LENGTH_IN_DAYS = 7
@@ -61,7 +65,8 @@ const WETH_ONLY: ChainTokenList = {
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE],
-  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TBTC, TUSDT]
+  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TBTC, TUSDT],
+  [ChainId.TOMOCHAIN_MAINNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_MAINNET], MLUA]
 }
 
 /**
@@ -69,29 +74,31 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
  * tokens.
  */
 export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: Token[] } } = {
-  [ChainId.MAINNET]: {
-    // [AMPL.address]: [DAI, WETH[ChainId.MAINNET]]
-  },
-  [ChainId.TOMOCHAIN_TESTNET]: {}
+  [ChainId.MAINNET]: {},
+  [ChainId.TOMOCHAIN_TESTNET]: {},
+  [ChainId.TOMOCHAIN_MAINNET]: {}
 }
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [LUA, USDC, USDT, TOMOE],
-  [ChainId.TOMOCHAIN_TESTNET]: [TUSDT, TBTC]
+  [ChainId.TOMOCHAIN_TESTNET]: [TUSDT, TBTC],
+  [ChainId.TOMOCHAIN_MAINNET]: [MLUA]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE],
-  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TUSDT, TBTC]
+  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TUSDT, TBTC],
+  [ChainId.TOMOCHAIN_MAINNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_MAINNET], MLUA]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [[USDC, USDT]],
-  [ChainId.TOMOCHAIN_TESTNET]: [[TUSDT, TBTC]]
+  [ChainId.TOMOCHAIN_TESTNET]: [[TUSDT, TBTC]],
+  [ChainId.TOMOCHAIN_MAINNET]: [[MLUA, TUSDT]]
   
 }
 
@@ -159,9 +166,9 @@ export const NETWORK_SCAN : { [chainId in ChainId]: string } = {
   4: 'View Etherscan',
   5: 'View Etherscan',
   42: 'View Etherscan',
-  99: 'View TomoScan',
+  88: 'View TomoScan',
   89: 'View TomoScan',
-  88: 'View TomoScan'
+  99: 'View TomoScan'  
 }
 
 export const TokenTextSupport: { [chainId in ChainId]: string } = {
@@ -170,9 +177,9 @@ export const TokenTextSupport: { [chainId in ChainId]: string } = {
   4: 'ETH',
   5: 'ETH',
   42: 'ETH',
-  99: 'TOMO',
+  88: 'TOMO',
   89: 'TOMO',
-  88: 'TOMO'
+  99: 'TOMO'
 }
 
 export const NetworkContextName = 'NETWORK'
