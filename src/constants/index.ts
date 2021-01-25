@@ -68,7 +68,7 @@ export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE],
   [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TBTC, TUSDT],
-  [ChainId.TOMOCHAIN_MAINNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_MAINNET], MLUA, MUSDT, MBTC]
+  [ChainId.TOMOCHAIN_MAINNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_MAINNET], MLUA]
 }
 
 /**
@@ -207,7 +207,7 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 
 // used to ensure the user doesn't send so much ETH so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
-// export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
+export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(1), JSBI.BigInt(16)) // .01 ETH
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
 
 export const STAKING_POOLS = [
