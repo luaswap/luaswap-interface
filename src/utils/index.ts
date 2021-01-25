@@ -27,7 +27,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   42: 'kovan.',
   99: 'scan.devnet.',
   89: 'scan.testnet.',
-  88: 'scan'
+  88: 'scan.'
 }
 const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
