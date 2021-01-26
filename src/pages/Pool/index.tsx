@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { Pair } from '@luaswap/sdk'
 import { Link } from 'react-router-dom'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
-import { getTextNativeToken } from '../../utils'
+import { IsTomoChain, getTextNativeToken } from '../../utils'
 
 import { LP_FEE } from '../../utils/prices'
 
@@ -81,6 +81,7 @@ export default function Pool() {
   const theme = useContext(ThemeContext)
   const { chainId, account } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
+  const IsTomo = IsTomoChain(chainId)
   //@ts-ignore
   const userFarmingMap: { [key: string]: any } = useFarmingStaked(window.pools)
 
@@ -181,15 +182,17 @@ export default function Pool() {
               </EmptyProposals>
             ) : allV2PairsWithLiquidity?.length > 0 ? (
               <>
-                <ButtonSecondary>
-                  <RowBetween>
-                    <ExternalLink href={'https://info.luaswap.org/account/' + account}>
-                      Account analytics and accrued fees
-                    </ExternalLink>
-                    <span> ↗</span>
-                  </RowBetween>
-                </ButtonSecondary>
-
+                {!IsTomo ? (
+                  <ButtonSecondary>
+                    <RowBetween>
+                      <ExternalLink href={'https://info.luaswap.org/account/' + account}>
+                        Account analytics and accrued fees
+                      </ExternalLink>
+                      <span> ↗</span>
+                    </RowBetween>
+                  </ButtonSecondary>
+                  ) : ''
+                }
                 {allV2PairsWithLiquidity.map(v2Pair => (
                   <FullPositionCard
                     key={v2Pair.liquidityToken.address}

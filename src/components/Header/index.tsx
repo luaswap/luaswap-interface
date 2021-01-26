@@ -13,7 +13,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
-import { getTextNativeToken } from '../../utils'
+import { IsTomoChain, getTextNativeToken } from '../../utils'
 import { useETHBalances } from '../../state/wallet/hooks'
 import { ExternalLink } from '../../theme'
 
@@ -286,10 +286,12 @@ const StyledExternalLink = styled(ExternalLink).attrs({
 `
 
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
+  [ChainId.MAINNET]: 'Ethereum',
   [ChainId.RINKEBY]: 'Rinkeby',
   [ChainId.ROPSTEN]: 'Ropsten',
   [ChainId.GÖRLI]: 'Görli',
   [ChainId.KOVAN]: 'Kovan',
+  [ChainId.TOMOCHAIN_MAINNET]: 'TomoChain',
   [ChainId.TOMOCHAIN_DEVNET]: 'TomoDevnet',
   [ChainId.TOMOCHAIN_TESTNET]: 'TomoTestnet'
 }
@@ -297,6 +299,7 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
+  const IsTomo = IsTomoChain(chainId)
   const { t } = useTranslation()  
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
@@ -358,20 +361,18 @@ export default function Header() {
               )}
             </>
           ) : (
-            <StyleNavBox>
+            !IsTomo ?
+            (<StyleNavBox>              
               <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                 Farming
               </StyledNavLink>
-              {/* <StyledExternalLink id={`stake-nav-link`} href={'https://luaswap.org'}>
-                Farming
-              </StyledExternalLink> */}
               <StyledNavLink id="pool-nav-link" to="/lua-safe">
                 {t('LuaSafe')}
               </StyledNavLink>
               <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
                 Charts <span style={{ fontSize: '11px' }}>↗</span>
               </StyledExternalLink>
-            </StyleNavBox>
+            </StyleNavBox>) : ''
           )}          
           
         </HeaderLinks>
@@ -379,7 +380,7 @@ export default function Header() {
       <HeaderControls>
         <HeaderElement>
           <HideSmall>
-            {chainId && NETWORK_LABELS[chainId] && (
+            {chainId && NETWORK_LABELS[chainId] && account && (
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
             )}
           </HideSmall>

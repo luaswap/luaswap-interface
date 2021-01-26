@@ -25,9 +25,9 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   4: 'rinkeby.',
   5: 'goerli.',
   42: 'kovan.',
-  99: 'scan.devnet.',
+  88: 'scan.devnet.',
   89: 'scan.testnet.',
-  88: 'scan.'
+  99: 'scan.'
 }
 const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
@@ -35,9 +35,19 @@ const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
   4: 'etherscan.io',
   5: 'etherscan.io',
   42: 'etherscan.io',
-  99: 'tomochain.com',
+  88: 'tomochain.com',
   89: 'tomochain.com',
-  88: 'tomochain.com'
+  99: 'tomochain.com'
+}
+const BLOCK_LINK : { [chainId in ChainId]: string } = {
+  1: 'block',
+  3: 'block',
+  4: 'block',
+  5: 'block',
+  42: 'blocks',
+  88: 'blocks',
+  89: 'blocks',
+  99: 'blocks'
 }
 
 export function getEtherscanLink(
@@ -47,6 +57,8 @@ export function getEtherscanLink(
 ): string {
   const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}${NETWORK_DOMAIN[chainId]}`
 
+  const block = BLOCK_LINK[chainId]
+
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`
@@ -55,7 +67,7 @@ export function getEtherscanLink(
       return `${prefix}/token/${data}`
     }
     case 'block': {
-      return `${prefix}/block/${data}`
+      return `${prefix}/${block}/${data}`
     }
     case 'address':
     default: {
