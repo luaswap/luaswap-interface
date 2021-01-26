@@ -38,7 +38,6 @@ import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
-// import CurrencySearchModal from '../../components/SearchModal/CurrencySearchModal'
 
 export default function AddLiquidity({
   match: {
@@ -79,7 +78,6 @@ export default function AddLiquidity({
     error
   } = useDerivedMintInfo(currencyA ?? undefined, currencyB ?? undefined)
   const { onFieldAInput, onFieldBInput } = useMintActionHandlers(noLiquidity)
-
   const isValid = !error
 
   // modal and loading
@@ -286,7 +284,7 @@ export default function AddLiquidity({
           history.push(`/add/${newCurrencyIdB}`)
         }
       } else {
-        history.push(`/add/${currencyIdA ? currencyIdA : 'ETH'}/${newCurrencyIdB}`)
+        history.push(`/add/${currencyIdA ? currencyIdA : IsTomo ? 'TOMO' : 'ETH'}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, history, currencyIdB]
@@ -342,33 +340,33 @@ export default function AddLiquidity({
                   </BlueCard>
                 </ColumnCenter>
               ))}
-              <CurrencyInputPanel
-                value={formattedAmounts[Field.CURRENCY_A]}
-                onUserInput={onFieldAInput}
-                onMax={() => {
-                  onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
-                }}
-                onCurrencySelect={handleCurrencyASelect}
-                showMaxButton={!atMaxAmounts[Field.CURRENCY_A]}
-                currency={currencies[Field.CURRENCY_A]}
-                id="add-liquidity-input-tokena"
-                showCommonBases
-              />
+            <CurrencyInputPanel
+              value={formattedAmounts[Field.CURRENCY_A]}
+              onUserInput={onFieldAInput}
+              onMax={() => {
+                onFieldAInput(maxAmounts[Field.CURRENCY_A]?.toExact() ?? '')
+              }}
+              onCurrencySelect={handleCurrencyASelect}
+              showMaxButton={!atMaxAmounts[Field.CURRENCY_A]}
+              currency={currencies[Field.CURRENCY_A]}
+              id="add-liquidity-input-tokena"
+              showCommonBases
+            />
             <ColumnCenter>
               <Plus size="16" color={theme.text2} />
             </ColumnCenter>
-              <CurrencyInputPanel
-                value={formattedAmounts[Field.CURRENCY_B]}
-                onUserInput={onFieldBInput}
-                onCurrencySelect={handleCurrencyBSelect}
-                onMax={() => {
-                  onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
-                }}
-                showMaxButton={!atMaxAmounts[Field.CURRENCY_B]}
-                currency={currencies[Field.CURRENCY_B]}
-                id="add-liquidity-input-tokenb"
-                showCommonBases
-              />
+            <CurrencyInputPanel
+              value={formattedAmounts[Field.CURRENCY_B]}
+              onUserInput={onFieldBInput}
+              onCurrencySelect={handleCurrencyBSelect}
+              onMax={() => {
+                onFieldBInput(maxAmounts[Field.CURRENCY_B]?.toExact() ?? '')
+              }}
+              showMaxButton={!atMaxAmounts[Field.CURRENCY_B]}
+              currency={currencies[Field.CURRENCY_B]}
+              id="add-liquidity-input-tokenb"
+              showCommonBases
+            />
             {currencies[Field.CURRENCY_A] && currencies[Field.CURRENCY_B] && pairState !== PairState.INVALID && (
               <>
                 <LightCard padding="0px" borderRadius={'20px'}>
