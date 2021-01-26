@@ -10,7 +10,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import { useTradeExactIn, useTradeExactOut } from '../../hooks/Trades'
 import useParsedQueryString from '../../hooks/useParsedQueryString'
-import { isAddress } from '../../utils'
+import { isAddress, IsTomoChain } from '../../utils'
 import { AppDispatch, AppState } from '../index'
 import { useCurrencyBalances } from '../wallet/hooks'
 import { Field, replaceSwapState, selectCurrency, setRecipient, switchCurrencies, typeInput } from './actions'
@@ -218,6 +218,7 @@ export function useDerivedSwapInfo(): {
 }
 
 function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId) { // remove :string
+  const IsTomo = IsTomoChain(chainId)
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
@@ -226,13 +227,13 @@ function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId) { // rem
     }else if(urlParam.toUpperCase() === 'TOMO'){
       return 'TOMO'
     }
-    if (valid === false  && (chainId === 89 || chainId === 88 || chainId === 99)){
+    if (valid === false  && IsTomo){
       return 'TOMO'
     }else{
       return 'ETH'
     }
   }
-  return (chainId === 89 || chainId === 88 || chainId === 99) ?'TOMO' ?? '' : 'ETH' ?? ''
+  return IsTomo ?'TOMO' ?? '' : 'ETH' ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {

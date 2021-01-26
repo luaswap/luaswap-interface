@@ -15,7 +15,7 @@ import CurrencyLogo from '../CurrencyLogo'
 import { MouseoverTooltip } from '../Tooltip'
 import { FadedSpan, MenuItem } from './styleds'
 import Loader from '../Loader'
-import { isTokenOnList } from '../../utils'
+import { isTokenOnList, IsTomoChain } from '../../utils'
 
 function currencyKey(currency: Currency): string {
   return currency instanceof Token ? currency.address : (currency === ETHER ? 'ETHER' : currency === TOMO ? 'TOMO' : '')
@@ -172,7 +172,8 @@ export default function CurrencyList({
   showETH: boolean
 }) {
   const { chainId } = useActiveWeb3React()
-  const NATIVE_TOKEN = (chainId === 88 || chainId === 89 || chainId === 99) ? Currency.TOMO : Currency.ETHER
+  const IsTomo = IsTomoChain(chainId)
+  const NATIVE_TOKEN = IsTomo ? Currency.TOMO : Currency.ETHER
   const itemData = useMemo(() => (showETH ? [NATIVE_TOKEN, ...currencies] : currencies), [currencies, showETH])
 
   const Row = useCallback(

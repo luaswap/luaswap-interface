@@ -30,7 +30,7 @@ import { useDerivedMintInfo, useMintActionHandlers, useMintState } from '../../s
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import { useIsExpertMode, useUserSlippageTolerance } from '../../state/user/hooks'
 import { TYPE } from '../../theme'
-import { calculateGasMargin, calculateSlippageAmount, getRouterContract } from '../../utils'
+import { calculateGasMargin, calculateSlippageAmount, getRouterContract, IsTomoChain } from '../../utils'
 import { maxAmountSpend } from '../../utils/maxAmountSpend'
 import { wrappedCurrency } from '../../utils/wrappedCurrency'
 import AppBody from '../AppBody'
@@ -46,6 +46,7 @@ export default function AddLiquidity({
   history
 }: RouteComponentProps<{ currencyIdA?: string; currencyIdB?: string }>) {
   const { account, chainId, library } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const theme = useContext(ThemeContext)
   
   const currencyA = useCurrency(currencyIdA)
@@ -116,8 +117,8 @@ export default function AddLiquidity({
   )
 
   // check whether the user has approved the router on the tokens
-  const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
-  const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], (chainId === 88 || chainId === 89 || chainId === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
 
   const addTransaction = useTransactionAdder()
     // Add Pool

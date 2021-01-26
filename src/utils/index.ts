@@ -27,7 +27,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   42: 'kovan.',
   99: 'scan.devnet.',
   89: 'scan.testnet.',
-  88: 'scan'
+  88: 'scan.'
 }
 const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
@@ -64,8 +64,13 @@ export function getEtherscanLink(
   }
 }
 
+export function IsTomoChain( chainId: ChainId | undefined){  
+  return chainId === 88 || chainId === 89 || chainId === 99
+}
+
 export function getNativeToken( chainId: ChainId | undefined ){
-  if(chainId === 89 || chainId === 88 || chainId === 99){
+  const IsTomo = IsTomoChain(chainId)
+  if(IsTomo){
     return TOMO
   }else{
     return ETHER
@@ -73,7 +78,8 @@ export function getNativeToken( chainId: ChainId | undefined ){
 }
 
 export function getTextNativeToken( chainId: ChainId | undefined ){
-  if(chainId === 89 || chainId === 88 || chainId === 99){
+  const IsTomo = IsTomoChain(chainId)
+  if(IsTomo){
     return 'TOMO'
   }else{
     return 'ETH'
@@ -81,7 +87,8 @@ export function getTextNativeToken( chainId: ChainId | undefined ){
 }
 
 export function getLogoNativeToken( chainId: ChainId | undefined ){
-  if(chainId === 89 || chainId === 88 || chainId === 99){
+  const IsTomo = IsTomoChain(chainId)
+  if(IsTomo){
     return TomoLogo
   }else{
     return EthereumLogo
