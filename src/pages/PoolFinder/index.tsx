@@ -1,7 +1,8 @@
-import { Currency, ETHER, JSBI, TokenAmount } from '@luaswap/sdk'
+import { Currency, JSBI, TokenAmount } from '@luaswap/sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'
+import { getNativeToken } from '../../utils'
 import { ButtonDropdownLight } from '../../components/Button'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
@@ -25,12 +26,14 @@ enum Fields {
 }
 
 export default function PoolFinder() {
-  const { account } = useActiveWeb3React()
+  const { chainId, account } = useActiveWeb3React()
+
+  const NATIVE_TOKEN = getNativeToken(chainId)
 
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
-  const [currency0, setCurrency0] = useState<Currency | null>(ETHER)
+  const [currency0, setCurrency0] = useState<Currency | null>(NATIVE_TOKEN)
   const [currency1, setCurrency1] = useState<Currency | null>(null)
 
   const [pairState, pair] = usePair(currency0 ?? undefined, currency1 ?? undefined)
@@ -40,7 +43,7 @@ export default function PoolFinder() {
       addPair(pair)
     }
   }, [pair, addPair])
-
+  
   const validPairNoLiquidity: boolean =
     pairState === PairState.NOT_EXISTS ||
     Boolean(

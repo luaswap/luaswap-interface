@@ -4,9 +4,11 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
-import { ROUTER_ADDRESS } from '../constants'
-import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER } from '@luaswap/sdk'
+import { ROUTER_ADDRESS, TOMO_ROUTER_ADDRESS } from '../constants'
+import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER, TOMO } from '@luaswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
+import EthereumLogo from '../assets/images/ethereum-logo.png'
+import TomoLogo from '../assets/images/tomo-logo.png'
 
 // returns the checksummed address if the address is valid, otherwise returns false
 export function isAddress(value: any): string | false {
@@ -22,7 +24,30 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   3: 'ropsten.',
   4: 'rinkeby.',
   5: 'goerli.',
-  42: 'kovan.'
+  42: 'kovan.',
+  88: 'scan.',
+  89: 'scan.testnet.',
+  99: 'scan.devnet.'
+}
+const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
+  1: 'etherscan.io',
+  3: 'etherscan.io',
+  4: 'etherscan.io',
+  5: 'etherscan.io',
+  42: 'etherscan.io',
+  88: 'tomochain.com',
+  89: 'tomochain.com',
+  99: 'tomochain.com'
+}
+const BLOCK_LINK : { [chainId in ChainId]: string } = {
+  1: 'block',
+  3: 'block',
+  4: 'block',
+  5: 'block',
+  42: 'blocks',
+  88: 'blocks',
+  89: 'blocks',
+  99: 'blocks'
 }
 
 export function getEtherscanLink(
@@ -30,7 +55,9 @@ export function getEtherscanLink(
   data: string,
   type: 'transaction' | 'token' | 'address' | 'block'
 ): string {
-  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}etherscan.io`
+  const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}${NETWORK_DOMAIN[chainId]}`
+
+  const block = BLOCK_LINK[chainId]
 
   switch (type) {
     case 'transaction': {
@@ -40,12 +67,43 @@ export function getEtherscanLink(
       return `${prefix}/token/${data}`
     }
     case 'block': {
-      return `${prefix}/block/${data}`
+      return `${prefix}/${block}/${data}`
     }
     case 'address':
     default: {
       return `${prefix}/address/${data}`
     }
+  }
+}
+
+export function IsTomoChain( chainId: ChainId | undefined){  
+  return chainId === 88 || chainId === 89 || chainId === 99
+}
+
+export function getNativeToken( chainId: ChainId | undefined ){
+  const IsTomo = IsTomoChain(chainId)
+  if(IsTomo){
+    return TOMO
+  }else{
+    return ETHER
+  }
+}
+
+export function getTextNativeToken( chainId: ChainId | undefined ){
+  const IsTomo = IsTomoChain(chainId)
+  if(IsTomo){
+    return 'TOMO'
+  }else{
+    return 'ETH'
+  }
+}
+
+export function getLogoNativeToken( chainId: ChainId | undefined ){
+  const IsTomo = IsTomoChain(chainId)
+  if(IsTomo){
+    return TomoLogo
+  }else{
+    return EthereumLogo
   }
 }
 
@@ -99,7 +157,7 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
-  return getContract(ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
+  return getContract((_ === 89 || _ === 88 || _ === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
 }
 
 export function escapeRegExp(string: string): string {
@@ -107,7 +165,7 @@ export function escapeRegExp(string: string): string {
 }
 
 export function isTokenOnList(defaultTokens: TokenAddressMap, currency?: Currency): boolean {
-  if (currency === ETHER) return true
+  if (currency === ETHER || currency === TOMO) return true
   return Boolean(currency instanceof Token && defaultTokens[currency.chainId]?.[currency.address])
 }
 

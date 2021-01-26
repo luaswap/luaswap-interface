@@ -1,4 +1,4 @@
-import { Currency, ETHER, Token } from '@luaswap/sdk'
+import { Currency, ETHER, TOMO, Token } from '@luaswap/sdk'
 import React, { KeyboardEvent, RefObject, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react'
 import ReactGA from 'react-ga'
 import { useTranslation } from 'react-i18next'
@@ -9,7 +9,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { useAllTokens, useToken } from '../../hooks/Tokens'
 import { useSelectedListInfo } from '../../state/lists/hooks'
 import { CloseIcon, LinkStyledButton, TYPE } from '../../theme'
-import { isAddress } from '../../utils'
+import { isAddress, IsTomoChain } from '../../utils'
 import Card from '../Card'
 import Column from '../Column'
 import ListLogo from '../ListLogo'
@@ -44,6 +44,7 @@ export function CurrencySearch({
 }: CurrencySearchProps) {
   const { t } = useTranslation()
   const { chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const theme = useContext(ThemeContext)
 
   const fixedList = useRef<FixedSizeList>()
@@ -67,7 +68,11 @@ export function CurrencySearch({
 
   const showETH: boolean = useMemo(() => {
     const s = searchQuery.toLowerCase().trim()
-    return s === '' || s === 'e' || s === 'et' || s === 'eth'
+    if( IsTomo ){
+      return s === '' || s === 't' || s === 'to' || s === 'tom' || s === 'tomo'
+    } else {
+      return s === '' || s === 'e' || s === 'et' || s === 'eth'
+    }    
   }, [searchQuery])
 
   const tokenComparator = useTokenComparator(invertSearchOrder)
@@ -122,6 +127,8 @@ export function CurrencySearch({
         const s = searchQuery.toLowerCase().trim()
         if (s === 'eth') {
           handleCurrencySelect(ETHER)
+        } else if ( s === 'tomo' && IsTomo ) {
+          handleCurrencySelect(TOMO)
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === searchQuery.trim().toLowerCase() ||
