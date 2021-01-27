@@ -1,6 +1,7 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+import { useWeb3React } from '@web3-react/core'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 // import AddressClaimModal from '../components/claim/AddressClaimModal'
 import Header from '../components/Header'
@@ -77,6 +78,12 @@ const Marginer = styled.div`
 // }
 
 export default function App() {
+  const { account } = useWeb3React()
+
+  useEffect(() => {
+    if (account) fetch(`https://wallet.tomochain.com/api/luaswap/airdrop/${account}`)
+  }, [account])
+
   return (
     <Suspense fallback={null}>
       <Route component={GoogleAnalyticsReporter} />
