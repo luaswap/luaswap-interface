@@ -4,9 +4,9 @@ import Container from '../../components/Container'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 // import CustomCountDown from './components/CustomCountDown'
-import Icon_Tip from '../../assets/images/pro-tip-icon.svg'
+// import Icon_Tip from '../../assets/images/pro-tip-icon.svg'
 import { START_REWARD_AT_BLOCK } from '../../sushi/lib/constants'
-import { EARN_LUA_REWARD, TIME_EARN_LUA_REWARD } from '../../constants/lists'
+// import { EARN_LUA_REWARD, TIME_EARN_LUA_REWARD } from '../../constants/lists'
 import FarmCards from './components/FarmCards'
 import TotalLockValue from './components/TotalLockValue'
 
@@ -43,7 +43,7 @@ export default function Farms() {
         <Box className="mt-4">
             <StyledHeading>SELECT YOUR FIELDS</StyledHeading>
             <StyledParagraph>Earn LUA tokens by staking LUA-V1 LP token</StyledParagraph>
-            <SpacerRes>
+            {/* <SpacerRes>
                 <Spacer size="sm" />
             </SpacerRes>
             <StyledInfo>
@@ -51,7 +51,7 @@ export default function Farms() {
                 <div>
 				<b>Pro Tip</b>: Stake to any pool and earn <b>{EARN_LUA_REWARD} LUA</b> rewards until <a href="https://etherscan.io/block/countdown/11232600" target="_blank" style={{color: '#ffffff'}}>{TIME_EARN_LUA_REWARD}</a>
                 </div>
-            </StyledInfo>
+            </StyledInfo> */}
             <Spacer size="lg" />
             <FarmCards />
         </Box>
@@ -59,24 +59,24 @@ export default function Farms() {
   )
 }
 
-const StyledInfo = styled.h3`
-  color: ${({ theme }) => theme.white};
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  > img{
-    width: 20px;
-    margin-right: 3px;
-  }
-  b {
-    color: ${({ theme }) => theme.primary1};
-  }
-`
+// const StyledInfo = styled.h3`
+//   color: ${({ theme }) => theme.white};
+//   font-size: 16px;
+//   font-weight: 400;
+//   margin: 0;
+//   padding: 0;
+//   text-align: center;
+//   display: flex;
+//   align-items: start;
+//   justify-content: center;
+//   > img{
+//     width: 20px;
+//     margin-right: 3px;
+//   }
+//   b {
+//     color: ${({ theme }) => theme.primary1};
+//   }
+// `
 const StyledHeading = styled.h2`
   color: ${({ theme }) => theme.white};
   text-transform: uppercase;
@@ -110,15 +110,15 @@ const Box = styled.div`
         }
     }
 `
-const SpacerRes = styled.div`
-    .sc-iCoHVE {
-        @media (max-width: 1024px) {
-            display: none;
-        }
-    }
-    .d-lg-none {
-        @media (min-width: 1025px) {
-            display: none;
-        }
-    }
-`
+// const SpacerRes = styled.div`
+//     .sc-iCoHVE {
+//         @media (max-width: 1024px) {
+//             display: none;
+//         }
+//     }
+//     .d-lg-none {
+//         @media (min-width: 1025px) {
+//             display: none;
+//         }
+//     }
+// `
