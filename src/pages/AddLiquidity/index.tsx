@@ -6,7 +6,7 @@ import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
-import { ThemeContext } from 'styled-components'
+import styled, { ThemeContext } from 'styled-components'
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { BlueCard, LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
@@ -38,6 +38,14 @@ import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
+
+const StyledInfo = styled.div`
+  max-width: 420px;
+  padding: 10px;
+  font-size: 13px;
+  text-align: center;
+  margin-bottom: 20px
+`
 
 export default function AddLiquidity({
   match: {
@@ -303,6 +311,9 @@ export default function AddLiquidity({
   
   return (
     <>
+      <StyledInfo style={{ color: '#c3a56e' }}>
+        Any ERC20 token can be brought into the TomoChain ecosystem with the click of a button to wrap/unwrap via <a href="https://bridge.tomochain.com/" target="true" style={{color: '#ecb34b'}}>TomoBridge</a> and integrated with LuaSwap seamlessly! 
+      </StyledInfo>
       <AppBody>
         <AddRemoveTabs creating={isCreate} adding={true} />
         <Wrapper>
