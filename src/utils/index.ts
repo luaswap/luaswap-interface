@@ -44,10 +44,20 @@ const BLOCK_LINK : { [chainId in ChainId]: string } = {
   3: 'block',
   4: 'block',
   5: 'block',
-  42: 'blocks',
+  42: 'block',
   88: 'blocks',
   89: 'blocks',
   99: 'blocks'
+}
+const TOKEN : { [chainId in ChainId]: string } = {
+  1: 'token',
+  3: 'token',
+  4: 'token',
+  5: 'token',
+  42: 'token',
+  88: 'tokens',
+  89: 'tokens',
+  99: 'tokens'
 }
 
 export function getEtherscanLink(
@@ -58,13 +68,14 @@ export function getEtherscanLink(
   const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}${NETWORK_DOMAIN[chainId]}`
 
   const block = BLOCK_LINK[chainId]
+  const token = TOKEN[chainId]
 
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`
     }
     case 'token': {
-      return `${prefix}/token/${data}`
+      return `${prefix}/${token}/${data}`
     }
     case 'block': {
       return `${prefix}/${block}/${data}`
