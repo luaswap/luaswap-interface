@@ -249,3 +249,14 @@ export const FEE_WARNING_TOKENS = ['0xd46ba6d942050d489dbd938a2c909a5d5039a161']
 
 // fee swap
 export const FEE_SWAP = 0.004
+
+export const NETWORK_TABS = [
+  {
+    key: 'ETH',
+    label: 'Ethereum Network'
+  },
+  {
+    key: 'TOMO',
+    label: 'TomoChain Network'
+  }
+]

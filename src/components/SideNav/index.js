@@ -15,17 +15,7 @@ import menu from '../../assets/menu.svg'
 import { TYPE } from '../../theme'
 import { Box, Flex } from 'rebass'
 import Select from '../Select'
-
-const NETWORK_TABS = [
-  {
-    key: 'ETH',
-    label: 'Ethereum Network'
-  },
-  {
-    key: 'TOMO',
-    label: 'TomoChain Network'
-  }
-]
+import { NETWORK_TABS } from '../../constants'
 
 const Wrapper = styled.div`
   height: ${({ isMobile }) => (isMobile ? 'initial' : '100vh')};
@@ -134,7 +124,24 @@ const MenuMobileWrapper = styled.div`
   display: ${props => props.hide && 'none'};
 `
 
-const NetworkDropdown = styled.select``
+const NetworkDropdown = styled.select`
+  padding: 5px;
+  width: 100%;
+  border-radius: 8px;
+  color: ${({ theme }) => theme.text4 || 'inherit'};
+  text-transform: none;
+  > option {
+    padding: 5px;
+    color: ${({ theme }) => theme.text4 || 'inherit'};
+    font-size: 14px;
+    &:first-child {
+      border-radius: 8px 8px 0px 0px;
+    }
+    &:last-child {
+      border-radius: 0px 0px 8px 8px;
+    }
+  }
+`
 
 function MenuContent({ history, toggleMenu }) {
   return (
@@ -235,16 +242,13 @@ function SideNav({ history, chosenNetwork, setChosenNetwork }) {
         <DesktopWrapper>
           <AutoColumn gap="1rem" style={{ marginLeft: '.75rem', marginTop: '1.5rem' }}>
             {/* <Title /> */}
-            <Box mb={2}>
-              <Select options={NETWORK_TABS} onChange={opt => setChosenNetwork(opt.key)} />
-              {/* <NetworkDropdown value={chosenNetwork} onChange={event => setChosenNetwork(event.target.value)}>
-                {NETWORK_TABS.map((opt, optIdx) => (
-                  <option key={`network_option_${optIdx}`} value={opt.key}>
-                    {opt.label}
-                  </option>
-                ))}
-              </NetworkDropdown> */}
-            </Box>
+            <NetworkDropdown value={chosenNetwork} onChange={event => setChosenNetwork(event.target.value)}>
+              {NETWORK_TABS.map((opt, optIdx) => (
+                <option key={`network_option_${optIdx}`} value={opt.key}>
+                  {opt.label}
+                </option>
+              ))}
+            </NetworkDropdown>
             {!below1080 && <MenuContent history={history} />}
           </AutoColumn>
           <AutoColumn gap="0.5rem" style={{ marginLeft: '.75rem', marginBottom: '4rem' }}>

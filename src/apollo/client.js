@@ -12,7 +12,7 @@ export const client = new ApolloClient({
 
 export const clientTomo = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.luaswap.org/subgraphs/name/phucnhg/Luaswap'
+    uri: 'https://api.luaswap.org/subgraphs/name/phucngh/Luaswap'
   }),
   cache: new InMemoryCache(),
   shouldBatch: true
@@ -51,7 +51,7 @@ export const blockClient = new ApolloClient({
 
 export const blockClientTomo = new ApolloClient({
   link: new HttpLink({
-    uri: 'https://api.luaswap.org/subgraphs/name/phucnhg/ethereum-blocks'
+    uri: 'https://api.luaswap.org/subgraphs/name/phucngh/ethereum-blocks'
   }),
   cache: new InMemoryCache()
 })
