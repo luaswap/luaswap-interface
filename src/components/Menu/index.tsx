@@ -2,11 +2,11 @@ import React, { useRef } from 'react'
 import { Code, Info, PieChart } from 'react-feather' // BookOpen, MessageCircle
 import styled from 'styled-components'
 import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
-// import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from '../../hooks'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useToggleModal } from '../../state/application/hooks'
-
+import { IsTomoChain } from '../../utils'
 import { ExternalLink } from '../../theme'
 // import { ButtonPrimary } from '../Button'
 
@@ -88,8 +88,8 @@ const MenuItem = styled(ExternalLink)`
 const CODE_LINK = 'https://github.com/tomochain/'
 
 export default function Menu() {
-  // const { account } = useActiveWeb3React()
-
+  const { chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const node = useRef<HTMLDivElement>()
   const open = useModalOpen(ApplicationModal.MENU)
   const toggle = useToggleModal(ApplicationModal.MENU)
@@ -121,10 +121,12 @@ export default function Menu() {
             <MessageCircle size={14} />
             Discord
           </MenuItem> */}
-          <MenuItem id="link" href="https://info.luaswap.org/">
-            <PieChart size={14} />
-            Analytics
-          </MenuItem>
+          {!IsTomo ?
+            (<MenuItem id="link" href="https://info.luaswap.org/">
+              <PieChart size={14} />
+              Analytics
+            </MenuItem>) : ''
+          }
           {/* {account && (
             <ButtonPrimary onClick={openClaimModal} padding="8px 16px" width="100%" borderRadius="12px" mt="0.5rem">
               Claim LUA
