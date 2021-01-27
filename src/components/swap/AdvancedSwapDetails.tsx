@@ -12,6 +12,8 @@ import { RowBetween, RowFixed } from '../Row'
 import FormattedPriceImpact from './FormattedPriceImpact'
 import { SectionBreak } from './styleds'
 import SwapRoute from './SwapRoute'
+import { useActiveWeb3React } from '../../hooks'
+import { IsTomoChain } from '../../utils'
 
 const InfoLink = styled(ExternalLink)`
   width: 100%;
@@ -27,8 +29,7 @@ function TradeSummary({ trade, allowedSlippage }: { trade: Trade; allowedSlippag
   const theme = useContext(ThemeContext)
   const { priceImpactWithoutFee, realizedLPFee } = computeTradePriceBreakdown(trade)
   const isExactIn = trade.tradeType === TradeType.EXACT_INPUT
-  const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage)
-
+  const slippageAdjustedAmounts = computeSlippageAdjustedAmounts(trade, allowedSlippage)  
   return (
     <>
       <AutoColumn style={{ padding: '0 20px' }}>
@@ -84,9 +85,13 @@ export interface AdvancedSwapDetailsProps {
 export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
   const theme = useContext(ThemeContext)
 
+  const { chainId } = useActiveWeb3React()
+  
+  const IsTomo = IsTomoChain(chainId)
+
   const [allowedSlippage] = useUserSlippageTolerance()
 
-  const showRoute = Boolean(trade && trade.route.path.length > 2)
+  const showRoute = Boolean(trade && trade.route.path.length > 2)  
 
   return (
     <AutoColumn gap="md">
@@ -107,14 +112,16 @@ export function AdvancedSwapDetails({ trade }: AdvancedSwapDetailsProps) {
               </AutoColumn>
             </>
           )}
-          <AutoColumn style={{ padding: '0 24px' }}>
-            <InfoLink
-              href={'https://info.luaswap.org/pair/' + trade.route.pairs[0].liquidityToken.address}
-              target="_blank"
-            >
-              View pair analytics ↗
-            </InfoLink>
-          </AutoColumn>
+          {!IsTomo ? 
+            (<AutoColumn style={{ padding: '0 24px' }}>
+              <InfoLink
+                href={'https://info.luaswap.org/pair/' + trade.route.pairs[0].liquidityToken.address}
+                target="_blank"
+              >
+                View pair analytics ↗
+              </InfoLink>
+            </AutoColumn>) : ''
+          }
         </>
       )}
     </AutoColumn>
