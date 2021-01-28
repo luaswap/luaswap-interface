@@ -255,7 +255,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
       setSymbolLiquidityToken(farm.symbol)
     } else {
       for (let i = 0; i < farmPools.length; i++) {
-        if (pair.liquidityToken.address === farmPools[i].lpAddresses[1]) {
+        if (pair.liquidityToken.address.toLowerCase() === farmPools[i].lpAddresses[1].toLowerCase()) {
           setSymbolLiquidityToken(farmPools[i].symbol)
         }
       }

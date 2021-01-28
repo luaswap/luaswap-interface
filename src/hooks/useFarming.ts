@@ -87,7 +87,7 @@ export function useFarmingStaked(pools: any[]) {
         pool.totalStaked = poolStakeds ? poolStakeds[index] : '0'
         pool.pendingReward = pendingRewards ? pendingRewards[index] : '0'
 
-        poolsMap[pool.lpAddresses[1]] = pool
+        poolsMap[pool.lpAddresses[1].toLowerCase()] = pool
       }
 
       !isCancelled && setUserFarmingPoolsMap(poolsMap)
