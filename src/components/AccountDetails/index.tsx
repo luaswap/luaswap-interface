@@ -1,6 +1,10 @@
-import React, { useCallback, useContext } from 'react'
+import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import styled, { ThemeContext } from 'styled-components'
+import axios from 'axios'
+import BigNumber from 'bignumber.js'
+import { TokenAmount } from '@luaswap/sdk'
+
 import { useActiveWeb3React } from '../../hooks'
 import { AppDispatch } from '../../state'
 import { clearAllTransactions } from '../../state/transactions/actions'
@@ -9,7 +13,7 @@ import { AutoRow } from '../Row'
 import Copy from './Copy'
 import Transaction from './Transaction'
 
-import { SUPPORTED_WALLETS, NETWORK_SCAN } from '../../constants'
+import { SUPPORTED_WALLETS, NETWORK_SCAN, LUA } from '../../constants'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
 import { getEtherscanLink } from '../../utils'
 import { injected, walletconnect, walletlink, fortmatic, portis } from '../../connectors'
@@ -21,6 +25,8 @@ import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
+
+const LUA_REWARD_URL = 'https://wallet.tomochain.com/api/luaswap/read/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC'
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -165,6 +171,22 @@ const WalletName = styled.div`
   color: ${({ theme }) => theme.text3};
 `
 
+const Title = styled.div`
+  margin-left: 12px;
+  width: initial;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: ${({ theme }) => theme.primary1};
+`
+
+const CommingSoon = styled.div`
+  margin-left: 12px;
+  width: initial;
+  font-size: 0.825rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.text3};
+`
+
 const IconWrapper = styled.div<{ size?: number }>`
   ${({ theme }) => theme.flexColumnNoWrap};
   align-items: center;
@@ -228,6 +250,48 @@ export default function AccountDetails({
   const { chainId, account, connector } = useActiveWeb3React()
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
+  const [accountData, setAccountData] = useState({
+    totalLuaLock: new TokenAmount(LUA, '0'),
+    luaUnlockAble: new TokenAmount(LUA, '0')
+  })
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const totalLuaLockPromise = axios.post(LUA_REWARD_URL, {
+          method: 'lockOf(address):(uint256)',
+          params: [account],
+          cache: true
+        })
+
+        const luaUnLockAblePromise = axios.post(LUA_REWARD_URL, {
+          method: 'canUnlockAmount(address):(uint256)',
+          params: [account],
+          cache: true
+        })
+
+        const [totalLuaLockResult, luaUnlockAbleResult] = await Promise.all([totalLuaLockPromise, luaUnLockAblePromise])
+        const totalLuaLock = new TokenAmount(LUA, totalLuaLockResult.data.data || '0')
+        const luaUnlockAble = new TokenAmount(LUA, luaUnlockAbleResult.data.data || '0')
+
+        setAccountData({ totalLuaLock, luaUnlockAble })
+      } catch (error) {
+        console.log(error)
+
+        setAccountData({
+          totalLuaLock: new TokenAmount(LUA, '0'),
+          luaUnlockAble: new TokenAmount(LUA, '0')
+        })
+      }
+    }
+
+    fetchData()
+  }, [account])
+
+  const [unlock, setUnlock] = useState(false)
+  function unlockLua() {
+    setUnlock(true)
+  }
 
   function formatConnectorName() {
     const { ethereum } = window
@@ -388,6 +452,21 @@ export default function AccountDetails({
                   </>
                 )}
               </AccountGroupingRow>
+              <AccountGroupingRow>
+                <Title>
+                  Can unlock: {new BigNumber(accountData.luaUnlockAble.toFixed(3)).toFormat()}/
+                  {new BigNumber(accountData.totalLuaLock.toFixed(3)).toFormat()} LUA
+                </Title>
+                <WalletAction
+                  style={{ fontSize: '.825rem', fontWeight: 400 }}
+                  onClick={() => {
+                    unlockLua()
+                  }}
+                >
+                  Unlock
+                </WalletAction>
+              </AccountGroupingRow>
+              <AccountGroupingRow>{unlock && <CommingSoon>Unlock is coming soon</CommingSoon>}</AccountGroupingRow>
             </InfoCard>
           </YourAccount>
         </AccountSection>
