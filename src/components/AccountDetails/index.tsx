@@ -6,6 +6,7 @@ import BigNumber from 'bignumber.js'
 import { TokenAmount } from '@luaswap/sdk'
 
 import { useActiveWeb3React } from '../../hooks'
+import { useLuaTokenContract } from '../../hooks/useContract'
 import { AppDispatch } from '../../state'
 import { clearAllTransactions } from '../../state/transactions/actions'
 import { shortenAddress } from '../../utils'
@@ -248,8 +249,11 @@ export default function AccountDetails({
   openOptions
 }: AccountDetailsProps) {
   const { chainId, account, connector } = useActiveWeb3React()
+  const isEtherMainnet = chainId === 1
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
+  const luaContract = useLuaTokenContract(LUA.address)
+
   const [accountData, setAccountData] = useState({
     totalLuaLock: new TokenAmount(LUA, '0'),
     luaUnlockAble: new TokenAmount(LUA, '0')
@@ -289,8 +293,15 @@ export default function AccountDetails({
   }, [account])
 
   const [unlock, setUnlock] = useState(false)
-  function unlockLua() {
+  async function unlockLua() {
     setUnlock(true)
+
+    try {
+      luaContract && (await luaContract.unlock())
+      setUnlock(false)
+    } catch (e) {
+      setUnlock(false)
+    }
   }
 
   function formatConnectorName() {
@@ -459,14 +470,15 @@ export default function AccountDetails({
                 </Title>
                 <WalletAction
                   style={{ fontSize: '.825rem', fontWeight: 400 }}
-                  onClick={() => {
-                    unlockLua()
-                  }}
+                  disabled={unlock || !isEtherMainnet}
+                  onClick={unlockLua}
                 >
                   Unlock
                 </WalletAction>
               </AccountGroupingRow>
-              <AccountGroupingRow>{unlock && <CommingSoon>Unlock is coming soon</CommingSoon>}</AccountGroupingRow>
+              <AccountGroupingRow>
+                {!isEtherMainnet && <CommingSoon>Please switch to the Ethereum mainnet to unlock</CommingSoon>}
+              </AccountGroupingRow>
             </InfoCard>
           </YourAccount>
         </AccountSection>
