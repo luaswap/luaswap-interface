@@ -2,6 +2,7 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@luaswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
+export const FACTORY_ADDRESS = '0x28c79368257CD71A122409330ad2bEBA7277a396'
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
 // Tomo router address testnet: 0x6f7425954a609bc4f585A13664c414D543B676d8
@@ -207,7 +208,7 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 
 // used to ensure the user doesn't send so much ETH so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
-export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(1), JSBI.BigInt(16)) // .01 ETH
+export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(0), JSBI.BigInt(16)) // .01 ETH
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
 
 export const STAKING_POOLS = [

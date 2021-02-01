@@ -6,6 +6,7 @@ import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
+import { Link } from 'react-router-dom'
 import styled, { ThemeContext } from 'styled-components'
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { BlueCard, LightCard } from '../../components/Card'
@@ -46,7 +47,15 @@ const StyledInfo = styled.div`
   text-align: center;
   margin-bottom: 20px
 `
-
+const StyledLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 25px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.primary1};
+`
 export default function AddLiquidity({
   match: {
     params: { currencyIdA, currencyIdB }
@@ -270,7 +279,6 @@ export default function AddLiquidity({
   const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
     currencies[Field.CURRENCY_A]?.symbol
   } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
-
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
@@ -403,7 +411,16 @@ export default function AddLiquidity({
               <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
               </div>
-            ) : (
+              ) : IsTomo && noLiquidity 
+              ? (
+                <AutoColumn gap="sm" justify="center">
+                  <Text color="#AF7C31" textAlign="center" fontSize="13px">Pair don't exist yet. Please create a pair before adding liquidity.</Text>
+                  <StyledLink to={`/create-pair`}>
+                    <Text textAlign="center">Create Pair</Text>
+                  </StyledLink>
+                </AutoColumn>
+              )
+              :(
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||
                   approvalA === ApprovalState.PENDING ||
@@ -460,7 +477,7 @@ export default function AddLiquidity({
         <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
-      ) : null}
+      ) : (null)}
     </>
   )
 }

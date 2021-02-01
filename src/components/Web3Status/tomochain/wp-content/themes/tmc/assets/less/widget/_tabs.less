@@ -1,0 +1,119 @@
+.tmc-tabs-widget{
+	margin: 0 auto;
+	@media(min-width: 1200px){
+		width: 80%;
+	}
+	.title-heading{
+		font-size: 60px;
+		line-height: 1;
+		margin-bottom: 50px;
+		text-align: right;
+		position: relative;
+		font-weight: 900;
+		z-index: 1;
+		@media (max-width: 1366px){
+			font-size: 40px;
+		}
+		span{
+			height: 30px;
+			display: block;
+			background-color: @secondary-color;
+			position: absolute;
+			z-index: -1;
+			width: 200px;
+			right: 0;
+			bottom: 0px;
+			@media (max-width: 1366px){
+				height: 15px;
+				width: 150px;
+			}
+		}
+	}
+	.tmc-tab-title{
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		margin-bottom: 60px;
+		@media(max-width: 767px){
+			margin-bottom: 30px;
+		}
+		li{
+			position: relative;
+			font-size: 28px;
+			font-weight: 900;
+			margin-bottom: 15px;
+			@media(max-width: 767px){
+				font-size: 16px;
+			}
+			@media(min-width: 768px){
+				// width: 25%;
+			}
+			@media(min-width: 768px)and(max-width: 991px){
+				font-size: 22px;
+			}
+			a{
+				display: inline-block;
+				position: relative;
+				color: #ACB0BC;
+				&:after{
+					position: absolute;
+					content: '';
+					width: 0;
+					height: 2px;
+					background: @text-color;
+					bottom: 5px;
+					left: 0;
+					opacity: 0;
+					transition: all 0.35s ease;
+				}
+			}
+			&.active,
+			&:hover{
+				a {
+					color: #242828;
+					&:after{
+						width: 100%;
+						opacity: 1;
+					}
+				}
+			}
+		}
+	}
+	.tab-content{
+		display: none;
+		width: 100%!important;
+		.row{
+			align-items: center;
+			img{
+				max-width: 150px;
+				max-height: 60px;
+				@media(max-width: 991px){
+					max-width: 115px;
+				}
+				@media(max-width: 767px){
+					max-width: 100%;
+				}
+			}
+			a,
+			.common-logo-item{
+				display: block;
+				// text-align: center;
+				margin-bottom: 50px;
+				@media(max-width: 767px){
+					margin-bottom: 25px;
+				}
+			}
+		}
+	}
+	.img-size {
+		img {
+			width: 120px;
+			@media(max-width: 767px){
+				width: 80%;
+			}
+		}
+	}
+}

@@ -10,9 +10,11 @@ const commit_hash = '3dda6df393721f8832dbbd0cc279d4ff8d693276'
 
 const getTokenLogoURL = (address: string, chainId: ChainId | undefined) =>{
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo) return `https://raw.githubusercontent.com/tomochain/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${address}.png`
-  
-  return `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
+  if(IsTomo){
+    return `https://raw.githubusercontent.com/tomochain/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${address}.png`
+  }else{
+    return `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
+  }  
 }  
 
 const StyledEthereumLogo = styled.img<{ size: string }>`

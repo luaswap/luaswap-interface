@@ -1,0 +1,144 @@
+@keyframes HotNews{
+	0%{ color: transparent;}
+	50%{
+		background-color: #e11616;
+		color: #ffffff;
+	}
+	75%{
+		background-color: #e11616;
+		color: #ffffff;
+	}
+	100%{ color: transparent;}
+}
+.tmc-top-report{
+	background-color: #3A3D3D;
+	width: 100%!important;
+	height: 35px;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	z-index: 10;
+	.container{
+		position: relative;
+	}
+	.tmc-report-list {
+		max-width: 650px;
+		overflow: hidden;
+		.slick-list {
+			margin: 0 -30px;
+			@media only screen and (max-width: 767px) {
+				margin: 0;
+			}
+		}
+		.tmc-report-item{
+			color: @white;
+			height: 35px;
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			transition: all .3s;
+			color: #A49F9F;
+			position: relative;
+			&::after {
+				content: '';
+				height: 10px;
+				width: 1px;
+				background-color: #A49F9F;
+				position: absolute;
+				right: 0;
+				top: 50%;
+				transform: translateY(-50%);
+			}
+			@media only screen and (max-width: 767px) {
+				&::after {
+					display: none;
+				}
+			}
+
+			&:last-child{
+				&::after {
+					display: none;
+				}
+			}
+			&:nth-child(1),
+			&:nth-child(2) {
+				a {
+					color:#00e8b4;
+					&::before {
+						content: 'NEW';
+						animation-name: HotNews;
+						animation-duration: 1.3s;
+						animation-iteration-count: infinite;
+						border-radius: 20px;
+						padding: 3px 7px;
+						font-size: 7px;
+						margin-right: 5px;
+						line-height: 1;
+						font-weight: bold;
+						float: left;
+					}
+				}
+			}
+			a{
+				position: relative;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: block;
+				font-size: 14px;
+				padding: 0 30px;
+				line-height: 1;
+				@media only screen and (max-width: 767px) {
+					padding: 0;
+					&::after {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	.close{
+		position: absolute;
+		right: 0;
+		top: -100%;
+		transform: translate(0, -50%);
+		-webkit-transform: translate(0, -50%);
+		-moz-transform: translate(0, -50%);
+		color: @white;
+		line-height: 30px;
+	    width: 30px;
+	    text-align: center;
+		cursor: pointer;
+		transition: all .3s;
+		display: none;
+	}
+	&:hover{
+		.close{
+			top: 50%;
+		}
+	}
+}
+
+// .site-header{
+// 	&.scrollFixed {
+// 		.tmc-report-item{
+// 			a {
+// 				font-size: 13px;
+// 			}
+// 		}
+// 	}
+// }
+
+.tmc-report-widget{
+	.tmc-report-content{
+		display: flex;
+		justify-content: space-between;
+		padding-top: 5px;
+		padding-bottom: 5px;
+		.close{
+			padding-left: 20px;
+			padding-right: 20px;
+			cursor: pointer;
+		}
+	}
+}

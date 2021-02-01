@@ -1,0 +1,72 @@
+*{
+	box-sizing: border-box;
+}
+body {
+	color: @text-color;
+	font-family: @body-font-family;
+	font-size: @font-size-base;
+	line-height: @body-line-height;
+	margin: 0;
+	background: @body-bg;
+}
+h1,h2,h3,h4,h5,h6{
+	margin: 0;
+	font-family: @heading-font-family;
+}
+.menu li{
+	font-family: @menu-font-family;
+}
+
+a{
+	text-decoration: none;
+	color: inherit;
+	transition: all 0.35s ease;
+	&:focus {
+		outline: none;
+	}
+}
+a:hover{
+	color: @secondary-color;
+	text-decoration: none!important;
+}
+strong {
+    font-weight: 700;
+}
+
+dfn, cite, em, i {
+	font-style: italic;
+}
+
+:focus {
+	outline: none;
+}
+
+blockquote {
+	margin: 0 1.5em;
+}
+
+address {
+	margin: 0 0 1.5em;
+}
+
+abbr, acronym {
+	border-bottom: 1px dotted @border-color;
+	cursor: help;
+}
+big {
+	font-size: 125%;
+}
+ul {
+	padding-left: 20px;
+	margin: 0;
+}
+li {
+	margin-top: 10px;
+}
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.li-square li {
+	list-style: square;
+}

@@ -1,0 +1,101 @@
+.content-wrap{
+    display: flex;
+    flex-wrap: wrap;
+    .inner{
+        background: @white;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+    .post-loop{
+        width: 33.33%;
+        padding-left: 10px;
+        padding-right: 10px;
+        margin-bottom: 20px;
+        @media(max-width: 992px){
+            width: 50%;
+        }
+        @media(max-width: 680px){
+            width: 100%;
+        }
+    }
+    .post-thumbnail{
+        display: block;
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+    .box-content{
+        padding: 10px 20px 10px 20px;
+        .entry-title{
+            margin-top: 0;
+            font-weight: 600;
+        }
+        .entry-meta{
+            .posted-on{
+                margin-right: 5px;
+            }
+            i{
+                color: @secondary-color;
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.tmc-breadcrumb-wrap {
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    padding: 7px 0;
+    margin-bottom: 30px;
+    margin-top: 4px;
+    font-size: 14px;
+    overflow: hidden;
+    white-space: nowrap;
+    @media(max-width: 991px){
+        margin-bottom: 15px;
+    }
+    .breadcrumbs {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        overflow: hidden;
+        @media(max-width: 991px){
+            margin-left: 0px;
+        }
+        li {
+            list-style: none;
+            padding-right: 15px;
+            margin-top: 0;
+            a {
+                color: #bf953b;
+            }
+            &::before {
+                content: '/';
+                margin-right: 15px;
+            }
+            &:first-child {
+                &::before {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+/* Use Case */
+.usecase-content{
+    .inner{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 30px;
+        .entry-img{
+            width: 30%;
+        }
+        .box-content{
+            width: 70%;
+            padding: 20px 0 20px 50px;
+        }
+
+    }
+}
+

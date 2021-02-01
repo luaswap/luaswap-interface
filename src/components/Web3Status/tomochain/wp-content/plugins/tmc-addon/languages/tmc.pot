@@ -1,0 +1,1940 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Project-Id-Version: Tomochain Addon\n"
+"POT-Creation-Date: 2020-03-16 23:53+0700\n"
+"PO-Revision-Date: 2020-03-16 23:53+0700\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: tmc-addon.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/admin/page-metaboxs.php:24
+msgid "Page Options"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:37
+msgid "Hide Page Heading"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:47
+msgid "Event Options"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:60 includes/post-type/event.php:98
+msgid "Open Date"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:66
+msgid "Add Close Date"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:67
+msgid "Use when the event lasts several days"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:73
+msgid "Close Date"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:83
+msgid "Place"
+msgstr ""
+
+#: includes/admin/page-metaboxs.php:84
+msgid "Place of the event"
+msgstr ""
+
+#: includes/admin/sidebar-register.php:11
+msgid "TMC - Footer Column #"
+msgstr ""
+
+#: includes/admin/theme-options.php:28
+msgid "Tomo Settings"
+msgstr ""
+
+#: includes/admin/theme-options.php:32 includes/elementor-extra/contact.php:38
+#: includes/elementor-extra/layer-content.php:38
+#: includes/elementor-extra/layer.php:39 includes/elementor-extra/press.php:54
+#: includes/elementor-extra/step.php:38
+#: includes/elementor-extra/tmc-build.php:56
+msgid "General"
+msgstr ""
+
+#: includes/admin/theme-options.php:40
+msgid "Home URL"
+msgstr ""
+
+#: includes/admin/theme-options.php:45 includes/admin/theme-options.php:88
+#: includes/elementor-extra/alpha-slider.php:116
+#: includes/elementor-extra/alpha-tabs.php:91
+#: includes/elementor-extra/contact.php:93
+#: includes/elementor-extra/layer-content.php:98
+#: includes/elementor-extra/press.php:105 includes/elementor-extra/step.php:95
+#: includes/elementor-extra/tabs.php:94 includes/elementor-extra/tabs.php:167
+#: includes/elementor-extra/tabs.php:241 includes/elementor-extra/tabs.php:314
+#: includes/elementor-extra/tmc-build.php:90
+#: includes/elementor-extra/tmc-button.php:56
+msgid "Url"
+msgstr ""
+
+#: includes/admin/theme-options.php:46
+msgid "Enter url"
+msgstr ""
+
+#: includes/admin/theme-options.php:51
+msgid "Tomochain Report"
+msgstr ""
+
+#: includes/admin/theme-options.php:56
+msgid "Show Report"
+msgstr ""
+
+#: includes/admin/theme-options.php:65
+msgid "Report {#}"
+msgstr ""
+
+#: includes/admin/theme-options.php:66 includes/admin/theme-options.php:105
+msgid "Add"
+msgstr ""
+
+#: includes/admin/theme-options.php:67 includes/admin/theme-options.php:106
+#: includes/libs/cmb2/includes/CMB2_JS.php:229
+#: includes/libs/cmb2/includes/CMB2_Types.php:406
+#: includes/libs/cmb2/includes/types/CMB2_Type_File_Base.php:84
+msgid "Remove"
+msgstr ""
+
+#: includes/admin/theme-options.php:75
+msgid "Title report"
+msgstr ""
+
+#: includes/admin/theme-options.php:82
+msgid "Target Blank"
+msgstr ""
+
+#: includes/admin/theme-options.php:89
+msgid "Enter url to the report"
+msgstr ""
+
+#: includes/admin/theme-options.php:95
+msgid "Social"
+msgstr ""
+
+#: includes/admin/theme-options.php:104
+msgid "Social {#}"
+msgstr ""
+
+#: includes/admin/theme-options.php:114
+msgid "Social Name"
+msgstr ""
+
+#: includes/admin/theme-options.php:121
+msgid "Social Icon"
+msgstr ""
+
+#: includes/admin/theme-options.php:129
+msgid "Social Url"
+msgstr ""
+
+#: includes/admin/theme-options.php:151
+msgid "Header"
+msgstr ""
+
+#: includes/admin/theme-options.php:164
+msgid "Header Settings"
+msgstr ""
+
+#: includes/admin/theme-options.php:169
+msgid "Header Layout"
+msgstr ""
+
+#: includes/admin/theme-options.php:170
+msgid "Set Header Layout"
+msgstr ""
+
+#: includes/admin/theme-options.php:174
+msgid "Header Static"
+msgstr ""
+
+#: includes/admin/theme-options.php:183 includes/admin/theme-options.php:188
+msgid "Footer"
+msgstr ""
+
+#: includes/admin/theme-options.php:198
+msgid "Footer Settings"
+msgstr ""
+
+#: includes/admin/theme-options.php:203
+msgid "Footer columns"
+msgstr ""
+
+#: includes/admin/theme-options.php:205
+#, php-format
+msgid "Go to <a href=\"%s\">the widget</a> to set up the footer"
+msgstr ""
+
+#: includes/admin/theme-options.php:209
+msgid "1"
+msgstr ""
+
+#: includes/admin/theme-options.php:210
+msgid "2"
+msgstr ""
+
+#: includes/admin/theme-options.php:211
+msgid "3"
+msgstr ""
+
+#: includes/admin/theme-options.php:215
+msgid "Logo"
+msgstr ""
+
+#: includes/admin/theme-options.php:224
+msgid "Add File"
+msgstr ""
+
+#: includes/admin/theme-options.php:244
+msgid "Form Subscribe"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+#: includes/class-elementor-extra-widgets.php:122
+msgid "Tomochain Addon"
+msgstr ""
+
+#: includes/class-elementor-extra-widgets.php:229
+#: includes/class-elementor-extra-widgets.php:241
+msgid "Cheatin&#8217; huh?"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:23
+msgid "TMC Slider"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:61
+#: includes/elementor-extra/post-layout.php:116
+msgid "Slider"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:70
+#: includes/elementor-extra/alpha-tabs.php:53
+#: includes/elementor-extra/layer-content.php:64
+#: includes/elementor-extra/press.php:78 includes/elementor-extra/tabs.php:84
+#: includes/elementor-extra/tabs.php:157 includes/elementor-extra/tabs.php:231
+#: includes/elementor-extra/tabs.php:304
+#: includes/elementor-extra/team-member.php:66
+#: includes/elementor-extra/tmc-build.php:65
+msgid "Image"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:79
+#: includes/elementor-extra/alpha-slider.php:139
+#: includes/elementor-extra/alpha-tabs.php:62
+msgid "Tab"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:81
+#: includes/elementor-extra/alpha-slider.php:144
+#: includes/elementor-extra/alpha-tabs.php:64
+#: includes/elementor-extra/alpha-tabs.php:110
+msgid "D"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:82
+#: includes/elementor-extra/alpha-tabs.php:65
+#: includes/elementor-extra/contact.php:47
+#: includes/elementor-extra/layer-heading.php:43
+#: includes/elementor-extra/layer-heading.php:52
+#: includes/elementor-extra/layer-heading.php:61
+#: includes/elementor-extra/press.php:63
+#: includes/elementor-extra/section-build.php:40
+#: includes/elementor-extra/section-features.php:44
+#: includes/elementor-extra/tabs.php:48 includes/elementor-extra/tabs.php:67
+#: includes/elementor-extra/tabs.php:140 includes/elementor-extra/tabs.php:213
+#: includes/elementor-extra/title.php:44
+#: includes/elementor-extra/tmc-button.php:49
+#: includes/elementor-extra/tmc-title.php:43
+msgid "Type your title"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:89
+#: includes/elementor-extra/layer-heading.php:75
+#: includes/elementor-extra/layer-heading.php:101
+#: includes/elementor-extra/layer-heading.php:127
+#: includes/elementor-extra/tmc-button.php:70
+#: includes/elementor-extra/tmc-title.php:69
+msgid "Color"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:96
+#: includes/elementor-extra/alpha-tabs.php:71
+#: includes/elementor-extra/contact.php:44
+#: includes/elementor-extra/contact.php:55
+#: includes/elementor-extra/layer-content.php:74
+#: includes/elementor-extra/layer-heading.php:49
+#: includes/elementor-extra/layer-heading.php:51
+#: includes/elementor-extra/layer-heading.php:94
+#: includes/elementor-extra/layer.php:76
+#: includes/elementor-extra/post-layout.php:157
+#: includes/elementor-extra/press.php:60 includes/elementor-extra/press.php:71
+#: includes/elementor-extra/section-build.php:36
+#: includes/elementor-extra/section-features.php:40
+#: includes/elementor-extra/service.php:72 includes/elementor-extra/step.php:71
+#: includes/elementor-extra/tabs.php:45 includes/elementor-extra/tabs.php:74
+#: includes/elementor-extra/tabs.php:147 includes/elementor-extra/tabs.php:149
+#: includes/elementor-extra/tabs.php:220 includes/elementor-extra/tabs.php:294
+#: includes/elementor-extra/title.php:40
+#: includes/elementor-extra/tmc-build.php:75
+#: includes/elementor-extra/tmc-button.php:46
+#: includes/elementor-extra/tmc-title.php:33
+#: includes/elementor-extra/tmc-title.php:40
+#: includes/elementor-extra/tmc-title.php:42 includes/post-type/event.php:97
+msgid "Title"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:98
+#: includes/elementor-extra/alpha-slider.php:145
+#: includes/elementor-extra/alpha-tabs.php:73
+#: includes/elementor-extra/alpha-tabs.php:111
+msgid "Developer hub"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:105
+#: includes/elementor-extra/alpha-tabs.php:80
+#: includes/elementor-extra/section-build.php:46
+#: includes/elementor-extra/section-features.php:50
+msgid "Sub title"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:108
+#: includes/elementor-extra/alpha-slider.php:146
+#: includes/elementor-extra/alpha-slider.php:151
+#: includes/elementor-extra/alpha-slider.php:156
+#: includes/elementor-extra/alpha-tabs.php:83
+#: includes/elementor-extra/alpha-tabs.php:112
+#: includes/elementor-extra/alpha-tabs.php:117
+#: includes/elementor-extra/alpha-tabs.php:122
+msgid "Dive on Tomochain technoloty, and start building."
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:109
+#: includes/elementor-extra/alpha-tabs.php:84
+#: includes/elementor-extra/section-build.php:49
+#: includes/elementor-extra/section-features.php:53
+msgid "Type your sub title"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:118
+#: includes/elementor-extra/alpha-tabs.php:93
+#: includes/elementor-extra/contact.php:95
+#: includes/elementor-extra/layer-content.php:100
+#: includes/elementor-extra/press.php:107 includes/elementor-extra/step.php:97
+#: includes/elementor-extra/tabs.php:96 includes/elementor-extra/tabs.php:169
+#: includes/elementor-extra/tabs.php:243 includes/elementor-extra/tabs.php:316
+#: includes/elementor-extra/team-member.php:109
+#: includes/elementor-extra/team-member.php:135
+#: includes/elementor-extra/team-member.php:161
+#: includes/elementor-extra/team-member.php:188
+#: includes/elementor-extra/tmc-build.php:92
+#: includes/elementor-extra/tmc-button.php:58
+msgid "https://your-link.com"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:130
+#: includes/elementor-extra/post-layout.php:308
+#: includes/elementor-extra/press.php:96 includes/elementor-extra/step.php:86
+msgid "Button text"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:132
+#: includes/elementor-extra/alpha-tabs.php:170
+msgid "View more"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:149
+#: includes/elementor-extra/alpha-tabs.php:115
+msgid "P"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:150
+#: includes/elementor-extra/alpha-tabs.php:116
+msgid "Protocol & Product"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:154
+#: includes/elementor-extra/alpha-tabs.php:120
+msgid "S"
+msgstr ""
+
+#: includes/elementor-extra/alpha-slider.php:155
+#: includes/elementor-extra/alpha-tabs.php:121
+msgid "Staking"
+msgstr ""
+
+#: includes/elementor-extra/alpha-tabs.php:23
+msgid "TMC Alpha Tabs"
+msgstr ""
+
+#: includes/elementor-extra/alpha-tabs.php:44
+msgid "Alpha Tab"
+msgstr ""
+
+#: includes/elementor-extra/alpha-tabs.php:105
+msgid "Tab Alpha"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:22
+msgid "TMC Contact"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:46
+msgid "Contact"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:62
+#: includes/elementor-extra/tmc-title.php:50
+msgid "Type"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:65
+#: includes/elementor-extra/contact.php:73
+msgid "Email"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:66
+msgid "URL"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:83
+msgid "Text"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:111
+msgid "Contact List"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:116
+msgid "Contact 1"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:119
+msgid "Contact 2"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:122
+msgid "Contact 3"
+msgstr ""
+
+#: includes/elementor-extra/contact.php:125
+msgid "Contact 4"
+msgstr ""
+
+#: includes/elementor-extra/event.php:17
+msgid "TMC Event"
+msgstr ""
+
+#: includes/elementor-extra/event.php:75
+#: includes/elementor-extra/layer-heading.php:33
+#: includes/elementor-extra/post-layout.php:106
+#: includes/elementor-extra/section-build.php:29
+#: includes/elementor-extra/section-features.php:33
+#: includes/elementor-extra/team-member.php:57
+#: includes/elementor-extra/title.php:33
+msgid "General Options"
+msgstr ""
+
+#: includes/elementor-extra/event.php:82
+msgid "Categories"
+msgstr ""
+
+#: includes/elementor-extra/event.php:93
+#: includes/elementor-extra/post-layout.php:153
+msgid "Order by"
+msgstr ""
+
+#: includes/elementor-extra/event.php:96
+#: includes/libs/cmb2/includes/CMB2_JS.php:166
+msgid "Default"
+msgstr ""
+
+#: includes/elementor-extra/event.php:97 includes/elementor-extra/event.php:208
+msgid "Upcoming Event"
+msgstr ""
+
+#: includes/elementor-extra/event.php:98 includes/elementor-extra/event.php:206
+msgid "Past Event"
+msgstr ""
+
+#: includes/elementor-extra/event.php:107
+#: includes/elementor-extra/post-layout.php:169
+msgid "Sort by"
+msgstr ""
+
+#: includes/elementor-extra/event.php:110
+#: includes/elementor-extra/post-layout.php:172
+msgid "ASC"
+msgstr ""
+
+#: includes/elementor-extra/event.php:111
+#: includes/elementor-extra/post-layout.php:173
+msgid "DESC"
+msgstr ""
+
+#: includes/elementor-extra/event.php:118
+#: includes/elementor-extra/post-layout.php:180
+msgid "Post Per Page"
+msgstr ""
+
+#: includes/elementor-extra/event.php:120
+#: includes/elementor-extra/post-layout.php:182
+msgid "8"
+msgstr ""
+
+#: includes/elementor-extra/event.php:121
+#: includes/elementor-extra/post-layout.php:183
+msgid "-1 = Get all post."
+msgstr ""
+
+#: includes/elementor-extra/event.php:128
+msgid "Display slide number"
+msgstr ""
+
+#: includes/elementor-extra/event.php:130
+msgid "6"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:22
+msgid "TMC Layer Content"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:46
+#: includes/elementor-extra/layer.php:47
+#: includes/elementor-extra/post-layout.php:135
+#: includes/elementor-extra/step.php:46
+msgid "Columns"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:80
+msgid "Sub Title"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:83
+#: includes/elementor-extra/layer-content.php:92
+#: includes/elementor-extra/press.php:90 includes/elementor-extra/press.php:99
+#: includes/elementor-extra/step.php:80 includes/elementor-extra/step.php:89
+#: includes/elementor-extra/tmc-build.php:84
+msgid "Type your description"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:90
+#: includes/elementor-extra/layer-heading.php:58
+#: includes/elementor-extra/layer-heading.php:120
+#: includes/elementor-extra/press.php:88
+#: includes/elementor-extra/service.php:81 includes/elementor-extra/step.php:78
+#: includes/elementor-extra/tmc-build.php:82
+#: includes/libs/cmb2/example-functions.php:543
+msgid "Description"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:113
+msgid "Button Text"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:114
+#: includes/elementor-extra/post-layout.php:309
+#: includes/elementor-extra/post-layout.php:310
+msgid "Read more"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:125
+msgid "Tomo Wallet"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:128
+msgid "Tomo Stats"
+msgstr ""
+
+#: includes/elementor-extra/layer-content.php:131
+msgid "Tomo Scan"
+msgstr ""
+
+#: includes/elementor-extra/layer-heading.php:17
+msgid "TMC Layer Heading"
+msgstr ""
+
+#: includes/elementor-extra/layer-heading.php:40
+#: includes/elementor-extra/layer-heading.php:68
+msgid "Layer"
+msgstr ""
+
+#: includes/elementor-extra/layer-heading.php:42
+msgid "Layer 1"
+msgstr ""
+
+#: includes/elementor-extra/layer-heading.php:86
+#: includes/elementor-extra/layer-heading.php:112
+#: includes/elementor-extra/layer-heading.php:138
+#: includes/elementor-extra/tmc-title.php:80
+msgid "Typography"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:23
+msgid "TMC Layer"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:64
+#: includes/elementor-extra/service.php:44
+#: includes/elementor-extra/team-member.php:97
+#: includes/elementor-extra/team-member.php:123
+#: includes/elementor-extra/team-member.php:149
+#: includes/elementor-extra/team-member.php:176
+msgid "Icon"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:83
+msgid "ID Section"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:84
+msgid "Including lowercase letters and dashes. Eg: product-setion"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:91
+msgid "layer List"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:96
+msgid "Product"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:99
+msgid "Protocol"
+msgstr ""
+
+#: includes/elementor-extra/layer.php:102
+msgid "Core Blockchain"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:25
+msgid "TMC Post Layout"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:112
+msgid "Layout"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:115
+msgid "Grid"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:124
+msgid "Category"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:156 includes/post-type/event.php:99
+msgid "Date"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:158
+msgid "Modified date"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:159
+msgid "Comment count"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:160
+msgid "Random"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:191
+msgid "Pagination"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:201
+msgid "Loop"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:203
+#: includes/elementor-extra/post-layout.php:217
+#: includes/elementor-extra/post-layout.php:231
+#: includes/elementor-extra/post-layout.php:259
+msgid "Off"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:204
+#: includes/elementor-extra/post-layout.php:218
+#: includes/elementor-extra/post-layout.php:232
+#: includes/elementor-extra/post-layout.php:260
+msgid "On"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:215
+msgid "Item Center"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:229
+msgid "Auto Play"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:243
+msgid "Auto Height"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:245
+msgid "Yes"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:246
+msgid "No"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:257
+msgid "Show Navigation"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:278
+msgid "Content"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:287
+msgid "Excerpt Length (words)"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:288
+msgid "Length of content (words)"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:297
+#: includes/elementor-extra/tmc-button.php:48
+#: includes/elementor-extra/tmc-button.php:103
+msgid "Button"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:431
+msgid "Previous"
+msgstr ""
+
+#: includes/elementor-extra/post-layout.php:432
+#: includes/libs/cmb2/includes/CMB2_JS.php:206
+msgid "Next"
+msgstr ""
+
+#: includes/elementor-extra/press.php:22
+msgid "TMC Press"
+msgstr ""
+
+#: includes/elementor-extra/press.php:62
+msgid "Press"
+msgstr ""
+
+#: includes/elementor-extra/press.php:98 includes/elementor-extra/press.php:172
+#: includes/elementor-extra/step.php:88
+msgid "Read the article"
+msgstr ""
+
+#: includes/elementor-extra/press.php:120
+msgid "Article List"
+msgstr ""
+
+#: includes/elementor-extra/press.php:125
+msgid "Article 1"
+msgstr ""
+
+#: includes/elementor-extra/press.php:128
+msgid "Article 2"
+msgstr ""
+
+#: includes/elementor-extra/press.php:131
+msgid "Article 3"
+msgstr ""
+
+#: includes/elementor-extra/press.php:134
+msgid "Article 4"
+msgstr ""
+
+#: includes/elementor-extra/press.php:169
+msgid "News"
+msgstr ""
+
+#: includes/elementor-extra/section-build.php:13
+msgid "TMC Build on Tomochain"
+msgstr ""
+
+#: includes/elementor-extra/section-build.php:39
+msgid "Build on Tomochain"
+msgstr ""
+
+#: includes/elementor-extra/section-features.php:17
+msgid "TMC Features"
+msgstr ""
+
+#: includes/elementor-extra/section-features.php:43
+msgid "Features"
+msgstr ""
+
+#: includes/elementor-extra/service.php:22
+#: includes/elementor-extra/service.php:37
+msgid "TMC Service"
+msgstr ""
+
+#: includes/elementor-extra/service.php:55
+msgid "Size"
+msgstr ""
+
+#: includes/elementor-extra/service.php:74
+#: includes/elementor-extra/title.php:43
+#: includes/elementor-extra/tmc-title.php:17
+msgid "TMC Title"
+msgstr ""
+
+#: includes/elementor-extra/service.php:75
+msgid "Type your title here"
+msgstr ""
+
+#: includes/elementor-extra/service.php:83
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, "
+"luctus nec ullamcorper mattis, pulvinar dapibus leo."
+msgstr ""
+
+#: includes/elementor-extra/service.php:84
+msgid "type your description here"
+msgstr ""
+
+#: includes/elementor-extra/service.php:90
+msgid "Animate"
+msgstr ""
+
+#: includes/elementor-extra/service.php:93
+msgid "Default description"
+msgstr ""
+
+#: includes/elementor-extra/service.php:94
+msgid "Values ​​separated by |"
+msgstr ""
+
+#: includes/elementor-extra/step.php:22
+msgid "TMC Step"
+msgstr ""
+
+#: includes/elementor-extra/step.php:64
+msgid "Step"
+msgstr ""
+
+#: includes/elementor-extra/step.php:110
+msgid "Step List"
+msgstr ""
+
+#: includes/elementor-extra/step.php:115
+msgid "Step 1"
+msgstr ""
+
+#: includes/elementor-extra/step.php:118
+msgid "Step 2"
+msgstr ""
+
+#: includes/elementor-extra/step.php:121
+msgid "Step 3"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:23
+msgid "TMC Tabs"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:38
+msgid "Title heading"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:47
+msgid "Ecosystem"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:56 includes/elementor-extra/tabs.php:66
+#: includes/elementor-extra/tabs.php:76
+msgid "Partner"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:63 includes/elementor-extra/tabs.php:136
+#: includes/elementor-extra/tabs.php:209 includes/elementor-extra/tabs.php:283
+#: includes/elementor-extra/tabs.php:286
+msgid "Tab title"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:109
+msgid "Partner List"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:114 includes/elementor-extra/tabs.php:117
+msgid "Partner 1"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:129 includes/elementor-extra/tabs.php:139
+msgid "Liquidity"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:183
+msgid "Exchange List"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:188
+msgid "Bibox"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:191
+msgid "Kucoin"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:202 includes/elementor-extra/tabs.php:212
+#: includes/elementor-extra/tabs.php:222 includes/elementor-extra/tabs.php:257
+msgid "Wallet"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:262
+msgid "Wallet 1"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:265
+msgid "Wallet 2"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:276
+msgid "Dapp Channels"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:296
+msgid "Dapp Title"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:330
+msgid "Channels"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:335
+msgid "Dapp 1"
+msgstr ""
+
+#: includes/elementor-extra/tabs.php:338
+msgid "Dapp 2"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:26
+msgid "TMC Team Member"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:76
+msgid "Name"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:83
+msgid "Position"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:89
+msgid "Social 1"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:107
+#: includes/elementor-extra/team-member.php:133
+#: includes/elementor-extra/team-member.php:159
+#: includes/elementor-extra/team-member.php:186
+msgid "Link"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:115
+msgid "Social 2"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:141
+msgid "Social 3"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:168
+msgid "Social 4"
+msgstr ""
+
+#: includes/elementor-extra/team-member.php:194
+msgid "Team Item"
+msgstr ""
+
+#: includes/elementor-extra/title.php:17
+msgid "TMC Title Heading"
+msgstr ""
+
+#: includes/elementor-extra/title.php:51
+msgid "Title Style"
+msgstr ""
+
+#: includes/elementor-extra/title.php:59
+msgid "Sub title tag"
+msgstr ""
+
+#: includes/elementor-extra/title.php:62
+#: includes/elementor-extra/tmc-title.php:53
+msgid "Type 1"
+msgstr ""
+
+#: includes/elementor-extra/title.php:63
+#: includes/elementor-extra/tmc-title.php:54
+msgid "Type 2"
+msgstr ""
+
+#: includes/elementor-extra/title.php:70
+msgid "Title Color"
+msgstr ""
+
+#: includes/elementor-extra/title.php:81
+msgid "Typography for Title"
+msgstr ""
+
+#: includes/elementor-extra/title.php:88
+msgid "Align"
+msgstr ""
+
+#: includes/elementor-extra/title.php:92
+#: includes/elementor-extra/tmc-button.php:132
+#: includes/elementor-extra/tmc-title.php:91
+msgid "Left"
+msgstr ""
+
+#: includes/elementor-extra/title.php:96
+#: includes/elementor-extra/tmc-button.php:136
+#: includes/elementor-extra/tmc-title.php:95
+msgid "Center"
+msgstr ""
+
+#: includes/elementor-extra/title.php:100
+#: includes/elementor-extra/tmc-button.php:140
+#: includes/elementor-extra/tmc-title.php:99
+msgid "Right"
+msgstr ""
+
+#: includes/elementor-extra/tmc-build.php:22
+msgid "TMC Building"
+msgstr ""
+
+#: includes/elementor-extra/tmc-build.php:109
+msgid "Finance"
+msgstr ""
+
+#: includes/elementor-extra/tmc-build.php:112
+msgid "Game"
+msgstr ""
+
+#: includes/elementor-extra/tmc-build.php:115
+msgid "Social & Loyalty"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:23
+msgid "TMC Button"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:38
+msgid "Tmc Button"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:81
+msgid "Background Color"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:92
+msgid "Border Color"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:108
+msgid "Button 1"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:117
+msgid "Padding"
+msgstr ""
+
+#: includes/elementor-extra/tmc-button.php:128
+#: includes/elementor-extra/tmc-title.php:87
+msgid "Alignment"
+msgstr ""
+
+#: includes/elementor-extra/tmc-title.php:62
+msgid "Style"
+msgstr ""
+
+#: includes/libs/cmb2-extend/ajax-search/cmb-field-ajax-search.php:165
+msgid "Error : Unauthorized action"
+msgstr ""
+
+#: includes/libs/cmb2-extend/ajax-search/cmb-field-ajax-search.php:171
+msgid "Error : Wrong request parameters"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:117
+msgid "Test Metabox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:150
+#: includes/libs/cmb2/example-functions.php:490
+msgid "Test Text"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:151
+#: includes/libs/cmb2/example-functions.php:164
+#: includes/libs/cmb2/example-functions.php:177
+#: includes/libs/cmb2/example-functions.php:184
+#: includes/libs/cmb2/example-functions.php:197
+#: includes/libs/cmb2/example-functions.php:205
+#: includes/libs/cmb2/example-functions.php:214
+#: includes/libs/cmb2/example-functions.php:222
+#: includes/libs/cmb2/example-functions.php:237
+#: includes/libs/cmb2/example-functions.php:245
+#: includes/libs/cmb2/example-functions.php:253
+#: includes/libs/cmb2/example-functions.php:270
+#: includes/libs/cmb2/example-functions.php:279
+#: includes/libs/cmb2/example-functions.php:295
+#: includes/libs/cmb2/example-functions.php:302
+#: includes/libs/cmb2/example-functions.php:309
+#: includes/libs/cmb2/example-functions.php:334
+#: includes/libs/cmb2/example-functions.php:347
+#: includes/libs/cmb2/example-functions.php:360
+#: includes/libs/cmb2/example-functions.php:372
+#: includes/libs/cmb2/example-functions.php:381
+#: includes/libs/cmb2/example-functions.php:389
+#: includes/libs/cmb2/example-functions.php:398
+#: includes/libs/cmb2/example-functions.php:405
+#: includes/libs/cmb2/example-functions.php:419
+#: includes/libs/cmb2/example-functions.php:491
+#: includes/libs/cmb2/example-functions.php:583
+#: includes/libs/cmb2/example-functions.php:591
+#: includes/libs/cmb2/example-functions.php:598
+#: includes/libs/cmb2/example-functions.php:605
+#: includes/libs/cmb2/example-functions.php:612
+#: includes/libs/cmb2/example-functions.php:619
+#: includes/libs/cmb2/example-functions.php:626
+#: includes/libs/cmb2/example-functions.php:653
+#: includes/libs/cmb2/example-functions.php:661
+#: includes/libs/cmb2/example-functions.php:668
+#: includes/libs/cmb2/example-functions.php:717
+msgid "field description (optional)"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:163
+msgid "Test Text Small"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:176
+msgid "Test Text Medium"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:183
+msgid "Read-only Disabled Field"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:187
+msgid "Hey there, I'm a read-only field"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:196
+msgid "Custom Rendered Field"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:204
+msgid "Website URL"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:213
+msgid "Test Text Email"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:221
+msgid "Test Time"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:229
+#: includes/libs/cmb2/example-functions.php:230
+msgid "Time zone"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:236
+msgid "Test Date Picker"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:244
+msgid "Test Date Picker (UNIX timestamp)"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:252
+msgid "Test Date/Time Picker Combo (UNIX timestamp)"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:269
+msgid "Test Money"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:278
+msgid "Test Color Picker"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:294
+msgid "Test Text Area"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:301
+msgid "Test Text Area Small"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:308
+msgid "Test Text Area for Code"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:326
+msgid "Test Title Weeeee"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:327
+msgid "This is a title description"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:333
+msgid "Test Select"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:339
+#: includes/libs/cmb2/example-functions.php:352
+#: includes/libs/cmb2/example-functions.php:364
+msgid "Option One"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:340
+#: includes/libs/cmb2/example-functions.php:353
+#: includes/libs/cmb2/example-functions.php:365
+msgid "Option Two"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:341
+#: includes/libs/cmb2/example-functions.php:354
+#: includes/libs/cmb2/example-functions.php:366
+msgid "Option Three"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:346
+msgid "Test Radio inline"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:359
+msgid "Test Radio"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:371
+msgid "Test Taxonomy Radio"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:380
+msgid "Test Taxonomy Select"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:388
+msgid "Test Taxonomy Multi Checkbox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:397
+msgid "Test Checkbox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:404
+msgid "Test Multi Checkbox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:410
+msgid "Check One"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:411
+msgid "Check Two"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:412
+msgid "Check Three"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:418
+msgid "Test wysiwyg"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:428
+msgid "Test Image"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:429
+msgid "Upload an image or enter a URL."
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:435
+msgid "Multiple Files"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:436
+msgid "Upload or add multiple images/attachments."
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:443
+msgid "oEmbed"
+msgstr ""
+
+#. translators: %s: link to codex.wordpress.org/Embeds
+#: includes/libs/cmb2/example-functions.php:446
+#, php-format
+msgid ""
+"Enter a youtube, twitter, or instagram URL. Supports services listed at %s."
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:479
+msgid "About Page Metabox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:510
+msgid "Repeating Field Group"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:518
+msgid "Generates reusable form entries"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:520
+msgid "Entry {#}"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:521
+msgid "Add Another Entry"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:522
+msgid "Remove Entry"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:536
+msgid "Entry Title"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:544
+msgid "Write a short description for this entry"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:550
+msgid "Entry Image"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:556
+msgid "Image Caption"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:575
+msgid "User Profile Metabox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:582
+#: includes/libs/cmb2/example-functions.php:652
+msgid "Extra Info"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:590
+msgid "Avatar"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:597
+msgid "Facebook URL"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:604
+msgid "Twitter URL"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:611
+msgid "Google+ URL"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:618
+msgid "Linkedin URL"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:625
+msgid "User Field"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:645
+msgid "Category Metabox"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:660
+msgid "Term Image"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:667
+msgid "Arbitrary Term Field"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:686
+msgid "Theme Options"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:716
+msgid "Site Background Color"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:753
+#, php-format
+msgid "%s &mdash; Updated!"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:787
+msgid "REST Test Box"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:796
+msgid "REST Test Text"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:797
+msgid "Will show in the REST API for this box and for pages."
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:803
+msgid "REST Editable Test Text"
+msgstr ""
+
+#: includes/libs/cmb2/example-functions.php:804
+msgid "Will show in REST API \"editable\" contexts only (`POST` requests)."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2.php:199
+msgid "Metabox configuration is required to have an ID parameter."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2.php:603
+msgid "Click to toggle"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Ajax.php:75
+msgid "Please Try Again"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Ajax.php:181
+msgid "Remove Embed"
+msgstr ""
+
+#. translators: 1: results for. 2: link to codex.wordpress.org/Embeds
+#: includes/libs/cmb2/includes/CMB2_Ajax.php:189
+#: includes/libs/cmb2/includes/helper-functions.php:107
+#, php-format
+msgid "No oEmbed Results Found for %1$s. View more info at %2$s."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Base.php:422
+#, php-format
+msgid ""
+"The \"%1$s\" field parameter has been deprecated in favor of the \"%2$s\" "
+"parameter."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Base.php:426
+#, php-format
+msgid ""
+"Using the \"%1$s\" field parameter as a callback has been deprecated in "
+"favor of the \"%2$s\" parameter."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Base.php:456
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s! %3$s"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Base.php:458
+#, php-format
+msgid ""
+"%1$s was called with a parameter that is <strong>deprecated</strong> since "
+"version %2$s with no alternative available."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Base.php:491
+#: includes/libs/cmb2/includes/CMB2_Hookup_Base.php:102
+#: includes/libs/cmb2/includes/CMB2_Options.php:247
+#: includes/libs/cmb2/includes/CMB2_Options_Hookup.php:357
+#: includes/libs/cmb2/includes/types/CMB2_Type_Base.php:173
+#, php-format
+msgid "Invalid %1$s property: %2$s"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Base.php:509
+#: includes/libs/cmb2/includes/types/CMB2_Type_Base.php:157
+#, php-format
+msgid "Invalid %1$s method: %2$s"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Field.php:1415
+msgid "Add Group"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Field.php:1416
+msgid "Remove Group"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Field.php:1448
+#: includes/libs/cmb2/includes/CMB2_Field.php:1452
+msgid "None"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Field.php:1563
+msgid "Sorry, this field does not have a cmb_id specified."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Field_Display.php:432
+#: includes/libs/cmb2/includes/CMB2_JS.php:230
+#: includes/libs/cmb2/includes/types/CMB2_Type_File_Base.php:79
+msgid "File:"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Hookup_Base.php:44
+#, php-format
+msgid "%1$s should be implemented by the extended class."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:165
+#: includes/libs/cmb2/includes/CMB2_JS.php:210
+msgid "Clear"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:167
+msgid "Select Color"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:168
+msgid "Current Color"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:200
+msgctxt "Valid formatDate string for jquery-ui datepicker"
+msgid "mm/dd/yy"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:201
+msgid "Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:202
+msgid "Su, Mo, Tu, We, Th, Fr, Sa"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:203
+msgid "Sun, Mon, Tue, Wed, Thu, Fri, Sat"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:204
+msgid ""
+"January, February, March, April, May, June, July, August, September, "
+"October, November, December"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:205
+msgid "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:207
+msgid "Prev"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:208
+msgid "Today"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:209
+#: includes/libs/cmb2/includes/CMB2_JS.php:219
+msgid "Done"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:213
+msgid "Choose Time"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:214
+msgid "Time"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:215
+msgid "Hour"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:216
+msgid "Minute"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:217
+msgid "Second"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:218
+msgid "Now"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:220
+msgctxt ""
+"Valid formatting string, as per http://trentrichardson.com/examples/"
+"timepicker/"
+msgid "hh:mm TT"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:226
+msgid "Use this file"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:227
+msgid "Use these files"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:228
+#: includes/libs/cmb2/includes/types/CMB2_Type_File_Base.php:64
+msgid "Remove Image"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:231
+#: includes/libs/cmb2/includes/types/CMB2_Type_File_Base.php:82
+msgid "Download"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_JS.php:232
+msgid "Select / Deselect All"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Options_Hookup.php:139
+msgid "Nothing to update."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Options_Hookup.php:143
+msgid "Settings updated."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Types.php:226
+msgid "Custom CMB2 field type classes must extend CMB2_Type_Base."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Types.php:344
+msgid "Add Row"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_Types.php:406
+msgid "Remove Row"
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_hookup.php:182
+msgid ""
+"Term Metadata is a WordPress 4.4+ feature. Please upgrade your WordPress "
+"install."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_hookup.php:186
+msgid "Term metaboxes configuration requires a \"taxonomies\" parameter."
+msgstr ""
+
+#: includes/libs/cmb2/includes/CMB2_hookup.php:466
+#, php-format
+msgid "Toggle panel: %s"
+msgstr ""
+
+#: includes/libs/cmb2/includes/helper-functions.php:307
+msgid "Save"
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller.php:257
+msgid "This box does not have read permissions."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller.php:277
+msgid "This box does not have write permissions."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller.php:300
+msgid ""
+"No box found by that id. A box needs to be registered with the \"show_in_rest"
+"\" parameter configured."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller.php:378
+msgid "A human-readable description of the object."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller.php:385
+msgid "The id for the object."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller.php:392
+msgid "The title for the object."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:51
+msgid "Includes the registered fields for the box in the response."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:72
+msgid ""
+"Includes the fully rendered attributes, 'form_open', 'form_close', as well "
+"as the enqueued 'js_dependencies' script handles, and 'css_dependencies' "
+"stylesheet handles."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Boxes.php:122
+msgid "No boxes found."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:27
+msgid ""
+"Includes the box object which the fields are registered to in the response."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:30
+msgid ""
+"When the '_rendered' argument is passed, the renderable field attributes "
+"will be returned fully rendered. By default, the names of the callback "
+"handers for the renderable attributes will be returned."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:33
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:36
+msgid ""
+"To view or modify the field's value, the 'object_id' and 'object_type' "
+"arguments are required."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:236
+msgid ""
+"CMB2 Field value cannot be updated without the value parameter specified."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:297
+msgid ""
+"CMB2 Field value cannot be modified without the object_id and object_type "
+"parameters specified."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:312
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:341
+msgid "No field found by that id."
+msgstr ""
+
+#: includes/libs/cmb2/includes/rest-api/CMB2_REST_Controller_Fields.php:415
+#, php-format
+msgid "Value Error for %s"
+msgstr ""
+
+#. translators: %s: register_routes()
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:25
+#, php-format
+msgid "Method '%s' must be overridden."
+msgstr ""
+
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:35
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:47
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:59
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:71
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:83
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:95
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:107
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:119
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:131
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:143
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:155
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:168
+#, php-format
+msgid "Method '%s' not implemented. Must be overridden in subclass."
+msgstr ""
+
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:273
+msgid "Current page of the collection."
+msgstr ""
+
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:281
+msgid "Maximum number of items to be returned in result set."
+msgstr ""
+
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:290
+msgid "Limit results to those matching a string."
+msgstr ""
+
+#: includes/libs/cmb2/includes/shim/WP_REST_Controller.php:308
+msgid ""
+"Scope under which the request is made; determines fields present in response."
+msgstr ""
+
+#: includes/libs/cmb2/includes/types/CMB2_Type_File.php:76
+msgid "Add or Upload File"
+msgstr ""
+
+#: includes/libs/cmb2/includes/types/CMB2_Type_File_List.php:41
+msgid "Add or Upload Files"
+msgstr ""
+
+#: includes/libs/cmb2/includes/types/CMB2_Type_Taxonomy_Base.php:115
+msgid "No terms"
+msgstr ""
+
+#: includes/post-type/event.php:18
+msgid "Events"
+msgstr ""
+
+#: includes/post-type/event.php:19
+msgid "Single Event"
+msgstr ""
+
+#: includes/post-type/event.php:20
+msgid "Event"
+msgstr ""
+
+#: includes/post-type/event.php:21
+msgid "Add New"
+msgstr ""
+
+#: includes/post-type/event.php:22 includes/post-type/event.php:24
+msgid "Add New Event"
+msgstr ""
+
+#: includes/post-type/event.php:23
+msgid "Edit Event"
+msgstr ""
+
+#: includes/post-type/event.php:25
+msgid "View Event"
+msgstr ""
+
+#: includes/post-type/event.php:26
+msgid "Search Event"
+msgstr ""
+
+#: includes/post-type/event.php:27
+msgid "No Event items found"
+msgstr ""
+
+#: includes/post-type/event.php:28
+msgid "No Event items found in trash"
+msgstr ""
+
+#: includes/post-type/event.php:34
+msgid "Display Event"
+msgstr ""
+
+#: includes/post-type/event.php:53 includes/post-type/event.php:55
+msgid "Event Categories"
+msgstr ""
+
+#: includes/post-type/event.php:54
+msgid "Event Category"
+msgstr ""
+
+#: includes/post-type/event.php:56
+msgid "All Event Categories"
+msgstr ""
+
+#: includes/post-type/event.php:57
+msgid "Edit Event Category"
+msgstr ""
+
+#: includes/post-type/event.php:58
+msgid "View Event Category"
+msgstr ""
+
+#: includes/post-type/event.php:59
+msgid "Update Event Category"
+msgstr ""
+
+#: includes/post-type/event.php:60
+msgid "Add New Event Category"
+msgstr ""
+
+#: includes/post-type/event.php:61
+msgid "New Event Category Name"
+msgstr ""
+
+#: includes/post-type/event.php:62
+msgid "Parent Event Category"
+msgstr ""
+
+#: includes/post-type/event.php:63
+msgid "Parent Event Category:"
+msgstr ""
+
+#: includes/post-type/event.php:64
+msgid "Search Event Categories"
+msgstr ""
+
+#: includes/post-type/event.php:65
+msgid "Popular Event Categories"
+msgstr ""
+
+#: includes/post-type/event.php:66
+msgid "Separate Event Categories with commas"
+msgstr ""
+
+#: includes/post-type/event.php:67
+msgid "Add or remove Event Categories"
+msgstr ""
+
+#: includes/post-type/event.php:68
+msgid "Choose from the most used Event Categories"
+msgstr ""
+
+#: includes/post-type/event.php:69
+msgid "No Event Categories found"
+msgstr ""
+
+#: includes/wp-widget/widgets.php:12
+msgid "Your site&#8217;s most recent Posts."
+msgstr ""
+
+#: includes/wp-widget/widgets.php:14
+msgid "TMC Recent News"
+msgstr ""
+
+#: includes/wp-widget/widgets.php:40
+msgid "Recent News"
+msgstr ""
+
+#: includes/wp-widget/widgets.php:130
+msgid "Title:"
+msgstr ""
+
+#: includes/wp-widget/widgets.php:135
+msgid "Number of posts to show:"
+msgstr ""
+
+#: includes/wp-widget/widgets.php:141
+msgid "Display post date?"
+msgstr ""
+
+#: tmc-addon.php:84
+#, php-format
+msgid ""
+"<strong>%s</strong> requires <strong><a href=\"https://wordpress.org/plugins/"
+"elementor/\" target=\"_blank\">Elementor</a></strong> plugin to be installed "
+"and activated on your site."
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Elementor Widget Extra for Tomochain"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Tomochain"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.tomochain.com"
+msgstr ""

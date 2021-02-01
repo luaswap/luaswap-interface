@@ -1,0 +1,143 @@
+.home {
+    .site-header{
+        background-color: transparent;
+    }
+}
+.site-header{
+    background-color: @header-bg;
+    width: 100%!important;
+    position: fixed;
+    left: 0;
+    transition: all .3s;
+    z-index: 99;
+    .tmc-header{
+        transition: all .3s;
+        &.fixed-top{
+            position: fixed;
+            top: 32px;
+            left: 0;
+            width: 100%;
+            will-change: transform;
+            padding: 0;
+            z-index: 999;
+            -webkit-transform: translateY(-100%);
+            transform: translateY(-100%);
+            background-color: #202741;
+        }
+    }
+    .navbar-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .site-branding{
+        display: flex;
+        align-items: center;
+        h2{
+            margin: 0;
+            color: @white;
+        }
+        a{
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            img {
+                transition: all .3s;
+                width: 170px;
+                @media (min-width: 992px) and (max-width: 1400px) {
+                    width: 120px;
+                }
+            }
+        }
+        .wpml-ls-statics-shortcode_actions{
+            width: auto;
+            margin-left: 20px;
+        }
+
+        .wpml-ls-legacy-dropdown a.wpml-ls-item-toggle:after,
+        .wpml-ls-legacy-dropdown-click a.wpml-ls-item-toggle:after{
+            content: '\f107';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            border: none;
+            right: -20px;
+            top: 50%;
+            color: @border-color;
+            transform: translateY(-50%);
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+        }
+    }
+
+    &.scrollFixed {
+        background-color: @header-bg!important;
+	    // position: fixed;
+        .site-branding {
+            a{
+                padding: 5px 0;
+                @media only screen and (max-width: 1024px) {
+                    padding: 15px 0;
+                }
+                img {
+                    width: 120px;
+                    transition: all .3s;
+                }
+            }
+        }
+    }
+    // .mobile-menu-btn{
+    //     display: none;
+    // }
+    // @media(max-width: 992px){
+    //     .mobile-menu-btn{
+    //         display: block;
+    //     }
+    // }
+}
+.header-tools{
+    display: none;
+}
+@media(max-width: 991px){
+    .header-tools{
+        display: flex;
+    }
+}
+.search-icon{
+     position: relative;
+     color: @white;
+    .icon-search-menu{
+        display: block;
+        line-height: 50px;
+        padding: 20px 25px;
+    }
+    .seach-form{
+        position: absolute;
+        right: 0;
+        min-width: 300px;
+        z-index: 3;
+        display: none;
+        form{
+            display: flex;
+            padding: 10px;
+            background: @white;
+            border-top: 2px solid #00E8B4;
+            input{
+                border: 1px solid @border-color;
+                width: 260px;
+            }
+            button{
+                width: 40px;
+                height: 40px;
+                background: @secondary-color;
+                outline: none;
+                border: none;
+                color: @white;
+            }
+        }
+    }
+}
+/* Language Switch */
+span.wpml-ls-display{
+    font-size: 14px;
+}

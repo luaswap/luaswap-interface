@@ -1,0 +1,364 @@
+# Translation of Themes - Twenty Nineteen in Vietnamese
+# This file is distributed under the same license as the Themes - Twenty Nineteen package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2019-05-10 05:13:06+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/3.0.0-alpha.2\n"
+"Language: vi_VN\n"
+"Project-Id-Version: Themes - Twenty Nineteen\n"
+
+#. translators: %s: Parent post link.
+#: single.php:31
+msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%s</span>"
+msgstr "<span class=\"meta-nav\">Đăng trong</span><span class=\"post-title\">%s</span>"
+
+#: image.php:87
+msgctxt "Parent post link"
+msgid "<span class=\"meta-nav\">Published in</span><br><span class=\"post-title\">%title</span>"
+msgstr "<span class=\"meta-nav\">Đăng trong</span><br><span class=\"post-title\">%title</span>"
+
+#: template-parts/content/content.php:18
+#: template-parts/content/content-excerpt.php:18
+msgctxt "post"
+msgid "Featured"
+msgstr "Nổi bật"
+
+#. translators: %s: WordPress version.
+#: inc/back-compat.php:40 inc/back-compat.php:55 inc/back-compat.php:76
+msgid "Twenty Nineteen requires at least WordPress version 4.7. You are running version %s. Please upgrade and try again."
+msgstr "Twenty Nineteen yêu cầu phiên bản WordPress 4.7 trở lên. Bạn đang sử dụng phiên bản %s. Hãy nâng cấp và thử lại."
+
+#: inc/template-functions.php:143
+msgid "Back"
+msgstr "Trở lại"
+
+#: inc/template-functions.php:136
+msgid "More"
+msgstr "Xem thêm"
+
+#: inc/customizer.php:98
+msgid "Apply a filter to featured images using the primary color"
+msgstr "Áp dụng bộ lọc cho ảnh đại diện sử dụng màu chính"
+
+#: inc/customizer.php:78
+msgid "Apply a custom color for buttons, links, featured images, etc."
+msgstr "Áp dụng màu riêng cho nút ấn, liên kết, ảnh đại diện,..."
+
+#: inc/customizer.php:56
+msgctxt "primary color"
+msgid "Custom"
+msgstr "Tùy chỉnh"
+
+#: inc/customizer.php:55
+msgctxt "primary color"
+msgid "Default"
+msgstr "Mặc định"
+
+#: functions.php:168
+msgid "White"
+msgstr "Trắng"
+
+#: functions.php:163
+msgid "Light Gray"
+msgstr "Light Gray"
+
+#: functions.php:158
+msgid "Dark Gray"
+msgstr "Dark Gray"
+
+#: functions.php:136
+msgid "XL"
+msgstr "XL"
+
+#: functions.php:135
+msgid "Huge"
+msgstr "Rất lớn"
+
+#: functions.php:130
+msgid "L"
+msgstr "L"
+
+#: functions.php:129
+msgid "Large"
+msgstr "Lớn"
+
+#: functions.php:124
+msgid "M"
+msgstr "M"
+
+#: functions.php:123
+msgid "Normal"
+msgstr "Bình thường"
+
+#: functions.php:117
+msgid "Small"
+msgstr "Nhỏ"
+
+#: functions.php:118
+msgid "S"
+msgstr "S"
+
+#: functions.php:60 footer.php:37
+msgid "Footer Menu"
+msgstr "Menu cuối trang"
+
+#: image.php:70
+msgctxt "Used before full size attachment link."
+msgid "Full size"
+msgstr "Kích thước đầy đủ"
+
+#: image.php:56
+msgid "Page"
+msgstr "Trang"
+
+#: functions.php:192
+msgid "Add widgets here to appear in your footer."
+msgstr "Thêm widget ở đây để hiển thị ở cuối trang."
+
+#: functions.php:190 template-parts/footer/footer-widgets.php:12
+msgid "Footer"
+msgstr "Cuối trang"
+
+#: inc/customizer.php:53
+msgid "Primary Color"
+msgstr "Màu chính"
+
+#: template-parts/post/discussion-meta.php:18
+msgid "No comments"
+msgstr "Chưa có bình luận"
+
+#. translators: %d: Number of comments.
+#: template-parts/post/discussion-meta.php:16
+msgid "%d Comment"
+msgid_plural "%d Comments"
+msgstr[0] "%d bình luận"
+
+#: template-parts/post/author-bio.php:26
+msgid "View more posts"
+msgstr "Xem thêm bài viết"
+
+#. translators: %s: Post author.
+#: template-parts/post/author-bio.php:17
+msgid "Published by %s"
+msgstr "Đăng bởi %s"
+
+#: template-parts/header/site-branding.php:33
+msgid "Top Menu"
+msgstr "Menu trên cùng"
+
+#. translators: %s: Post title. Only visible to screen readers.
+#: template-parts/content/content.php:36
+#: template-parts/content/content-single.php:27
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "Đọc tiếp<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#: image.php:52 template-parts/content/content-page.php:27
+#: template-parts/content/content.php:49
+#: template-parts/content/content-single.php:40
+msgid "Pages:"
+msgstr "Trang:"
+
+#: template-parts/content/content-none.php:46
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Không thấy nội dung tìm kiếm. Hãy thử tìm kiếm khác."
+
+#: template-parts/content/content-none.php:39
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Rất tiếc, không có nội dung nào khớp với yêu cầu tìm kiếm của bạn. Hãy thử lại với các từ khóa khác."
+
+#. translators: 1: Link to WP admin new post page.
+#: template-parts/content/content-none.php:26
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Bạn đã sẵn sàng đăng bài viết đầu tiên chưa? <a href=\"%1$s\">Hãy bắt đầu tại đây</a>."
+
+#: template-parts/content/content-none.php:16
+msgid "Nothing Found"
+msgstr "Không có kết quả"
+
+#: single.php:42
+msgid "Previous post:"
+msgstr "Bài cũ hơn:"
+
+#: single.php:41
+msgid "Previous Post"
+msgstr "Bài cũ hơn"
+
+#: single.php:39
+msgid "Next post:"
+msgstr "Bài tiếp theo:"
+
+#: single.php:38
+msgid "Next Post"
+msgstr "Bài tiếp theo"
+
+#: inc/template-tags.php:234
+msgid "Older posts"
+msgstr "Bài cũ hơn"
+
+#: inc/template-tags.php:230
+msgid "Newer posts"
+msgstr "Bài mới hơn"
+
+#: inc/template-tags.php:104
+msgid "Tags:"
+msgstr "Thẻ từ khóa:"
+
+#: inc/template-tags.php:92
+msgid "Posted in"
+msgstr "Đăng trong"
+
+#. translators: Used between list items, there is a space after the comma.
+#: inc/template-tags.php:86 inc/template-tags.php:98
+msgid ", "
+msgstr ", "
+
+#. translators: %s: Post title. Only visible to screen readers.
+#: inc/template-tags.php:63
+msgid "Leave a comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr "Đăng bình luận<span class=\"screen-reader-text\"> trong %s</span>"
+
+#: inc/template-tags.php:46
+msgid "Posted by"
+msgstr "Đăng bởi"
+
+#: inc/template-functions.php:82
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: inc/template-functions.php:80
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: inc/template-functions.php:92
+msgid "Archives:"
+msgstr "Lưu trữ:"
+
+#. translators: %s: Taxonomy singular name.
+#: inc/template-functions.php:90
+msgid "%s Archives:"
+msgstr "Bài viết trong %s:"
+
+#: inc/template-functions.php:86
+msgid "Post Type Archives: "
+msgstr "Bài viết:"
+
+#: inc/template-functions.php:84
+msgid "Daily Archives: "
+msgstr "Bài viết đăng ngày:"
+
+#: inc/template-functions.php:82
+msgid "Monthly Archives: "
+msgstr "Bài viết đăng trong tháng:"
+
+#: inc/template-functions.php:80
+msgid "Yearly Archives: "
+msgstr "Bài viết đăng trong năm:"
+
+#: inc/template-functions.php:78
+msgid "Author Archives: "
+msgstr "Bài viết của tác giả:"
+
+#: inc/template-functions.php:76
+msgid "Tag Archives: "
+msgstr "Bài viết có từ khóa:"
+
+#: inc/template-functions.php:74
+msgid "Category Archives: "
+msgstr "Bài viết trong chuyên mục:"
+
+#. translators: %s: Post title. Only visible to screen readers.
+#: template-parts/content/content-page.php:41
+#: template-parts/header/entry-header.php:32 inc/template-tags.php:120
+msgid "Edit <span class=\"screen-reader-text\">%s</span>"
+msgstr "Sửa <span class=\"screen-reader-text\">%s</span>"
+
+#: header.php:25
+msgid "Skip to content"
+msgstr "Chuyển đến phần nội dung"
+
+#: functions.php:61 template-parts/header/site-branding.php:46
+msgid "Social Links Menu"
+msgstr "Menu mạng xã hội"
+
+#: functions.php:59
+msgid "Primary"
+msgstr "Chính"
+
+#. translators: %s: WordPress.
+#: footer.php:28
+msgid "Proudly powered by %s."
+msgstr "Tự hào cung cấp bởi %s."
+
+#: comments.php:116
+msgid "Comments are closed."
+msgstr "Không cho phép bình luận."
+
+#: comments.php:96
+msgid "Next"
+msgstr "Trang sau"
+
+#: comments.php:95
+msgid "Previous"
+msgstr "Trước"
+
+#: comments.php:92 comments.php:95 comments.php:96
+msgid "Comments"
+msgstr "Bình luận"
+
+#. translators: 1: Number of comments, 2: Post title.
+#: comments.php:44
+msgctxt "comments title"
+msgid "%1$s reply on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s replies on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s trả lời trong &ldquo;%2$s&rdquo;"
+
+#. translators: %s: Post title.
+#: comments.php:40
+msgctxt "comments title"
+msgid "One reply on &ldquo;%s&rdquo;"
+msgstr "Một bình luận trong &ldquo;%s&rdquo;"
+
+#: comments.php:35 comments.php:105 comments.php:107
+msgid "Leave a comment"
+msgstr "Gửi bình luận"
+
+#: comments.php:33
+msgid "Join the Conversation"
+msgstr "Tham gia bình luận"
+
+#: classes/class-twentynineteen-walker-comment.php:94
+msgid "Your comment is awaiting moderation."
+msgstr "Bình luận của bạn cần chờ duyệt."
+
+#: classes/class-twentynineteen-walker-comment.php:87
+msgid "Edit"
+msgstr "Sửa"
+
+#. translators: 1: Comment date, 2: Comment time.
+#: classes/class-twentynineteen-walker-comment.php:79
+msgid "%1$s at %2$s"
+msgstr "%1$s vào lúc %2$s"
+
+#. translators: %s: Comment author link.
+#: classes/class-twentynineteen-walker-comment.php:59
+msgid "%s <span class=\"screen-reader-text says\">says:</span>"
+msgstr "%s <span class=\"screen-reader-text says\">bình luận:</span>"
+
+#: 404.php:24
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "Không thể tìm thấy dữ liệu cần thiết tại đây. Hãy thử tìm kiếm?"
+
+#: 404.php:20
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Oops! Không tìm thấy trang này."
+
+#. Author URI of the theme
+#: footer.php:25
+msgid "https://wordpress.org/"
+msgstr "https://vi.wordpress.org/"
