@@ -555,15 +555,11 @@ export function useGlobalData() {
     if (!data && ethPrice && oldEthPrice) {
       fetchData()
     }
-  }, [
-    ethPrice,
-    oldEthPrice,
-    update,
-    data,
-    updateAllPairsInUniswap,
-    updateAllTokensInUniswap,
-    sessionStorage.getItem('chosenNetwork')
-  ])
+  }, [ethPrice, oldEthPrice, update, data, updateAllPairsInUniswap, updateAllTokensInUniswap])
+
+  useEffect(() => {
+    update(null)
+  }, [sessionStorage.getItem('chosenNetwork')])
 
   return data || {}
 }
