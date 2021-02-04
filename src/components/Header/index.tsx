@@ -178,9 +178,9 @@ const AccountElement = styled.div<{ active: boolean }>`
     background-color: ${({ theme, active }) => (!active ? theme.bg2 : theme.bg4)};
   } */
 `
-const HideSmall = styled.div`  
+const HideSmall = styled.div`
   position: relative;
-  .switch-network{
+  .switch-network {
     display: none;
     position: absolute;
     bottom: -82px;
@@ -190,13 +190,12 @@ const HideSmall = styled.div`
     width: 200px;
     padding: 10px;
     background-color: ${({ theme }) => theme.bg1};
-    color: #c3a56e
-    a{
-      color: #ecb34b
+    color: #c3a56e a {
+      color: #ecb34b;
     }
   }
-  :hover{
-    .switch-network{
+  :hover {
+    .switch-network {
       display: block;
     }
   }
@@ -408,7 +407,10 @@ export default function Header() {
               <>
                 <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
                 <div className="switch-network">
-                  <a href="https://docs.tomochain.com/general/how-to-connect-to-tomochain-network/metamask">Switch Networks</a> between Ethereum & TomoChain to access different trading pools
+                  <a href="https://docs.tomochain.com/general/how-to-connect-to-tomochain-network/metamask">
+                    Switch Networks
+                  </a>{' '}
+                  between Ethereum & TomoChain to access different trading pools
                 </div>
               </>
             )}
