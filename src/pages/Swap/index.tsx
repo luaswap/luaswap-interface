@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
 import { Text } from 'rebass'
-import styled, { ThemeContext } from 'styled-components'
+import { ThemeContext } from 'styled-components'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
 import Card, { GreyCard } from '../../components/Card'
@@ -44,14 +44,7 @@ import { computeTradePriceBreakdown, warningSeverity } from '../../utils/prices'
 import AppBody from '../AppBody'
 import { ClickableText } from '../Pool/styleds'
 import Loader from '../../components/Loader'
-
-const StyledInfo = styled.div`
-  max-width: 420px;
-  padding: 10px;
-  font-size: 13px;
-  text-align: center;
-  margin-bottom: 20px
-`
+import NoticeTomoBridge from '../../components/NoticeGeneral/bridge'
 
 export default function Swap() {
   const loadedUrlParams = useDefaultsFromURLSearch()
@@ -274,9 +267,7 @@ export default function Swap() {
   ])
   return (
     <>
-      <StyledInfo style={{ color: '#c3a56e' }}>
-      Any ERC20 token can be brought into the TomoChain ecosystem with the click of a button to wrap/unwrap via <a href="https://bridge.tomochain.com/" target="true" style={{color: '#ecb34b'}}>TomoBridge</a> and integrated with LuaSwap seamlessly! 
-      </StyledInfo>
+      <NoticeTomoBridge/>
       <TokenWarningModal
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
         tokens={urlLoadedTokens}
