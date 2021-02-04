@@ -94,10 +94,11 @@ export default function CreatePair() {
       isTrc21A = false
     } else {
       try {
-        // @ts-ignore
         const currencyAContract = getContract(
+          // @ts-ignore
           wrappedCurrency(currency0, chainId)?.address ?? '',
           TRC21_ABI,
+          // @ts-ignore
           library,
           account
         )
@@ -113,11 +114,12 @@ export default function CreatePair() {
     if (currency1 === TOMO) {
       isTrc21B = false
     } else {
-      try {
-        // @ts-ignore
+      try {        
         const currencyBContract = getContract(
+          // @ts-ignore
           wrappedCurrency(currency1, chainId)?.address ?? '',
           TRC21_ABI,
+          // @ts-ignore
           library,
           account
         )
@@ -147,6 +149,7 @@ export default function CreatePair() {
       .then(result => {
         console.log('Pair has been created')
       })
+      // @ts-ignore
       .catch(error => {
         console.log(error)
       })
