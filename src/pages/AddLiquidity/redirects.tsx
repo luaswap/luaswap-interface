@@ -32,4 +32,3 @@ export function RedirectDuplicateTokenIds(props: RouteComponentProps<{ currencyI
   }
   return <AddLiquidity {...props} />
 }
-

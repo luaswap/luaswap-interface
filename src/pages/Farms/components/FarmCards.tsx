@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
-import Countdown,{ CountdownRenderProps } from 'react-countdown'
+import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 
 import Button from '../../../components/ButtonSushi'
@@ -37,7 +37,7 @@ const FarmCards: React.FC = () => {
 
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
-      const farmWithStakedValue : FarmWithStakedValue = {
+      const farmWithStakedValue: FarmWithStakedValue = {
         ...farm,
         tokenAmount: (stakedValue[i] || {}).tokenAmount || new BigNumber(0),
         token2Amount: (stakedValue[i] || {}).token2Amount || new BigNumber(0),
@@ -55,7 +55,7 @@ const FarmCards: React.FC = () => {
       }
       return newFarmRows
     },
-    [[]],
+    [[]]
   )
 
   return (
@@ -86,7 +86,7 @@ interface FarmCardProps {
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const poolActive = usePoolActive(farm.pid)
-  
+
   const sushi = useSushi()
 
   const [newReward, setNewRewad] = useState<BigNumber>()
@@ -101,7 +101,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   }, [sushi, setNewRewad, poolActive])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
-    var { days, hours, minutes, seconds } = countdownProps
+    let { days, hours, minutes, seconds } = countdownProps
     const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
     const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
     hours = days * 24 + hours
@@ -124,64 +124,66 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
             <StyledTopIcon>
               {farm.isHot && <StyledHotIcon>NO REWARD</StyledHotIcon>}
               {farm.isNew && <StyledNewIcon>THIS WEEK</StyledNewIcon>}
-            </StyledTopIcon>      
-            <div style={{display: 'flex'}}>
-              <CardIcon><img src={farm.icon} alt="" height="60"/></CardIcon>
+            </StyledTopIcon>
+            <div style={{ display: 'flex' }}>
+              <CardIcon>
+                <img src={farm.icon} alt="" height="60" />
+              </CardIcon>
               <span>&nbsp;&nbsp;</span>
-              <CardIcon><img src={farm.icon2} alt=""  height="60"/></CardIcon>
-            </div>      
+              <CardIcon>
+                <img src={farm.icon2} alt="" height="60" />
+              </CardIcon>
+            </div>
             <StyledTitle>{farm.name}</StyledTitle>
             <StyledDetails>
               <StyledDetail>{farm.description}</StyledDetail>
             </StyledDetails>
             <Spacer />
-            <Button
-              disabled={!poolActive}
-              text={poolActive ? 'Select' : undefined}
-              to={`/farming/${farm.id}`}
-            >
-              {!poolActive && (
-                <Countdown
-                  date={new Date(startTime * 1000)}
-                  renderer={renderer}
-                />
-              )}
+            <Button disabled={!poolActive} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
+              {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
             </Button>
-            <br/>
+            <br />
             <StyledInsight>
               <span>Total Locked Value</span>
               <span>
-                {farm.usdValue &&
-                  <><b>{parseFloat(farm.usdValue.toFixed(0)).toLocaleString('en-US')} USD</b></>
-                }
+                {farm.usdValue && (
+                  <>
+                    <b>{parseFloat(farm.usdValue.toFixed(0)).toLocaleString('en-US')} USD</b>
+                  </>
+                )}
               </span>
             </StyledInsight>
-            {!farm.isHot && <>              
-              <StyledInsight>
-                <span>Reward</span>
-                <span>
-                  {newReward &&
-                    <><b>{getBalanceNumber(newReward).toFixed(2)} LUA</b> / block</>
-                  }
-                  {!newReward && "~"}
-                </span>
-              </StyledInsight>
-              <StyledInsight>
-              <span>APY</span>
-              <span style={{fontWeight: 'bold', color: '#4caf50'}}>
-                {newReward && farm.poolWeight && farm.luaPrice && farm.usdValue ?
-                  `${parseFloat(farm.luaPrice
-                    .times(NUMBER_BLOCKS_PER_YEAR)
-                    .times(newReward.div(10 ** 18))
-                    .div(farm.usdValue)
-                    .div(10 ** 8)
-                    .times(100)
-                    .toFixed(2)).toLocaleString('en-US')}%` : '~'
-                }
-              </span>
-            </StyledInsight>
+            {!farm.isHot && (
+              <>
+                <StyledInsight>
+                  <span>Reward</span>
+                  <span>
+                    {newReward && (
+                      <>
+                        <b>{getBalanceNumber(newReward).toFixed(2)} LUA</b> / block
+                      </>
+                    )}
+                    {!newReward && '~'}
+                  </span>
+                </StyledInsight>
+                <StyledInsight>
+                  <span>APY</span>
+                  <span style={{ fontWeight: 'bold', color: '#4caf50' }}>
+                    {newReward && farm.poolWeight && farm.luaPrice && farm.usdValue
+                      ? `${parseFloat(
+                          farm.luaPrice
+                            .times(NUMBER_BLOCKS_PER_YEAR)
+                            .times(newReward.div(10 ** 18))
+                            .div(farm.usdValue)
+                            .div(10 ** 8)
+                            .times(100)
+                            .toFixed(2)
+                        ).toLocaleString('en-US')}%`
+                      : '~'}
+                  </span>
+                </StyledInsight>
               </>
-            }
+            )}
           </StyledContent>
         </CardContent>
       </CardWrap>
@@ -190,7 +192,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
 }
 
 const CardWrap = styled.div`
-  background-color: ${(props) => props.theme.bg1};
+  background-color: ${props => props.theme.bg1};
 `
 const RainbowLight = keyframes`
   
@@ -248,7 +250,7 @@ const StyledLoadingWrapper = styled.div`
 
 const StyledRow = styled.div`
   display: flex;
-  margin-bottom: ${(props) => props.theme.spacing[4]}px;
+  margin-bottom: ${props => props.theme.spacing[4]}px;
   flex-flow: row wrap;
   @media (max-width: 768px) {
     width: 100%;
@@ -259,17 +261,17 @@ const StyledRow = styled.div`
 
 const StyledCardWrapper = styled.div`
   display: flex;
-  width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
+  width: calc((900px - ${props => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
   overflow: hidden;
   border-radius: 12px;
 `
 
 const StyledTitle = styled.h4`
-  color: ${(props) => props.theme.white};
+  color: ${props => props.theme.white};
   font-size: 20px;
   font-weight: 700;
-  margin: ${(props) => props.theme.spacing[2]}px 0 0;
+  margin: ${props => props.theme.spacing[2]}px 0 0;
   padding: 0;
 `
 
@@ -300,7 +302,7 @@ const StyledNewIcon = styled.div`
   padding: 8px 40px 8px;
   top: 12px;
   left: -40px;
-  background-color: ${(props) => props.theme.primary1};
+  background-color: ${props => props.theme.primary1};
   font-weight: bold;
   -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
@@ -310,17 +312,17 @@ const StyledNewIcon = styled.div`
 `
 
 const StyledSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
+  height: ${props => props.theme.spacing[4]}px;
+  width: ${props => props.theme.spacing[4]}px;
 `
 
 const StyledDetails = styled.div`
-  margin-top: ${(props) => props.theme.spacing[2]}px;
+  margin-top: ${props => props.theme.spacing[2]}px;
   text-align: center;
 `
 
 const StyledDetail = styled.div`
-  color: ${(props) => props.theme.text2};
+  color: ${props => props.theme.text2};
   font-size: 14px;
 `
 
@@ -330,7 +332,7 @@ const StyledInsight = styled.div`
   box-sizing: border-box;
   border-radius: 8px;
   background: transparent;
-  color: #9E9E9E;
+  color: #9e9e9e;
   width: 100%;
   line-height: 25px;
   font-size: 13px;

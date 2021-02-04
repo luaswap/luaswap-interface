@@ -105,7 +105,7 @@ export function theme(darkMode: boolean): DefaultTheme {
       4: 24,
       5: 32,
       6: 48,
-      7: 64,
+      7: 64
     },
     // siteWidth
     siteWidth: 1200,

@@ -157,17 +157,21 @@ export default function Pool() {
                 </TYPE.mediumHeader>
               </HideSmall>
               <ButtonRow>
-                {!IsTomo ?(
+                {!IsTomo ? (
                   <ResponsiveButtonSecondary as={Link} padding="6px 8px" to={`/create/${NATIVE_TOKEN_TEXT}`}>
                     Create a pair
-                  </ResponsiveButtonSecondary>)
-                  : (
+                  </ResponsiveButtonSecondary>
+                ) : (
                   <ResponsiveButtonSecondary as={Link} padding="6px 8px" to={`/create-pair`}>
                     Create a pair
                   </ResponsiveButtonSecondary>
-                  )
-                }
-                <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 8px" to={`/add/${NATIVE_TOKEN_TEXT}`}>
+                )}
+                <ResponsiveButtonPrimary
+                  id="join-pool-button"
+                  as={Link}
+                  padding="6px 8px"
+                  to={`/add/${NATIVE_TOKEN_TEXT}`}
+                >
                   <Text fontWeight={500} fontSize={16} color={theme.text5}>
                     Add Liquidity
                   </Text>
@@ -198,8 +202,9 @@ export default function Pool() {
                       <span> ↗</span>
                     </RowBetween>
                   </ButtonSecondary>
-                  ) : ''
-                }
+                ) : (
+                  ''
+                )}
                 {allV2PairsWithLiquidity.map(v2Pair => (
                   <FullPositionCard
                     key={v2Pair.liquidityToken.address}

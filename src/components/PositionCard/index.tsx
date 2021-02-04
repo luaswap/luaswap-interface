@@ -353,102 +353,103 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
             </FixedHeightRow>
 
             <Divider />
-            { !IsTomo ? (
+            {!IsTomo ? (
               <>
-              <FixedHeightRow>
-                <RowFixed>
+                <FixedHeightRow>
+                  <RowFixed>
+                    <Text fontSize={16} fontWeight={500}>
+                      Farming pool tokens:
+                    </Text>
+                  </RowFixed>
+                  <RowFixedValue>
+                    <Text fontSize={16} fontWeight={500}>
+                      {userFarmBalance ? new BigNumber(userFarmBalance.toFixed(6)).toFormat() : '-'}
+                    </Text>
+                    {farm && userFarmBalance?.greaterThan('0') && (
+                      <ButtonSecondary
+                        as={Link}
+                        to={`/farming/${symbolLiquidityToken}`}
+                        padding="3px 10px"
+                        borderRadius="8px"
+                        fontSize="12px"
+                        width="fit-content"
+                      >
+                        Unstake
+                      </ButtonSecondary>
+                    )}
+                  </RowFixedValue>
+                </FixedHeightRow>
+
+                <FixedHeightRow>
                   <Text fontSize={16} fontWeight={500}>
-                    Farming pool tokens:
+                    Your farming pool share:
                   </Text>
-                </RowFixed>
-                <RowFixedValue>
-                  <Text fontSize={16} fontWeight={500}>
-                    {userFarmBalance ? new BigNumber(userFarmBalance.toFixed(6)).toFormat() : '-'}
-                  </Text>
-                  {farm && userFarmBalance?.greaterThan('0') && (
+                  <RowFixedValue>
+                    <Text fontSize={16} fontWeight={500}>
+                      {farmingTokenPercentage ? new BigNumber(farmingTokenPercentage.toFixed(5)).toFormat() + '%' : '-'}
+                    </Text>
+                  </RowFixedValue>
+                </FixedHeightRow>
+
+                <FixedHeightRow>
+                  <RowFixedTitle>
+                    <Text fontSize={16} fontWeight={500}>
+                      Available pool tokens <QuestionHelper text="Stake pool tokens to earn LUA tokens" />:
+                    </Text>
+                  </RowFixedTitle>
+                  <RowFixedValue>
+                    <Text fontSize={16} fontWeight={500}>
+                      {userPoolBalance ? new BigNumber(userPoolBalance.toSignificant(8)).toFormat() : '-'}
+                    </Text>
+                    {userPoolBalance?.greaterThan(`0`) && (
+                      <ButtonSecondary
+                        as={Link}
+                        to={`/farming/${symbolLiquidityToken}`}
+                        padding="3px 10px"
+                        fontSize="12px"
+                        width="fit-content"
+                      >
+                        Stake
+                      </ButtonSecondary>
+                    )}
+                  </RowFixedValue>
+                </FixedHeightRow>
+
+                <FixedHeightRow>
+                  <RowFixed>
+                    <Text fontSize={16} fontWeight={500}>
+                      LUA reward:
+                    </Text>
+                  </RowFixed>
+                  <RowFixedValue>
+                    <Text fontSize={16} fontWeight={500}>
+                      {pendingReward ? new BigNumber(pendingReward.toFixed(3)).toFormat() : '-'}
+                    </Text>
                     <ButtonSecondary
-                      as={Link}
-                      to={`/farming/${symbolLiquidityToken}`}
                       padding="3px 10px"
                       borderRadius="8px"
                       fontSize="12px"
                       width="fit-content"
+                      onClick={harvestReward}
+                      disabled={harvest || pendingReward.equalTo('0')}
                     >
-                      Unstake
+                      Harvest
                     </ButtonSecondary>
-                  )}
-                </RowFixedValue>
-              </FixedHeightRow>
+                  </RowFixedValue>
+                </FixedHeightRow>
 
-              <FixedHeightRow>
-                <Text fontSize={16} fontWeight={500}>
-                  Your farming pool share:
-                </Text>
-                <RowFixedValue>
-                  <Text fontSize={16} fontWeight={500}>
-                    {farmingTokenPercentage ? new BigNumber(farmingTokenPercentage.toFixed(5)).toFormat() + '%' : '-'}
-                  </Text>
-                </RowFixedValue>
-              </FixedHeightRow>
-
-              <FixedHeightRow>
-                <RowFixedTitle>
-                  <Text fontSize={16} fontWeight={500}>
-                    Available pool tokens <QuestionHelper text="Stake pool tokens to earn LUA tokens" />:
-                  </Text>
-                </RowFixedTitle>
-                <RowFixedValue>
-                  <Text fontSize={16} fontWeight={500}>
-                    {userPoolBalance ? new BigNumber(userPoolBalance.toSignificant(8)).toFormat() : '-'}
-                  </Text>
-                  {userPoolBalance?.greaterThan(`0`) && (
-                    <ButtonSecondary
-                      as={Link}
-                      to={`/farming/${symbolLiquidityToken}`}
-                      padding="3px 10px"
-                      fontSize="12px"
-                      width="fit-content"
-                    >
-                      Stake
-                    </ButtonSecondary>
-                  )}
-                </RowFixedValue>
-              </FixedHeightRow>
-
-              <FixedHeightRow>
-                <RowFixed>
-                  <Text fontSize={16} fontWeight={500}>
-                    LUA reward:
-                  </Text>
-                </RowFixed>
-                <RowFixedValue>
-                  <Text fontSize={16} fontWeight={500}>
-                    {pendingReward ? new BigNumber(pendingReward.toFixed(3)).toFormat() : '-'}
-                  </Text>
-                  <ButtonSecondary
-                    padding="3px 10px"
-                    borderRadius="8px"
-                    fontSize="12px"
-                    width="fit-content"
-                    onClick={harvestReward}
-                    disabled={harvest || pendingReward.equalTo('0')}
+                <ButtonSecondary padding="8px" borderRadius="8px">
+                  <ExternalLink
+                    style={{ width: '100%', textAlign: 'center' }}
+                    href={`https://info.luaswap.org/account/${account}`}
                   >
-                    Harvest
-                  </ButtonSecondary>
-                </RowFixedValue>
-              </FixedHeightRow>
-
-              <ButtonSecondary padding="8px" borderRadius="8px">
-                <ExternalLink
-                  style={{ width: '100%', textAlign: 'center' }}
-                  href={`https://info.luaswap.org/account/${account}`}
-                >
-                  View accrued fees and analytics<span style={{ fontSize: '11px' }}>↗</span>
-                </ExternalLink>
-              </ButtonSecondary>
+                    View accrued fees and analytics<span style={{ fontSize: '11px' }}>↗</span>
+                  </ExternalLink>
+                </ButtonSecondary>
               </>
-              ) : ''
-            }
+            ) : (
+              ''
+            )}
             <RowBetween marginTop="10px">
               <ButtonPrimary
                 padding="8px"

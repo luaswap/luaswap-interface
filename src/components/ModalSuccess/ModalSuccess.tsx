@@ -10,22 +10,19 @@ interface SuccessProps {
   symbol: string
   txhash: string
 }
-const ModalSuccess: React.FC<SuccessProps> = ({
-    text,
-    amount,
-    symbol,
-    txhash
-}) => {
+const ModalSuccess: React.FC<SuccessProps> = ({ text, amount, symbol, txhash }) => {
   return (
     <StyledSuccessWrap>
       <StyledModalSuccess>
-        <img src={Cup} alt="Confirm Success"/>
+        <img src={Cup} alt="Confirm Success" />
         <Spacer size="md" />
         <StyleMaxText>Your deposit is done!</StyleMaxText>
         <Spacer size="md" />
         <StyleInfo>
-            <StyleLabel>Amount:</StyleLabel>
-            <StyleContent>{amount} {symbol}</StyleContent>
+          <StyleLabel>Amount:</StyleLabel>
+          <StyleContent>
+            {amount} {symbol}
+          </StyleContent>
         </StyleInfo>
         {/* <Spacer size="md" />
         <StyleInfo>
@@ -34,14 +31,13 @@ const ModalSuccess: React.FC<SuccessProps> = ({
         </StyleInfo> */}
       </StyledModalSuccess>
     </StyledSuccessWrap>
-
   )
 }
 
 const StyledSuccessWrap = styled.div``
 
 const StyledModalSuccess = styled.div`
-  padding: ${(props) => props.theme.spacing[4]}px;
+  padding: ${props => props.theme.spacing[4]}px;
   text-align: center;
   // display: none;
 `
@@ -54,7 +50,7 @@ const StyleInfo = styled.div`
   justify-content: space-between;
 `
 const StyleLabel = styled.div`
-  color: ${(props) => props.theme.text2};
+  color: ${props => props.theme.text2};
 `
 const StyleContent = styled.div`
   color: #fff;

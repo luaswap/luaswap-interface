@@ -113,10 +113,10 @@ const StyleNavBox = styled.ul`
 const StyleNavSub = styled.ul`
   position: absolute;
   top: 5em;
-  background-color: ${({ theme }) => theme.bg3};;
+  background-color: ${({ theme }) => theme.bg3};
   padding: 0 5px;
   border-radius: 8px;
-  a{
+  a {
     padding: 0.5rem 0.5rem;
   }
 `
@@ -300,7 +300,7 @@ export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
   const IsTomo = IsTomoChain(chainId)
-  const { t } = useTranslation()  
+  const { t } = useTranslation()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
@@ -308,7 +308,7 @@ export default function Header() {
   const { width } = useWindowSize()
   const open = useModalOpen(ApplicationModal.MENULEFT)
   const toggle = useToggleModal(ApplicationModal.MENULEFT)
-  
+
   return (
     <HeaderFrame>
       <ClaimModal />
@@ -341,12 +341,12 @@ export default function Header() {
               {t('pool')}
             </StyledNavLink>
           </StyleNavBox>
-          { width && width < 767 ? (
+          {width && width < 767 ? (
             <>
               <StyledMenuButton onClick={toggle}>
-                <StyledMenuIcon/>
+                <StyledMenuIcon />
               </StyledMenuButton>
-              { open && (
+              {open && (
                 <StyleNavSub>
                   <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                     Farming
@@ -360,9 +360,8 @@ export default function Header() {
                 </StyleNavSub>
               )}
             </>
-          ) : (
-            !IsTomo ?
-            (<StyleNavBox>              
+          ) : !IsTomo ? (
+            <StyleNavBox>
               <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                 Farming
               </StyledNavLink>
@@ -372,9 +371,10 @@ export default function Header() {
               <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
                 Charts <span style={{ fontSize: '11px' }}>↗</span>
               </StyledExternalLink>
-            </StyleNavBox>) : ''
-          )}          
-          
+            </StyleNavBox>
+          ) : (
+            ''
+          )}
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>

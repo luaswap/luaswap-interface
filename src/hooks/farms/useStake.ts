@@ -13,19 +13,13 @@ const useStake = (pid: number) => {
   const handleStake = useCallback(
     async (amount: string) => {
       try {
-        const txHash = await stake(
-          getMasterChefContract(sushi),
-          pid,
-          amount,
-          account,
-        )
+        const txHash = await stake(getMasterChefContract(sushi), pid, amount, account)
         return txHash
-      }
-      catch (ex) {
+      } catch (ex) {
         return ''
       }
     },
-    [account, pid, sushi],
+    [account, pid, sushi]
   )
 
   return { onStake: handleStake }

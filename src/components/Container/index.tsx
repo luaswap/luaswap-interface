@@ -2,11 +2,11 @@ import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 interface ContainerProps {
-  children?: React.ReactNode,
+  children?: React.ReactNode
   size?: 'sm' | 'md' | 'lg'
 }
 
-export default function Container({ children, size = 'md' } : ContainerProps){
+export default function Container({ children, size = 'md' }: ContainerProps) {
   const { siteWidth } = useContext(ThemeContext)
   let width: number
   switch (size) {
@@ -14,17 +14,13 @@ export default function Container({ children, size = 'md' } : ContainerProps){
       width = siteWidth / 2
       break
     case 'md':
-      width = siteWidth * 2 / 3
+      width = (siteWidth * 2) / 3
       break
     case 'lg':
     default:
       width = siteWidth
   }
-  return (
-    <StyledContainer width={width}>
-      {children}
-    </StyledContainer>
-  )
+  return <StyledContainer width={width}>{children}</StyledContainer>
 }
 
 const StyledContainer = styled.div<{ width: number }>`

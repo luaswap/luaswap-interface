@@ -105,7 +105,7 @@ export function useCreatePairContract(factoryAddress?: string, withSignerIfPossi
 }
 
 export function useTrc21Contract(address?: string, withSignerIfPossible?: boolean): Contract | null {
-  return useContract(address , TRC21_ABI, withSignerIfPossible)
+  return useContract(address, TRC21_ABI, withSignerIfPossible)
 }
 
 export function useMulticallContract(): Contract | null {

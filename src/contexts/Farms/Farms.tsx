@@ -17,7 +17,7 @@ const Farms: React.FC = ({ children }) => {
     <Context.Provider
       value={{
         farms,
-        unharvested,
+        unharvested
       }}
     >
       {children}

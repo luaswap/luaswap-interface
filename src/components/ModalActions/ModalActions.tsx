@@ -9,9 +9,7 @@ const ModalActions: React.FC = ({ children }) => {
     <StyledModalActions>
       {React.Children.map(children, (child, i) => (
         <>
-          <StyledModalAction>
-            {child}
-          </StyledModalAction>
+          <StyledModalAction>{child}</StyledModalAction>
           {i < l - 1 && <Spacer />}
         </>
       ))}

@@ -12,12 +12,19 @@ const StyledInfo = styled.div`
   text-align: center;
   margin-bottom: 20px;
 `
-export default function NoticeTomoBridge(){
-
+export default function NoticeTomoBridge() {
   return (
     <>
-      <StyledInfo style={{ color:'#c3a56e' }}>
-        <a style={{fontSize: '15px', color: '#ecb34b'}} href="https://docs.tomochain.com/tomobridge/tutorial/trc21-wrapped-token/issue-a-wrapped-erc-20-token-on-tomoissuer-and-list-it-on-tomobridge" target="true">Bring</a> any ERC20 token into the TomoChain ecosystem & integrate with LuaSwap seamlessly. Take advantage of near-zero gas fees & super fast trades!
+      <StyledInfo style={{ color: '#c3a56e' }}>
+        <a
+          style={{ fontSize: '15px', color: '#ecb34b' }}
+          href="https://docs.tomochain.com/tomobridge/tutorial/trc21-wrapped-token/issue-a-wrapped-erc-20-token-on-tomoissuer-and-list-it-on-tomobridge"
+          target="true"
+        >
+          Bring
+        </a>{' '}
+        any ERC20 token into the TomoChain ecosystem & integrate with LuaSwap seamlessly. Take advantage of near-zero
+        gas fees & super fast trades!
       </StyledInfo>
     </>
   )

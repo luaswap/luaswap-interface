@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 
 import {
-  getMasterChefContract,
+  getMasterChefContract
   // getFarms,
   // getLPValue,
 } from '../../sushi/utils'

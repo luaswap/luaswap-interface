@@ -105,5 +105,5 @@ export function useCurrency(currencyId: string | undefined): Currency | null | u
   const isETH = currencyId?.toUpperCase() === 'ETH'
   const isTOMO = currencyId?.toUpperCase() === 'TOMO'
   const token = useToken(isETH || isTOMO ? undefined : currencyId)
-  return isETH ? ETHER : isTOMO ? TOMO :token
+  return isETH ? ETHER : isTOMO ? TOMO : token
 }

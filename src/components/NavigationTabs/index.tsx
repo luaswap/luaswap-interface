@@ -74,7 +74,7 @@ export function CreatePairTitle() {
           <StyledArrowLeft />
         </HistoryLink>
         <ActiveText>Create Pair</ActiveText>
-        <QuestionHelper text={"Use this tool to create pairs on TomoChain Network."} />
+        <QuestionHelper text={'Use this tool to create pairs on TomoChain Network.'} />
       </RowBetween>
     </Tabs>
   )
