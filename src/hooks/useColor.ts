@@ -13,12 +13,11 @@ async function getColorFromToken(token: Token): Promise<string | null> {
   }
   const IsTomo = IsTomoChain(token.chainId)
   let path
-  if(IsTomo){
+  if (IsTomo) {
     path = `https://raw.githubusercontent.com/tomochain/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${token.address}.png`
-  }else{
+  } else {
     path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${token.address}/logo.png`
-  } 
-  
+  }
 
   return Vibrant.from(path)
     .getPalette()

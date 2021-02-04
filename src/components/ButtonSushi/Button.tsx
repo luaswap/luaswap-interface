@@ -4,27 +4,18 @@ import styled, { ThemeContext } from 'styled-components'
 import { Link } from 'react-router-dom'
 
 interface ButtonProps {
-  children?: React.ReactNode,
-  disabled?: boolean,
-  href?: string,
-  onClick?: () => void,
-  size?: 'sm' | 'md' | 'lg',
-  text?: string,
-  to?: string,
+  children?: React.ReactNode
+  disabled?: boolean
+  href?: string
+  onClick?: () => void
+  size?: 'sm' | 'md' | 'lg'
+  text?: string
+  to?: string
   variant?: 'default' | 'secondary' | 'tertiary'
 }
 
-const Button: React.FC<ButtonProps> = ({
-  children,
-  disabled,
-  href,
-  onClick,
-  size,
-  text,
-  to,
-  variant,
-}) => {
-  const { primary1,text6,bg2, spacing } = useContext(ThemeContext)
+const Button: React.FC<ButtonProps> = ({ children, disabled, href, onClick, size, text, to, variant }) => {
+  const { primary1, text6, bg2, spacing } = useContext(ThemeContext)
 
   let buttonColor: string
   let bgColor: string
@@ -72,7 +63,11 @@ const Button: React.FC<ButtonProps> = ({
     if (to) {
       return <StyledLink to={to}>{text}</StyledLink>
     } else if (href) {
-      return <StyledExternalLink href={href} target="__blank">{text}</StyledExternalLink>
+      return (
+        <StyledExternalLink href={href} target="__blank">
+          {text}
+        </StyledExternalLink>
+      )
     } else {
       return text
     }
@@ -82,7 +77,7 @@ const Button: React.FC<ButtonProps> = ({
     <StyledButton
       boxShadow={boxShadow}
       color={buttonColor}
-      bgColor = {bgColor}
+      bgColor={bgColor}
       disabled={disabled}
       fontSize={fontSize}
       onClick={onClick}
@@ -96,18 +91,18 @@ const Button: React.FC<ButtonProps> = ({
 }
 
 interface StyledButtonProps {
-  boxShadow: string,
-  color: string,
-  bgColor: string,
-  disabled?: boolean,
-  fontSize: number,
-  padding: number,
+  boxShadow: string
+  color: string
+  bgColor: string
+  disabled?: boolean
+  fontSize: number
+  padding: number
   size: number
 }
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${props => !props.disabled ? props.bgColor : `${props.bgColor}50`};
+  background-color: ${props => (!props.disabled ? props.bgColor : `${props.bgColor}50`)};
   border: 0;
   border-radius: 8px;
   box-shadow: ${props => props.boxShadow};
@@ -121,7 +116,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
   padding-left: ${props => props.padding}px;
   padding-right: ${props => props.padding}px;
-  pointer-events: ${props => !props.disabled ? undefined : 'none'};
+  pointer-events: ${props => (!props.disabled ? undefined : 'none')};
   width: 100%;
   // &:hover {
   //   background-color: ${props => props.bgColor};

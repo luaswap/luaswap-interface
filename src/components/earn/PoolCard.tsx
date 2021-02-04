@@ -85,7 +85,7 @@ export default function PoolCard({ stakingInfo }: { stakingInfo: StakingInfo }) 
 
   // get the color of the token
   const { chainId } = useActiveWeb3React()
-  const NATIVE_TOKEN = getNativeToken( chainId )
+  const NATIVE_TOKEN = getNativeToken(chainId)
   const token = currency0 === NATIVE_TOKEN ? token1 : token0
   const WETH = currency0 === NATIVE_TOKEN ? token0 : token1
   const backgroundColor = useColor(token)

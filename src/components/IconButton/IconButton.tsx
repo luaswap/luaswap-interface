@@ -9,12 +9,7 @@ interface IconButtonProps {
   to?: string
 }
 
-const IconButton: React.FC<IconButtonProps> = ({
-  children,
-  disabled,
-  onClick,
-  to,
-}) => {
+const IconButton: React.FC<IconButtonProps> = ({ children, disabled, onClick, to }) => {
   return (
     <StyledButton disabled={disabled} onClick={onClick}>
       {!!to ? <StyledLink to={to}>{children}</StyledLink> : children}
@@ -28,13 +23,10 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${(props) => props.theme.bg1};
+  background-color: ${props => props.theme.bg1};
   border: 0;
-  border-radius: 28px;  
-  color: ${(props) =>
-    !props.disabled
-      ? props.theme.primary1
-      : props.theme.text2};
+  border-radius: 28px;
+  color: ${props => (!props.disabled ? props.theme.primary1 : props.theme.text2)};
   cursor: pointer;
   display: flex;
   font-weight: 700;
@@ -44,10 +36,10 @@ const StyledButton = styled.button<StyledButtonProps>`
   outline: none;
   padding: 0;
   margin: 0;
-  pointer-events: ${(props) => (!props.disabled ? undefined : 'none')};
+  pointer-events: ${props => (!props.disabled ? undefined : 'none')};
   width: 48px;
-  // position: relative;  
-  > .icon-unstake{
+  // position: relative;
+  > .icon-unstake {
     padding: 10px 10px 10px 8px;
     height: 46px;
     width: 46px;
@@ -61,8 +53,8 @@ const StyledLink = styled(Link)`
   flex: 1;
   height: 48px;
   justify-content: center;
-  margin: 0 ${(props) => -props.theme.spacing[4]}px;
-  padding: 0 ${(props) => props.theme.spacing[4]}px;
+  margin: 0 ${props => -props.theme.spacing[4]}px;
+  padding: 0 ${props => props.theme.spacing[4]}px;
   text-decoration: none;
 `
 

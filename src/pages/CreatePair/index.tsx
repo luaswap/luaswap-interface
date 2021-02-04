@@ -6,7 +6,7 @@ import { Plus } from 'react-feather'
 import { Text } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-// import 
+// import
 import { FACTORY_ADDRESS } from '../../constants'
 import { getNativeToken } from '../../utils'
 import { ButtonDropdownLight } from '../../components/Button'
@@ -72,7 +72,7 @@ export default function CreatePair() {
     )
   const position: TokenAmount | undefined = useTokenBalance(account ?? undefined, pair?.liquidityToken)
   const hasPosition = Boolean(position && JSBI.greaterThan(position.raw, JSBI.BigInt(0)))
-  
+
   const handleCurrencySelect = useCallback(
     (currency: Currency) => {
       if (activeField === Fields.TOKEN0) {
@@ -89,37 +89,43 @@ export default function CreatePair() {
   }, [setShowSearch])
   const history = useHistory()
   async function onCreate() {
-    let args: Array<string | string[] | number>,
-        isTrc21A: boolean,
-        isTrc21B: boolean
-    if(currency0 === TOMO){
+    let args: Array<string | string[] | number>, isTrc21A: boolean, isTrc21B: boolean
+    if (currency0 === TOMO) {
       isTrc21A = false
-    }else{
-      try{
+    } else {
+      try {
         // @ts-ignore
-        const currencyAContract = getContract(wrappedCurrency(currency0, chainId)?.address ?? '', TRC21_ABI, library, account)
+        const currencyAContract = getContract(
+          wrappedCurrency(currency0, chainId)?.address ?? '',
+          TRC21_ABI,
+          library,
+          account
+        )
         await currencyAContract.minFee()
         // @ts-ignore
         await currencyAContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency0?.decimals).toString(10))
         isTrc21A = true
-      }
-      catch{
+      } catch {
         isTrc21A = false
       }
     }
-    
-    if(currency1 === TOMO){
+
+    if (currency1 === TOMO) {
       isTrc21B = false
-    }else{
-      try{
+    } else {
+      try {
         // @ts-ignore
-        const currencyBContract = getContract(wrappedCurrency(currency1, chainId)?.address ?? '', TRC21_ABI, library, account)
+        const currencyBContract = getContract(
+          wrappedCurrency(currency1, chainId)?.address ?? '',
+          TRC21_ABI,
+          library,
+          account
+        )
         await currencyBContract.minFee()
         // @ts-ignore
         await currencyBContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency1?.decimals).toString(10))
         isTrc21B = true
-      }
-      catch{
+      } catch {
         isTrc21B = false
       }
     }
@@ -135,11 +141,17 @@ export default function CreatePair() {
       // @ts-ignore
       isTrc21B
     ]
-    await factoryContract.createPairTRC21(...args)
+    await factoryContract
+      .createPairTRC21(...args)
+      // @ts-ignore
+      .then(result => {
+        console.log('Pair has been created')
+      })
+      .catch(error => {
+        console.log(error)
+      })
     // @ts-ignore
-    .then(result => {console.log('Pair has been created')}).catch(error => {console.log(error)})
-    // @ts-ignore
-    factoryContract.once('PairCreated', function(token0, token1){
+    factoryContract.once('PairCreated', function(token0, token1) {
       history.push(`/add/${token0}/${token1}`)
     })
   }
@@ -154,7 +166,7 @@ export default function CreatePair() {
 
   return (
     <>
-      <NoticeTomoBridge/>
+      <NoticeTomoBridge />
       <AppBody>
         <CreatePairTitle />
         <AutoColumn gap="md" style={{ padding: '1rem' }}>
@@ -222,7 +234,9 @@ export default function CreatePair() {
               ) : (
                 <LightCard padding="45px 10px">
                   <AutoColumn gap="sm" justify="center">
-                    <Text color="#AF7C31" textAlign="center" fontSize="13px">Pair already exist, you can add liquidity to this pair.</Text>
+                    <Text color="#AF7C31" textAlign="center" fontSize="13px">
+                      Pair already exist, you can add liquidity to this pair.
+                    </Text>
                     <StyledLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
                       <Text textAlign="center">Add liquidity</Text>
                     </StyledLink>
@@ -235,15 +249,15 @@ export default function CreatePair() {
                   Create Pair
                 </Text>
               </ButtonPrimary>
-              // <LightCard padding="45px 10px">
-              //   <AutoColumn gap="sm" justify="center">
-              //     <Text textAlign="center">No pool found.</Text>
-              //     <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
-              //       Create pool.
-              //     </StyledInternalLink>
-              //   </AutoColumn>
-              // </LightCard>
-            ) : pairState === PairState.INVALID ? (
+            ) : // <LightCard padding="45px 10px">
+            //   <AutoColumn gap="sm" justify="center">
+            //     <Text textAlign="center">No pool found.</Text>
+            //     <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>
+            //       Create pool.
+            //     </StyledInternalLink>
+            //   </AutoColumn>
+            // </LightCard>
+            pairState === PairState.INVALID ? (
               <LightCard padding="45px 10px">
                 <AutoColumn gap="sm" justify="center">
                   <Text textAlign="center" fontWeight={500}>

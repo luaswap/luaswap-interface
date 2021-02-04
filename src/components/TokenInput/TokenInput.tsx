@@ -5,42 +5,38 @@ import Button from '../ButtonSushi'
 import Input, { InputProps } from '../Input'
 
 interface TokenInputProps extends InputProps {
-  max: number | string,
-  symbol: string,
-  onSelectMax?: () => void,
+  max: number | string
+  symbol: string
+  onSelectMax?: () => void
 }
 
-const TokenInput: React.FC<TokenInputProps> = ({
-  max,
-  symbol,
-  onChange,
-  onSelectMax,
-  value,
-}) => {
+const TokenInput: React.FC<TokenInputProps> = ({ max, symbol, onChange, onSelectMax, value }) => {
   return (
     <StyledTokenInput>
-        <Box>
-            <StyleBox>
-                <StyleLabel>Amount</StyleLabel>
-                <StyledMaxText>{max.toLocaleString('en-US')} {symbol}</StyledMaxText>
-            </StyleBox>
-            <BoxInput>
-                <Input
-                    endAdornment={(
-                    <StyledTokenAdornmentWrapper>
-                        <StyledTokenSymbol>{symbol}</StyledTokenSymbol>
-                        <StyledSpacer />
-                        <div>
-                        <Button size="sm" text="Max" onClick={onSelectMax} />
-                        </div>
-                    </StyledTokenAdornmentWrapper>
-                    )}
-                    onChange={onChange}
-                    placeholder="0"
-                    value={value}
-                />
-            </BoxInput>
-        </Box>
+      <Box>
+        <StyleBox>
+          <StyleLabel>Amount</StyleLabel>
+          <StyledMaxText>
+            {max.toLocaleString('en-US')} {symbol}
+          </StyledMaxText>
+        </StyleBox>
+        <BoxInput>
+          <Input
+            endAdornment={
+              <StyledTokenAdornmentWrapper>
+                <StyledTokenSymbol>{symbol}</StyledTokenSymbol>
+                <StyledSpacer />
+                <div>
+                  <Button size="sm" text="Max" onClick={onSelectMax} />
+                </div>
+              </StyledTokenAdornmentWrapper>
+            }
+            onChange={onChange}
+            placeholder="0"
+            value={value}
+          />
+        </BoxInput>
+      </Box>
     </StyledTokenInput>
   )
 }
@@ -66,9 +62,9 @@ const StyledTokenInput = styled.div`
   padding: 24px;
 `
 const Box = styled.div`
-    background-color: ${props => props.theme.bg2};
-    border-radius: 12px;
-    padding: 10px 0;
+  background-color: ${props => props.theme.bg2};
+  border-radius: 12px;
+  padding: 10px 0;
 `
 const StyledSpacer = styled.div`
   width: ${props => props.theme.spacing[3]}px;
@@ -97,10 +93,8 @@ const StyledTokenSymbol = styled.span`
 
 const BoxInput = styled.div`
   input {
-      width: 40%;
+    width: 40%;
   }
 `
-
-
 
 export default TokenInput

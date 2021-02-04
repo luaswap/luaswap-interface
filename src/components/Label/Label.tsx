@@ -5,12 +5,10 @@ interface LabelProps {
   text?: string
 }
 
-const Label: React.FC<LabelProps> = ({ text }) => (
-  <StyledLabel>{text}</StyledLabel>
-)
+const Label: React.FC<LabelProps> = ({ text }) => <StyledLabel>{text}</StyledLabel>
 
 const StyledLabel = styled.div`
-  color: ${(props) => props.theme.text2};
+  color: ${props => props.theme.text2};
 `
 
 export default Label

@@ -3,14 +3,14 @@ import CountUp from 'react-countup'
 import useAllStakedValue from '../../../hooks/farms/useAllStakedValue'
 
 const TotalLockValue = memo(() => {
-  const stakedValue = useAllStakedValue() 
+  const stakedValue = useAllStakedValue()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(0)
   const [scale, setScale] = useState(1)
 
   let sumEarning = 0
-  for (let e of stakedValue) {
-    sumEarning += (e.usdValue as any)
+  for (const e of stakedValue) {
+    sumEarning += e.usdValue as any
   }
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const TotalLockValue = memo(() => {
         transform: `scale(${scale})`,
         transformOrigin: 'right bottom',
         transition: 'transform 0.5s',
-        display: 'inline-block',
+        display: 'inline-block'
       }}
     >
       <CountUp

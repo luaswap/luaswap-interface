@@ -172,10 +172,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
           </LoaderContainer>
         )}
       </PageWrapper>
-      { IsTomo ? (
-          <NoticeModal/>
-          ): ''
-      }
+      {IsTomo ? <NoticeModal /> : ''}
     </>
   )
 }

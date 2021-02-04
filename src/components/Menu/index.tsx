@@ -121,12 +121,14 @@ export default function Menu() {
             <MessageCircle size={14} />
             Discord
           </MenuItem> */}
-          {!IsTomo ?
-            (<MenuItem id="link" href="https://info.luaswap.org/">
+          {!IsTomo ? (
+            <MenuItem id="link" href="https://info.luaswap.org/">
               <PieChart size={14} />
               Analytics
-            </MenuItem>) : ''
-          }
+            </MenuItem>
+          ) : (
+            ''
+          )}
           {/* {account && (
             <ButtonPrimary onClick={openClaimModal} padding="8px 16px" width="100%" borderRadius="12px" mt="0.5rem">
               Claim LUA

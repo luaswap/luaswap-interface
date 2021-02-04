@@ -35,7 +35,7 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
-  const NATIVE_TOKEN = getNativeToken( chainId )
+  const NATIVE_TOKEN = getNativeToken(chainId)
   return (
     <AutoColumn gap="md">
       <AutoRow>

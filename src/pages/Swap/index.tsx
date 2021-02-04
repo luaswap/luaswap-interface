@@ -265,7 +265,7 @@ export default function Swap() {
   ])
   return (
     <>
-      <NoticeTomoBridge/>
+      <NoticeTomoBridge />
       <TokenWarningModal
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
         tokens={urlLoadedTokens}

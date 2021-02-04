@@ -15,12 +15,7 @@ interface DepositModalProps extends ModalProps {
   tokenName?: string
 }
 
-const DepositModal: React.FC<DepositModalProps> = ({
-  max,
-  onConfirm,
-  onDismiss,
-  tokenName = '',
-}) => {
+const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '' }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const [successTx, setSuccessTx] = useState(false)
@@ -33,7 +28,7 @@ const DepositModal: React.FC<DepositModalProps> = ({
     (e: React.FormEvent<HTMLInputElement>) => {
       setVal(e.currentTarget.value)
     },
-    [setVal],
+    [setVal]
   )
 
   const handleSelectMax = useCallback(() => {
@@ -43,47 +38,45 @@ const DepositModal: React.FC<DepositModalProps> = ({
   return (
     <Modal>
       <ModalTitle text={successTx ? '' : `Deposit ${tokenName} Tokens`} />
-      {!successTx && <>
-        <TokenInput
-          value={val}
-          onSelectMax={handleSelectMax}
-          onChange={handleChange}
-          max={fullBalance}
-          symbol={tokenName}
-        />
-        <ModalActions>
-          <Button text="Cancel" variant="secondary" onClick={onDismiss} />
-          <Button
-            disabled={pendingTx}
-            text={pendingTx ? 'Pending Confirmation' : 'Confirm'}
-            onClick={async () => {
-              if (val && parseFloat(val) > 0) {
-                setPendingTx(true)
-                var tx : any = await onConfirm(val)
-                setPendingTx(false)
-                if (tx) {
-                  setSuccessTx(true)
-                }
-                else {
-                  if(onDismiss) onDismiss()
-                }
-              }
-            }}
-          />
-        </ModalActions>
-      </>}
-      {successTx &&
+      {!successTx && (
         <>
-          <ModalSuccess 
-            amount={val} 
-            symbol={tokenName} 
-            txhash="4f95c6770c75ddd3388f525" text="deposit"/>
-          <Spacer size="md"/>
+          <TokenInput
+            value={val}
+            onSelectMax={handleSelectMax}
+            onChange={handleChange}
+            max={fullBalance}
+            symbol={tokenName}
+          />
+          <ModalActions>
+            <Button text="Cancel" variant="secondary" onClick={onDismiss} />
+            <Button
+              disabled={pendingTx}
+              text={pendingTx ? 'Pending Confirmation' : 'Confirm'}
+              onClick={async () => {
+                if (val && parseFloat(val) > 0) {
+                  setPendingTx(true)
+                  const tx: any = await onConfirm(val)
+                  setPendingTx(false)
+                  if (tx) {
+                    setSuccessTx(true)
+                  } else {
+                    if (onDismiss) onDismiss()
+                  }
+                }
+              }}
+            />
+          </ModalActions>
+        </>
+      )}
+      {successTx && (
+        <>
+          <ModalSuccess amount={val} symbol={tokenName} txhash="4f95c6770c75ddd3388f525" text="deposit" />
+          <Spacer size="md" />
           <Button text="Close" variant="secondary" onClick={onDismiss} />
 
-          <Spacer size="md"/>
+          <Spacer size="md" />
         </>
-      }
+      )}
     </Modal>
   )
 }

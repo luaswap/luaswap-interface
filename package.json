@@ -119,7 +119,7 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@luaswap/sdk": "^2.0.0",
-    "axios": "^0.21.0",
+    "axios": "^0.21.1",
     "bignumber.js": "^9.0.1",
     "react-countdown": "^2.3.1",
     "react-countup": "^4.3.3",
