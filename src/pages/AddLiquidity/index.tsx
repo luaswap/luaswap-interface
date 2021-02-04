@@ -39,14 +39,8 @@ import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
+import NoticeTomoBridge from '../../components/NoticeTomoBridge'
 
-const StyledInfo = styled.div`
-  max-width: 420px;
-  padding: 10px;
-  font-size: 13px;
-  text-align: center;
-  margin-bottom: 20px
-`
 const StyledLink = styled(Link)`
   color: #fff;
   text-decoration: none;
@@ -319,9 +313,7 @@ export default function AddLiquidity({
   
   return (
     <>
-      <StyledInfo style={{ color: '#c3a56e' }}>
-        Any ERC20 token can be brought into the TomoChain ecosystem with the click of a button to wrap/unwrap via <a href="https://bridge.tomochain.com/" target="true" style={{color: '#ecb34b'}}>TomoBridge</a> and integrated with LuaSwap seamlessly! 
-      </StyledInfo>
+      <NoticeTomoBridge/>
       <AppBody>
         <AddRemoveTabs creating={isCreate} adding={true} />
         <Wrapper>

@@ -30,14 +30,8 @@ import { StyledInternalLink } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import AppBody from '../AppBody'
 import { Dots } from '../Pool/styleds'
+import NoticeTomoBridge from '../../components/NoticeTomoBridge'
 
-const StyledInfo = styled.div`
-  max-width: 420px;
-  padding: 10px;
-  font-size: 13px;
-  text-align: center;
-  margin-bottom: 20px
-`
 const StyledLink = styled(Link)`
   color: #fff;
   text-decoration: none;
@@ -160,9 +154,7 @@ export default function CreatePair() {
 
   return (
     <>
-      <StyledInfo style={{ color: '#c3a56e' }}>
-        Any ERC20 token can be brought into the TomoChain ecosystem with the click of a button to wrap/unwrap via <a href="https://bridge.tomochain.com/" target="true" style={{color: '#ecb34b'}}>TomoBridge</a> and integrated with LuaSwap seamlessly! 
-      </StyledInfo>
+      <NoticeTomoBridge/>
       <AppBody>
         <CreatePairTitle />
         <AutoColumn gap="md" style={{ padding: '1rem' }}>

@@ -23,8 +23,9 @@ export default function NoticeModal(){
             <RowBetween>
                             
                 <TYPE.body color={'#ecb34b'} >
-                    LuaSwap farming feature and LuaSafe staking pool are not available at the moment on TomoChain network which will be activated later in February.
-                    The same swap features are now available on the TomoChain version. Anyone can start trading, create and provide liquidity for any token pair on LuaSwap.
+                LuaSwap Farming and LuaSafe features are not available, at the moment, on TomoChain network. 
+                They will be activated in February 2021. The same swap features are now available on the TomoChain version. 
+                Anyone can start trading, create and provide liquidity for any token pair on LuaSwap.
                 </TYPE.body>
                 
             </RowBetween>
