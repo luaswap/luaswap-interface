@@ -406,7 +406,7 @@ export default function Header() {
           <HideSmall>
             {chainId && NETWORK_LABELS[chainId] && account && (
               <>
-                <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>
+                <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>
                 <div className="switch-network">
                   <a href="https://docs.tomochain.com/general/how-to-connect-to-tomochain-network/metamask">Switch Networks</a> between Ethereum & TomoChain to access different trading pools
                 </div>

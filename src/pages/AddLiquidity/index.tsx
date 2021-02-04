@@ -39,7 +39,7 @@ import { Dots, Wrapper } from '../Pool/styleds'
 import { ConfirmAddModalBottom } from './ConfirmAddModalBottom'
 import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
-import NoticeTomoBridge from '../../components/NoticeTomoBridge'
+import NoticeTomoBridge from '../../components/NoticeGeneral/bridge'
 
 const StyledLink = styled(Link)`
   color: #fff;

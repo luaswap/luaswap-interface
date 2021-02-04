@@ -1,9 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-// import Modal from '../Modal'
-// import { TYPE} from '../../theme'
-// import Spacer from '../Spacer'
-// import { RowBetween } from '../Row'
 
 const StyledInfo = styled.div`
   max-width: 420px;
@@ -18,7 +14,7 @@ export default function NoticeTomoBridge() {
       <StyledInfo style={{ color: '#c3a56e' }}>
         <a
           style={{ fontSize: '15px', color: '#ecb34b' }}
-          href="https://docs.tomochain.com/tomobridge/tutorial/trc21-wrapped-token/issue-a-wrapped-erc-20-token-on-tomoissuer-and-list-it-on-tomobridge"
+          href="https://bridge.tomochain.com/"
           target="true"
         >
           Bring

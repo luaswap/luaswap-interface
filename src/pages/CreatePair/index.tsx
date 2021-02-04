@@ -30,7 +30,7 @@ import { StyledInternalLink } from '../../theme'
 import { currencyId } from '../../utils/currencyId'
 import AppBody from '../AppBody'
 import { Dots } from '../Pool/styleds'
-import NoticeTomoBridge from '../../components/NoticeTomoBridge'
+import NoticeTomoBridge from '../../components/NoticeGeneral/bridge'
 
 const StyledLink = styled(Link)`
   color: #fff;
