@@ -14,7 +14,7 @@ export default function NoticeTomoBridge() {
       <StyledInfo style={{ color: '#c3a56e' }}>
         <a
           style={{ fontSize: '15px', color: '#ecb34b' }}
-          href="https://docs.tomochain.com/tomobridge/tutorial/trc21-wrapped-token/issue-a-wrapped-erc-20-token-on-tomoissuer-and-list-it-on-tomobridge"
+          href="https://bridge.tomochain.com/"
           target="true"
         >
           Bring
