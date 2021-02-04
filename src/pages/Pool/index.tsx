@@ -105,7 +105,7 @@ export default function Pool() {
       tokenPairsWithLiquidityTokens.filter(
         ({ liquidityToken }) =>
           v2PairsBalances[liquidityToken.address]?.greaterThan('0') ||
-          Object.keys(userFarmingMap).includes(liquidityToken.address)
+          Object.keys(userFarmingMap).includes(liquidityToken.address.toLowerCase())
       ),
     [tokenPairsWithLiquidityTokens, v2PairsBalances, userFarmingMap]
   )
@@ -209,7 +209,7 @@ export default function Pool() {
                   <FullPositionCard
                     key={v2Pair.liquidityToken.address}
                     pair={v2Pair}
-                    farm={userFarmingMap[v2Pair.liquidityToken.address]}
+                    farm={userFarmingMap[v2Pair.liquidityToken.address.toLowerCase()]}
                   />
                 ))}
               </>
