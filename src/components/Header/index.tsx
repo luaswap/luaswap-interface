@@ -27,6 +27,7 @@ import ClaimModal from '../claim/ClaimModal'
 
 import Modal from '../Modal'
 import UniBalanceContent from './UniBalanceContent'
+// import { MouseoverTooltip } from '../Tooltip'
 
 const HeaderFrame = styled.div`
   display: grid;
@@ -109,16 +110,59 @@ const HeaderLinks = styled(Row)`
 const StyleNavBox = styled.ul`
   display: flex;
   padding-left: 0;
+  margin: 0;
+`
+const StyleNavList = styled.li`
+  list-style: none;
+  padding: 15px 0;
+  position: relative;
+  :hover > ul{
+    display: block;
+  }
 `
 const StyleNavSub = styled.ul`
   position: absolute;
-  top: 5em;
-  background-color: ${({ theme }) => theme.bg3};;
+  top: 50px;
+  background-color: ${({ theme }) => theme.bg3};
   padding: 0 5px;
   border-radius: 8px;
-  a{
-    padding: 0.5rem 0.5rem;
+  // display: none;
+  margin: 0;  
+  > li{
+    padding: 10px 0;
+    a{
+      font-size: 15px;
+    }
   }
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    left: -130px;
+    top: 0px;
+    > li {
+      padding: 0;
+    }
+  `}
+`
+
+const StyleNavMobile = styled.ul`
+  position: absolute;
+  top: 5em;
+  background-color: ${({ theme }) => theme.bg3};
+  padding: 0 5px;
+  border-radius: 8px;
+  a {
+    padding: 10px;
+  }
+  > li{
+    padding: 0px;
+  }
+`
+const StyleText = styled(Text)`
+  padding-left: 10px;
+  cursor: pointer;
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    padding: 10px;
+    margin: 0 12px!important;
+  `}
 `
 const StyledMenuButton = styled.button`
   width: 50px;
@@ -177,10 +221,10 @@ const AccountElement = styled.div<{ active: boolean }>`
     background-color: ${({ theme, active }) => (!active ? theme.bg2 : theme.bg4)};
   } */
 `
-const HideSmall = styled.span`
+const HideSmall = styled.div`
   position: relative;
-  .switch-network{
-    display: none;	    display: none;
+  .switch-network {
+    display: none;
     position: absolute;
     bottom: -82px;
     left: 0;
@@ -189,13 +233,12 @@ const HideSmall = styled.span`
     width: 200px;
     padding: 10px;
     background-color: ${({ theme }) => theme.bg1};
-    color: #c3a56e
-    a{
-      color: #ecb34b
+    color: #c3a56e a {
+      color: #ecb34b;
     }
   }
-  :hover{
-    .switch-network{
+  :hover {
+    .switch-network {
       display: block;
     }
   }
@@ -308,7 +351,6 @@ const StyledExternalLink = styled(ExternalLink).attrs({
   //     display: none;
   // `}
 `
-
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'Ethereum',
   [ChainId.RINKEBY]: 'Rinkeby',
@@ -324,7 +366,7 @@ export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
   const IsTomo = IsTomoChain(chainId)
-  const { t } = useTranslation()  
+  const { t } = useTranslation()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
@@ -332,7 +374,7 @@ export default function Header() {
   const { width } = useWindowSize()
   const open = useModalOpen(ApplicationModal.MENULEFT)
   const toggle = useToggleModal(ApplicationModal.MENULEFT)
-  
+
   return (
     <HeaderFrame>
       <ClaimModal />
@@ -348,57 +390,101 @@ export default function Header() {
         </Title>
         <HeaderLinks>
           <StyleNavBox>
-            <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-              {t('swap')}
-            </StyledNavLink>
-            <StyledNavLink
-              id={`pool-nav-link`}
-              to={'/pool'}
-              isActive={(match, { pathname }) =>
-                Boolean(match) ||
-                pathname.startsWith('/add') ||
-                pathname.startsWith('/remove') ||
-                pathname.startsWith('/create') ||
-                pathname.startsWith('/find')
-              }
-            >
-              {t('pool')}
-            </StyledNavLink>
+            <StyleNavList>
+              <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+                {t('swap')}
+              </StyledNavLink>
+            </StyleNavList>
+            <StyleNavList>
+              <StyledNavLink
+                id={`pool-nav-link`}
+                to={'/pool'}
+                isActive={(match, { pathname }) =>
+                  Boolean(match) ||
+                  pathname.startsWith('/add') ||
+                  pathname.startsWith('/remove') ||
+                  pathname.startsWith('/create') ||
+                  pathname.startsWith('/find')
+                }
+              >
+                {t('pool')}
+              </StyledNavLink>
+            </StyleNavList>
           </StyleNavBox>
-          { width && width < 767 ? (
+          {width && width < 767 ? (
             <>
               <StyledMenuButton onClick={toggle}>
-                <StyledMenuIcon/>
+                <StyledMenuIcon />
               </StyledMenuButton>
-              { open && (
-                <StyleNavSub>
-                  <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                    Farming
-                  </StyledNavLink>
-                  <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                    {t('LuaSafe')}
-                  </StyledNavLink>
-                  <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
-                    Charts <span style={{ fontSize: '11px' }}>↗</span>
-                  </StyledExternalLink>
-                </StyleNavSub>
+              {open && (
+                <StyleNavMobile>
+                  {!IsTomo ? (
+                    <>
+                      <StyleNavList>
+                        <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                          Farming
+                        </StyledNavLink>
+                      </StyleNavList>
+                      <StyleNavList>
+                        <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                          {t('LuaSafe')}
+                        </StyledNavLink>
+                      </StyleNavList>
+                    </>
+                  ) : ''
+                  }
+                  <StyleNavList>
+                    <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                    <StyleNavSub>
+                      <StyleNavList>
+                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                            Ethereum
+                        </StyledExternalLink>
+                      </StyleNavList>
+                      <StyleNavList>
+                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
+                          TomoChain
+                        </StyledExternalLink>
+                      </StyleNavList>
+                    </StyleNavSub>
+                  </StyleNavList>
+                </StyleNavMobile>
               )}
             </>
           ) : (
-            !IsTomo ?
-            (<StyleNavBox>              
-              <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                Farming
-              </StyledNavLink>
-              <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                {t('LuaSafe')}
-              </StyledNavLink>
-              <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
-                Charts <span style={{ fontSize: '11px' }}>↗</span>
-              </StyledExternalLink>
-            </StyleNavBox>) : ''
-          )}          
-          
+            <StyleNavBox>
+              {!IsTomo ? (
+                <>
+                  <StyleNavList>
+                    <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                      Farming
+                    </StyledNavLink>
+                  </StyleNavList>
+                  <StyleNavList>
+                    <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                      {t('LuaSafe')}
+                    </StyledNavLink>
+                  </StyleNavList>
+                </>
+                ) : ''
+              }
+              <StyleNavList>
+                <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                <StyleNavSub>
+                  <StyleNavList>
+                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                        Ethereum
+                    </StyledExternalLink>
+                  </StyleNavList>
+                  <StyleNavList>
+                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
+                      TomoChain
+                    </StyledExternalLink>
+                  </StyleNavList>
+                </StyleNavSub>
+              </StyleNavList>
+            </StyleNavBox>
+          )}
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
@@ -408,7 +494,10 @@ export default function Header() {
               <>
                 <NetworkCard>{NETWORK_LABELS[chainId]}</NetworkCard>
                 <div className="switch-network">
-                  <a href="https://docs.tomochain.com/general/how-to-connect-to-tomochain-network/metamask">Switch Networks</a> between Ethereum & TomoChain to access different trading pools
+                  <a href="https://docs.tomochain.com/general/how-to-connect-to-tomochain-network/metamask">
+                    Switch Networks
+                  </a>{' '}
+                  between Ethereum & TomoChain to access different trading pools
                 </div>
               </>
             )}
