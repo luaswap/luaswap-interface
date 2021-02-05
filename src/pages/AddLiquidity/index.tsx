@@ -408,7 +408,7 @@ export default function AddLiquidity({
               <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
               </div>
-            ) : (IsTomo && noLiquidity && pairState === PairState.NOT_EXISTS) ? (
+            ) : IsTomo && noLiquidity && pairState === PairState.NOT_EXISTS ? (
               <AutoColumn gap="sm" justify="center">
                 <Text color="#AF7C31" textAlign="center" fontSize="13px">
                   Pair don't exist yet. Please create a pair before adding liquidity.
