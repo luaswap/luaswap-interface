@@ -181,7 +181,6 @@ export default function Swap() {
 
   // the callback to execute the swap
   const { callback: swapCallback, error: swapCallbackError } = useSwapCallback(trade, allowedSlippage, recipient)
-
   const { priceImpactWithoutFee } = computeTradePriceBreakdown(trade)
 
   const handleSwap = useCallback(() => {
@@ -191,7 +190,6 @@ export default function Swap() {
     if (!swapCallback) {
       return
     }
-
     setSwapState({ attemptingTxn: true, tradeToConfirm, showConfirm, swapErrorMessage: undefined, txHash: undefined })
     swapCallback()
       .then(hash => {
@@ -267,7 +265,7 @@ export default function Swap() {
   ])
   return (
     <>
-      <NoticeTomoBridge/>
+      <NoticeTomoBridge />
       <TokenWarningModal
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
         tokens={urlLoadedTokens}

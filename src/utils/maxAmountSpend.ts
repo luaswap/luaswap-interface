@@ -13,7 +13,7 @@ export function maxAmountSpend(currencyAmount?: CurrencyAmount): CurrencyAmount 
     } else {
       return CurrencyAmount.ether(JSBI.BigInt(0))
     }
-  } else if(currencyAmount.currency === TOMO){
+  } else if (currencyAmount.currency === TOMO) {
     if (JSBI.greaterThan(currencyAmount.raw, MIN_TOMO)) {
       return CurrencyAmount.tomo(JSBI.subtract(currencyAmount.raw, MIN_TOMO))
     } else {

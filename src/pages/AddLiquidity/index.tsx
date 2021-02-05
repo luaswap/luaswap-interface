@@ -6,7 +6,8 @@ import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
 import { RouteComponentProps } from 'react-router-dom'
 import { Text } from 'rebass'
-import { ThemeContext } from 'styled-components'
+import { Link } from 'react-router-dom'
+import styled, { ThemeContext } from 'styled-components'
 import { ButtonError, ButtonLight, ButtonPrimary } from '../../components/Button'
 import { BlueCard, LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
@@ -40,6 +41,15 @@ import { currencyId } from '../../utils/currencyId'
 import { PoolPriceBar } from './PoolPriceBar'
 import NoticeTomoBridge from '../../components/NoticeGeneral/bridge'
 
+const StyledLink = styled(Link)`
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 25px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  background-color: ${({ theme }) => theme.primary1};
+`
 export default function AddLiquidity({
   match: {
     params: { currencyIdA, currencyIdB }
@@ -49,7 +59,7 @@ export default function AddLiquidity({
   const { account, chainId, library } = useActiveWeb3React()
   const IsTomo = IsTomoChain(chainId)
   const theme = useContext(ThemeContext)
-  
+
   const currencyA = useCurrency(currencyIdA)
   const currencyB = useCurrency(currencyIdB)
 
@@ -117,11 +127,17 @@ export default function AddLiquidity({
   )
 
   // check whether the user has approved the router on the tokens
-  const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
-  const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approvalA, approveACallback] = useApproveCallback(
+    parsedAmounts[Field.CURRENCY_A],
+    IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS
+  )
+  const [approvalB, approveBCallback] = useApproveCallback(
+    parsedAmounts[Field.CURRENCY_B],
+    IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS
+  )
 
   const addTransaction = useTransactionAdder()
-    // Add Pool
+  // Add Pool
   async function onAdd() {
     if (!chainId || !library || !account) return
     const router = getRouterContract(chainId, library, account)
@@ -137,7 +153,7 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    
+
     if (currencyA === ETHER || currencyB === ETHER || currencyA === TOMO || currencyB === TOMO) {
       const tokenBIsETH = currencyB === ETHER || currencyB === TOMO
       estimate = router.estimateGas.addLiquidityETH
@@ -205,7 +221,6 @@ export default function AddLiquidity({
         }
       })
   }
-
   const modalHeader = () => {
     return noLiquidity ? (
       <AutoColumn gap="20px">
@@ -263,7 +278,6 @@ export default function AddLiquidity({
   const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
     currencies[Field.CURRENCY_A]?.symbol
   } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
-
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
@@ -301,10 +315,10 @@ export default function AddLiquidity({
   }, [onFieldAInput, txHash])
 
   const isCreate = history.location.pathname.includes('/create')
-  
+
   return (
     <>
-      <NoticeTomoBridge/>
+      <NoticeTomoBridge />
       <AppBody>
         <AddRemoveTabs creating={isCreate} adding={true} />
         <Wrapper>
@@ -394,6 +408,15 @@ export default function AddLiquidity({
               <div style={{ padding: '1em', backgroundColor: theme.bg3 }}>
                 <ButtonLight onClick={toggleWalletModal}>Connect Wallet</ButtonLight>
               </div>
+            ) : IsTomo && noLiquidity && pairState === PairState.NOT_EXISTS ? (
+              <AutoColumn gap="sm" justify="center">
+                <Text color="#AF7C31" textAlign="center" fontSize="13px">
+                  Pair don't exist yet. Please create a pair before adding liquidity.
+                </Text>
+                <StyledLink to={`/create-pair`}>
+                  <Text textAlign="center">Back</Text>
+                </StyledLink>
+              </AutoColumn>
             ) : (
               <AutoColumn gap={'md'}>
                 {(approvalA === ApprovalState.NOT_APPROVED ||

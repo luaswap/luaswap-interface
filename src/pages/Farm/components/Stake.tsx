@@ -45,33 +45,23 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
   const sushi = useSushi()
   const block = useBlock()
   const stakedValue = useStakedValue(pid)
-  
+
   useEffect(() => {
-      async function fetchData() {
-          const data = await getLPTokenStaked(sushi, lpContract)
-          setTotalStake(data)
-      }
-      if (sushi && lpContract) {
-          fetchData()
-      }
+    async function fetchData() {
+      const data = await getLPTokenStaked(sushi, lpContract)
+      setTotalStake(data)
+    }
+    if (sushi && lpContract) {
+      fetchData()
+    }
   }, [sushi, setTotalStake, lpContract, block])
 
   const { onStake } = useStake(pid)
   const { onUnstake } = useUnstake(pid)
 
-  const [onPresentDeposit] = useModal(
-    <DepositModal
-      max={tokenBalance}
-      onConfirm={onStake}
-      tokenName={tokenName}
-    />,
-  )
+  const [onPresentDeposit] = useModal(<DepositModal max={tokenBalance} onConfirm={onStake} tokenName={tokenName} />)
   const [onPresentWithdraw] = useModal(
-    <WithdrawModal
-      max={stakedBalance}
-      onConfirm={onUnstake}
-      tokenName={tokenName}
-    />,
+    <WithdrawModal max={stakedBalance} onConfirm={onUnstake} tokenName={tokenName} />
   )
 
   const handleApprove = useCallback(async () => {
@@ -108,22 +98,28 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
             {/* <CardIcon><img src={Luas} alt="LUA Reward"/></CardIcon> */}
             <StyledValue>
               <Label text={`Tokens Staked`} />
-              <br/>
+              <br />
               <ValueStyled>{new BigNumber(getBalanceNumber(stakedBalance)).toFormat(6)}</ValueStyled>
-              <br/>
+              <br />
               <StyledContent>
-                <div>{new BigNumber(totalToken).toFormat(6)}<span style={{fontSize: 10}}> {tokenSymbol}</span></div>
-                <div>{new BigNumber(totalToken2).toFormat(6)}<span style={{fontSize: 10}}> {token2Symbol}</span></div>
+                <div>
+                  {new BigNumber(totalToken).toFormat(6)}
+                  <span style={{ fontSize: 10 }}> {tokenSymbol}</span>
+                </div>
+                <div>
+                  {new BigNumber(totalToken2).toFormat(6)}
+                  <span style={{ fontSize: 10 }}> {token2Symbol}</span>
+                </div>
               </StyledContent>
             </StyledValue>
           </StyledCardHeader>
-          {totalStake && stakedBalance &&
-            <div style={{marginTop: 10}}>
-              <span style={{color: '#4caf50'}}>Share of Pool: <span style={{fontSize: 18}}>
-                {(shareOfPool * 100).toFixed(5)}%
-              </span></span>
+          {totalStake && stakedBalance && (
+            <div style={{ marginTop: 10 }}>
+              <span style={{ color: '#4caf50' }}>
+                Share of Pool: <span style={{ fontSize: 18 }}>{(shareOfPool * 100).toFixed(5)}%</span>
+              </span>
             </div>
-          }
+          )}
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
@@ -133,17 +129,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
               />
             ) : (
               <>
-                <Button
-                  disabled={!poolActive}
-                  text={'Stake'}
-                  onClick={onPresentDeposit}
-                />
+                <Button disabled={!poolActive} text={'Stake'} onClick={onPresentDeposit} />
                 <StyledActionSpacer />
                 <StyleButtonWrap>
                   <span className="tooltip-unstake">UnStake</span>
-                  <IconButton 
-                    disabled={stakedBalance.eq(new BigNumber(0))}
-                    onClick={onPresentWithdraw}>                    
+                  <IconButton disabled={stakedBalance.eq(new BigNumber(0))} onClick={onPresentWithdraw}>
                     <AddIcon />
                   </IconButton>
                 </StyleButtonWrap>
@@ -163,9 +153,9 @@ const StyledCardHeader = styled.div`
 `
 const StyledValue = styled.div`
   text-align: center;
-  span{
-    color: ${(props) => props.theme.white};
-  }  
+  span {
+    color: ${props => props.theme.white};
+  }
 `
 
 const ValueStyled = styled.div`
@@ -177,13 +167,13 @@ const ValueStyled = styled.div`
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.spacing[6]}px;
+  margin-top: ${props => props.theme.spacing[6]}px;
   width: 100%;
 `
 
 const StyledActionSpacer = styled.div`
-  height: ${(props) => props.theme.spacing[4]}px;
-  width: ${(props) => props.theme.spacing[4]}px;
+  height: ${props => props.theme.spacing[4]}px;
+  width: ${props => props.theme.spacing[4]}px;
 `
 
 const StyledCardContentInner = styled.div`
@@ -196,20 +186,20 @@ const StyledCardContentInner = styled.div`
 const StyleButtonWrap = styled.div`
   position: relative;
 
-  border: 1px solid ${(props) => props.theme.text2};
+  border: 1px solid ${props => props.theme.text2};
   border-radius: 12px;
-  > .tooltip-unstake{
+  > .tooltip-unstake {
     position: absolute;
     font-size: 14px;
     font-weight: bold;
     top: -30px;
-    left:-14px;
-    color: ${(props) => props.theme.text2};
+    left: -14px;
+    color: ${props => props.theme.text2};
     padding: 3px 10px;
     border-radius: 12px;
-    background-color: ${(props) => props.theme.bg2};
+    background-color: ${props => props.theme.bg2};
     display: none;
-    :after{
+    :after {
       content: '';
       position: absolute;
       top: 100%;
@@ -217,23 +207,22 @@ const StyleButtonWrap = styled.div`
       margin-left: -5px;
       border-width: 5px;
       border-style: solid;
-      border-color: ${(props) => props.theme.bg2} transparent transparent transparent;
-
+      border-color: ${props => props.theme.bg2} transparent transparent transparent;
     }
   }
-  &:hover{
-    > .tooltip-unstake{
+  &:hover {
+    > .tooltip-unstake {
       display: block;
     }
   }
 `
 const StyledContent = styled.span`
-    color: ${(props) => props.theme.white};
-    font-weight: bold;
-    display: block;
-    @media (max-width: 767px) {
-        font-size: 14px;
-    }
+  color: ${props => props.theme.white};
+  font-weight: bold;
+  display: block;
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
 `
 
 export default Stake

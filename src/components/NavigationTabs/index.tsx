@@ -66,6 +66,20 @@ export function SwapPoolTabs({ active }: { active: 'swap' | 'pool' | 'lua-safe' 
   )
 }
 
+export function CreatePairTitle() {
+  return (
+    <Tabs>
+      <RowBetween style={{ padding: '1rem' }}>
+        <HistoryLink to="/pool">
+          <StyledArrowLeft />
+        </HistoryLink>
+        <ActiveText>Create Pair</ActiveText>
+        <QuestionHelper text={'Use this tool to create pairs on TomoChain Network.'} />
+      </RowBetween>
+    </Tabs>
+  )
+}
+
 export function FindPoolTabs() {
   return (
     <Tabs>

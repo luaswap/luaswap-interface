@@ -102,7 +102,10 @@ export default function RemoveLiquidity({
 
   // allowance handling
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
-  const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS)
+  const [approval, approveCallback] = useApproveCallback(
+    parsedAmounts[Field.LIQUIDITY],
+    IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS
+  )
 
   const isArgentWallet = useIsArgentWallet()
 
@@ -249,7 +252,7 @@ export default function RemoveLiquidity({
     else if (signatureData !== null) {
       // removeLiquidityETHWithPermit
       if (oneCurrencyIsETH) {
-        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']        
+        methodNames = ['removeLiquidityETHWithPermit', 'removeLiquidityETHWithPermitSupportingFeeOnTransferTokens']
         args = [
           currencyBIsETH ? tokenA.address : tokenB.address,
           liquidityAmount.raw.toString(),
@@ -580,9 +583,9 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${(currencyA === ETHER || currencyA === TOMO) ? WETH[chainId].address : currencyIdA}/${
-                              (currencyB === ETHER || currencyB === TOMO) ? WETH[chainId].address : currencyIdB
-                            }`}
+                            to={`/remove/${
+                              currencyA === ETHER || currencyA === TOMO ? WETH[chainId].address : currencyIdA
+                            }/${currencyB === ETHER || currencyB === TOMO ? WETH[chainId].address : currencyIdB}`}
                           >
                             Receive W{NATIVE_TOKEN_TEXT}
                           </StyledInternalLink>
@@ -590,15 +593,17 @@ export default function RemoveLiquidity({
                           <StyledInternalLink
                             to={`/remove/${
                               currencyA && currencyEquals(currencyA, WETH[chainId]) && IsTomo
-                              ? 'TOMO'
-                              : currencyA && currencyEquals(currencyA, WETH[chainId])
-                              ? 'ETH' 
-                              : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WETH[chainId]) && IsTomo
-                              ? 'TOMO'
-                              : currencyB && currencyEquals(currencyB, WETH[chainId])
-                              ? 'ETH'
-                              : currencyIdB}`}
+                                ? 'TOMO'
+                                : currencyA && currencyEquals(currencyA, WETH[chainId])
+                                ? 'ETH'
+                                : currencyIdA
+                            }/${
+                              currencyB && currencyEquals(currencyB, WETH[chainId]) && IsTomo
+                                ? 'TOMO'
+                                : currencyB && currencyEquals(currencyB, WETH[chainId])
+                                ? 'ETH'
+                                : currencyIdB
+                            }`}
                           >
                             Receive {NATIVE_TOKEN_TEXT}
                           </StyledInternalLink>

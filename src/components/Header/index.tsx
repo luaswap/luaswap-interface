@@ -116,7 +116,7 @@ const StyleNavList = styled.li`
   list-style: none;
   padding: 15px 0;
   position: relative;
-  :hover > ul{
+  :hover > ul {
     display: block;
   }
 `
@@ -127,10 +127,10 @@ const StyleNavSub = styled.ul`
   padding: 0 5px;
   border-radius: 8px;
   display: none;
-  margin: 0;  
-  > li{
+  margin: 0;
+  > li {
     padding: 10px 0;
-    a{
+    a {
       font-size: 15px;
     }
   }
@@ -152,7 +152,7 @@ const StyleNavMobile = styled.ul`
   a {
     padding: 10px;
   }
-  > li{
+  > li {
     padding: 0px;
   }
 `
@@ -233,8 +233,7 @@ const HideSmall = styled.div`
     width: 200px;
     padding: 10px;
     background-color: ${({ theme }) => theme.bg1};
-    color: #c3a56e 
-    a {
+    color: #c3a56e a {
       color: #ecb34b;
     }
   }
@@ -432,14 +431,17 @@ export default function Header() {
                         </StyledNavLink>
                       </StyleNavList>
                     </>
-                  ) : ''
-                  }
+                  ) : (
+                    ''
+                  )}
                   <StyleNavList>
-                    <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                    <StyleText>
+                      Charts <span style={{ fontSize: '11px' }}>↗</span>
+                    </StyleText>
                     <StyleNavSub>
                       <StyleNavList>
                         <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                            Ethereum
+                          Ethereum
                         </StyledExternalLink>
                       </StyleNavList>
                       <StyleNavList>
@@ -467,14 +469,17 @@ export default function Header() {
                     </StyledNavLink>
                   </StyleNavList>
                 </>
-                ) : ''
-              }
+              ) : (
+                ''
+              )}
               <StyleNavList>
-                <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                <StyleText>
+                  Charts <span style={{ fontSize: '11px' }}>↗</span>
+                </StyleText>
                 <StyleNavSub>
                   <StyleNavList>
                     <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                        Ethereum
+                      Ethereum
                     </StyledExternalLink>
                   </StyleNavList>
                   <StyleNavList>

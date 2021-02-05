@@ -32,6 +32,7 @@ import Farms from './Farms'
 import Farm from './Farm'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // OpenClaimAddressModalAndRedirectToSwap
 import SafePage from './Safe'
+import CreatePair from './CreatePair'
 // import Vote from './Vote'
 // import VotePage from './Vote/VotePage'
 
@@ -114,6 +115,8 @@ export default function App() {
               <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
               <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
               <Route exact path="/create" component={AddLiquidity} />
+              <Route exact path="/create-pair" component={CreatePair} />
+              <Route exact path="/create-pair/TOMO" component={CreatePair} />
               <Route exact path="/create/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
               <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
               <Route exact strict path="/remove/v1/:address" component={RemoveV1Exchange} />

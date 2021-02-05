@@ -6,7 +6,7 @@ const ModalContent: React.FC = ({ children }) => {
 }
 
 const StyledModalContent = styled.div`
-  padding: ${(props) => props.theme.spacing[4]}px;
+  padding: ${props => props.theme.spacing[4]}px;
 `
 
 export default ModalContent

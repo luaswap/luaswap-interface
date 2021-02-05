@@ -29,7 +29,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   89: 'scan.testnet.',
   99: 'scan.devnet.'
 }
-const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
+const NETWORK_DOMAIN: { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
   3: 'etherscan.io',
   4: 'etherscan.io',
@@ -39,7 +39,7 @@ const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
   89: 'tomochain.com',
   99: 'tomochain.com'
 }
-const BLOCK_LINK : { [chainId in ChainId]: string } = {
+const BLOCK_LINK: { [chainId in ChainId]: string } = {
   1: 'block',
   3: 'block',
   4: 'block',
@@ -49,7 +49,7 @@ const BLOCK_LINK : { [chainId in ChainId]: string } = {
   89: 'blocks',
   99: 'blocks'
 }
-const TOKEN : { [chainId in ChainId]: string } = {
+const TOKEN: { [chainId in ChainId]: string } = {
   1: 'token',
   3: 'token',
   4: 'token',
@@ -87,33 +87,33 @@ export function getEtherscanLink(
   }
 }
 
-export function IsTomoChain( chainId: ChainId | undefined){  
+export function IsTomoChain(chainId: ChainId | undefined) {
   return chainId === 88 || chainId === 89 || chainId === 99
 }
 
-export function getNativeToken( chainId: ChainId | undefined ){
+export function getNativeToken(chainId: ChainId | undefined) {
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo){
+  if (IsTomo) {
     return TOMO
-  }else{
+  } else {
     return ETHER
   }
 }
 
-export function getTextNativeToken( chainId: ChainId | undefined ){
+export function getTextNativeToken(chainId: ChainId | undefined) {
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo){
+  if (IsTomo) {
     return 'TOMO'
-  }else{
+  } else {
     return 'ETH'
   }
 }
 
-export function getLogoNativeToken( chainId: ChainId | undefined ){
+export function getLogoNativeToken(chainId: ChainId | undefined) {
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo){
+  if (IsTomo) {
     return TomoLogo
-  }else{
+  } else {
     return EthereumLogo
   }
 }
@@ -168,7 +168,12 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
-  return getContract((_ === 89 || _ === 88 || _ === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
+  return getContract(
+    _ === 89 || _ === 88 || _ === 99 ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS,
+    IUniswapV2Router02ABI,
+    library,
+    account
+  )
 }
 
 export function escapeRegExp(string: string): string {

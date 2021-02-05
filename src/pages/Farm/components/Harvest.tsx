@@ -28,11 +28,17 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
             {/* <CardIcon><img src={Lua} alt="LUA Reward"/></CardIcon> */}
             <StyledValue>
               <Label text="LUA Reward" />
-              <br/>
-              <Value value={getBalanceNumber(earnings)}/>
-              <br/>
-              <div style={{fontSize: 13, color: 'rgb(255,152,0,0.7)'}}>During the first 8 weeks since launch, <b>25% of your earned LUA</b> is available to <b>unlock immediately</b></div>
-              <div style={{marginTop: 10, fontSize: 13, color: 'rgb(255,152,0,0.7)'}}>Beginning January 18, 2021, the remaining <b>75% will be unlocked</b> linearly every block <b>over 1 year</b>.</div>
+              <br />
+              <Value value={getBalanceNumber(earnings)} />
+              <br />
+              <div style={{ fontSize: 13, color: 'rgb(255,152,0,0.7)' }}>
+                During the first 8 weeks since launch, <b>25% of your earned LUA</b> is available to{' '}
+                <b>unlock immediately</b>
+              </div>
+              <div style={{ marginTop: 10, fontSize: 13, color: 'rgb(255,152,0,0.7)' }}>
+                Beginning January 18, 2021, the remaining <b>75% will be unlocked</b> linearly every block{' '}
+                <b>over 1 year</b>.
+              </div>
             </StyledValue>
           </StyledCardHeader>
           <StyledCardActions>
@@ -59,14 +65,14 @@ const StyledCardHeader = styled.div`
 `
 const StyledValue = styled.div`
   text-align: center;
-  span{
-    color: ${(props) => props.theme.white};
-  }  
+  span {
+    color: ${props => props.theme.white};
+  }
 `
 const StyledCardActions = styled.div`
   display: flex;
   justify-content: center;
-  margin-top: ${(props) => props.theme.spacing[6]}px;
+  margin-top: ${props => props.theme.spacing[6]}px;
   width: 100%;
 `
 

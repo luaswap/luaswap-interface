@@ -35,7 +35,8 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : currency === TOMO ? 'TOMO':''
+          currencyId:
+            currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : currency === TOMO ? 'TOMO' : ''
         })
       )
     },
@@ -69,7 +70,7 @@ export function useSwapActionHandlers(): {
 }
 
 // try to parse a user entered amount for a given token
-export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmount | undefined {  
+export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmount | undefined {
   if (!value || !currency) {
     return undefined
   }
@@ -78,7 +79,9 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
     if (typedValueParsed !== '0') {
       return currency instanceof Token
         ? new TokenAmount(currency, JSBI.BigInt(typedValueParsed))
-        : currency === TOMO ? CurrencyAmount.tomo(JSBI.BigInt(typedValueParsed)) : CurrencyAmount.ether(JSBI.BigInt(typedValueParsed))
+        : currency === TOMO
+        ? CurrencyAmount.tomo(JSBI.BigInt(typedValueParsed))
+        : CurrencyAmount.ether(JSBI.BigInt(typedValueParsed))
     }
   } catch (error) {
     // should fail if the user specifies too many decimal places of precision (or maybe exceed max uint?)
@@ -217,23 +220,24 @@ export function useDerivedSwapInfo(): {
   }
 }
 
-function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId) { // remove :string
+function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId) {
+  // remove :string
   const IsTomo = IsTomoChain(chainId)
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH'){
+    if (urlParam.toUpperCase() === 'ETH') {
       return 'ETH'
-    }else if(urlParam.toUpperCase() === 'TOMO'){
+    } else if (urlParam.toUpperCase() === 'TOMO') {
       return 'TOMO'
     }
-    if (valid === false  && IsTomo){
+    if (valid === false && IsTomo) {
       return 'TOMO'
-    }else{
+    } else {
       return 'ETH'
     }
   }
-  return IsTomo ?'TOMO' ?? '' : 'ETH' ?? ''
+  return IsTomo ? 'TOMO' ?? '' : 'ETH' ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {
@@ -290,7 +294,7 @@ export function useDefaultsFromURLSearch():
   const parsedQs = useParsedQueryString()
   const [result, setResult] = useState<
     { inputCurrencyId: string | undefined; outputCurrencyId: string | undefined } | undefined
-  >()  
+  >()
   useEffect(() => {
     if (!chainId) return
     const parsed = queryParametersToSwapState(parsedQs, chainId) // add chainId
