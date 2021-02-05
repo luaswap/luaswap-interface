@@ -437,7 +437,7 @@ export default function Header() {
                     <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
                     <StyleNavSub>
                       <StyleNavList>
-                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
                             Ethereum
                         </StyledExternalLink>
                       </StyleNavList>
@@ -472,7 +472,7 @@ export default function Header() {
                 <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
                 <StyleNavSub>
                   <StyleNavList>
-                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
                         Ethereum
                     </StyledExternalLink>
                   </StyleNavList>
