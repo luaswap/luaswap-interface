@@ -115,13 +115,14 @@ const StyleNavBox = styled.ul`
 const StyleNavList = styled.li`
   list-style: none;
   padding: 15px 0;
+  position: relative;
   :hover > ul{
     display: block;
   }
 `
 const StyleNavSub = styled.ul`
   position: absolute;
-  top: 65px;
+  top: 50px;
   background-color: ${({ theme }) => theme.bg3};
   padding: 0 5px;
   border-radius: 8px;
@@ -135,7 +136,7 @@ const StyleNavSub = styled.ul`
   }
   ${({ theme }) => theme.mediaWidth.upToMedium`
     left: -130px;
-    top: 75px;
+    top: 0px;
     > li {
       padding: 0;
     }
@@ -436,7 +437,7 @@ export default function Header() {
                     <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
                     <StyleNavSub>
                       <StyleNavList>
-                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
                             Ethereum
                         </StyledExternalLink>
                       </StyleNavList>
@@ -471,7 +472,7 @@ export default function Header() {
                 <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
                 <StyleNavSub>
                   <StyleNavList>
-                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
                         Ethereum
                     </StyledExternalLink>
                   </StyleNavList>
