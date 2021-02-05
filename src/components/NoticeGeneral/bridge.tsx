@@ -12,7 +12,11 @@ export default function NoticeTomoBridge() {
   return (
     <>
       <StyledInfo style={{ color: '#c3a56e' }}>
-        <a style={{ fontSize: '15px', color: '#ecb34b' }} href="https://bridge.tomochain.com/" target="true">
+        <a
+          style={{ fontSize: '15px', color: '#ecb34b' }}
+          href="https://bridge.tomochain.com/"
+          target="true"
+        >
           Bring
         </a>{' '}
         any ERC20 token into the TomoChain ecosystem & integrate with LuaSwap seamlessly. Take advantage of near-zero
