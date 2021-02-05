@@ -115,12 +115,8 @@ const StyleNavBox = styled.ul`
 const StyleNavList = styled.li`
   list-style: none;
   padding: 15px 0;
-<<<<<<< HEAD
   position: relative;
   :hover > ul{
-=======
-  :hover > ul {
->>>>>>> 304bffac46d9cb247ce79b86e132ecd419e55ddf
     display: block;
   }
 `
