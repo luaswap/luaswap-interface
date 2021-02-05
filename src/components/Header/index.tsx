@@ -445,7 +445,7 @@ export default function Header() {
                     <StyleNavSub>
                       <StyleNavList>
                         <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                            Ethereum
+                          Ethereum
                         </StyledExternalLink>
                       </StyleNavList>
                       <StyleNavList>
@@ -483,7 +483,7 @@ export default function Header() {
                 <StyleNavSub>
                   <StyleNavList>
                     <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                        Ethereum
+                      Ethereum
                     </StyledExternalLink>
                   </StyleNavList>
                   <StyleNavList>
