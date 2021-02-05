@@ -126,7 +126,7 @@ const StyleNavSub = styled.ul`
   background-color: ${({ theme }) => theme.bg3};
   padding: 0 5px;
   border-radius: 8px;
-  // display: none;
+  display: none;
   margin: 0;  
   > li{
     padding: 10px 0;
