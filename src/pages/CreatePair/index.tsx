@@ -114,7 +114,7 @@ export default function CreatePair() {
     if (currency1 === TOMO) {
       isTrc21B = false
     } else {
-      try {        
+      try {
         const currencyBContract = getContract(
           // @ts-ignore
           wrappedCurrency(currency1, chainId)?.address ?? '',
