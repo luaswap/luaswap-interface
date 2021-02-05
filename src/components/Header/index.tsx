@@ -110,16 +110,58 @@ const HeaderLinks = styled(Row)`
 const StyleNavBox = styled.ul`
   display: flex;
   padding-left: 0;
+  margin: 0;
+`
+const StyleNavList = styled.li`
+  list-style: none;
+  padding: 15px 0;
+  :hover > ul{
+    display: block;
+  }
 `
 const StyleNavSub = styled.ul`
+  position: absolute;
+  top: 65px;
+  background-color: ${({ theme }) => theme.bg3};
+  padding: 0 5px;
+  border-radius: 8px;
+  display: none;
+  margin: 0;  
+  > li{
+    padding: 10px 0;
+    a{
+      font-size: 15px;
+    }
+  }
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    left: -130px;
+    top: 75px;
+    > li {
+      padding: 0;
+    }
+  `}
+`
+
+const StyleNavMobile = styled.ul`
   position: absolute;
   top: 5em;
   background-color: ${({ theme }) => theme.bg3};
   padding: 0 5px;
   border-radius: 8px;
   a {
-    padding: 0.5rem 0.5rem;
+    padding: 10px;
   }
+  > li{
+    padding: 0px;
+  }
+`
+const StyleText = styled(Text)`
+  padding-left: 10px;
+  cursor: pointer;
+  ${({ theme }) => theme.mediaWidth.upToMedium`
+    padding: 10px;
+    margin: 0 12px!important;
+  `}
 `
 const StyledMenuButton = styled.button`
   width: 50px;
@@ -348,22 +390,26 @@ export default function Header() {
         </Title>
         <HeaderLinks>
           <StyleNavBox>
-            <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-              {t('swap')}
-            </StyledNavLink>
-            <StyledNavLink
-              id={`pool-nav-link`}
-              to={'/pool'}
-              isActive={(match, { pathname }) =>
-                Boolean(match) ||
-                pathname.startsWith('/add') ||
-                pathname.startsWith('/remove') ||
-                pathname.startsWith('/create') ||
-                pathname.startsWith('/find')
-              }
-            >
-              {t('pool')}
-            </StyledNavLink>
+            <StyleNavList>
+              <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
+                {t('swap')}
+              </StyledNavLink>
+            </StyleNavList>
+            <StyleNavList>
+              <StyledNavLink
+                id={`pool-nav-link`}
+                to={'/pool'}
+                isActive={(match, { pathname }) =>
+                  Boolean(match) ||
+                  pathname.startsWith('/add') ||
+                  pathname.startsWith('/remove') ||
+                  pathname.startsWith('/create') ||
+                  pathname.startsWith('/find')
+                }
+              >
+                {t('pool')}
+              </StyledNavLink>
+            </StyleNavList>
           </StyleNavBox>
           {width && width < 767 ? (
             <>
@@ -371,33 +417,73 @@ export default function Header() {
                 <StyledMenuIcon />
               </StyledMenuButton>
               {open && (
-                <StyleNavSub>
-                  <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                    Farming
-                  </StyledNavLink>
-                  <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                    {t('LuaSafe')}
-                  </StyledNavLink>
-                  <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
-                    Charts <span style={{ fontSize: '11px' }}>↗</span>
-                  </StyledExternalLink>
-                </StyleNavSub>
+                <StyleNavMobile>
+                  {!IsTomo ? (
+                    <>
+                      <StyleNavList>
+                        <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                          Farming
+                        </StyledNavLink>
+                      </StyleNavList>
+                      <StyleNavList>
+                        <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                          {t('LuaSafe')}
+                        </StyledNavLink>
+                      </StyleNavList>
+                    </>
+                  ) : ''
+                  }
+                  <StyleNavList>
+                    <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                    <StyleNavSub>
+                      <StyleNavList>
+                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                            Ethereum
+                        </StyledExternalLink>
+                      </StyleNavList>
+                      <StyleNavList>
+                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
+                          TomoChain
+                        </StyledExternalLink>
+                      </StyleNavList>
+                    </StyleNavSub>
+                  </StyleNavList>
+                </StyleNavMobile>
               )}
             </>
-          ) : !IsTomo ? (
-            <StyleNavBox>
-              <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                Farming
-              </StyledNavLink>
-              <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                {t('LuaSafe')}
-              </StyledNavLink>
-              <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
-                Charts <span style={{ fontSize: '11px' }}>↗</span>
-              </StyledExternalLink>
-            </StyleNavBox>
           ) : (
-            ''
+            <StyleNavBox>
+              {!IsTomo ? (
+                <>
+                  <StyleNavList>
+                    <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                      Farming
+                    </StyledNavLink>
+                  </StyleNavList>
+                  <StyleNavList>
+                    <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                      {t('LuaSafe')}
+                    </StyledNavLink>
+                  </StyleNavList>
+                </>
+                ) : ''
+              }
+              <StyleNavList>
+                <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                <StyleNavSub>
+                  <StyleNavList>
+                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org'}>
+                        Ethereum
+                    </StyledExternalLink>
+                  </StyleNavList>
+                  <StyleNavList>
+                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
+                      TomoChain
+                    </StyledExternalLink>
+                  </StyleNavList>
+                </StyleNavSub>
+              </StyleNavList>
+            </StyleNavBox>
           )}
         </HeaderLinks>
       </HeaderRow>
