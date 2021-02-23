@@ -68,11 +68,11 @@ export function CurrencySearch({
 
   const showETH: boolean = useMemo(() => {
     const s = searchQuery.toLowerCase().trim()
-    if( IsTomo ){
+    if (IsTomo) {
       return s === '' || s === 't' || s === 'to' || s === 'tom' || s === 'tomo'
     } else {
       return s === '' || s === 'e' || s === 'et' || s === 'eth'
-    }    
+    }
   }, [searchQuery])
 
   const tokenComparator = useTokenComparator(invertSearchOrder)
@@ -127,7 +127,7 @@ export function CurrencySearch({
         const s = searchQuery.toLowerCase().trim()
         if (s === 'eth') {
           handleCurrencySelect(ETHER)
-        } else if ( s === 'tomo' && IsTomo ) {
+        } else if (s === 'tomo' && IsTomo) {
           handleCurrencySelect(TOMO)
         } else if (filteredSortedTokens.length > 0) {
           if (

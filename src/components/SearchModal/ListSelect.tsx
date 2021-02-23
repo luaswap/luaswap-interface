@@ -260,7 +260,6 @@ export function ListSelect({ onDismiss, onBack }: { onDismiss: () => void; onBac
     setAddError(null)
   }, [])
   const fetchList = useFetchListCallback()
-
   const handleAddList = useCallback(() => {
     if (adding) return
     setAddError(null)

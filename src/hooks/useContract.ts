@@ -6,7 +6,7 @@ import { abi as MERKLE_DISTRIBUTOR_ABI } from '@uniswap/merkle-distributor/build
 import { ChainId, WETH } from '@luaswap/sdk'
 import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.json'
 import { useMemo } from 'react'
-import { GOVERNANCE_ADDRESS, MERKLE_DISTRIBUTOR_ADDRESS, UNI } from '../constants'
+import { GOVERNANCE_ADDRESS, MERKLE_DISTRIBUTOR_ADDRESS, UNI, TOMO_ROUTER_ADDRESS } from '../constants'
 import {
   ARGENT_WALLET_DETECTOR_ABI,
   ARGENT_WALLET_DETECTOR_MAINNET_ADDRESS
@@ -18,11 +18,15 @@ import ERC20_ABI from '../constants/abis/erc20.json'
 import { MIGRATOR_ABI, MIGRATOR_ADDRESS } from '../constants/abis/migrator'
 import UNISOCKS_ABI from '../constants/abis/unisocks.json'
 import WETH_ABI from '../constants/abis/weth.json'
+import V2_FACTORY_ABI from '../constants/abis/factory.json'
+import TRC21_ABI from '../constants/abis/trc21.json'
 import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../constants/v1'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
 import { FARMING_ABI, FARMING_ADDRESS } from '../constants/abis/farming'
+import LUA_ABI from '../constants/abis/lua'
+import TOMO_ROUTER_ABI from '../constants/abis/tomo-router.json'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
@@ -54,6 +58,10 @@ export function useV1ExchangeContract(address?: string, withSignerIfPossible?: b
 
 export function useTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
   return useContract(tokenAddress, ERC20_ABI, withSignerIfPossible)
+}
+
+export function useLuaTokenContract(tokenAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(tokenAddress, LUA_ABI, withSignerIfPossible)
 }
 
 export function useWETHContract(withSignerIfPossible?: boolean): Contract | null {
@@ -98,6 +106,14 @@ export function usePairContract(pairAddress?: string, withSignerIfPossible?: boo
   return useContract(pairAddress, IUniswapV2PairABI, withSignerIfPossible)
 }
 
+export function useCreatePairContract(factoryAddress?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(factoryAddress, V2_FACTORY_ABI, withSignerIfPossible)
+}
+
+export function useTrc21Contract(address?: string, withSignerIfPossible?: boolean): Contract | null {
+  return useContract(address, TRC21_ABI, withSignerIfPossible)
+}
+
 export function useMulticallContract(): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && MULTICALL_NETWORKS[chainId], MULTICALL_ABI, false)
@@ -132,4 +148,8 @@ export function useSocksController(): Contract | null {
 
 export function useFarmingContract(): Contract | null {
   return useContract(FARMING_ADDRESS, FARMING_ABI)
+}
+
+export function useTomoRouterContract(): Contract | null {
+  return useContract(TOMO_ROUTER_ADDRESS, TOMO_ROUTER_ABI, false)
 }

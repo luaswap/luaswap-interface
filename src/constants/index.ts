@@ -2,6 +2,7 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@luaswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { injected, walletconnect, walletlink, tomoWalletconnect } from '../connectors' // remove portis, fortmatic
+export const FACTORY_ADDRESS = '0x28c79368257CD71A122409330ad2bEBA7277a396'
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
 // Tomo router address testnet: 0x6f7425954a609bc4f585A13664c414D543B676d8
@@ -16,13 +17,49 @@ type ChainTokenList = {
 
 // Base Token on TomoChain NetWork
 // TESTNET
-export const TUSDT = new Token(ChainId.TOMOCHAIN_TESTNET, '0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c', 6, 'USDT', 'Tether USD')
-export const TBTC = new Token(ChainId.TOMOCHAIN_TESTNET, '0x11c2cAF973db997b8a9b5689b33962E1AedEA968', 8, 'BTC', 'Wrapped BTC')
+export const TUSDT = new Token(
+  ChainId.TOMOCHAIN_TESTNET,
+  '0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c',
+  6,
+  'USDT',
+  'Tether USD'
+)
+export const TBTC = new Token(
+  ChainId.TOMOCHAIN_TESTNET,
+  '0x11c2cAF973db997b8a9b5689b33962E1AedEA968',
+  8,
+  'BTC',
+  'Wrapped BTC'
+)
 // MAINNET
-export const MLUA = new Token(ChainId.TOMOCHAIN_MAINNET, '0x7262fa193e9590b2e075c3c16170f3f2f32f5c74', 18, 'LUA', 'LuaToken')
-export const MBTC = new Token(ChainId.TOMOCHAIN_MAINNET, '0xAE44807D8A9CE4B30146437474Ed6fAAAFa1B809', 8, 'BTC', 'Wrapped BTC')
-export const METH = new Token(ChainId.TOMOCHAIN_MAINNET, '0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b', 18, 'ETH', 'Wrapped ETH')
-export const MUSDT = new Token(ChainId.TOMOCHAIN_MAINNET, '0x381B31409e4D220919B2cFF012ED94d70135A59e', 6, 'USDT', 'Wrapped Tether USD')
+export const MLUA = new Token(
+  ChainId.TOMOCHAIN_MAINNET,
+  '0x7262fa193e9590b2e075c3c16170f3f2f32f5c74',
+  18,
+  'LUA',
+  'LuaToken'
+)
+export const MBTC = new Token(
+  ChainId.TOMOCHAIN_MAINNET,
+  '0xAE44807D8A9CE4B30146437474Ed6fAAAFa1B809',
+  8,
+  'BTC',
+  'Wrapped BTC'
+)
+export const METH = new Token(
+  ChainId.TOMOCHAIN_MAINNET,
+  '0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b',
+  18,
+  'ETH',
+  'Wrapped ETH'
+)
+export const MUSDT = new Token(
+  ChainId.TOMOCHAIN_MAINNET,
+  '0x381B31409e4D220919B2cFF012ED94d70135A59e',
+  6,
+  'USDT',
+  'Wrapped Tether USD'
+)
 // Base Token on ETH NetWork
 export const USDC = new Token(ChainId.MAINNET, '0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48', 6, 'USDC', 'USD//C')
 export const USDT = new Token(ChainId.MAINNET, '0xdAC17F958D2ee523a2206206994597C13D831ec7', 6, 'USDT', 'Tether USD')
@@ -101,7 +138,6 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
   [ChainId.MAINNET]: [[USDC, USDT]],
   [ChainId.TOMOCHAIN_TESTNET]: [[TUSDT, TBTC]],
   [ChainId.TOMOCHAIN_MAINNET]: [[MLUA, MUSDT]]
-  
 }
 
 export interface WalletInfo {
@@ -171,7 +207,7 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   }
 }
 
-export const NETWORK_SCAN : { [chainId in ChainId]: string } = {
+export const NETWORK_SCAN: { [chainId in ChainId]: string } = {
   1: 'View Etherscan',
   3: 'View Etherscan',
   4: 'View Etherscan',
@@ -179,7 +215,7 @@ export const NETWORK_SCAN : { [chainId in ChainId]: string } = {
   42: 'View Etherscan',
   88: 'View TomoScan',
   89: 'View TomoScan',
-  99: 'View TomoScan'  
+  99: 'View TomoScan'
 }
 
 export const TokenTextSupport: { [chainId in ChainId]: string } = {
@@ -216,7 +252,7 @@ export const BLOCKED_PRICE_IMPACT_NON_EXPERT: Percent = new Percent(JSBI.BigInt(
 
 // used to ensure the user doesn't send so much ETH so they end up with <.01
 export const MIN_ETH: JSBI = JSBI.exponentiate(JSBI.BigInt(10), JSBI.BigInt(16)) // .01 ETH
-export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(1), JSBI.BigInt(16)) // .01 ETH
+export const MIN_TOMO: JSBI = JSBI.exponentiate(JSBI.BigInt(0), JSBI.BigInt(16)) // .01 ETH
 export const BETTER_TRADE_LINK_THRESHOLD = new Percent(JSBI.BigInt(75), JSBI.BigInt(10000))
 
 export const STAKING_POOLS = [

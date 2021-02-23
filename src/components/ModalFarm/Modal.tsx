@@ -37,14 +37,14 @@ const StyledResponsiveWrapper = styled.div`
     right: 0;
     left: 0;
     height: 100%;
-    // max-height: calc(100% - ${(props) => props.theme.spacing[4]}px);
+    // max-height: calc(100% - ${props => props.theme.spacing[4]}px);
     animation: ${mobileKeyframes} 0.3s forwards ease-out;
   }
 `
 
 const StyledModal = styled.div`
   padding: 0 20px;
-  background: ${(props) => props.theme.bg1};
+  background: ${props => props.theme.bg1};
   border-radius: 12px;
   display: flex;
   flex-direction: column;

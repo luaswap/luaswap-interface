@@ -25,19 +25,39 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   4: 'rinkeby.',
   5: 'goerli.',
   42: 'kovan.',
-  99: 'scan.devnet.',
+  88: 'scan.',
   89: 'scan.testnet.',
-  88: 'scan.'
+  99: 'scan.devnet.'
 }
-const NETWORK_DOMAIN : { [chainId in ChainId]: string } = {
+const NETWORK_DOMAIN: { [chainId in ChainId]: string } = {
   1: 'etherscan.io',
   3: 'etherscan.io',
   4: 'etherscan.io',
   5: 'etherscan.io',
   42: 'etherscan.io',
-  99: 'tomochain.com',
+  88: 'tomochain.com',
   89: 'tomochain.com',
-  88: 'tomochain.com'
+  99: 'tomochain.com'
+}
+const BLOCK_LINK: { [chainId in ChainId]: string } = {
+  1: 'block',
+  3: 'block',
+  4: 'block',
+  5: 'block',
+  42: 'block',
+  88: 'blocks',
+  89: 'blocks',
+  99: 'blocks'
+}
+const TOKEN: { [chainId in ChainId]: string } = {
+  1: 'token',
+  3: 'token',
+  4: 'token',
+  5: 'token',
+  42: 'token',
+  88: 'tokens',
+  89: 'tokens',
+  99: 'tokens'
 }
 
 export function getEtherscanLink(
@@ -47,15 +67,18 @@ export function getEtherscanLink(
 ): string {
   const prefix = `https://${ETHERSCAN_PREFIXES[chainId] || ETHERSCAN_PREFIXES[1]}${NETWORK_DOMAIN[chainId]}`
 
+  const block = BLOCK_LINK[chainId]
+  const token = TOKEN[chainId]
+
   switch (type) {
     case 'transaction': {
       return `${prefix}/tx/${data}`
     }
     case 'token': {
-      return `${prefix}/token/${data}`
+      return `${prefix}/${token}/${data}`
     }
     case 'block': {
-      return `${prefix}/block/${data}`
+      return `${prefix}/${block}/${data}`
     }
     case 'address':
     default: {
@@ -64,33 +87,33 @@ export function getEtherscanLink(
   }
 }
 
-export function IsTomoChain( chainId: ChainId | undefined){  
+export function IsTomoChain(chainId: ChainId | undefined) {
   return chainId === 88 || chainId === 89 || chainId === 99
 }
 
-export function getNativeToken( chainId: ChainId | undefined ){
+export function getNativeToken(chainId: ChainId | undefined) {
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo){
+  if (IsTomo) {
     return TOMO
-  }else{
+  } else {
     return ETHER
   }
 }
 
-export function getTextNativeToken( chainId: ChainId | undefined ){
+export function getTextNativeToken(chainId: ChainId | undefined) {
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo){
+  if (IsTomo) {
     return 'TOMO'
-  }else{
+  } else {
     return 'ETH'
   }
 }
 
-export function getLogoNativeToken( chainId: ChainId | undefined ){
+export function getLogoNativeToken(chainId: ChainId | undefined) {
   const IsTomo = IsTomoChain(chainId)
-  if(IsTomo){
+  if (IsTomo) {
     return TomoLogo
-  }else{
+  } else {
     return EthereumLogo
   }
 }
@@ -145,7 +168,12 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 
 // account is optional
 export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
-  return getContract((_ === 89 || _ === 88 || _ === 99) ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS, IUniswapV2Router02ABI, library, account)
+  return getContract(
+    _ === 89 || _ === 88 || _ === 99 ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS,
+    IUniswapV2Router02ABI,
+    library,
+    account
+  )
 }
 
 export function escapeRegExp(string: string): string {

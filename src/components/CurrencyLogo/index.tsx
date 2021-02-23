@@ -1,5 +1,5 @@
-import { Currency, Token } from '@luaswap/sdk'
-import { getNativeToken, getLogoNativeToken } from '../../utils'
+import { Currency, Token, ChainId } from '@luaswap/sdk'
+import { IsTomoChain, getNativeToken, getLogoNativeToken } from '../../utils'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 import { useActiveWeb3React } from '../../hooks'
@@ -8,8 +8,14 @@ import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
 const commit_hash = '3dda6df393721f8832dbbd0cc279d4ff8d693276'
 
-const getTokenLogoURL = (address: string) =>
-  `https://raw.githubusercontent.com/tomochain/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${address}.png`
+const getTokenLogoURL = (address: string, chainId: ChainId | undefined) => {
+  const IsTomo = IsTomoChain(chainId)
+  if (IsTomo) {
+    return `https://raw.githubusercontent.com/tomochain/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${address}.png`
+  } else {
+    return `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${address}/logo.png`
+  }
+}
 
 const StyledEthereumLogo = styled.img<{ size: string }>`
   width: ${({ size }) => size};
@@ -36,7 +42,7 @@ export default function CurrencyLogo({
 }) {
   const { chainId } = useActiveWeb3React()
   const NATIVE_TOKEN = getNativeToken(chainId)
-  const NATIVE_LOGO  = getLogoNativeToken(chainId)
+  const NATIVE_LOGO = getLogoNativeToken(chainId)
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {
@@ -44,14 +50,14 @@ export default function CurrencyLogo({
 
     if (currency instanceof Token) {
       if (currency instanceof WrappedTokenInfo) {
-        return [...uriLocations, getTokenLogoURL(currency.address)]
+        return [...uriLocations, getTokenLogoURL(currency.address, chainId)]
       }
 
-      return [getTokenLogoURL(currency.address)]
+      return [getTokenLogoURL(currency.address, chainId)]
     }
     return []
   }, [currency, uriLocations])
-  
+
   if (currency === NATIVE_TOKEN) {
     return <StyledEthereumLogo src={NATIVE_LOGO} size={size} style={style} />
   }

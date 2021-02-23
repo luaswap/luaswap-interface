@@ -18,7 +18,7 @@ import Loader from '../Loader'
 import { isTokenOnList, IsTomoChain } from '../../utils'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : (currency === ETHER ? 'ETHER' : currency === TOMO ? 'TOMO' : '')
+  return currency instanceof Token ? currency.address : currency === ETHER ? 'ETHER' : currency === TOMO ? 'TOMO' : ''
 }
 
 const StyledBalanceText = styled(Text)`

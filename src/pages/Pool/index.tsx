@@ -3,7 +3,7 @@ import styled, { ThemeContext } from 'styled-components'
 import { Pair } from '@luaswap/sdk'
 import { Link } from 'react-router-dom'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
-import { getTextNativeToken } from '../../utils'
+import { IsTomoChain, getTextNativeToken } from '../../utils'
 
 import { LP_FEE } from '../../utils/prices'
 
@@ -81,6 +81,7 @@ export default function Pool() {
   const theme = useContext(ThemeContext)
   const { chainId, account } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
+  const IsTomo = IsTomoChain(chainId)
   //@ts-ignore
   const userFarmingMap: { [key: string]: any } = useFarmingStaked(window.pools)
 
@@ -104,7 +105,7 @@ export default function Pool() {
       tokenPairsWithLiquidityTokens.filter(
         ({ liquidityToken }) =>
           v2PairsBalances[liquidityToken.address]?.greaterThan('0') ||
-          Object.keys(userFarmingMap).includes(liquidityToken.address)
+          Object.keys(userFarmingMap).includes(liquidityToken.address.toLowerCase())
       ),
     [tokenPairsWithLiquidityTokens, v2PairsBalances, userFarmingMap]
   )
@@ -156,10 +157,21 @@ export default function Pool() {
                 </TYPE.mediumHeader>
               </HideSmall>
               <ButtonRow>
-                <ResponsiveButtonSecondary as={Link} padding="6px 8px" to={`/create/${NATIVE_TOKEN_TEXT}`}>
-                  Create a pair
-                </ResponsiveButtonSecondary>
-                <ResponsiveButtonPrimary id="join-pool-button" as={Link} padding="6px 8px" to={`/add/${NATIVE_TOKEN_TEXT}`}>
+                {!IsTomo ? (
+                  <ResponsiveButtonSecondary as={Link} padding="6px 8px" to={`/create/${NATIVE_TOKEN_TEXT}`}>
+                    Create a pair
+                  </ResponsiveButtonSecondary>
+                ) : (
+                  <ResponsiveButtonSecondary as={Link} padding="6px 8px" to={`/create-pair`}>
+                    Create a pair
+                  </ResponsiveButtonSecondary>
+                )}
+                <ResponsiveButtonPrimary
+                  id="join-pool-button"
+                  as={Link}
+                  padding="6px 8px"
+                  to={`/add/${NATIVE_TOKEN_TEXT}`}
+                >
                   <Text fontWeight={500} fontSize={16} color={theme.text5}>
                     Add Liquidity
                   </Text>
@@ -181,20 +193,23 @@ export default function Pool() {
               </EmptyProposals>
             ) : allV2PairsWithLiquidity?.length > 0 ? (
               <>
-                <ButtonSecondary>
-                  <RowBetween>
-                    <ExternalLink href={'https://info.luaswap.org/account/' + account}>
-                      Account analytics and accrued fees
-                    </ExternalLink>
-                    <span> ↗</span>
-                  </RowBetween>
-                </ButtonSecondary>
-
+                {!IsTomo ? (
+                  <ButtonSecondary>
+                    <RowBetween>
+                      <ExternalLink href={'https://info.luaswap.org/account/' + account}>
+                        Account analytics and accrued fees
+                      </ExternalLink>
+                      <span> ↗</span>
+                    </RowBetween>
+                  </ButtonSecondary>
+                ) : (
+                  ''
+                )}
                 {allV2PairsWithLiquidity.map(v2Pair => (
                   <FullPositionCard
                     key={v2Pair.liquidityToken.address}
                     pair={v2Pair}
-                    farm={userFarmingMap[v2Pair.liquidityToken.address]}
+                    farm={userFarmingMap[v2Pair.liquidityToken.address.toLowerCase()]}
                   />
                 ))}
               </>

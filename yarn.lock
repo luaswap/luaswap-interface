@@ -1984,22 +1984,10 @@
     "@babel/runtime" "^7.7.2"
     regenerator-runtime "^0.13.3"
 
-"@json-rpc-tools/types@^1.5.7":
-  version "1.5.8"
-  resolved "https://registry.yarnpkg.com/@json-rpc-tools/types/-/types-1.5.8.tgz#8e511dd9ecc354f6e2cad0859315904614745c12"
-  integrity sha512-PZj2TP/p0H7mFrsKoUwInh39b2bmFzv5boF0jX44QLWLW6bhhUzcBtKiEznTLjUdeGdMNaUncKI2VEIq/VXSDQ==
-  dependencies:
-    keyvaluestorage "^0.6.0"
-
-"@json-rpc-tools/utils@1.5.7":
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/@json-rpc-tools/utils/-/utils-1.5.7.tgz#932fa5b7885919e746caff0d32a61b613c631fd6"
-  integrity sha512-AE7p5p15Lgu/L6onIaQfvIEUHD3U95hmOBNp3rdIe/lTjZIZrwm+CUiA/UAa+4QqwlG74Ri4fKbm+uriW5HaZA==
-  dependencies:
-    "@json-rpc-tools/types" "^1.5.7"
-
-"@luaswap/sdk@../luaswap-sdk":
-  version "1.4.0"
+"@luaswap/sdk@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@luaswap/sdk/-/sdk-2.0.0.tgz#a3824de059bb87c94d1c07be404bcf3939b478e1"
+  integrity sha512-+uGBIWCEdIF6MnJE57sIzsTXkHS0kW8LbJozbkw3tcyv0bsQ7KfWK4AhraKwHY5P3HETkl0xXGqs06yd0NRu+Q==
   dependencies:
     "@uniswap/v2-core" "^1.0.0"
     big.js "^5.2.2"
@@ -3629,7 +3617,7 @@ axios@^0.18.0:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
 
-axios@^0.21.0, axios@^0.21.1:
+axios@^0.21.1:
   version "0.21.1"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.21.1.tgz#22563481962f4d6bde9a76d516ef0e5d3c09b2b8"
   integrity sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==

@@ -100,15 +100,16 @@ export function useCurrencyBalances(
   account?: string,
   currencies?: (Currency | undefined)[]
 ): (CurrencyAmount | undefined)[] {
-  
   const tokens = useMemo(() => currencies?.filter((currency): currency is Token => currency instanceof Token) ?? [], [
     currencies
   ])
   const { chainId } = useActiveWeb3React()
   const NATIVE_TOKEN = getNativeToken(chainId)
   const tokenBalances = useTokenBalances(account, tokens)
-  const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === NATIVE_TOKEN) ?? false, [currencies])
-  
+  const containsETH: boolean = useMemo(() => currencies?.some(currency => currency === NATIVE_TOKEN) ?? false, [
+    currencies
+  ])
+
   const ethBalance = useETHBalances(containsETH ? [account] : [])
   return useMemo(
     () =>

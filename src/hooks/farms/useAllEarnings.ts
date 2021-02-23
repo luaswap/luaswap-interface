@@ -6,7 +6,6 @@ import useSushi from './useSushi'
 
 // import axios from 'axios'
 
-
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   // const { account }: { account: string | null } = useWallet()
@@ -14,7 +13,7 @@ const useAllEarnings = () => {
   const sushi = useSushi()
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
-  const block = 0//useBlock()
+  const block = 0 //useBlock()
 
   const fetchAllBalances = useCallback(async () => {
     // const balances: Array<BigNumber> = await Promise.all(
@@ -25,15 +24,16 @@ const useAllEarnings = () => {
     // setBalance(balances)
 
     const data: Array<BigNumber> = await Promise.all(
-      farms.map(({ pid }: any) => new Promise(async (resolve) => {
-        if (await checkPoolActive(pid)) {
-          resolve(await getEarned(masterChefContract, pid, account))
-        }
-        else {
-          resolve("0")
-        }
-
-      }))
+      farms.map(
+        ({ pid }: any) =>
+          new Promise(async resolve => {
+            if (await checkPoolActive(pid)) {
+              resolve(await getEarned(masterChefContract, pid, account))
+            } else {
+              resolve('0')
+            }
+          })
+      )
     )
     setBalance(data)
   }, [account, masterChefContract, sushi])

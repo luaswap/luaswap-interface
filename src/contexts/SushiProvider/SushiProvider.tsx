@@ -32,7 +32,7 @@ const SushiProvider: React.FC = ({ children }) => {
   window.eth = ethereum && ethereum.provider ? ethereum.provider : null
 
   useEffect(() => {
-    if(!IsTomo){
+    if (!IsTomo) {
       if (ethereum && ethereum.provider) {
         const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
           defaultAccount: ethereum.selectedAddress,

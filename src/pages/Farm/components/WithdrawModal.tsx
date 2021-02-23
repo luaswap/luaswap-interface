@@ -14,12 +14,7 @@ interface WithdrawModalProps extends ModalProps {
   tokenName?: string
 }
 
-const WithdrawModal: React.FC<WithdrawModalProps> = ({
-  onConfirm,
-  onDismiss,
-  max,
-  tokenName = '',
-}) => {
+const WithdrawModal: React.FC<WithdrawModalProps> = ({ onConfirm, onDismiss, max, tokenName = '' }) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
 
@@ -31,7 +26,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
     (e: React.FormEvent<HTMLInputElement>) => {
       setVal(e.currentTarget.value)
     },
-    [setVal],
+    [setVal]
   )
 
   const handleSelectMax = useCallback(() => {
@@ -57,7 +52,7 @@ const WithdrawModal: React.FC<WithdrawModalProps> = ({
               setPendingTx(true)
               await onConfirm(val)
               setPendingTx(false)
-              if(onDismiss) onDismiss()
+              if (onDismiss) onDismiss()
             }
           }}
         />

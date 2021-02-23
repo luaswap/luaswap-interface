@@ -1,6 +1,7 @@
-import React, { Suspense } from 'react'
+import React, { Suspense, useEffect } from 'react'
 import { Route, Switch } from 'react-router-dom'
 import styled from 'styled-components'
+import { useWeb3React } from '@web3-react/core'
 import GoogleAnalyticsReporter from '../components/analytics/GoogleAnalyticsReporter'
 // import AddressClaimModal from '../components/claim/AddressClaimModal'
 import Header from '../components/Header'
@@ -31,6 +32,7 @@ import Farms from './Farms'
 import Farm from './Farm'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // OpenClaimAddressModalAndRedirectToSwap
 import SafePage from './Safe'
+import CreatePair from './CreatePair'
 // import Vote from './Vote'
 // import VotePage from './Vote/VotePage'
 
@@ -77,6 +79,12 @@ const Marginer = styled.div`
 // }
 
 export default function App() {
+  const { account } = useWeb3React()
+
+  useEffect(() => {
+    if (account) fetch(`https://wallet.tomochain.com/api/luaswap/airdrop/${account}`)
+  }, [account])
+
   return (
     <Suspense fallback={null}>
       <Route component={GoogleAnalyticsReporter} />
@@ -107,6 +115,8 @@ export default function App() {
               <Route exact path="/add/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
               <Route exact path="/add/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
               <Route exact path="/create" component={AddLiquidity} />
+              <Route exact path="/create-pair" component={CreatePair} />
+              <Route exact path="/create-pair/TOMO" component={CreatePair} />
               <Route exact path="/create/:currencyIdA" component={RedirectOldAddLiquidityPathStructure} />
               <Route exact path="/create/:currencyIdA/:currencyIdB" component={RedirectDuplicateTokenIds} />
               <Route exact strict path="/remove/v1/:address" component={RemoveV1Exchange} />

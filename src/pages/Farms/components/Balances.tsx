@@ -27,10 +27,8 @@ const PendingRewards: React.FC = () => {
 
   const allEarnings = useAllEarnings()
   let sumEarning = 0
-  for (let earning of allEarnings) {
-    sumEarning += new BigNumber(earning)
-      .div(new BigNumber(10).pow(18))
-      .toNumber()
+  for (const earning of allEarnings) {
+    sumEarning += new BigNumber(earning).div(new BigNumber(10).pow(18)).toNumber()
   }
 
   useEffect(() => {
@@ -44,7 +42,7 @@ const PendingRewards: React.FC = () => {
         transform: `scale(${scale})`,
         transformOrigin: 'right bottom',
         transition: 'transform 0.5s',
-        display: 'inline-block',
+        display: 'inline-block'
       }}
     >
       <CountUp
@@ -75,13 +73,11 @@ const Balances = memo(() => {
           <StyledBalances>
             <StyledBalance>
               {/* <SushiIcon /> */}
-              <img src={Lua} alt="LUA Balance"/>
+              <img src={Lua} alt="LUA Balance" />
               <Spacer />
               <div style={{ flex: 1 }}>
                 <Label text="Your Available LUA Balance" />
-                <Value
-                  value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'}
-                />
+                <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
               </div>
             </StyledBalance>
           </StyledBalances>
@@ -99,13 +95,11 @@ const Balances = memo(() => {
         <CardContent>
           <StyledBalance>
             {/* <SushiIcon /> */}
-            <img src={Luas} alt="Total LUA Supply"/>
+            <img src={Luas} alt="Total LUA Supply" />
             <Spacer />
             <div style={{ flex: 1 }}>
               <Label text="LUA Circulating Supply" />
-              <Value
-                value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'}
-              />
+              <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
             </div>
           </StyledBalance>
         </CardContent>
@@ -124,13 +118,13 @@ const Balances = memo(() => {
 const Footnote = styled.div`
   font-size: 14px;
   padding: 14px 20px;
-  color: ${(props) => props.theme.text2};
-  background-color: ${(props) => props.theme.bg3};
+  color: ${props => props.theme.text2};
+  background-color: ${props => props.theme.bg3};
 `
 const FootnoteValue = styled.div`
   font-family: 'Nunito Sans', sans-serif;
   float: right;
-  color: ${(props) => props.theme.white};
+  color: ${props => props.theme.white};
 `
 
 const StyledWrapper = styled.div`

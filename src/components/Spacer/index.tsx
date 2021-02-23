@@ -5,9 +5,9 @@ interface SpacerProps {
   size?: 'sm' | 'md' | 'lg' | 'bg'
 }
 
-export default function Spacer({ size = 'md' } : SpacerProps){
+export default function Spacer({ size = 'md' }: SpacerProps) {
   const { spacing } = useContext(ThemeContext)
-  
+
   let s: number
   switch (size) {
     case 'bg':
@@ -23,13 +23,11 @@ export default function Spacer({ size = 'md' } : SpacerProps){
     default:
       s = spacing[4]
   }
-  
-  return (
-    <StyledSpacer size={s}/>
-  )
+
+  return <StyledSpacer size={s} />
 }
 
-const StyledSpacer = styled.div<{size: number}>`
+const StyledSpacer = styled.div<{ size: number }>`
   height: ${props => props.size}px;
   width: ${props => props.size}px;
 `

@@ -60,7 +60,7 @@ const Farm: React.FC = () => {
   const { account, library: ethereum } = useWeb3React()
   // const [onPresentWalletProviderModal] = useModal(<WalletProviderModal />)
   const lpContract = useMemo(() => {
-    let e_provider = ethereum && ethereum.provider ? ethereum.provider : null
+    const e_provider = ethereum && ethereum.provider ? ethereum.provider : null
     return getContract(e_provider as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
 

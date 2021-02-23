@@ -1,10 +1,12 @@
 import useENS from '../../hooks/useENS'
 import { Version } from '../../hooks/useToggledVersion'
 import { parseUnits } from '@ethersproject/units'
-import { Currency, CurrencyAmount, ETHER, TOMO, JSBI, Token, TokenAmount, Trade, ChainId } from '@luaswap/sdk'
+import { Currency, CurrencyAmount, ETHER, TOMO, WETH, JSBI, Token, TokenAmount, Trade, ChainId } from '@luaswap/sdk'
 import { ParsedQs } from 'qs'
 import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import BigNumber from 'bignumber.js'
+
 import { useV1Trade } from '../../data/V1'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
@@ -18,6 +20,7 @@ import { SwapState } from './reducer'
 import useToggledVersion from '../../hooks/useToggledVersion'
 import { useUserSlippageTolerance } from '../user/hooks'
 import { computeSlippageAdjustedAmounts } from '../../utils/prices'
+import { useTomoRouterContract } from '../../hooks/useContract'
 
 export function useSwapState(): AppState['swap'] {
   return useSelector<AppState, AppState['swap']>(state => state.swap)
@@ -35,7 +38,8 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : currency === TOMO ? 'TOMO':''
+          currencyId:
+            currency instanceof Token ? currency.address : currency === ETHER ? 'ETH' : currency === TOMO ? 'TOMO' : ''
         })
       )
     },
@@ -69,7 +73,7 @@ export function useSwapActionHandlers(): {
 }
 
 // try to parse a user entered amount for a given token
-export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmount | undefined {  
+export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmount | undefined {
   if (!value || !currency) {
     return undefined
   }
@@ -78,7 +82,9 @@ export function tryParseAmount(value?: string, currency?: Currency): CurrencyAmo
     if (typedValueParsed !== '0') {
       return currency instanceof Token
         ? new TokenAmount(currency, JSBI.BigInt(typedValueParsed))
-        : currency === TOMO ? CurrencyAmount.tomo(JSBI.BigInt(typedValueParsed)) : CurrencyAmount.ether(JSBI.BigInt(typedValueParsed))
+        : currency === TOMO
+        ? CurrencyAmount.tomo(JSBI.BigInt(typedValueParsed))
+        : CurrencyAmount.ether(JSBI.BigInt(typedValueParsed))
     }
   } catch (error) {
     // should fail if the user specifies too many decimal places of precision (or maybe exceed max uint?)
@@ -106,16 +112,64 @@ function involvesAddress(trade: Trade, checksummedAddress: string): boolean {
   )
 }
 
+// get amount in/out from tomo router contract, to resolve the issue trc21's fee
+function useGetAmountsOnTomo(
+  trade: Trade | null,
+  isExactIn: boolean,
+  parsedAmount: TokenAmount | CurrencyAmount | null | undefined
+) {
+  const { chainId } = useActiveWeb3React()
+  const tomoRouteContract = useTomoRouterContract()
+  const [amounts, setAmounts] = useState([])
+
+  useEffect(() => {
+    async function getAmounts() {
+      if (IsTomoChain(chainId) && trade && parsedAmount && tomoRouteContract) {
+        try {
+          const pathAddresses = trade.route.path.map(token => token.address)
+
+          const parsedAmountWithDecimals = parsedAmount
+            .multiply(JSBI.BigInt(10 ** parsedAmount.currency.decimals))
+            .toFixed(0)
+
+          const result = isExactIn
+            ? await tomoRouteContract.getAmountsOut(parsedAmountWithDecimals, pathAddresses)
+            : await tomoRouteContract.getAmountsIn(parsedAmountWithDecimals, pathAddresses)
+
+          const parsedResult = result.map((amount: any, idx: number) => {
+            const amountWithoutDecimals = new BigNumber(amount.toString()).dividedBy(
+              10 ** trade.route.path[idx].decimals
+            )
+
+            const currency =
+              trade.route.path[idx].address === WETH[chainId ?? 88].address ? TOMO : trade.route.path[idx]
+
+            return tryParseAmount(amountWithoutDecimals.toString(), currency)
+          })
+
+          setAmounts(parsedResult)
+        } catch (error) {
+          console.log(error, '======================================')
+        }
+      }
+    }
+
+    getAmounts()
+  }, [chainId, isExactIn, parsedAmount, tomoRouteContract, trade])
+
+  return amounts
+}
+
 // from the current swap inputs, compute the best trade and return it.
 export function useDerivedSwapInfo(): {
   currencies: { [field in Field]?: Currency }
   currencyBalances: { [field in Field]?: CurrencyAmount }
-  parsedAmount: CurrencyAmount | undefined
+  parsedAmount: CurrencyAmount | TokenAmount | undefined
   v2Trade: Trade | undefined
   inputError?: string
   v1Trade: Trade | undefined
 } {
-  const { account } = useActiveWeb3React()
+  const { account, chainId } = useActiveWeb3React()
 
   const toggledVersion = useToggledVersion()
 
@@ -144,6 +198,12 @@ export function useDerivedSwapInfo(): {
   const bestTradeExactOut = useTradeExactOut(inputCurrency ?? undefined, !isExactIn ? parsedAmount : undefined)
 
   const v2Trade = isExactIn ? bestTradeExactIn : bestTradeExactOut
+  const amountsOnTomo = useGetAmountsOnTomo(v2Trade, isExactIn, parsedAmount)
+
+  if (chainId === 88 && v2Trade && amountsOnTomo.length > 0) {
+    v2Trade.inputAmount = amountsOnTomo[0]
+    v2Trade.outputAmount = amountsOnTomo[amountsOnTomo.length - 1]
+  }
 
   const currencyBalances = {
     [Field.INPUT]: relevantTokenBalances[0],
@@ -217,23 +277,24 @@ export function useDerivedSwapInfo(): {
   }
 }
 
-function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId) { // remove :string
+function parseCurrencyFromURLParameter(urlParam: any, chainId: ChainId) {
+  // remove :string
   const IsTomo = IsTomoChain(chainId)
   if (typeof urlParam === 'string') {
     const valid = isAddress(urlParam)
     if (valid) return valid
-    if (urlParam.toUpperCase() === 'ETH'){
+    if (urlParam.toUpperCase() === 'ETH') {
       return 'ETH'
-    }else if(urlParam.toUpperCase() === 'TOMO'){
+    } else if (urlParam.toUpperCase() === 'TOMO') {
       return 'TOMO'
     }
-    if (valid === false  && IsTomo){
+    if (valid === false && IsTomo) {
       return 'TOMO'
-    }else{
+    } else {
       return 'ETH'
     }
   }
-  return IsTomo ?'TOMO' ?? '' : 'ETH' ?? ''
+  return IsTomo ? 'TOMO' ?? '' : 'ETH' ?? ''
 }
 
 function parseTokenAmountURLParameter(urlParam: any): string {
@@ -290,7 +351,7 @@ export function useDefaultsFromURLSearch():
   const parsedQs = useParsedQueryString()
   const [result, setResult] = useState<
     { inputCurrencyId: string | undefined; outputCurrencyId: string | undefined } | undefined
-  >()  
+  >()
   useEffect(() => {
     if (!chainId) return
     const parsed = queryParametersToSwapState(parsedQs, chainId) // add chainId
