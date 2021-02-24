@@ -119,15 +119,13 @@ class WalletConnectProvider extends ProviderEngine {
         processTransaction: async (txParams: any, cb: any) => {
           try {
             const wc = await this.getWalletConnector()
-            const gasLimit = this.web3.utils.toHex(2000000)
-            const gasPrice = this.web3.utils.toHex(250000000)
-            let nonce = await this.web3.eth.getTransactionCount(txParams.from)
-            console.log(nonce, 'nonce============================================')
-            
+            const gasPriceResult = await this.web3.eth.getGasPrice()
+            const gasPrice = this.web3.utils.toHex(gasPriceResult)
 
+            let nonce = await this.web3.eth.getTransactionCount(txParams.from)
             nonce = this.web3.utils.toHex(nonce)
 
-            txParams = { ...txParams, gasLimit, gasPrice, nonce }
+            txParams = { ...txParams, gasLimit: txParams.gas, gasPrice, nonce }
 
             const tx = new EthTx(txParams)
 
@@ -144,29 +142,10 @@ class WalletConnectProvider extends ProviderEngine {
               s: ethUtils.bufferToHex(signatureParams.s)
             }
 
-            console.log(signatureParsed, tx.hash(false).toString('hex'), 'v, r, s======================================')
-
-            const senderPubKey = ethUtils.ecrecover(
-              tx.hash(false),
-              signatureParams.v,
-              signatureParams.r,
-              signatureParams.s
-            )
-            const from = ethUtils.publicToAddress(senderPubKey)
-            console.log(from.toString('hex'), '==================================')
-
             const txAndSign = new EthTx({ ...txParams, ...signatureParsed })
-            console.log(txAndSign.from.toString('hex'), 'from==============================')
-
             const serializedTxAndSign = '0x' + txAndSign.serialize().toString('hex')
-            console.log(serializedTxAndSign, 'serialized ======================================')
-            
-            
 
-            // @ts-ignore
             this.web3.eth.sendSignedTransaction(serializedTxAndSign, (error, result) => {
-              console.log(error, result, '======================================')
-              
               cb(null, result)
             })
           } catch (error) {
