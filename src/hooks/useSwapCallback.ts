@@ -179,12 +179,13 @@ export function useSwapCallback(
 
         // trc21 fee on tomochain is special so we spit a different flow
         let successfulEstimation: SuccessfulCall | any
-        let estimatedCalls: EstimatedSwapCall[]
+        let estimatedCalls: EstimatedSwapCall[] = []
 
         if (IsTomoChain(chainId)) {
-          const result = await Promise.allSettled(promises)
-          //@ts-ignore
-          estimatedCalls = result.map(es => es.value)
+          for (let index = 0; index < promises.length; index++) {
+            const elm = await promises[index]
+            estimatedCalls = [...estimatedCalls, elm]
+          }
 
           // a successful estimation is a bignumber gas estimate
           successfulEstimation = estimatedCalls.find((el): el is SuccessfulCall => 'gasEstimate' in el)
