@@ -1,13 +1,14 @@
 import { AbstractConnector } from '@web3-react/abstract-connector'
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core'
 import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
+import { TomoWalletConnectConnector } from '../../connectors/TomoWalletConnect'
 import React, { useEffect, useState } from 'react'
 import { isMobile } from 'react-device-detect'
 import ReactGA from 'react-ga'
 import styled from 'styled-components'
 import MetamaskIcon from '../../assets/images/metamask.png'
 import { ReactComponent as Close } from '../../assets/images/x.svg'
-import { fortmatic, injected, portis } from '../../connectors'
+import { fortmatic, injected, portis, walletconnect, tomoWalletconnect } from '../../connectors'
 import { OVERLAY_READY } from '../../connectors/Fortmatic'
 import { SUPPORTED_WALLETS } from '../../constants'
 import usePrevious from '../../hooks/usePrevious'
@@ -15,10 +16,10 @@ import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 import { ExternalLink } from '../../theme'
 import AccountDetails from '../AccountDetails'
-
 import Modal from '../Modal'
 import Option from './Option'
 import PendingView from './PendingView'
+import { IsTomoChain } from '../../utils'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -126,7 +127,7 @@ export default function WalletModal({
   ENSName?: string
 }) {
   // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error } = useWeb3React()
+  const { active, account, connector, activate, error, chainId } = useWeb3React()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -181,7 +182,10 @@ export default function WalletModal({
     setWalletView(WALLET_VIEWS.PENDING)
 
     // if the connector is walletconnect and the user has already tried to connect, manually reset the connector
-    if (connector instanceof WalletConnectConnector && connector.walletConnectProvider?.wc?.uri) {
+    if (
+      (connector instanceof WalletConnectConnector || connector instanceof TomoWalletConnectConnector) &&
+      connector.walletConnectProvider?.wc?.uri
+    ) {
       connector.walletConnectProvider = undefined
     }
 
@@ -262,6 +266,16 @@ export default function WalletModal({
         else if (option.name === 'Injected' && isMetamask) {
           return null
         }
+      }
+
+      // only show a wallet connect of current chain
+      // if chain is ethereum remove tomo wallet connect and vice versa
+      if (!IsTomoChain(chainId) && option.connector === tomoWalletconnect) {
+        return null
+      }
+
+      if (IsTomoChain(chainId) && option.connector === walletconnect) {
+        return null
       }
 
       // return rest of options

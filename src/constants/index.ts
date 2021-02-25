@@ -1,7 +1,7 @@
 import { ChainId, JSBI, Percent, Token, WETH } from '@luaswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
-import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
+import { injected, walletconnect, walletlink, tomoWalletconnect } from '../connectors' // remove portis, fortmatic
 export const FACTORY_ADDRESS = '0x28c79368257CD71A122409330ad2bEBA7277a396'
 // TODO: Need to change to luaswap's Router address
 export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
@@ -172,6 +172,15 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
   },
   WALLET_CONNECT: {
     connector: walletconnect,
+    name: 'WalletConnect',
+    iconName: 'walletConnectIcon.svg',
+    description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
+    href: null,
+    color: '#4196FC',
+    mobile: true
+  },
+  WALLET_CONNECT_TOMO: {
+    connector: tomoWalletconnect,
     name: 'WalletConnect',
     iconName: 'walletConnectIcon.svg',
     description: 'Connect to Trust Wallet, Rainbow Wallet and more...',
