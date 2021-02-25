@@ -16,12 +16,10 @@ import { ApplicationModal } from '../../state/application/actions'
 import { useModalOpen, useWalletModalToggle } from '../../state/application/hooks'
 import { ExternalLink } from '../../theme'
 import AccountDetails from '../AccountDetails'
-// Todo: remove when have function switch chain
-import { CHAIN } from '../../constants'
-
 import Modal from '../Modal'
 import Option from './Option'
 import PendingView from './PendingView'
+import { IsTomoChain } from '../../utils'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -129,7 +127,7 @@ export default function WalletModal({
   ENSName?: string
 }) {
   // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error } = useWeb3React()
+  const { active, account, connector, activate, error, chainId } = useWeb3React()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
@@ -272,12 +270,11 @@ export default function WalletModal({
 
       // only show a wallet connect of current chain
       // if chain is ethereum remove tomo wallet connect and vice versa
-      //@ts-ignore
-      if (CHAIN === 'ethereum' && option.connector === tomoWalletconnect) {
+      if (!IsTomoChain(chainId) && option.connector === tomoWalletconnect) {
         return null
       }
 
-      if (CHAIN === 'tomochain' && option.connector === walletconnect) {
+      if (IsTomoChain(chainId) && option.connector === walletconnect) {
         return null
       }
 

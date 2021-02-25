@@ -12,8 +12,6 @@ import {
   IQRCodeModalOptions
 } from '@walletconnect/types'
 
-import { calculateGasMargin } from '../utils'
-
 const ProviderEngine = require('web3-provider-engine')
 const CacheSubprovider = require('web3-provider-engine/subproviders/cache')
 const FixtureSubprovider = require('web3-provider-engine/subproviders/fixture')

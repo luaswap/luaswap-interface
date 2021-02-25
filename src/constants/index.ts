@@ -303,6 +303,3 @@ export const TOKEN_ICONS: TokenIconProps = {
   BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png',
   RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png'
 }
-
-// Todo: remove when have function switch chain
-export const CHAIN = 'tomochain'
