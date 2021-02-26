@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
 import { useActiveWeb3React } from '../../hooks'
-import { IsTomoChain } from '../../utils'
+// import { IsTomoChain } from '../../utils'
 import { AutoColumn } from '../../components/Column'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 import logoSrc from '../../assets/images/logo.png'
@@ -18,7 +18,7 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import { Flex, Box } from 'rebass'
 import UnstakeXLua from './UnstakeXLua'
 import StakeLua from './StakeLua'
-import NoticeModal from '../../components/NoticeModal'
+// import NoticeModal from '../../components/NoticeModal'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 900px;
@@ -100,7 +100,6 @@ const InfoBox = styled(Box)`
 
 const SafePage: React.FC<SafePageProps> = ({ location }) => {
   const { chainId } = useActiveWeb3React()
-  const IsTomo = IsTomoChain(chainId)
   const [poolKey, setPoolKey] = useState('')
   const [pools, setPools] = useState<PoolItemProps[]>([])
   const [totalSupply, setTotalSupply] = useState<BigNumber>(new BigNumber(0))
@@ -108,8 +107,8 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
   const xLuaAddress = getXLuaAddress(sushi)
 
   useEffect(() => {
-    requestStakingPools((data: any) => setPools(data))
-  }, [])
+    requestStakingPools((data: any) => setPools(data), chainId)
+  }, [chainId])
 
   useEffect(() => {
     if (location && location.search) {
@@ -172,7 +171,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
           </LoaderContainer>
         )}
       </PageWrapper>
-      {IsTomo ? <NoticeModal /> : ''}
+      {/* {IsTomo ? <NoticeModal /> : ''} */}
     </>
   )
 }

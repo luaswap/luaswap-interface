@@ -75,7 +75,7 @@ const PoolCard: React.FC<PoolCardProps> = ({ pool }) => {
     />
   )
   const [failedIconList, setFailedIconList] = useState<string[]>([])
-
+    // console.log(pool)
   useEffect(() => {
     if (pool) {
       const newList = []

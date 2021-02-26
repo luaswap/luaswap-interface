@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useActiveWeb3React } from '../../hooks'
-import { IsTomoChain } from '../../utils'
+// import { useActiveWeb3React } from '../../hooks'
+// import { IsTomoChain } from '../../utils'
 import Container from '../../components/Container'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
@@ -11,13 +11,11 @@ import { START_REWARD_AT_BLOCK } from '../../sushi/lib/constants'
 // import { EARN_LUA_REWARD, TIME_EARN_LUA_REWARD } from '../../constants/lists'
 import FarmCards from './components/FarmCards'
 import TotalLockValue from './components/TotalLockValue'
-import NoticeModal from '../../components/NoticeModal'
+// import NoticeModal from '../../components/NoticeModal'
 
 export default function Farms() {
   const block = 99999999999
   const launchBlock = START_REWARD_AT_BLOCK
-  const { chainId } = useActiveWeb3React()
-  const IsTomo = IsTomoChain(chainId)
   return (
     <>
       <Container>
@@ -69,7 +67,7 @@ export default function Farms() {
         <Spacer size="lg" />
         <FarmCards />
       </Box>
-      {IsTomo ? <NoticeModal /> : ''}
+      {/* {IsTomo ? <NoticeModal /> : ''} */}
     </>
   )
 }

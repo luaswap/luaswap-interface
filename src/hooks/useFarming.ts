@@ -9,7 +9,7 @@ import { getContract } from '../utils/index'
 
 export function useFarmingPool() {
   const [farmingPools, setFarmingPools] = useState([])
-
+  const { chainId } = useActiveWeb3React()
   useEffect(() => {
     let isCancelled = false
 
@@ -17,7 +17,7 @@ export function useFarmingPool() {
       let pools
 
       if (!isCancelled) {
-        pools = await getFarmingPools()
+        pools = await getFarmingPools(chainId)
       }
 
       !isCancelled && setFarmingPools(pools)
@@ -69,7 +69,7 @@ export function useFarmingStaked(pools: any[]) {
             ? getContract(pool.lpAddresses[1], IUniswapV2PairABI, library, account ? account : undefined)
             : null
 
-          return getTotalStaked(lpContract)
+          return getTotalStaked(lpContract, chainId)
         })
         poolStakeds = await Promise.all(poolBalancePromises)
       }

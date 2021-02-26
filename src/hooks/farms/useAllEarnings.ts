@@ -9,7 +9,7 @@ import useSushi from './useSushi'
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
   // const { account }: { account: string | null } = useWallet()
-  const { account } = useWeb3React()
+  const { account, chainId } = useWeb3React()
   const sushi = useSushi()
   const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
@@ -21,13 +21,12 @@ const useAllEarnings = () => {
     //     getEarned(masterChefContract, pid, account),
     //   ),
     // )
-    // setBalance(balances)
-
+    // setBalance(balances)    
     const data: Array<BigNumber> = await Promise.all(
       farms.map(
         ({ pid }: any) =>
           new Promise(async resolve => {
-            if (await checkPoolActive(pid)) {
+            if (await checkPoolActive(pid, chainId)) {              
               resolve(await getEarned(masterChefContract, pid, account))
             } else {
               resolve('0')
