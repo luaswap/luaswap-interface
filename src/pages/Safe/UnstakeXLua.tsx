@@ -68,7 +68,12 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   }, [sushi, setTotalSupplyXLua])
 
   const xLuaToLua = myXLua.multipliedBy(totalLuaInSafe).dividedBy(totalSupplyXLua)
-  const trackingReward = trackingAPYBalanceXLua
+  const trackingReward = IsTomo ? trackingAPYBalanceXLua
+  .multipliedBy(totalLuaInSafe)
+  .dividedBy(10)
+  .dividedBy(totalSupplyXLua)
+  .minus(10 * 10 ** 18):
+  trackingAPYBalanceXLua
     .multipliedBy(totalLuaInSafe)
     .dividedBy(totalSupplyXLua)
     .minus(10 * 10 ** 18)
