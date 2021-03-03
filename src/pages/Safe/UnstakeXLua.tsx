@@ -76,7 +76,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   const { onLeave } = useLeave()
   const tokenName = 'xLUA'
   const oneDay = 1000 * 60 * 60 * 24 // hours*minutes*seconds*milliseconds
-  const initStakeAt = IsTomo ? new Date(1614560400000) : new Date(1603904400000) //1614226890000
+  const initStakeAt = IsTomo ? new Date(1611133723000) : new Date(1603904400000) //1614226890000
   const toDay = new Date() // Today
   const differenceMs = Math.abs(toDay.getTime() - initStakeAt.getTime())
   const totalStakedDay = Math.round(differenceMs / oneDay)

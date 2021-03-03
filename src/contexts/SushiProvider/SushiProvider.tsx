@@ -41,7 +41,7 @@ const SushiProvider: React.FC = ({ children }) => {
     // setPools(allPools)
     if (ethereum && ethereum.provider) {
       const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
-        defaultAccount: ethereum.selectedAddress,
+        defaultAccount: ethereum.provider.selectedAddress,
         defaultConfirmations: 1,
         autoGasMultiplier: 1.5,
         testing: false,
