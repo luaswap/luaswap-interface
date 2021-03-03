@@ -5,7 +5,7 @@ import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.
 import { getUserStaked, getFarmingPools, getTotalStaked, getPendingReward } from '../utils/farmingPool'
 import { useFarmingContract } from './useContract'
 import { useActiveWeb3React } from './index'
-import { getContract } from '../utils/index'
+import { getContract, IsTomoChain } from '../utils/index'
 
 export function useFarmingPool() {
   const [farmingPools, setFarmingPools] = useState([])
@@ -37,6 +37,8 @@ export function useFarmingPool() {
 
 export function useFarmingStaked(pools: any[]) {
   const { library, account, chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
+  const networkId = IsTomo ? 88 : 1
   const farmingContract: Contract | null = useFarmingContract()
   const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
 
@@ -66,7 +68,7 @@ export function useFarmingStaked(pools: any[]) {
       if (!isCancelled) {
         const poolBalancePromises = userFarmingPools.map(pool => {
           const lpContract = library
-            ? getContract(pool.lpAddresses[1], IUniswapV2PairABI, library, account ? account : undefined)
+            ? getContract(pool.lpAddresses[networkId], IUniswapV2PairABI, library, account ? account : undefined)
             : null
 
           return getTotalStaked(lpContract, chainId)
@@ -87,7 +89,7 @@ export function useFarmingStaked(pools: any[]) {
         pool.totalStaked = poolStakeds ? poolStakeds[index] : '0'
         pool.pendingReward = pendingRewards ? pendingRewards[index] : '0'
 
-        poolsMap[pool.lpAddresses[1].toLowerCase()] = pool
+        poolsMap[pool.lpAddresses[networkId].toLowerCase()] = pool
       }
 
       !isCancelled && setUserFarmingPoolsMap(poolsMap)

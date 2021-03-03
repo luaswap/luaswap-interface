@@ -34,7 +34,6 @@ export class Contracts {
         token2Contract: new this.web3.eth.Contract(ERC20Abi)
       })
     )
-    // console.log(provider)
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
   } 

@@ -15,6 +15,7 @@ import Stake from './components/Stake'
 
 const Farm: React.FC = () => {
   const { farmId } = useParams() as any
+  
   const {
     pid,
     lpToken,
@@ -32,7 +33,8 @@ const Farm: React.FC = () => {
     iconProtocal,
     pairLink,
     addLiquidityLink
-  } = useFarm(farmId) || {
+  } = useFarm(farmId) 
+  || {
     pid: 0,
     lpToken: '',
     lpTokenAddress: '',
@@ -49,12 +51,10 @@ const Farm: React.FC = () => {
     pairLink: '',
     addLiquidityLink: ''
   }
-
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  // const sushi = useSushi()
   const toggleWalletModal = useWalletModalToggle()
 
   const { account, library: ethereum } = useWeb3React()

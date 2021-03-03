@@ -23,15 +23,14 @@ interface ApyProps {
 const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol, token2Symbol }) => {
   const sushi = useSushi()
   const { library: ethereum } = useWeb3React()
-
   // const block = useBlock()
   const stakedValue = useStakedValue(pid)
   const luaPrice = useLuaPrice()
+  
   const lpContract = useMemo(() => {
     const e_provider = ethereum && ethereum.provider ? ethereum.provider : null
     return getContract(e_provider as provider, lpTokenAddress)
   }, [ethereum, lpTokenAddress])
-
   const newReward = useNewReward(pid + 1)
 
   const [totalStake, setTotalStake] = useState<BigNumber>()
