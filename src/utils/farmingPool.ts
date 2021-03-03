@@ -1,11 +1,16 @@
 import axios from 'axios'
 import { Contract } from '@ethersproject/contracts'
+import { ChainId } from '@luaswap/sdk' 
+import { IsTomoChain } from '../utils'
 
-import { FARMING_ADDRESS } from '../constants/abis/farming'
+import { TOMO_SUPPORTED_POOL, SUPPORTED_POOL, FARMING_ADDRESS, TOMO_FARMING_ADDRESS } from '../constants/abis/farming'
 
-export async function getFarmingPools() {
+export async function getFarmingPools(chainId: ChainId | undefined) {
+  const IsTomo = IsTomoChain(chainId)
+  const supportedPoolUrl = IsTomo ? TOMO_SUPPORTED_POOL : SUPPORTED_POOL
+
   try {
-    const result = await axios.get('https://wallet.tomochain.com/api/luaswap/supportedPools')
+    const result = await axios.get(supportedPoolUrl)
     return result.data
   } catch {
     return []
@@ -25,11 +30,12 @@ export async function getUserStaked(farmingContract: Contract | null, pid: strin
   }
 }
 
-export async function getTotalStaked(lpContract: Contract | null) {
+export async function getTotalStaked(lpContract: Contract | null, chainId: ChainId | undefined) {
+  const IsTomo = IsTomoChain(chainId)
+  const contractAddress = IsTomo ? TOMO_FARMING_ADDRESS : FARMING_ADDRESS
   try {
-    if (!lpContract) throw new Error('Farming contract is null')
-
-    const balance = await lpContract.balanceOf(FARMING_ADDRESS)
+    if (!lpContract) throw new Error('Farming contract is null')     
+    const balance = await lpContract.balanceOf(contractAddress)
     return balance.toString()
   } catch (e) {
     console.log(e)

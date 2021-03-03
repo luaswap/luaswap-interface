@@ -14,10 +14,10 @@ import TotalLockValue from './components/TotalLockValue'
 import NoticeModal from '../../components/NoticeModal'
 
 export default function Farms() {
-  const block = 99999999999
-  const launchBlock = START_REWARD_AT_BLOCK
   const { chainId } = useActiveWeb3React()
   const IsTomo = IsTomoChain(chainId)
+  const block = 99999999999
+  const launchBlock = START_REWARD_AT_BLOCK
   return (
     <>
       <Container>

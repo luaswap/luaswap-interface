@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 import config from '../../config'
 import axios from 'axios'
+
+import { useActiveWeb3React } from '../../hooks'
+import { IsTomoChain } from '../../utils'
 // import debounce from 'debounce'
 
 const CACHE: any = {
@@ -10,10 +13,13 @@ const CACHE: any = {
 }
 
 const useBlock = () => {
+  const { chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const [block, setBlock] = useState(CACHE.value)
   const getBlock = useCallback(async () => {
     if (CACHE.time + CACHE.old <= new Date().getTime()) {
-      const { data } = await axios.get(`${config.api}/blockNumber`)
+      const apiUrl = IsTomo ? config.apiTOMO : config.apiETH
+      const { data } = await axios.get(`${apiUrl}/blockNumber`)
       const latestBlockNumber = data.number
       if (block !== latestBlockNumber) {
         CACHE.time = new Date().getTime()

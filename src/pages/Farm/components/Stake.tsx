@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import Button from '../../../components/ButtonSushi'
 import CardBox from '../../../components/CardBox'
@@ -32,6 +33,7 @@ interface StakeProps {
 }
 
 const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, token2Symbol }) => {
+  const {chainId} = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
 
   const allowance = useAllowance(lpContract)
@@ -48,7 +50,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getLPTokenStaked(sushi, lpContract)
+      const data = await getLPTokenStaked(sushi, lpContract, chainId)
       setTotalStake(data)
     }
     if (sushi && lpContract) {

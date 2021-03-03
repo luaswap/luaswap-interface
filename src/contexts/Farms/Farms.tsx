@@ -10,7 +10,6 @@ const Farms: React.FC = ({ children }) => {
   const [unharvested] = useState(0)
 
   const sushi = useSushi()
-  // const { account } = useWallet()
 
   const farms = getFarms(sushi)
   return (

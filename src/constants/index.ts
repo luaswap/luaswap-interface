@@ -292,5 +292,8 @@ export const TOKEN_ICONS: TokenIconProps = {
   UNI: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7083.png',
   DAI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png',
   BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png',
-  RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png'
+  RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png',
+  WTOMO: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
+  BTC: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png',
+  LIT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3870.png'
 }

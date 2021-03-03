@@ -34,13 +34,14 @@ export class Contracts {
         token2Contract: new this.web3.eth.Contract(ERC20Abi)
       })
     )
+    // console.log(provider)
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
-  }
-
+  } 
   setProvider(provider, networkId) {
-    const setProvider = (contract, address) => {
+    const setProvider = (contract, address) => {     
       contract.setProvider(provider)
+      
       if (address) contract.options.address = address
       else console.error('Contract address not found in network', networkId)
     }
@@ -48,17 +49,14 @@ export class Contracts {
     setProvider(this.sushi, contractAddresses.sushi[networkId])
     setProvider(this.masterChef, contractAddresses.masterChef[networkId])
     setProvider(this.maker, contractAddresses.maker[networkId])
-
-    // setProvider(this.sushi, contractAddresses.sushi[networkId])
-    // setProvider(this.masterChef, contractAddresses.masterChef[networkId])
     setProvider(this.xSushiStaking, contractAddresses.xSushi[networkId])
-    // setProvider(this.weth, contractAddresses.weth[networkId])
+    setProvider(this.weth, contractAddresses.weth[networkId])
 
-    this.pools.forEach(({ lpContract, lpAddress, tokenContract, token2Contract, token2Address, tokenAddress }) => {
-      setProvider(lpContract, lpAddress)
-      setProvider(tokenContract, tokenAddress)
-      setProvider(token2Contract, token2Address)
-    })
+    // this.pools.forEach(({ lpContract, lpAddress, tokenContract, token2Contract, token2Address, tokenAddress }) => {
+    //   setProvider(lpContract, lpAddress)
+    //   setProvider(tokenContract, tokenAddress)
+    //   setProvider(token2Contract, token2Address)
+    // })
   }
 
   setDefaultAccount(account) {
