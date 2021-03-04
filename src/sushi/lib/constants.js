@@ -559,9 +559,15 @@ export const supportedPools = [
 export const tomoSupportedPools = [
   {
     pid:0,
-    lpAddresses:{1:"0x810a21afe69fe356697a9824930904383930bd96"},
-    tokenAddresses:{1:"0x7262fa193e9590b2e075c3c16170f3f2f32f5c74"},
-    token2Addresses:{1:"0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"},
+    lpAddresses:{
+      88:"0x810a21afe69fe356697a9824930904383930bd96"
+    },
+    tokenAddresses:{
+      88:"0x7262fa193e9590b2e075c3c16170f3f2f32f5c74"
+    },
+    token2Addresses:{
+      88:"0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+    },
     name:"LUA - TOMO",
     symbol:"LUA-TOMO LUA-V1 LP",
     symbolShort:"LUA-TOMO",

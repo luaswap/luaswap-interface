@@ -6,12 +6,12 @@ import { useWeb3React } from '@web3-react/core'
 import { leave, getXSushiStakingContract } from '../../sushi/utils'
 
 const useLeave = () => {
-  const { account } = useWeb3React()
+  const { chainId, account } = useWeb3React()
   const sushi = useSushi()
 
   const handle = useCallback(
     async (amount: string) => {
-      const txHash = await leave(getXSushiStakingContract(sushi), amount, account)
+      const txHash = await leave(getXSushiStakingContract(sushi), amount, account, chainId)
       console.log(txHash)
     },
     [account, sushi]
