@@ -19,7 +19,7 @@ import AccountDetails from '../AccountDetails'
 import Modal from '../Modal'
 import Option from './Option'
 import PendingView from './PendingView'
-import { IsTomoChain } from '../../utils'
+import { getLogoNativeToken } from '../../utils'
 
 const CloseIcon = styled.div`
   position: absolute;
@@ -110,6 +110,38 @@ const HoverText = styled.div`
   }
 `
 
+const StyledEthereumLogo = styled.img<{ size: string }>`
+  width: ${({ size }) => size};
+  height: ${({ size }) => size};
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.075);
+  border-radius: 24px;
+`
+
+const NetworkBox = styled.div`
+  padding: 15px 16px 25px;
+  font-size: 14px;
+`
+
+const NetworkRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
+
+const NetworkButton = styled.button`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  padding: 10px 25px;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  background-color: #2c3030;
+
+  &:hover {
+    background-color: #282d2d;
+  }
+`
+
 const WALLET_VIEWS = {
   OPTIONS: 'options',
   OPTIONS_SECONDARY: 'options_secondary',
@@ -127,13 +159,18 @@ export default function WalletModal({
   ENSName?: string
 }) {
   // important that these are destructed from the account-specific web3-react context
-  const { active, account, connector, activate, error, chainId } = useWeb3React()
+  const { active, account, connector, activate, error } = useWeb3React()
 
   const [walletView, setWalletView] = useState(WALLET_VIEWS.ACCOUNT)
 
   const [pendingWallet, setPendingWallet] = useState<AbstractConnector | undefined>()
 
   const [pendingError, setPendingError] = useState<boolean>()
+
+  const [chooseNetwork, setChooseNetwork] = useState(false)
+
+  const ETHER_LOGO = getLogoNativeToken(1)
+  const TOMO_LOGO = getLogoNativeToken(88)
 
   const walletModalOpen = useModalOpen(ApplicationModal.WALLET)
   const toggleWalletModal = useWalletModalToggle()
@@ -152,6 +189,7 @@ export default function WalletModal({
     if (walletModalOpen) {
       setPendingError(false)
       setWalletView(WALLET_VIEWS.ACCOUNT)
+      setChooseNetwork(false)
     }
   }, [walletModalOpen])
 
@@ -268,14 +306,45 @@ export default function WalletModal({
         }
       }
 
-      // only show a wallet connect of current chain
-      // if chain is ethereum remove tomo wallet connect and vice versa
-      if (!IsTomoChain(chainId) && option.connector === tomoWalletconnect) {
-        return null
-      }
-
-      if (IsTomoChain(chainId) && option.connector === walletconnect) {
-        return null
+      if (option.connector === walletconnect) {
+        return (
+          <div>
+            <Option
+              id={`connect-${key}`}
+              onClick={() => setChooseNetwork(true)}
+              key={key}
+              active={option.connector === connector}
+              color={option.color}
+              link={option.href}
+              header={option.name}
+              subheader={null} //use option.descriptio to bring back multi-line
+              icon={require('../../assets/images/' + option.iconName)}
+            />
+            {chooseNetwork && (
+              <NetworkBox>
+                <div style={{ marginBottom: '10px' }}>Choose network</div>
+                <NetworkRow>
+                  <NetworkButton
+                    onClick={() => {
+                      tryActivation(walletconnect)
+                    }}
+                  >
+                    <StyledEthereumLogo src={ETHER_LOGO} size={'24px'} />
+                    &nbsp;Ethereum
+                  </NetworkButton>
+                  <NetworkButton
+                    onClick={() => {
+                      tryActivation(tomoWalletconnect)
+                    }}
+                  >
+                    <StyledEthereumLogo src={TOMO_LOGO} size={'24px'} />
+                    &nbsp;Tomochain
+                  </NetworkButton>
+                </NetworkRow>
+              </NetworkBox>
+            )}
+          </div>
+        )
       }
 
       // return rest of options
