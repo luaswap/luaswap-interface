@@ -18,7 +18,7 @@ export const getAllowance = async (
   account: string
 ): Promise<string> => {
   try {
-    const allowance: string = await lpContract.methods.allowance(account, masterChefContract.options.address).call()
+    const allowance = await lpContract.methods.allowance(account, masterChefContract.options.address).call()
     return allowance
   } catch (e) {
     return '0'
@@ -27,7 +27,7 @@ export const getAllowance = async (
 
 export const getAllowanceStaking = async (contract: Contract, owner: string, spender: string): Promise<string> => {
   try {
-    const allowance: string = await contract.methods.allowance(owner, spender).call()
+    const allowance = await contract.methods.allowance(owner, spender).call()
     return allowance
   } catch (e) {
     return '0'

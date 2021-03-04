@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
 import useSushi from './useSushi'
 import { getLuaCirculatingSupply } from '../../sushi/utils'
 import BigNumber from 'bignumber.js'
@@ -11,12 +12,13 @@ const CACHE = {
 }
 
 const useLuaCirculatingSupply = () => {
+  const {chainId} = useWeb3React()
   const sushi = useSushi()
   const [newReward, setNewRewad] = useState<BigNumber>(CACHE.value)
 
   useEffect(() => {
     async function fetchData() {
-      const v = await getLuaCirculatingSupply(sushi)
+      const v = await getLuaCirculatingSupply(sushi, chainId)
       CACHE.time = new Date().getTime()
       CACHE.value = v
 

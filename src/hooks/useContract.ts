@@ -24,14 +24,13 @@ import { MULTICALL_ABI, MULTICALL_NETWORKS } from '../constants/multicall'
 import { V1_EXCHANGE_ABI, V1_FACTORY_ABI, V1_FACTORY_ADDRESSES } from '../constants/v1'
 import { getContract } from '../utils'
 import { useActiveWeb3React } from './index'
-import { FARMING_ABI, FARMING_ADDRESS } from '../constants/abis/farming'
+import { FARMING_ABI, FARMING_ADDRESS, TOMO_FARMING_ADDRESS } from '../constants/abis/farming'
 import LUA_ABI from '../constants/abis/lua'
 import TOMO_ROUTER_ABI from '../constants/abis/tomo-router.json'
 
 // returns null on errors
 function useContract(address: string | undefined, ABI: any, withSignerIfPossible = true): Contract | null {
   const { library, account } = useActiveWeb3React()
-
   return useMemo(() => {
     if (!address || !ABI || !library) return null
     try {
@@ -147,7 +146,8 @@ export function useSocksController(): Contract | null {
 }
 
 export function useFarmingContract(): Contract | null {
-  return useContract(FARMING_ADDRESS, FARMING_ABI)
+  const { chainId } = useActiveWeb3React()  
+  return useContract( chainId === ChainId.TOMOCHAIN_MAINNET ? TOMO_FARMING_ADDRESS : FARMING_ADDRESS, FARMING_ABI)
 }
 
 export function useTomoRouterContract(): Contract | null {

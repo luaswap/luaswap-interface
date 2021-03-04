@@ -11,6 +11,8 @@ import useSushi from './useSushi'
 import useBlock from './useBlock'
 import axios from 'axios'
 import config from '../../config'
+import { useActiveWeb3React } from '../../hooks'
+import { IsTomoChain } from '../../utils'
 
 export interface StakedValue {
   tokenAmount: BigNumber
@@ -23,6 +25,8 @@ export interface StakedValue {
 }
 
 const useStakedValue = (pid: number) => {
+  const { chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   const [balance, setBalance] = useState<StakedValue>()
   const sushi = useSushi()
   // const farms = getFarms(sushi)
@@ -52,7 +56,8 @@ const useStakedValue = (pid: number) => {
     //       ),
     //   ),
     // )
-    const { data: balances } = await axios.get(`${config.api}/pools/${pid}`)
+    const apiUrl = IsTomo ? config.apiTOMO : config.apiETH
+    const { data: balances } = await axios.get(`${apiUrl}/pools/${pid}`)
     setBalance(balances)
   }, [masterChefContract, block, sushi])
 

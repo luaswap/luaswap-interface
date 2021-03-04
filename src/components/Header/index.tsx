@@ -418,22 +418,22 @@ export default function Header() {
               </StyledMenuButton>
               {open && (
                 <StyleNavMobile>
-                  {!IsTomo ? (
+                  
                     <>
+                    {!IsTomo ? (
                       <StyleNavList>
                         <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                           Farming
                         </StyledNavLink>
                       </StyleNavList>
+                      ) : ''
+                    }
                       <StyleNavList>
                         <StyledNavLink id="pool-nav-link" to="/lua-safe">
                           {t('LuaSafe')}
                         </StyledNavLink>
                       </StyleNavList>
-                    </>
-                  ) : (
-                    ''
-                  )}
+                    </>                  
                   <StyleNavList>
                     <StyleText>
                       Charts <span style={{ fontSize: '11px' }}>↗</span>
@@ -456,22 +456,20 @@ export default function Header() {
             </>
           ) : (
             <StyleNavBox>
-              {!IsTomo ? (
-                <>
-                  <StyleNavList>
-                    <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                      Farming
-                    </StyledNavLink>
-                  </StyleNavList>
-                  <StyleNavList>
-                    <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                      {t('LuaSafe')}
-                    </StyledNavLink>
-                  </StyleNavList>
-                </>
-              ) : (
-                ''
-              )}
+              {/* {!IsTomo ? ( */}
+                <StyleNavList>
+                  <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                    Farming
+                  </StyledNavLink>
+                </StyleNavList>
+                {/* ) : ''
+              } */}
+              <StyleNavList>
+                <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                  {t('LuaSafe')}
+                </StyledNavLink>
+              </StyleNavList>
+              
               <StyleNavList>
                 <StyleText>
                   Charts <span style={{ fontSize: '11px' }}>↗</span>

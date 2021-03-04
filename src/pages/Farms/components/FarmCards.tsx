@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useEffect, useState } from 'react'
+import { useWeb3React } from '@web3-react/core'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 
@@ -85,6 +86,7 @@ interface FarmCardProps {
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
+  const {chainId} = useWeb3React()
   const poolActive = usePoolActive(farm.pid)
 
   const sushi = useSushi()
@@ -92,7 +94,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const [newReward, setNewRewad] = useState<BigNumber>()
   useEffect(() => {
     async function fetchData() {
-      const supply = await getNewRewardPerBlock(sushi, farm.pid + 1)
+      const supply = await getNewRewardPerBlock(sushi, farm.pid + 1, chainId)
       setNewRewad(supply)
     }
     if (sushi && poolActive) {

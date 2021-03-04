@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
-import { useActiveWeb3React } from '../../hooks'
-import { IsTomoChain } from '../../utils'
+import { getBalance } from '../../utils/erc20'
+import { useWeb3React } from '@web3-react/core'
+// import { IsTomoChain } from '../../utils'
 import { AutoColumn } from '../../components/Column'
 import { SwapPoolTabs } from '../../components/NavigationTabs'
 import logoSrc from '../../assets/images/logo.png'
@@ -13,12 +14,12 @@ import Loader from '../../components/Loader'
 import { requestStakingPools } from '../../services'
 import useSushi from '../../hooks/useSushi'
 import BigNumber from 'bignumber.js'
-import { getXSushiSupply, getXLuaAddress } from '../../sushi/utils'
+import { getXLuaAddress, getSushiAddress } from '../../sushi/utils'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import { Flex, Box } from 'rebass'
 import UnstakeXLua from './UnstakeXLua'
 import StakeLua from './StakeLua'
-import NoticeModal from '../../components/NoticeModal'
+// import NoticeModal from '../../components/NoticeModal'
 
 const PageWrapper = styled(AutoColumn)`
   max-width: 900px;
@@ -99,17 +100,17 @@ const InfoBox = styled(Box)`
 `
 
 const SafePage: React.FC<SafePageProps> = ({ location }) => {
-  const { chainId } = useActiveWeb3React()
-  const IsTomo = IsTomoChain(chainId)
+  const { chainId, library: ethereum } = useWeb3React()
   const [poolKey, setPoolKey] = useState('')
   const [pools, setPools] = useState<PoolItemProps[]>([])
-  const [totalSupply, setTotalSupply] = useState<BigNumber>(new BigNumber(0))
+   const [totalStake, setTotalStake] = useState<BigNumber>(new BigNumber(0))
   const sushi = useSushi()
+  const luaAddress = getSushiAddress(sushi)
   const xLuaAddress = getXLuaAddress(sushi)
 
   useEffect(() => {
-    requestStakingPools((data: any) => setPools(data))
-  }, [])
+    requestStakingPools((data: any) => setPools(data), chainId)
+  }, [chainId])
 
   useEffect(() => {
     if (location && location.search) {
@@ -122,12 +123,15 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
   }, [location])
 
   useEffect(() => {
-    const fetchTotalSupply = async () => {
-      const supply = await getXSushiSupply(sushi)
-      setTotalSupply(supply)
+    const fetchLuaStakeTotal = async () => {
+      if (ethereum && ethereum.provider) {
+        const luaStakeTotal = await getBalance(ethereum.provider, luaAddress, xLuaAddress)
+      
+        setTotalStake(new BigNumber(luaStakeTotal))
+      }
     }
     if (sushi) {
-      fetchTotalSupply()
+      fetchLuaStakeTotal()
     }
   }, [sushi])
 
@@ -140,7 +144,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
           <HeaderTitle>{'Welcome to the LuaSafe, stake LUA to earn tokens!'}</HeaderTitle>
           <HeaderSubTitle>
             {`LuaSafe Currently Has `}
-            <TotalSupplyText>{reduceFractionDigit(getBalanceNumber(new BigNumber(totalSupply)), 2)}</TotalSupplyText>
+            <TotalSupplyText>{reduceFractionDigit(getBalanceNumber(new BigNumber(totalStake)), 2)}</TotalSupplyText>
             {` LUA Staked`}
           </HeaderSubTitle>
         </Header>
@@ -172,7 +176,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
           </LoaderContainer>
         )}
       </PageWrapper>
-      {IsTomo ? <NoticeModal /> : ''}
+      {/* {IsTomo ? <NoticeModal /> : ''} */}
     </>
   )
 }

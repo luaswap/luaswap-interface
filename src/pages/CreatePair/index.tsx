@@ -51,6 +51,7 @@ export default function CreatePair() {
   const NATIVE_TOKEN = getNativeToken(chainId)
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
+  const [ loading, setLoading ] = useState<boolean>(false)
 
   const [currency0, setCurrency0] = useState<Currency | null>(NATIVE_TOKEN)
   const [currency1, setCurrency1] = useState<Currency | null>(null)
@@ -90,6 +91,7 @@ export default function CreatePair() {
   const history = useHistory()
   async function onCreate() {
     let args: Array<string | string[] | number>, isTrc21A: boolean, isTrc21B: boolean
+    setLoading(true)
     if (currency0 === TOMO) {
       isTrc21A = false
     } else {
@@ -151,14 +153,16 @@ export default function CreatePair() {
       })
       // @ts-ignore
       .catch(error => {
+        setLoading(false)
         console.log(error)
       })
     // @ts-ignore
     factoryContract.once('PairCreated', function(token0, token1) {
       history.push(`/add/${token0}/${token1}`)
+      setLoading(false)
     })
   }
-
+  
   const prerequisiteMessage = (
     <LightCard padding="45px 10px">
       <Text textAlign="center">
@@ -247,12 +251,14 @@ export default function CreatePair() {
                 </LightCard>
               )
             ) : validPairNoLiquidity ? (
-              <ButtonPrimary style={{ margin: '20px 0 0 0' }} onClick={onCreate}>
+              <ButtonPrimary style={{ margin: '20px 0 0 0' }} onClick={onCreate} disabled={loading} >
                 <Text fontWeight={500} fontSize={20}>
-                  Create Pair
+                Create Pair
+                { loading ? <Dots/> : ''}
                 </Text>
               </ButtonPrimary>
-            ) : // <LightCard padding="45px 10px">
+            ) : 
+            // <LightCard padding="45px 10px">
             //   <AutoColumn gap="sm" justify="center">
             //     <Text textAlign="center">No pool found.</Text>
             //     <StyledInternalLink to={`/add/${currencyId(currency0)}/${currencyId(currency1)}`}>

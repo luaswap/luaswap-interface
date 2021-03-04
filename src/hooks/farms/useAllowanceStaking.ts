@@ -13,9 +13,10 @@ const useAllowanceStaking = () => {
   const sushi = useSushi()
   const lpContract = getSushiContract(sushi)
   const stakingContract = getXSushiStakingContract(sushi)
-
   const fetchAllowance = useCallback(async () => {
+
     const allowance = await getAllowanceStaking(lpContract, account as string, stakingContract.options.address)
+    
     setAllowance(new BigNumber(allowance))
   }, [account, stakingContract, lpContract])
 
