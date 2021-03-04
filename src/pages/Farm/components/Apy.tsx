@@ -22,7 +22,7 @@ interface ApyProps {
 
 const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol, token2Symbol }) => {
   const sushi = useSushi()
-  const { library: ethereum } = useWeb3React()
+  const { chainId, library: ethereum } = useWeb3React()
   // const block = useBlock()
   const stakedValue = useStakedValue(pid)
   const luaPrice = useLuaPrice()
@@ -36,7 +36,7 @@ const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol
   const [totalStake, setTotalStake] = useState<BigNumber>()
   useEffect(() => {
     async function fetchData() {
-      const data = await getLPTokenStaked(sushi, lpContract)
+      const data = await getLPTokenStaked(sushi, lpContract, chainId)
       setTotalStake(data)
     }
     if (sushi && lpContract) {
