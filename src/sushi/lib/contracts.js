@@ -34,7 +34,6 @@ export class Contracts {
         token2Contract: new this.web3.eth.Contract(ERC20Abi)
       })
     )
-    // console.log(provider)
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
   } 
@@ -51,12 +50,11 @@ export class Contracts {
     setProvider(this.maker, contractAddresses.maker[networkId])
     setProvider(this.xSushiStaking, contractAddresses.xSushi[networkId])
     setProvider(this.weth, contractAddresses.weth[networkId])
-
-    // this.pools.forEach(({ lpContract, lpAddress, tokenContract, token2Contract, token2Address, tokenAddress }) => {
-    //   setProvider(lpContract, lpAddress)
-    //   setProvider(tokenContract, tokenAddress)
-    //   setProvider(token2Contract, token2Address)
-    // })
+    this.pools.forEach(({ lpContract, lpAddress, tokenContract, token2Contract, token2Address, tokenAddress }) => {
+      setProvider(lpContract, lpAddress)
+      setProvider(tokenContract, tokenAddress)
+      setProvider(token2Contract, token2Address)
+    })
   }
 
   setDefaultAccount(account) {
