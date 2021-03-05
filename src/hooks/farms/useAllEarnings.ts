@@ -9,7 +9,6 @@ import useSushi from './useSushi'
 
 const useAllEarnings = () => {
   const [balances, setBalance] = useState([] as Array<BigNumber>)
-  // const { account }: { account: string | null } = useWallet()
   const { account, chainId } = useWeb3React()
   const sushi = useSushi()
   const farms = getFarms(sushi)
