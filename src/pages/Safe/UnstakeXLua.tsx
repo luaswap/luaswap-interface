@@ -77,7 +77,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   .multipliedBy(totalLuaInSafe)
   .dividedBy(totalSupplyXLua)
   .minus(10 * 10 ** 18)
-
+  
   const { onLeave } = useLeave()
   const tokenName = 'xLUA'
   const oneDay = 1000 * 60 * 60 * 24 // hours*minutes*seconds*milliseconds
@@ -99,7 +99,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
       <CardActions mb={[3, 4]}>
         <Button
           disabled={!myXLua.toNumber() || pendingTx}
-          text={pendingTx ? 'pending Withdraw' : 'Withdraw'}
+          text={pendingTx ? 'pending Withdraw' : 'Unstake'}
           onClick={async () => {
             setPendingTx(true)
             await onPresentLeave()
