@@ -82,13 +82,10 @@ export function useFarmingStaked(pools: any[]) {
         const pendingRewardPromies = userFarmingPools.map(pool => getPendingReward(farmingContract, pool.pid, account))
         pendingRewards = await Promise.all(pendingRewardPromies)
       }
-
       for (let index = 0; index < userFarmingPools.length; index++) {
-        const pool = userFarmingPools[index]
-
+        const pool = userFarmingPools[index]        
         pool.totalStaked = poolStakeds ? poolStakeds[index] : '0'
         pool.pendingReward = pendingRewards ? pendingRewards[index] : '0'
-
         poolsMap[pool.lpAddresses[ID].toLowerCase()] = pool
       }
 

@@ -175,7 +175,6 @@ export const getLPTokenStaked = async (sushi, lpContract, chainId) => {
 
 export const approve = async (lpContract, masterChefContract, account, chainId) => {
   const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
-  console.log(gasLimit)
   return lpContract.methods
     .approve(masterChefContract.options.address, MaxUint256)
     .send(gasLimit)
