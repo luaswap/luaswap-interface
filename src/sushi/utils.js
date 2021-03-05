@@ -351,7 +351,7 @@ export const leave = async (contract, amount, account, chainId) => {
 }
 // Lua Convert
 export const makerConvert = async (contract, token0, token1, account, chainId) => {
-  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x1E8480' } : { from: account }
   return (
     contract &&
     contract.methods
