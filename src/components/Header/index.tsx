@@ -233,7 +233,7 @@ const HideSmall = styled.div`
     width: 200px;
     padding: 10px;
     background-color: ${({ theme }) => theme.bg1};
-    color: #c3a56e 
+    color: #c3a56e;
     a {
       color: #ecb34b;
     }
