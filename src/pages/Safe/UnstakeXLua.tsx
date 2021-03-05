@@ -123,7 +123,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
         </span>
       </CardInsight>
       <CardInsight>
-        <span>{'Withdrawal fee'}</span>
+        <span>{'Unstake fee'}</span>
         <span style={{ fontWeight: 'bold', color: '#4caf50' }}>{'0.5%'}</span>
       </CardInsight>
     </Card>
