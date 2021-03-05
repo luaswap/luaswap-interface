@@ -9,7 +9,7 @@ import { useActiveWeb3React } from '../../hooks'
 import { useLuaTokenContract } from '../../hooks/useContract'
 import { AppDispatch } from '../../state'
 import { clearAllTransactions } from '../../state/transactions/actions'
-import { shortenAddress } from '../../utils'
+import { shortenAddress, IsTomoChain } from '../../utils'
 import { AutoRow } from '../Row'
 import Copy from './Copy'
 import Transaction from './Transaction'
@@ -26,8 +26,8 @@ import Identicon from '../Identicon'
 import { ButtonSecondary } from '../Button'
 import { ExternalLink as LinkIcon } from 'react-feather'
 import { ExternalLink, LinkStyledButton, TYPE } from '../../theme'
+import { API_URL, LUA_CONTRACT } from '../../config'
 
-const LUA_REWARD_URL = 'https://wallet.tomochain.com/api/luaswap/read/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC'
 
 const HeaderRow = styled.div`
   ${({ theme }) => theme.flexRowNoWrap};
@@ -253,6 +253,9 @@ export default function AccountDetails({
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch<AppDispatch>()
   const luaContract = useLuaTokenContract(LUA.address)
+  const IsTomo = IsTomoChain(chainId)
+  const ID = IsTomo ? 88 : 1
+  const LUA_REWARD_URL = `${API_URL[ID]}/read/${LUA_CONTRACT[ID]}`
 
   const [accountData, setAccountData] = useState({
     totalLuaLock: new TokenAmount(LUA, '0'),

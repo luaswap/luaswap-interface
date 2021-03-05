@@ -6,7 +6,7 @@ import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import makerAbi from './abi/maker.json'
-import { contractAddresses } from './constants.js'
+import { contractAddresses, supportedPools,tomoSupportedPools } from './constants.js'
 import * as Types from './types.js'
 
 export class Contracts {
@@ -24,16 +24,39 @@ export class Contracts {
     this.weth = new this.web3.eth.Contract(WETHAbi)
     this.maker = new this.web3.eth.Contract(makerAbi)
     // window.pools <=> supportedPools
-    this.pools = window.pools.map(pool =>
-      Object.assign(pool, {
-        lpAddress: pool.lpAddresses[networkId],
-        tokenAddress: pool.tokenAddresses[networkId],
-        token2Address: pool.token2Addresses[networkId],
-        lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
-        tokenContract: new this.web3.eth.Contract(ERC20Abi),
-        token2Contract: new this.web3.eth.Contract(ERC20Abi)
-      })
-    )
+    if(networkId === 88){
+      this.pools = tomoSupportedPools.map(pool =>
+        Object.assign(pool, {
+          lpAddress: pool.lpAddresses[networkId],
+          tokenAddress: pool.tokenAddresses[networkId],
+          token2Address: pool.token2Addresses[networkId],
+          lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+          tokenContract: new this.web3.eth.Contract(ERC20Abi),
+          token2Contract: new this.web3.eth.Contract(ERC20Abi)
+        })
+      )
+    }else{
+      this.pools = supportedPools.map(pool =>
+        Object.assign(pool, {
+          lpAddress: pool.lpAddresses[networkId],
+          tokenAddress: pool.tokenAddresses[networkId],
+          token2Address: pool.token2Addresses[networkId],
+          lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+          tokenContract: new this.web3.eth.Contract(ERC20Abi),
+          token2Contract: new this.web3.eth.Contract(ERC20Abi)
+        })
+      )
+    }
+    // this.pools = window.pools.map(pool =>
+    //   Object.assign(pool, {
+    //     lpAddress: pool.lpAddresses[networkId],
+    //     tokenAddress: pool.tokenAddresses[networkId],
+    //     token2Address: pool.token2Addresses[networkId],
+    //     lpContract: new this.web3.eth.Contract(UNIV2PairAbi),
+    //     tokenContract: new this.web3.eth.Contract(ERC20Abi),
+    //     token2Contract: new this.web3.eth.Contract(ERC20Abi)
+    //   })
+    // )
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
   } 

@@ -30,7 +30,7 @@ export async function UnknownBlock(address, method, params, cache, chainId) {
     params,
     cache
   })
-
+  
   return data.data
 }
 
@@ -175,7 +175,6 @@ export const getLPTokenStaked = async (sushi, lpContract, chainId) => {
 
 export const approve = async (lpContract, masterChefContract, account, chainId) => {
   const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
-  console.log(gasLimit)
   return lpContract.methods
     .approve(masterChefContract.options.address, MaxUint256)
     .send(gasLimit)
@@ -195,13 +194,18 @@ export const getSushiSupply = async (sushi, chainId) => {
 }
 
 export const getLuaCirculatingSupply = async (sushi, chainId) => {
-  const chef = getMasterChefContract(sushi)
-  const a = new BigNumber(await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true, chainId))
-
-  const b = new BigNumber(
-    await UnknownBlock(sushi.contracts.sushi._address, 'balanceOf(address):(uint256)', [chef._address], true, chainId)
-  )
-  return a.minus(b)
+  if(chainId !== 88){
+    const chef = getMasterChefContract(sushi)
+    
+    const a = new BigNumber(await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true, chainId))
+    
+    const b = new BigNumber(
+      await UnknownBlock(sushi.contracts.sushi._address, 'balanceOf(address):(uint256)', [chef._address], true, chainId)
+    )
+    return a.minus(b)
+  }else{
+    return new BigNumber(0)
+  }
 }
 // Add chainId value
 export const checkPoolActive = async (pid, chainId) => {
