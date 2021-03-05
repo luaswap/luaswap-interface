@@ -184,6 +184,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
 export default function FullPositionCard({ pair, border, farm }: PositionCardProps) {
   const { chainId, account } = useActiveWeb3React()
   const IsTomo = IsTomoChain(chainId)
+  const ID = IsTomo ? 88 : 1
   const currency0 = unwrappedToken(pair.token0)
   const currency1 = unwrappedToken(pair.token1)
 
@@ -255,7 +256,7 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
       setSymbolLiquidityToken(farm.symbol)
     } else {
       for (let i = 0; i < farmPools.length; i++) {
-        if (pair.liquidityToken.address.toLowerCase() === farmPools[i].lpAddresses[1].toLowerCase()) {
+        if (pair.liquidityToken.address.toLowerCase() === farmPools[i].lpAddresses[ID].toLowerCase()) {
           setSymbolLiquidityToken(farmPools[i].symbol)
         }
       }
