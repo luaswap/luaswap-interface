@@ -37,6 +37,8 @@ export function useFarmingPool() {
 
 export function useFarmingStaked(pools: any[]) {
   const { library, account, chainId } = useActiveWeb3React()
+  const IsTomo = IsTomoChain(chainId)
+  const networkId = IsTomo ? 88 : 1
   const farmingContract: Contract | null = useFarmingContract()
   const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
   const IsTomo = IsTomoChain(chainId)

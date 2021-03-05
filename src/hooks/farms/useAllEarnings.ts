@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { getEarned, getMasterChefContract, getFarms, checkPoolActive } from '../../sushi/utils'
+// import { getContract } from '../../utils/erc20'
 import useSushi from './useSushi'
 
 // import axios from 'axios'
@@ -21,12 +22,12 @@ const useAllEarnings = () => {
     //     getEarned(masterChefContract, pid, account),
     //   ),
     // )
-    // setBalance(balances)    
+    // setBalance(balances)
     const data: Array<BigNumber> = await Promise.all(
       farms.map(
         ({ pid }: any) =>
           new Promise(async resolve => {
-            if (await checkPoolActive(pid, chainId)) {              
+            if (await checkPoolActive(pid, chainId)) {
               resolve(await getEarned(masterChefContract, pid, account))
             } else {
               resolve('0')

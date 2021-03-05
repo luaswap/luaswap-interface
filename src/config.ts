@@ -29,3 +29,14 @@ export const API_URL: { [chainId in ChainId]: string } = {
   89: '',
   99: ''
 }
+
+export const LUA_CONTRACT: { [chainId in ChainId]: string } = {
+  1: '0xB1f66997A5760428D3a87D68b90BfE0aE64121cC',
+  3: '',
+  4: '',
+  5: '',
+  42: '',
+  88: '0x7262fa193e9590B2E075c3C16170f3f2f32F5C74',
+  89: '',
+  99: ''
+}
