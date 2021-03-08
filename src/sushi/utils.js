@@ -258,7 +258,6 @@ export const stake = async (masterChefContract, pid, amount, account, chainId) =
 
 export const unstake = async (masterChefContract, pid, amount, account, chainId) => {
   const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
-  alert(JSON.stringify(gasLimit))
   return masterChefContract.methods
     .withdraw(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send(gasLimit)
