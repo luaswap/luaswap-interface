@@ -8,6 +8,28 @@ export default {
   apiTOMO: 'https://wallet.tomochain.com/api/luaswap/tomochain'
 }
 
+export const START_REWARD_AT_BLOCK: { [chainId in ChainId]: number } = {
+  1: 10950600,
+  3: 10950600,
+  4: 10950600,
+  5: 10950600,
+  42: 10950600,
+  88: 32787447,
+  89: 32787447,
+  99: 32787447
+}
+
+export const NUMBER_BLOCKS_PER_YEAR: { [chainId in ChainId]: number } = {
+  1: 2425000,
+  3: 2425000,
+  4: 2425000,
+  5: 2425000,
+  42: 2425000,
+  88: 12614400,
+  89: 12614400,
+  99: 12614400
+}
+
 export const RPC_URL: { [chainId in ChainId]: string } = {
   1: 'https://wallet.tomochain.com/api/luaswap/rpc',
   3: '',

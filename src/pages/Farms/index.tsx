@@ -1,23 +1,24 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useActiveWeb3React } from '../../hooks'
+import { useActiveWeb3React } from '../../hooks'
 // import { IsTomoChain } from '../../utils'
 import Container from '../../components/Container'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
 // import CustomCountDown from './components/CustomCountDown'
 // import Icon_Tip from '../../assets/images/pro-tip-icon.svg'
-import { START_REWARD_AT_BLOCK } from '../../sushi/lib/constants'
+import { START_REWARD_AT_BLOCK } from '../../config'
 // import { EARN_LUA_REWARD, TIME_EARN_LUA_REWARD } from '../../constants/lists'
 import FarmCards from './components/FarmCards'
 import TotalLockValue from './components/TotalLockValue'
 // import NoticeModal from '../../components/NoticeModal'
 
 export default function Farms() {
-  // const { chainId } = useActiveWeb3React()
+  const { chainId } = useActiveWeb3React()
+  const ID = chainId === 88 ? 88 : 1
   // const IsTomo = IsTomoChain(chainId)
   const block = 99999999999
-  const launchBlock = START_REWARD_AT_BLOCK
+  const launchBlock = START_REWARD_AT_BLOCK[ID]
   return (
     <>
       <Container>

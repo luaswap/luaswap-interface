@@ -8,7 +8,7 @@ import { getContract } from '../../../sushi/format/erc20'
 import { provider } from 'web3-core'
 import { getBalanceNumber } from '../../../sushi/format/formatBalance'
 import useStakedValue from '../../../hooks/farms/useStakedValue'
-import { NUMBER_BLOCKS_PER_YEAR } from '../../../sushi/lib/constants'
+import { NUMBER_BLOCKS_PER_YEAR } from '../../../config'
 import useLuaPrice from '../../../hooks/farms/useLuaPrice'
 import useNewReward from '../../../hooks/farms/useNewReward'
 
@@ -23,6 +23,7 @@ interface ApyProps {
 const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol, token2Symbol }) => {
   const sushi = useSushi()
   const { chainId, library: ethereum } = useWeb3React()
+  const ID = chainId === 88 ? 88 : 1
   // const block = useBlock()
   const stakedValue = useStakedValue(pid)
   const luaPrice = useLuaPrice()
@@ -57,7 +58,7 @@ const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol
           stakedValue.poolWeight
             ? `${parseFloat(
                 luaPrice
-                  .times(NUMBER_BLOCKS_PER_YEAR)
+                  .times(NUMBER_BLOCKS_PER_YEAR[ID])
                   .times(newReward.div(10 ** 18))
                   .div(stakedValue.usdValue)
                   .div(10 ** 8)

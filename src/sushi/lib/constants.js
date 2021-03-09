@@ -1,9 +1,6 @@
 import BigNumber from 'bignumber.js/bignumber'
 
 export const SUBTRACT_GAS_LIMIT = 100000
-export const START_REWARD_AT_BLOCK = 10950600 // TODO
-export const NUMBER_BLOCKS_PER_YEAR = 2425000
-
 export const START_NEW_POOL_AT = 1605601513
 
 const ONE_MINUTE_IN_SECONDS = new BigNumber(60)
@@ -556,6 +553,8 @@ export const supportedPools = [
     removeLiquidityLink: "https://app.luaswap.org/#/remove/0x2baecdf43734f22fd5c152db08e3c27233f0c7d2/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
   }
 ]
+
+
 export const tomoSupportedPools = [
   {
     pid:0,

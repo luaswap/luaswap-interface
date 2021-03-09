@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import config from '../../config'
+import {API_URL} from '../../config'
 import axios from 'axios'
 
 import { useActiveWeb3React } from '../../hooks'
@@ -18,8 +18,8 @@ const useBlock = () => {
   const [block, setBlock] = useState(CACHE.value)
   const getBlock = useCallback(async () => {
     if (CACHE.time + CACHE.old <= new Date().getTime()) {
-      const apiUrl = IsTomo ? config.apiTOMO : config.apiETH
-      const { data } = await axios.get(`${apiUrl}/blockNumber`)
+      const ID = IsTomo ? 88 : 1
+      const { data } = await axios.get(`${API_URL[ID]}/blockNumber`)
       const latestBlockNumber = data.number
       if (block !== latestBlockNumber) {
         CACHE.time = new Date().getTime()

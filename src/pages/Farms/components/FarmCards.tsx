@@ -16,10 +16,12 @@ import useFarms from '../../../hooks/farms/useFarms'
 import useLuaPrice from '../../../hooks/farms/useLuaPrice'
 import usePoolActive from '../../../hooks/farms/usePoolActive'
 import useSushi from '../../../hooks/farms/useSushi'
-import { NUMBER_BLOCKS_PER_YEAR, START_NEW_POOL_AT } from '../../../sushi/lib/constants'
+import { START_NEW_POOL_AT } from '../../../sushi/lib/constants'
+import { NUMBER_BLOCKS_PER_YEAR } from '../../../config'
 import { getNewRewardPerBlock } from '../../../sushi/utils'
 // import { bnToDec } from '../../sushi/ultils'
 import { getBalanceNumber } from '../../../sushi/format/formatBalance'
+import { IsTomoChain } from '../../../utils'
 
 interface FarmWithStakedValue extends Farm {
   tokenAmount: BigNumber
@@ -86,7 +88,9 @@ interface FarmCardProps {
 }
 
 const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
+  const IsTomo = IsTomoChain(chainId)
+  const ID = IsTomo ? 88 : 1
   const poolActive = usePoolActive(farm.pid)
 
   const sushi = useSushi()
@@ -116,7 +120,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   }
 
   const startTime = START_NEW_POOL_AT
-
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'LUA' && <StyledCardAccent />}
@@ -145,16 +148,19 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
             </Button>
             <br />
-            <StyledInsight>
-              <span>Total Locked Value</span>
-              <span>
-                {farm.usdValue && (
-                  <>
-                    <b>{parseFloat(farm.usdValue.toFixed(0)).toLocaleString('en-US')} USD</b>
-                  </>
-                )}
-              </span>
-            </StyledInsight>
+            {!IsTomo ? (
+              <StyledInsight>
+                <span>Total Locked Value</span>
+                <span>
+                  {farm.usdValue && (
+                    <>
+                      <b>{parseFloat(farm.usdValue.toFixed(0)).toLocaleString('en-US')} USD</b>
+                    </>
+                  )}
+                </span>
+              </StyledInsight>
+              ): ''
+            }
             {!farm.isHot && (
               <>
                 <StyledInsight>
@@ -174,7 +180,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                     {newReward && farm.poolWeight && farm.luaPrice && farm.usdValue
                       ? `${parseFloat(
                           farm.luaPrice
-                            .times(NUMBER_BLOCKS_PER_YEAR)
+                            .times(NUMBER_BLOCKS_PER_YEAR[ID])
                             .times(newReward.div(10 ** 18))
                             .div(farm.usdValue)
                             .div(10 ** 8)

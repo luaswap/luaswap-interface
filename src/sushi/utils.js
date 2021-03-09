@@ -174,7 +174,6 @@ export const getLPTokenStaked = async (sushi, lpContract, chainId) => {
 }
 
 export const approve = async (lpContract, masterChefContract, account) => {
-  console.log('approve', lpContract, masterChefContract, account)
   return lpContract.methods
     .approve(masterChefContract.options.address, MaxUint256)
     .send({ from: account })
@@ -239,6 +238,7 @@ export const getNewRewardPerBlock = async (sushi, pid1 = 0, chainId) => {
   } else {
     if (await checkPoolActive(pid1 - 1, chainId)) {
       const chef = getMasterChefContract(sushi)
+      const reward = await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId)
       return new BigNumber(await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId))
     } else {
       return new BigNumber('0')
