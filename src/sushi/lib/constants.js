@@ -582,5 +582,32 @@ export const tomoSupportedPools = [
     pairLink:'https://info.luaswap.org/tomochain/pair/0x810a21afe69fe356697a9824930904383930bd96',
     addLiquidityLink:'https://app.luaswap.org/#/add/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc',
     removeLiquidityLink:'https://app.luaswap.org/#/remove/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc'
+  },
+  {
+    pid:1,
+    lpAddresses:{
+      88:'0x347f551eaba062167779c9c336aa681526857b81'
+    },
+    tokenAddresses:{
+      88:'0xB1f66997A5760428D3a87D68b90BfE0aE64121cC'
+    },
+    token2Addresses:{
+      88:'0x381B31409e4D220919B2cFF012ED94d70135A59e'
+    },
+    name:'TOMO - USDT',
+    symbol:'TOMO-USDT LUA-V1 LP',
+    symbolShort:'TOMO-USDT',
+    description:`Deposit TOMO-USDT LUA-V1 LP Earn LUA`,
+    tokenSymbol:'TOMO',
+    token2Symbol:'USDT',
+    icon:'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
+    icon2:'https://raw.githubusercontent.com/tomochain/luaswap-token-list/3dda6df393721f8832dbbd0cc279d4ff8d693276/src/tokens/icons/tomochain/0x381B31409e4D220919B2cFF012ED94d70135A59e.png',
+    isHot:false,
+    isNew:true,
+    protocal:'LuaSwap',
+    iconProtocal:'https://luaswap.org/favicon.png',
+    pairLink:'https://info.luaswap.org/tomochain/pair/0x347f551eaba062167779c9c336aa681526857b81',
+    addLiquidityLink:'https://app.luaswap.org/#/add/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/0x381b31409e4d220919b2cff012ed94d70135a59e',
+    removeLiquidityLink:'https://app.luaswap.org/#/remove/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc/0x381b31409e4d220919b2cff012ed94d70135a59e'
   }
 ]

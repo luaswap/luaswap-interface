@@ -119,7 +119,7 @@ const Balances = memo(() => {
               {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
               {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
             </FootnoteValue>
-            ) : ' on Tomochain'
+            ) : ' on Tomochain Network'
           }
         </Footnote>
       </Card>
