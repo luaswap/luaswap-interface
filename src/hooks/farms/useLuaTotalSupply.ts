@@ -27,7 +27,7 @@ const useLuaCirculatingSupply = () => {
 
       setNewRewad(v)
     }
-    if (sushi && CACHE.time + CACHE.old <= new Date().getTime()) {
+    if (sushi && CACHE.time + CACHE.old <= new Date().getTime()) { // && CACHE.time + CACHE.old <= new Date().getTime()
       fetchData()
     }
   }, [sushi, setNewRewad])

@@ -19,6 +19,7 @@ import Lua from '../../../assets/images/lua-icon.svg'
 import Luas from '../../../assets/images/luas-icon.svg'
 import useLuaTotalSupply from '../../../hooks/farms/useLuaTotalSupply'
 import useLuaCirculatingSupply from '../../../hooks/farms/useLuaCirculatingSupply'
+import { IsTomoChain } from '../../../utils'
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
@@ -65,7 +66,8 @@ const Balances = memo(() => {
   const circulatingSupply = useLuaCirculatingSupply()
   const sushi = useSushi()
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
-  const { account } = useWeb3React()
+  const { chainId, account } = useWeb3React()
+  const IsTomo = IsTomoChain(chainId)
   return (
     <StyledWrapper>
       <Card>
@@ -97,18 +99,28 @@ const Balances = memo(() => {
             {/* <SushiIcon /> */}
             <img src={Luas} alt="Total LUA Supply" />
             <Spacer />
-            <div style={{ flex: 1 }}>
-              <Label text="LUA Circulating Supply" />
-              <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
-            </div>
+            {IsTomo ? (
+              <div style={{ flex: 1 }}>
+                <Label text="Total Supply" />
+                <Value value={totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')}` : '~'} />
+              </div>) : (
+              <div style={{ flex: 1 }}>
+                <Label text="LUA Circulating Supply" />
+                <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
+              </div>)
+              
+            }
           </StyledBalance>
         </CardContent>
         <Footnote>
           Total Supply
-          <FootnoteValue>
-            {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
-            {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
-          </FootnoteValue>
+          {!IsTomo ? (
+            <FootnoteValue>
+              {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
+              {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
+            </FootnoteValue>
+            ) : ' on Tomochain'
+          }
         </Footnote>
       </Card>
     </StyledWrapper>

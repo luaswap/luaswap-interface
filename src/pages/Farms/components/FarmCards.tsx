@@ -168,7 +168,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   <span>
                     {newReward && (
                       <>
-                        <b>{getBalanceNumber(newReward).toFixed(2)} LUA</b> / block
+                        <b>{getBalanceNumber(newReward).toFixed(3)} LUA</b> / block
                       </>
                     )}
                     {!newReward && '~'}
