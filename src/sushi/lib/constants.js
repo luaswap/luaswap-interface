@@ -607,7 +607,7 @@ export const tomoSupportedPools = [
     protocal:'LuaSwap',
     iconProtocal:'https://luaswap.org/favicon.png',
     pairLink:'https://info.luaswap.org/tomochain/pair/0x347f551eaba062167779c9c336aa681526857b81',
-    addLiquidityLink:'https://app.luaswap.org/#/add/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/0x381b31409e4d220919b2cff012ed94d70135a59e',
+    addLiquidityLink:'https://app.luaswap.org/#/add/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/0x381B31409e4D220919B2cFF012ED94d70135A59e',
     removeLiquidityLink:'https://app.luaswap.org/#/remove/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc/0x381b31409e4d220919b2cff012ed94d70135a59e'
   }
 ]

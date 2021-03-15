@@ -120,6 +120,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   }
 
   const startTime = START_NEW_POOL_AT
+
   return (
     <StyledCardWrapper>
       {farm.tokenSymbol === 'LUA' && <StyledCardAccent />}

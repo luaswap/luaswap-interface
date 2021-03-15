@@ -85,7 +85,7 @@ const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol
       </StyledBox>
       <StyledBox className="col-2">
         <StyledLabel>Reward per block</StyledLabel>
-        <StyledContent>{newReward ? getBalanceNumber(newReward).toFixed(2) : '~'} LUA</StyledContent>
+        <StyledContent>{newReward ? getBalanceNumber(newReward).toFixed(3) : '~'} LUA</StyledContent>
         <StyledEquility>
           ≈{' '}
           {stakedValue &&
