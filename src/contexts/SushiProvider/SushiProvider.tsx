@@ -39,10 +39,23 @@ const SushiProvider: React.FC = ({ children }) => {
     // @ts-ignore
     window.pools = allPools
     // setPools(allPools)
-    if(!IsTomo){
-      if (ethereum && ethereum.provider) {
-        const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
-          defaultAccount: ethereum.provider.selectedAddress,
+    if (ethereum && ethereum.provider) {
+      const sushiLib = new Sushi(ethereum.provider, Number(chainId), false, {
+        defaultAccount: ethereum.provider.selectedAddress,
+        defaultConfirmations: 1,
+        autoGasMultiplier: 1.5,
+        testing: false,
+        defaultGas: '6000000',
+        defaultGasPrice: '1000000000000',
+        accounts: [],
+        ethereumNodeTimeout: 10000
+      })
+      setSushi(sushiLib)
+      window.sushisauce = sushiLib
+    } else {
+        const chainId = config.chainId
+        const sushiLib = new Sushi(config.rpc, chainId, false, {
+          defaultAccount: '0x0000000000000000000000000000000000000000',
           defaultConfirmations: 1,
           autoGasMultiplier: 1.5,
           testing: false,
@@ -53,23 +66,9 @@ const SushiProvider: React.FC = ({ children }) => {
         })
         setSushi(sushiLib)
         window.sushisauce = sushiLib
-      } else {
-          const chainId = config.chainId
-          const sushiLib = new Sushi(config.rpc, chainId, false, {
-            defaultAccount: '0x0000000000000000000000000000000000000000',
-            defaultConfirmations: 1,
-            autoGasMultiplier: 1.5,
-            testing: false,
-            defaultGas: '6000000',
-            defaultGasPrice: '1000000000000',
-            accounts: [],
-            ethereumNodeTimeout: 10000
-          })
-          setSushi(sushiLib)
-          window.sushisauce = sushiLib
-        
-      }
+      
     }
+    
   }, [ethereum])
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>

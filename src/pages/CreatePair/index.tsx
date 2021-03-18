@@ -96,7 +96,6 @@ export default function CreatePair() {
       isTrc21A = false
     } else {
       try {
-        
         const currencyAContract = getContract(
           // @ts-ignore
           wrappedCurrency(currency0, chainId)?.address ?? '',
@@ -105,15 +104,15 @@ export default function CreatePair() {
           library,
           account
         )
-        await currencyAContract.minFee().then((result: any) => console.log(result + 'true')).catch((error:any) => console.log(error))
+        await currencyAContract.minFee()
         // @ts-ignore
-        // await currencyAContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency0?.decimals).toString(10))
+        await currencyAContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency0?.decimals).toString(10))
         isTrc21A = true
       } catch {
         isTrc21A = false
       }
     }
-    
+
     if (currency1 === TOMO) {
       isTrc21B = false
     } else {
@@ -146,7 +145,6 @@ export default function CreatePair() {
       // @ts-ignore
       isTrc21B
     ]
-    console.log(args)
     await factoryContract
       .createPairTRC21(...args)
       // @ts-ignore

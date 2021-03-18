@@ -174,7 +174,7 @@ export const getLPTokenStaked = async (sushi, lpContract, chainId) => {
 }
 
 export const approve = async (lpContract, masterChefContract, account, chainId) => {
-  const gasLimit = chainId == 89 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
   return lpContract.methods
     .approve(masterChefContract.options.address, MaxUint256)
     .send(gasLimit)
@@ -194,7 +194,7 @@ export const getSushiSupply = async (sushi, chainId) => {
 }
 
 export const getLuaCirculatingSupply = async (sushi, chainId) => {
-  if(chainId !== 89){
+  if(chainId !== 88){
     const chef = getMasterChefContract(sushi)
     
     const a = new BigNumber(await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true, chainId))
@@ -247,7 +247,7 @@ export const getNewRewardPerBlock = async (sushi, pid1 = 0, chainId) => {
 }
 
 export const stake = async (masterChefContract, pid, amount, account, chainId) => {
-  const gasLimit = chainId === 89 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
   return masterChefContract.methods
     .deposit(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send(gasLimit)
@@ -257,7 +257,7 @@ export const stake = async (masterChefContract, pid, amount, account, chainId) =
 }
 
 export const unstake = async (masterChefContract, pid, amount, account, chainId) => {
-  const gasLimit = chainId === 89 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
   return masterChefContract.methods
     .withdraw(pid, new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send(gasLimit)
@@ -266,7 +266,7 @@ export const unstake = async (masterChefContract, pid, amount, account, chainId)
     })
 }
 export const harvest = async (masterChefContract, pid, account, chainId) => {
-  const gasLimit = chainId === 89 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
   return masterChefContract.methods
     .claimReward(pid)
     .send(gasLimit)
@@ -330,7 +330,7 @@ export const unlock = async (sushi, account) => {
     })
 }
 export const enter = async (contract, amount, account, chainId) => {
-  const gasLimit = chainId === 89 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
   return contract.methods
     .enter(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send(gasLimit)
@@ -340,7 +340,7 @@ export const enter = async (contract, amount, account, chainId) => {
 }
 // Stake Withdraw
 export const leave = async (contract, amount, account, chainId) => {
-  const gasLimit = chainId === 89 ? { from: account, gasLimit: '0x7A120' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x7A120' } : { from: account }
   return contract.methods
     .leave(new BigNumber(amount).times(new BigNumber(10).pow(18)).toString())
     .send(gasLimit)
@@ -350,7 +350,7 @@ export const leave = async (contract, amount, account, chainId) => {
 }
 // Lua Convert
 export const makerConvert = async (contract, token0, token1, account, chainId) => {
-  const gasLimit = chainId === 89 ? { from: account, gasLimit: '0x1E8480' } : { from: account }
+  const gasLimit = chainId === 88 ? { from: account, gasLimit: '0x1E8480' } : { from: account }
   return (
     contract &&
     contract.methods
