@@ -32,7 +32,7 @@
       "address": "0xf55F13Fde623c00d6b0C7bfc6557735040aA6a08",
       "symbol": "ETH",
       "name": "Ethereum",
-      "decimals": 6,
+      "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png",
       "tags": ["defi"]
     }
