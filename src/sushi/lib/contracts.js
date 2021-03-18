@@ -24,7 +24,7 @@ export class Contracts {
     this.weth = new this.web3.eth.Contract(WETHAbi)
     this.maker = new this.web3.eth.Contract(makerAbi)
     // window.pools <=> supportedPools
-    if(networkId === 88){
+    if(networkId === 89){
       this.pools = tomoSupportedPools.map(pool =>
         Object.assign(pool, {
           lpAddress: pool.lpAddresses[networkId],
