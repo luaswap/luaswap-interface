@@ -29,7 +29,7 @@ export const getAllowance = async (
 export const getAllowanceStaking = async (contract: Contract, owner: string, spender: string, chainId: ChainId | undefined): Promise<string> => {
   try {
     let contract2
-    if(chainId === 89){
+    if(chainId === 88){
       contract2 = getContract(RPC_URL[chainId], (contract as any)._address)
     }else{
       contract2 = contract
