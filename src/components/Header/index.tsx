@@ -419,75 +419,78 @@ export default function Header() {
               </StyledMenuButton>
               {open && (
                 <StyleNavMobile>
-                  
+                  {!IsTomo ? (
                     <>
-                    {!IsTomo ? (
                       <StyleNavList>
                         <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                           Farming
                         </StyledNavLink>
-                      </StyleNavList>
-                      ) : ''
-                    }
+                      </StyleNavList>                      
                       <StyleNavList>
                         <StyledNavLink id="pool-nav-link" to="/lua-safe">
                           {t('LuaSafe')}
                         </StyledNavLink>
                       </StyleNavList>
-                    </>                  
-                  <StyleNavList>
-                    <StyleText>
-                      Charts <span style={{ fontSize: '11px' }}>↗</span>
-                    </StyleText>
-                    <StyleNavSub>
+               
                       <StyleNavList>
-                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                          Ethereum
-                        </StyledExternalLink>
+                        <StyleText>
+                          Charts <span style={{ fontSize: '11px' }}>↗</span>
+                        </StyleText>
+                        <StyleNavSub>
+                          <StyleNavList>
+                            <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
+                              Ethereum
+                            </StyledExternalLink>
+                          </StyleNavList>
+                          <StyleNavList>
+                            <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
+                              TomoChain
+                            </StyledExternalLink>
+                          </StyleNavList>
+                        </StyleNavSub>
                       </StyleNavList>
-                      <StyleNavList>
-                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
-                          TomoChain
-                        </StyledExternalLink>
-                      </StyleNavList>
-                    </StyleNavSub>
-                  </StyleNavList>
+                    </>
+                    ) : ''
+                    }
                 </StyleNavMobile>
               )}
             </>
           ) : (
             <StyleNavBox>
-              {/* {!IsTomo ? ( */}
+              {!IsTomo ? (
+                <>
                 <StyleNavList>
                   <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                     Farming
                   </StyledNavLink>
                 </StyleNavList>
-                {/* ) : ''
-              } */}
-              <StyleNavList>
-                <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                  {t('LuaSafe')}
-                </StyledNavLink>
-              </StyleNavList>
-              
-              <StyleNavList>
-                <StyleText>
-                  Charts <span style={{ fontSize: '11px' }}>↗</span>
-                </StyleText>
-                <StyleNavSub>
-                  <StyleNavList>
-                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                      Ethereum
-                    </StyledExternalLink>
-                  </StyleNavList>
-                  <StyleNavList>
-                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
-                      TomoChain
-                    </StyledExternalLink>
-                  </StyleNavList>
-                </StyleNavSub>
-              </StyleNavList>
+                 
+                <StyleNavList>
+                  <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                    {t('LuaSafe')}
+                  </StyledNavLink>
+                </StyleNavList>
+                
+                <StyleNavList>
+                  <StyleText>
+                    Charts <span style={{ fontSize: '11px' }}>↗</span>
+                  </StyleText>
+                  <StyleNavSub>
+                    <StyleNavList>
+                      <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
+                        Ethereum
+                      </StyledExternalLink>
+                    </StyleNavList>
+                    <StyleNavList>
+                      <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
+                        TomoChain
+                      </StyledExternalLink>
+                    </StyleNavList>
+                  </StyleNavSub>
+                    </StyleNavList>
+                </>
+              ) : ''
+            }
             </StyleNavBox>
           )}
         </HeaderLinks>

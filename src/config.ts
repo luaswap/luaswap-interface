@@ -15,7 +15,7 @@ export const RPC_URL: { [chainId in ChainId]: string } = {
   5: '',
   42: '',
   88: 'https://rpc.tomochain.com',
-  89: '',
+  89: 'https://rpc.testnet.tomochain.com',
   99: ''
 }
 
@@ -37,6 +37,6 @@ export const LUA_CONTRACT: { [chainId in ChainId]: string } = {
   5: '',
   42: '',
   88: '0x7262fa193e9590B2E075c3C16170f3f2f32F5C74',
-  89: '',
+  89: '0x4C314bAC596a4a93BB80823D99c0C2E27F8Df70c',
   99: ''
 }
