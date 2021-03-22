@@ -321,7 +321,7 @@ describe('list reducer', () => {
       expect(store.getState()).toEqual({
         byUrl: {},
         selectedListUrl:
-          'https://raw.githubusercontent.com/tomochain/luaswap-token-list/a857d61408a144a8a660e266ab5b517d29a08e7e/build/luaswap-default.tokenlist.json'
+          'https://raw.githubusercontent.com/tomochain/luaswap-token-list/643d9f7b81a28717f056509ff518c2c755a73c5c/build/luaswap-default.tokenlist.json'
       })
     })
   })
