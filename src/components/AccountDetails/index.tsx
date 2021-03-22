@@ -254,7 +254,7 @@ export default function AccountDetails({
   const dispatch = useDispatch<AppDispatch>()
   const luaContract = useLuaTokenContract(LUA.address)
   const IsTomo = IsTomoChain(chainId)
-  const ID = IsTomo ? 88 : 1
+  const ID = chainId && IsTomo ? chainId : 1
   const LUA_REWARD_URL = `${API_URL[ID]}/read/${LUA_CONTRACT[ID]}`
 
   const [accountData, setAccountData] = useState({

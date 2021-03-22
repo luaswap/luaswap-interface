@@ -3,11 +3,11 @@ import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
 // Tomo Factory mainet: 0x28c79368257CD71A122409330ad2bEBA7277a396
-export const FACTORY_ADDRESS = '0x1BA0DdCa35e152bE46e85e1EF9Db22d431dDc95e'
+// export const FACTORY_ADDRESS = '0x1BA0DdCa35e152bE46e85e1EF9Db22d431dDc95e'
 // TODO: Need to change to luaswap's Router address
-export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
+// export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
 // Tomo router address mainet: 0x0b792a01Fd3E8b3e23aaaA28561c3E774A82AA7b
-export const TOMO_ROUTER_ADDRESS = '0x6f7425954a609bc4f585A13664c414D543B676d8'
+// export const TOMO_ROUTER_ADDRESS = '0x6f7425954a609bc4f585A13664c414D543B676d8'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 

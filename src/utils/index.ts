@@ -4,7 +4,7 @@ import { AddressZero } from '@ethersproject/constants'
 import { JsonRpcSigner, Web3Provider } from '@ethersproject/providers'
 import { BigNumber } from '@ethersproject/bignumber'
 import { abi as IUniswapV2Router02ABI } from '@uniswap/v2-periphery/build/IUniswapV2Router02.json'
-import { ROUTER_ADDRESS, TOMO_ROUTER_ADDRESS } from '../constants'
+import { ROUTER_ADDRESS } from '../config'
 import { ChainId, JSBI, Percent, Token, CurrencyAmount, Currency, ETHER, TOMO } from '@luaswap/sdk'
 import { TokenAddressMap } from '../state/lists/hooks'
 import EthereumLogo from '../assets/images/ethereum-logo.png'
@@ -167,9 +167,9 @@ export function getContract(address: string, ABI: any, library: Web3Provider, ac
 }
 
 // account is optional
-export function getRouterContract(_: number, library: Web3Provider, account?: string): Contract {
+export function getRouterContract(_: ChainId, library: Web3Provider, account?: string): Contract {
   return getContract(
-    _ === 89 || _ === 88 || _ === 99 ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS,
+    _ ? ROUTER_ADDRESS[_] : ROUTER_ADDRESS[1],
     IUniswapV2Router02ABI,
     library,
     account

@@ -7,7 +7,7 @@ import { Text } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 // import
-import { FACTORY_ADDRESS } from '../../constants'
+import { FACTORY_ADDRESS } from '../../config'
 import { getNativeToken } from '../../utils'
 import { ButtonDropdownLight } from '../../components/Button'
 import { LightCard } from '../../components/Card'
@@ -105,7 +105,7 @@ export default function CreatePair() {
           library,
           account
         )
-        await currencyAContract.minFee().then((result: any) => console.log(result + 'true')).catch((error:any) => console.log(error))
+        await currencyAContract.minFee()
         // @ts-ignore
         // await currencyAContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency0?.decimals).toString(10))
         isTrc21A = true
@@ -135,7 +135,7 @@ export default function CreatePair() {
       }
     }
     // @ts-ignore
-    const factoryContract = getContract(FACTORY_ADDRESS, V2_FACTORY_ABI, library, account, false)
+    const factoryContract = getContract(FACTORY_ADDRESS[chainId], V2_FACTORY_ABI, library, account, false)
     args = [
       // @ts-ignore
       wrappedCurrency(currency0, chainId)?.address ?? '',
@@ -146,7 +146,6 @@ export default function CreatePair() {
       // @ts-ignore
       isTrc21B
     ]
-    console.log(args)
     await factoryContract
       .createPairTRC21(...args)
       // @ts-ignore

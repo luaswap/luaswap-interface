@@ -40,7 +40,7 @@ export function useFarmingStaked(pools: any[]) {
   const farmingContract: Contract | null = useFarmingContract()
   const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
   const IsTomo = IsTomoChain(chainId)
-  const ID = IsTomo ? 88 : 1
+  const ID = chainId && IsTomo ? chainId : 1
 
   useEffect(() => {
     let isCancelled = false

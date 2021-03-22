@@ -559,16 +559,43 @@ export const supportedPools = [
   }
 ]
 export const tomoSupportedPools = [
+  // {
+  //   pid:0,
+  //   lpAddresses:{
+  //     88:'0x810a21afe69fe356697a9824930904383930bd96'
+  //   },
+  //   tokenAddresses:{
+  //     88:'0x7262fa193e9590b2e075c3c16170f3f2f32f5c74'
+  //   },
+  //   token2Addresses:{
+  //     88:'0xb1f66997a5760428d3a87d68b90bfe0ae64121cc'
+  //   },
+  //   name:'LUA - TOMO',
+  //   symbol:'LUA-TOMO LUA-V1 LP',
+  //   symbolShort:'LUA-TOMO',
+  //   description:`Deposit LUA-TOMO LUA-V1 LP Earn LUA`,
+  //   tokenSymbol:'LUA',
+  //   token2Symbol:'TOMO',
+  //   icon:'https://luaswap.org/favicon.png',
+  //   icon2:'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
+  //   isHot:false,
+  //   isNew:true,
+  //   protocal:'LuaSwap',
+  //   iconProtocal:'https://luaswap.org/favicon.png',
+  //   pairLink:'https://info.luaswap.org/tomochain/pair/0x810a21afe69fe356697a9824930904383930bd96',
+  //   addLiquidityLink:'https://app.luaswap.org/#/add/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc',
+  //   removeLiquidityLink:'https://app.luaswap.org/#/remove/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc'
+  // },
   {
     pid:0,
     lpAddresses:{
-      88:'0x810a21afe69fe356697a9824930904383930bd96'
+      89:'0xc1e933B58C6775C75532ecdCeF770f9D6566f7Fb'
     },
     tokenAddresses:{
-      88:'0x7262fa193e9590b2e075c3c16170f3f2f32f5c74'
+      89:'0xB837c744A16A7f133A750254270Dce792dBBAE77'
     },
     token2Addresses:{
-      88:'0xb1f66997a5760428d3a87d68b90bfe0ae64121cc'
+      89:'0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c'
     },
     name:'LUA - TOMO',
     symbol:'LUA-TOMO LUA-V1 LP',
