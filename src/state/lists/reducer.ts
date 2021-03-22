@@ -57,7 +57,7 @@ export default createReducer(initialState, builder =>
       // no-op if update does nothing
       if (current) {
         // Set default tokenList (Add custom code)
-        // state.selectedListUrl = url
+        state.selectedListUrl = url
         // End Custom
         const upgradeType = getVersionUpgrade(current.version, tokenList.version)
         if (upgradeType === VersionUpgrade.NONE) return
