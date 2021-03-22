@@ -56,6 +56,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   const [totalSupplyXLua, setTotalSupplyXLua] = useState<BigNumber>(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
   const trackingAPYBalanceXLua = useTokenBalance(xLuaAddress, '0xdEad000000000000000000000000000000000000')
+  const trackingAPYBalanceXLuaTomo = useTokenBalance(xLuaAddress, '0x854f882771b61b26e91F8644dc0c9c94301FaD2d')
 
   useEffect(() => {
     async function fetchTotalSupplyXLua() {
@@ -69,10 +70,10 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
 
   const xLuaToLua = myXLua.multipliedBy(totalLuaInSafe).dividedBy(totalSupplyXLua)
   
-  const trackingReward = IsTomo ? trackingAPYBalanceXLua
+  const trackingReward = IsTomo ? trackingAPYBalanceXLuaTomo
   .multipliedBy(totalLuaInSafe)
   .dividedBy(totalSupplyXLua)
-  .minus(150 * 10 ** 18):
+  .minus(10 * 10 ** 18):
   trackingAPYBalanceXLua
   .multipliedBy(totalLuaInSafe)
   .dividedBy(totalSupplyXLua)
@@ -81,7 +82,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   const { onLeave } = useLeave()
   const tokenName = 'xLUA'
   const oneDay = 1000 * 60 * 60 * 24 // hours*minutes*seconds*milliseconds
-  const initStakeAt = IsTomo ? new Date(1611133723000) : new Date(1603904400000) //1614226890000
+  const initStakeAt = IsTomo ? new Date(1615349347000) : new Date(1603904400000) //1614226890000
   const toDay = new Date() // Today
   const differenceMs = Math.abs(toDay.getTime() - initStakeAt.getTime())
   const totalStakedDay = Math.round(differenceMs / oneDay)
