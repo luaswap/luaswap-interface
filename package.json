@@ -1,7 +1,7 @@
 {
   "name": "@uniswap/interface",
   "description": "Uniswap Interface",
-  "homepage": ".",
+  "homepage": "https:/info.luaswap.org/tomochain-testnet",
   "private": true,
   "devDependencies": {
     "@ethersproject/experimental": "^5.0.1",
