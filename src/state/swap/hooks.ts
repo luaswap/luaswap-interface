@@ -201,7 +201,9 @@ export function useDerivedSwapInfo(): {
   const amountsOnTomo = useGetAmountsOnTomo(v2Trade, isExactIn, parsedAmount)
 
   if (chainId === 88 && v2Trade && amountsOnTomo.length > 0) {
+    // @ts-ignore
     v2Trade.inputAmount = amountsOnTomo[0]
+    // @ts-ignore
     v2Trade.outputAmount = amountsOnTomo[amountsOnTomo.length - 1]
   }
 

@@ -5,7 +5,7 @@ import { abi as IUniswapV2PairABI } from '@uniswap/v2-core/build/IUniswapV2Pair.
 import { getUserStaked, getFarmingPools, getTotalStaked, getPendingReward } from '../utils/farmingPool'
 import { useFarmingContract } from './useContract'
 import { useActiveWeb3React } from './index'
-import { getContract } from '../utils/index'
+import { getContract, IsTomoChain } from '../utils/index'
 
 export function useFarmingPool() {
   const [farmingPools, setFarmingPools] = useState([])
@@ -39,6 +39,8 @@ export function useFarmingStaked(pools: any[]) {
   const { library, account, chainId } = useActiveWeb3React()
   const farmingContract: Contract | null = useFarmingContract()
   const [userFarmingPoolsMap, setUserFarmingPoolsMap] = useState({})
+  const IsTomo = IsTomoChain(chainId)
+  const ID = chainId && IsTomo ? chainId : 1
 
   useEffect(() => {
     let isCancelled = false
@@ -66,7 +68,7 @@ export function useFarmingStaked(pools: any[]) {
       if (!isCancelled) {
         const poolBalancePromises = userFarmingPools.map(pool => {
           const lpContract = library
-            ? getContract(pool.lpAddresses[1], IUniswapV2PairABI, library, account ? account : undefined)
+            ? getContract(pool.lpAddresses[ID], IUniswapV2PairABI, library, account ? account : undefined)
             : null
 
           return getTotalStaked(lpContract, chainId)
@@ -80,14 +82,11 @@ export function useFarmingStaked(pools: any[]) {
         const pendingRewardPromies = userFarmingPools.map(pool => getPendingReward(farmingContract, pool.pid, account))
         pendingRewards = await Promise.all(pendingRewardPromies)
       }
-
       for (let index = 0; index < userFarmingPools.length; index++) {
-        const pool = userFarmingPools[index]
-
+        const pool = userFarmingPools[index]        
         pool.totalStaked = poolStakeds ? poolStakeds[index] : '0'
         pool.pendingReward = pendingRewards ? pendingRewards[index] : '0'
-
-        poolsMap[pool.lpAddresses[1].toLowerCase()] = pool
+        poolsMap[pool.lpAddresses[ID].toLowerCase()] = pool
       }
 
       !isCancelled && setUserFarmingPoolsMap(poolsMap)
