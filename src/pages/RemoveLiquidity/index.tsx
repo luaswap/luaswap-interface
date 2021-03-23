@@ -20,7 +20,7 @@ import Row, { RowBetween, RowFixed, RowRight } from '../../components/Row'
 
 import Slider from '../../components/Slider'
 import CurrencyLogo from '../../components/CurrencyLogo'
-import { ROUTER_ADDRESS, TOMO_ROUTER_ADDRESS } from '../../constants'
+import { ROUTER_ADDRESS } from '../../config'
 import { useActiveWeb3React } from '../../hooks'
 import { useCurrency } from '../../hooks/Tokens'
 import { usePairContract } from '../../hooks/useContract'
@@ -104,7 +104,7 @@ export default function RemoveLiquidity({
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
   const [approval, approveCallback] = useApproveCallback(
     parsedAmounts[Field.LIQUIDITY],
-    IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS
+    chainId ? ROUTER_ADDRESS[chainId] : ROUTER_ADDRESS[1]
   )
 
   const isArgentWallet = useIsArgentWallet()
@@ -142,7 +142,7 @@ export default function RemoveLiquidity({
     ]
     const message = {
       owner: account,
-      spender: IsTomo ? TOMO_ROUTER_ADDRESS : ROUTER_ADDRESS,
+      spender: chainId ? ROUTER_ADDRESS[chainId] : ROUTER_ADDRESS[1],
       value: liquidityAmount.raw.toString(),
       nonce: nonce.toHexString(),
       deadline: deadline.toNumber()

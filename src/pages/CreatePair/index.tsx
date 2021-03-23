@@ -7,7 +7,7 @@ import { Text } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 // import
-import { FACTORY_ADDRESS } from '../../constants'
+import { FACTORY_ADDRESS } from '../../config'
 import { getNativeToken } from '../../utils'
 import { ButtonDropdownLight } from '../../components/Button'
 import { LightCard } from '../../components/Card'
@@ -96,6 +96,7 @@ export default function CreatePair() {
       isTrc21A = false
     } else {
       try {
+        
         const currencyAContract = getContract(
           // @ts-ignore
           wrappedCurrency(currency0, chainId)?.address ?? '',
@@ -106,13 +107,13 @@ export default function CreatePair() {
         )
         await currencyAContract.minFee()
         // @ts-ignore
-        await currencyAContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency0?.decimals).toString(10))
+        // await currencyAContract.estimateFee(new BigNumber(1000).multipliedBy(10 ** currency0?.decimals).toString(10))
         isTrc21A = true
       } catch {
         isTrc21A = false
       }
     }
-
+    
     if (currency1 === TOMO) {
       isTrc21B = false
     } else {
@@ -134,7 +135,7 @@ export default function CreatePair() {
       }
     }
     // @ts-ignore
-    const factoryContract = getContract(FACTORY_ADDRESS, V2_FACTORY_ABI, library, account, false)
+    const factoryContract = getContract(FACTORY_ADDRESS[chainId], V2_FACTORY_ABI, library, account, false)
     args = [
       // @ts-ignore
       wrappedCurrency(currency0, chainId)?.address ?? '',

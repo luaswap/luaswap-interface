@@ -5,7 +5,7 @@ import { hex } from 'wcag-contrast'
 import { Token, ChainId } from '@luaswap/sdk'
 import { IsTomoChain } from '../utils'
 
-const commit_hash = '3dda6df393721f8832dbbd0cc279d4ff8d693276'
+const commit_hash = 'b31403d6ef2e5350a493b5df99486a2ad4c91401'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
   if (token.chainId === ChainId.RINKEBY && token.address === '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735') {

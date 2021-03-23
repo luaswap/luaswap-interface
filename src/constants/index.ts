@@ -2,11 +2,12 @@ import { ChainId, JSBI, Percent, Token, WETH } from '@luaswap/sdk'
 import { AbstractConnector } from '@web3-react/abstract-connector'
 
 import { injected, walletconnect, walletlink } from '../connectors' // remove portis, fortmatic
-export const FACTORY_ADDRESS = '0x28c79368257CD71A122409330ad2bEBA7277a396'
+// Tomo Factory mainet: 0x28c79368257CD71A122409330ad2bEBA7277a396
+// export const FACTORY_ADDRESS = '0x1BA0DdCa35e152bE46e85e1EF9Db22d431dDc95e'
 // TODO: Need to change to luaswap's Router address
-export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
-// Tomo router address testnet: 0x6f7425954a609bc4f585A13664c414D543B676d8
-export const TOMO_ROUTER_ADDRESS = '0x0b792a01Fd3E8b3e23aaaA28561c3E774A82AA7b'
+// export const ROUTER_ADDRESS = '0x1d5C6F1607A171Ad52EFB270121331b3039dD83e'
+// Tomo router address mainet: 0x0b792a01Fd3E8b3e23aaaA28561c3E774A82AA7b
+// export const TOMO_ROUTER_ADDRESS = '0x6f7425954a609bc4f585A13664c414D543B676d8'
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 
@@ -17,6 +18,15 @@ type ChainTokenList = {
 
 // Base Token on TomoChain NetWork
 // TESTNET
+
+export const TLUA = new Token(
+  ChainId.TOMOCHAIN_TESTNET,
+  '0x4C314bAC596a4a93BB80823D99c0C2E27F8Df70c',
+  18,
+  'LUA',
+  'LUA Token'
+)
+
 export const TUSDT = new Token(
   ChainId.TOMOCHAIN_TESTNET,
   '0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c',
@@ -31,6 +41,7 @@ export const TBTC = new Token(
   'BTC',
   'Wrapped BTC'
 )
+
 // MAINNET
 export const MLUA = new Token(
   ChainId.TOMOCHAIN_MAINNET,
@@ -130,13 +141,13 @@ export const SUGGESTED_BASES: ChainTokenList = {
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
   [ChainId.MAINNET]: [...WETH_ONLY[ChainId.MAINNET], LUA, USDC, USDT, TOMOE],
-  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TUSDT, TBTC],
+  [ChainId.TOMOCHAIN_TESTNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_TESTNET], TLUA, TUSDT, TBTC],
   [ChainId.TOMOCHAIN_MAINNET]: [...WETH_ONLY[ChainId.TOMOCHAIN_MAINNET], MLUA, MUSDT, MBTC]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
   [ChainId.MAINNET]: [[USDC, USDT]],
-  [ChainId.TOMOCHAIN_TESTNET]: [[TUSDT, TBTC]],
+  [ChainId.TOMOCHAIN_TESTNET]: [[TLUA,TUSDT]],
   [ChainId.TOMOCHAIN_MAINNET]: [[MLUA, MUSDT]]
 }
 

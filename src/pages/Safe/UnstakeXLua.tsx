@@ -68,16 +68,16 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   }, [sushi, setTotalSupplyXLua])
 
   const xLuaToLua = myXLua.multipliedBy(totalLuaInSafe).dividedBy(totalSupplyXLua)
+  
   const trackingReward = IsTomo ? trackingAPYBalanceXLua
   .multipliedBy(totalLuaInSafe)
-  .dividedBy(10)
   .dividedBy(totalSupplyXLua)
-  .minus(10 * 10 ** 18):
+  .minus(150 * 10 ** 18):
   trackingAPYBalanceXLua
-    .multipliedBy(totalLuaInSafe)
-    .dividedBy(totalSupplyXLua)
-    .minus(10 * 10 ** 18)
-
+  .multipliedBy(totalLuaInSafe)
+  .dividedBy(totalSupplyXLua)
+  .minus(10 * 10 ** 18)
+  
   const { onLeave } = useLeave()
   const tokenName = 'xLUA'
   const oneDay = 1000 * 60 * 60 * 24 // hours*minutes*seconds*milliseconds
@@ -99,7 +99,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
       <CardActions mb={[3, 4]}>
         <Button
           disabled={!myXLua.toNumber() || pendingTx}
-          text={pendingTx ? 'pending Withdraw' : 'Withdraw'}
+          text={pendingTx ? 'pending Withdraw' : 'Unstake'}
           onClick={async () => {
             setPendingTx(true)
             await onPresentLeave()
@@ -123,7 +123,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
         </span>
       </CardInsight>
       <CardInsight>
-        <span>{'Withdrawal fee'}</span>
+        <span>{'Unstake fee'}</span>
         <span style={{ fontWeight: 'bold', color: '#4caf50' }}>{'0.5%'}</span>
       </CardInsight>
     </Card>
