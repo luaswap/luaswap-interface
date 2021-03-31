@@ -1,9 +1,9 @@
 {
   "name": "LuaSwap Default List",
-  "timestamp": "2020-11-26T02:38:53.850Z",
+  "timestamp": "2021-03-22T07:18:23.358Z",
   "version": {
     "major": 1,
-    "minor": 0,
+    "minor": 1,
     "patch": 0
   },
   "tags": {},
@@ -13,30 +13,6 @@
     "default"
   ],
   "tokens": [
-    {
-      "name": "Wrapped TOMO",      
-      "address": "0xB1f66997A5760428D3a87D68b90BfE0aE64121cC",
-      "symbol": "WTOMO",      
-      "decimals": 18,
-      "chainId": 88,
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png",
-    },
-    {
-      "name": "Tether USD",
-      "address": "0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c",
-      "symbol": "USDT",
-      "decimals": 6,
-      "chainId": 89,
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png"
-    },
-    {
-      "name": "Wrapped BTC",
-      "address": "0x11c2cAF973db997b8a9b5689b33962E1AedEA968",
-      "symbol": "BTC",
-      "decimals": 8,
-      "chainId": 89,
-      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png"
-    },
     {
       "name": "Frontier Token",
       "address": "0xf8C3527CC04340b208C854E985240c02F7B7793f",
@@ -156,6 +132,62 @@
       "decimals": 18,
       "chainId": 1,
       "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+    },
+    {
+      "name": "Wrapped BTC",
+      "address": "0xAE44807D8A9CE4B30146437474Ed6fAAAFa1B809",
+      "symbol": "BTC",
+      "decimals": 8,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599/logo.png"
+    },
+    {
+      "name": "Wrapped Ether",
+      "address": "0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b",
+      "symbol": "ETH",
+      "decimals": 18,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png"
+    },
+    {
+      "name": "Lition",
+      "address": "0xf9787E76750c1e731054Cf4Cc97a2e3F490DB360",
+      "symbol": "LIT",
+      "decimals": 18,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x763Fa6806e1acf68130D2D0f0df754C93cC546B2/logo.png"
+    },
+    {
+      "name": "LuaToken",
+      "address": "0x7262fa193e9590B2E075c3C16170f3f2f32F5C74",
+      "symbol": "LUA",
+      "decimals": 18,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png"
+    },
+    {
+      "name": "Wrapped USD Coin",
+      "address": "0xCCA4E6302510d555B654B3EaB9c0fCB223BCFDf0",
+      "symbol": "USDC",
+      "decimals": 6,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48/logo.png"
+    },
+    {
+      "name": "Wrapped Tether USD",
+      "address": "0x381B31409e4D220919B2cFF012ED94d70135A59e",
+      "symbol": "USDT",
+      "decimals": 6,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png"
+    },
+    {
+      "name": "Wrapped TOMO",
+      "address": "0xB1f66997A5760428D3a87D68b90BfE0aE64121cC",
+      "symbol": "WTOMO",
+      "decimals": 18,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0x05D3606d5c81EB9b7B18530995eC9B29da05FaBa/logo.png"
     }
   ]
 }
