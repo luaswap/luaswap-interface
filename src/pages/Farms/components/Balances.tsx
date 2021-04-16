@@ -112,14 +112,16 @@ const Balances = memo(() => {
             }
           </StyledBalance>
         </CardContent>
-        <Footnote>
-          Total Supply
+        <Footnote>          
           {!IsTomo ? (
-            <FootnoteValue>
-              {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
-              {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
-            </FootnoteValue>
-            ) : ' on Tomochain Network'
+            <>
+              Total Supply
+              <FootnoteValue>
+                {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
+                {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
+              </FootnoteValue>
+            </>
+            ) : ' on TomoChain Network'
           }
         </Footnote>
       </Card>

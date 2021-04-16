@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useActiveWeb3React } from '../../hooks'
-// import { IsTomoChain } from '../../utils'
+import { IsTomoChain } from '../../utils'
 import Container from '../../components/Container'
 import Spacer from '../../components/Spacer'
 import Balances from './components/Balances'
@@ -16,26 +16,27 @@ import TotalLockValue from './components/TotalLockValue'
 export default function Farms() {
   const { chainId } = useActiveWeb3React()
   const ID = chainId === 88 ? 88 : 1
-  // const IsTomo = IsTomoChain(chainId)
+  const IsTomo = IsTomoChain(chainId)
   const block = 99999999999
   const launchBlock = START_REWARD_AT_BLOCK[ID]
   return (
     <>
       <Container>
-        <div style={{ fontWeight: 'bold', fontSize: 22, color: '#ffffff', textAlign: 'center' }}>
-          LuaSwap Currently Has{' '}
-          <span style={{ color: '#4caf50', fontSize: 30 }}>
-            $<TotalLockValue />
-          </span>{' '}
-          Of Total Locked Value
-        </div>
-
+        {!IsTomo ? (
+          <div style={{ fontWeight: 'bold', fontSize: 22, color: '#ffffff', textAlign: 'center' }}>
+            LuaSwap Currently Has{' '}
+            <span style={{ color: '#4caf50', fontSize: 30 }}>
+              $<TotalLockValue />
+            </span>{' '}
+            Of Total Locked Value
+          </div>) : ''
+        }
         {block >= launchBlock && (
           <>
             <Spacer size="lg" />
             <Balances />
             <Spacer size="md" />
-            <div style={{ textAlign: 'center' }}>
+            {/* <div style={{ textAlign: 'center' }}>
               <ReadMore href="https://medium.com/luaswap/introducing-luaswap-org-7e6ff38beefc" target="__blank">
                 {' '}
                 👉&nbsp;&nbsp;Read The Announcement&nbsp;&nbsp;👈
@@ -43,17 +44,17 @@ export default function Farms() {
               <div style={{ color: 'rgb(255,255,255,0.6)', textAlign: 'center', marginTop: 5 }}>
                 Do not complain if you don't
               </div>
-            </div>
-            <Spacer size="lg" />
+            </div> */}
+            {/* <Spacer size="lg" /> */}
           </>
         )}
-        <div style={{ color: '#fa4c4c', textAlign: 'center' }}>This project is in beta. Use at your own risk.</div>
+        {/* <div style={{ color: '#fa4c4c', textAlign: 'center' }}>This project is in beta. Use at your own risk.</div>
         <Spacer size="lg" />
         <div
           style={{
             border: '1px solid #2C3030'
           }}
-        ></div>
+        ></div> */}
       </Container>
       <Box className="mt-4">
         <StyledHeading>SELECT YOUR FIELDS</StyledHeading>
@@ -105,18 +106,18 @@ const StyledParagraph = styled.p`
   margin-top: 10px;
 `
 
-const ReadMore = styled.a`
-  text-decoration: none;
-  font-weight: bold;
-  color: #ffffff;
-  display: inline-block;
-  padding: 5px 20px;
-  border-radius: 5px;
-  border: 1px solid #00ff8970;
-  background: #00ff890d;
-  font-size: 14px;
-  margin-top: 10px;
-`
+// const ReadMore = styled.a`
+//   text-decoration: none;
+//   font-weight: bold;
+//   color: #ffffff;
+//   display: inline-block;
+//   padding: 5px 20px;
+//   border-radius: 5px;
+//   border: 1px solid #00ff8970;
+//   background: #00ff890d;
+//   font-size: 14px;
+//   margin-top: 10px;
+// `
 
 const Box = styled.div`
   &.mt-4 {
