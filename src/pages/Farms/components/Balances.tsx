@@ -70,65 +70,94 @@ const Balances = memo(() => {
   const IsTomo = IsTomoChain(chainId)
   return (
     <StyledWrapper>
-      <Card>
-        <CardContent>
-          <StyledBalances>
-            <StyledBalance>
-              {/* <SushiIcon /> */}
-              <img src={Lua} alt="LUA Balance" />
-              <Spacer />
-              <div style={{ flex: 1 }}>
-                <Label text="Your Available LUA Balance" />
-                <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
-              </div>
-            </StyledBalance>
-          </StyledBalances>
-        </CardContent>
-        <Footnote>
-          Pending harvest
-          <FootnoteValue>
-            <PendingRewards /> LUA
-          </FootnoteValue>
-        </Footnote>
-      </Card>
-      <Spacer />
-
-      <Card>
-        <CardContent>
-          <StyledBalance>
-            {/* <SushiIcon /> */}
-            <img src={Luas} alt="Total LUA Supply" />
-            <Spacer />
-            {IsTomo ? (
-              <div style={{ flex: 1 }}>
-                <Label text="Total Supply" />
-                <Value value={totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')}` : '~'} />
-              </div>) : (
-              <div style={{ flex: 1 }}>
-                <Label text="LUA Circulating Supply" />
-                <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
-              </div>)
-              
-            }
-          </StyledBalance>
-        </CardContent>
-        <Footnote>          
-          {!IsTomo ? (
-            <>
-              Total Supply
+      {!IsTomo ? (
+        <>
+          <Card>
+            <CardContent>
+              <StyledBalances>
+                <StyledBalance>
+                  {/* <SushiIcon /> */}
+                  <img src={Lua} alt="LUA Balance" />
+                  <Spacer />
+                  <div style={{ flex: 1 }}>
+                    <Label text="Your Available LUA Balance" />
+                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
+                  </div>
+                </StyledBalance>
+              </StyledBalances>
+            </CardContent>
+            <Footnote>
+              Pending harvest
               <FootnoteValue>
-                {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
-                {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
+                <PendingRewards /> LUA
               </FootnoteValue>
-            </>
-            ) : ' on TomoChain Network'
-          }
-        </Footnote>
-      </Card>
+            </Footnote>
+          </Card>
+          <Spacer />
+          <Card>
+            <CardContent>
+              <StyledBalance>
+                {/* <SushiIcon /> */}
+                <img src={Luas} alt="Total LUA Supply" />
+                <Spacer />
+                  {/* <div style={{ flex: 1 }}>
+                    <Label text="Total Supply" />
+                    <Value value={totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')}` : '~'} />
+                  </div> */}
+                  <div style={{ flex: 1 }}>
+                    <Label text="LUA Circulating Supply" />
+                    <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
+                  </div>)
+              </StyledBalance>
+            </CardContent>
+              <Footnote>          
+                {!IsTomo ? (
+                  <>
+                    Total Supply
+                    <FootnoteValue>
+                      {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
+                      {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
+                    </FootnoteValue>
+                  </>
+                  ) : ' on TomoChain Network'
+                }
+              </Footnote>
+          </Card>
+        </>) : (
+          <CustomCard>
+            <CardContent>
+              <StyledBalances>
+                <StyledBalance>
+                  {/* <SushiIcon /> */}
+                  <img src={Lua} alt="LUA Balance" />
+                  <Spacer />
+                  <div style={{ flex: 1 }}>
+                    <Label text="Your Available LUA Balance" />
+                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
+                  </div>
+                </StyledBalance>
+              </StyledBalances>
+            </CardContent>
+            <Footnote>
+              Pending harvest
+              <FootnoteValue>
+                <PendingRewards /> LUA
+              </FootnoteValue>
+            </Footnote>
+          </CustomCard>
+        )
+      }
     </StyledWrapper>
   )
 })
 
+const CustomCard = styled.div`
+  background: ${props => props.theme.bg1};
+  border-radius: 12px;
+  overflow: hidden;
+  display: inline-block;
+  margin: 0 auto;
+`
 const Footnote = styled.div`
   font-size: 14px;
   padding: 14px 20px;
