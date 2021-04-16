@@ -4,7 +4,7 @@ import styled from 'styled-components'
 const Card: React.FC = ({ children }) => <StyledCard>{children}</StyledCard>
 
 const StyledCard = styled.div`
-  border-radius: 12px;
+  border-radius: 50%;
   overflow: hidden;
   display: flex;
   flex: 1;

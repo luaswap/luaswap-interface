@@ -13,6 +13,7 @@ import { useV1ExchangeContract } from './useContract'
 import useTransactionDeadline from './useTransactionDeadline'
 import useENS from './useENS'
 import { Version } from './useToggledVersion'
+import { IsTomoChain } from '../utils/index'
 
 export enum SwapCallbackState {
   INVALID,
@@ -137,52 +138,66 @@ export function useSwapCallback(
     return {
       state: SwapCallbackState.VALID,
       callback: async function onSwap(): Promise<string> {
-        const estimatedCalls: EstimatedSwapCall[] = await Promise.all(
-          swapCalls.map(call => {
-            const {
-              parameters: { methodName, args, value },
-              contract
-            } = call
-            const options = !value || isZero(value) ? {} : { value }
+        const promises = swapCalls.map(call => {
+          const {
+            parameters: { methodName, args, value },
+            contract
+          } = call
+          const options = !value || isZero(value) ? {} : { value }
 
-            return contract.estimateGas[methodName](...args, options)
-              .then(gasEstimate => {
-                return {
-                  call,
-                  gasEstimate
-                }
-              })
-              .catch(gasError => {
-                console.debug('Gas estimate failed, trying eth_call to extract error', call)
+          return contract.estimateGas[methodName](...args, options)
+            .then(gasEstimate => {
+              return {
+                call,
+                gasEstimate
+              }
+            })
+            .catch(gasError => {
+              console.debug('Gas estimate failed, trying eth_call to extract error', call)
 
-                return contract.callStatic[methodName](...args, options)
-                  .then(result => {
-                    console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
-                    return { call, error: new Error('Unexpected issue with estimating the gas. Please try again.') }
-                  })
-                  .catch(callError => {
-                    console.debug('Call threw error', call, callError)
-                    let errorMessage: string
-                    switch (callError.reason) {
-                      case 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT':
-                      case 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT':
-                        errorMessage =
-                          'This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.'
-                        break
-                      default:
-                        errorMessage = `The transaction cannot succeed due to error: ${callError.reason}. This is probably an issue with one of the tokens you are swapping.`
-                    }
-                    return { call, error: new Error(errorMessage) }
-                  })
-              })
-          })
-        )
+              return contract.callStatic[methodName](...args, options)
+                .then(result => {
+                  console.debug('Unexpected successful call after failed estimate gas', call, gasError, result)
+                  return { call, error: new Error('Unexpected issue with estimating the gas. Please try again.') }
+                })
+                .catch(callError => {
+                  console.debug('Call threw error', call, callError)
+                  let errorMessage: string
+                  switch (callError.reason) {
+                    case 'UniswapV2Router: INSUFFICIENT_OUTPUT_AMOUNT':
+                    case 'UniswapV2Router: EXCESSIVE_INPUT_AMOUNT':
+                      errorMessage =
+                        'This transaction will not succeed either due to price movement or fee on transfer. Try increasing your slippage tolerance.'
+                      break
+                    default:
+                      errorMessage = `The transaction cannot succeed due to error: ${callError.reason}. This is probably an issue with one of the tokens you are swapping.`
+                  }
+                  return { call, error: new Error(errorMessage) }
+                })
+            })
+        })
 
-        // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
-        const successfulEstimation = estimatedCalls.find(
-          (el, ix, list): el is SuccessfulCall =>
-            'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
-        )
+        // trc21 fee on tomochain is special so we spit a different flow
+        let successfulEstimation: SuccessfulCall | any
+        let estimatedCalls: EstimatedSwapCall[] = []
+
+        if (IsTomoChain(chainId)) {
+          for (let index = 0; index < promises.length; index++) {
+            const elm = await promises[index]
+            estimatedCalls = [...estimatedCalls, elm]
+          }
+
+          // a successful estimation is a bignumber gas estimate
+          successfulEstimation = estimatedCalls.find((el): el is SuccessfulCall => 'gasEstimate' in el)
+        } else {
+          estimatedCalls = await Promise.all(promises)
+
+          // a successful estimation is a bignumber gas estimate and the next call is also a bignumber gas estimate
+          successfulEstimation = estimatedCalls.find(
+            (el, ix, list): el is SuccessfulCall =>
+              'gasEstimate' in el && (ix === list.length - 1 || 'gasEstimate' in list[ix + 1])
+          )
+        }
 
         if (!successfulEstimation) {
           const errorCalls = estimatedCalls.filter((call): call is FailedCall => 'error' in call)

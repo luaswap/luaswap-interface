@@ -16,6 +16,7 @@ import useFarms from '../../../hooks/farms/useFarms'
 import useLuaPrice from '../../../hooks/farms/useLuaPrice'
 import usePoolActive from '../../../hooks/farms/usePoolActive'
 import useSushi from '../../../hooks/farms/useSushi'
+// import { useBlockNumber } from '../../../state/application/hooks'
 import { START_NEW_POOL_AT } from '../../../sushi/lib/constants'
 import { NUMBER_BLOCKS_PER_YEAR } from '../../../config'
 import { getNewRewardPerBlock } from '../../../sushi/utils'
@@ -94,7 +95,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
   const poolActive = usePoolActive(farm.pid)
 
   const sushi = useSushi()
-
+  // const block = useBlockNumber()
   const [newReward, setNewRewad] = useState<BigNumber>()
   useEffect(() => {
     async function fetchData() {
@@ -145,9 +146,12 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               <StyledDetail>{farm.description}</StyledDetail>
             </StyledDetails>
             <Spacer />
-            <Button disabled={!poolActive} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
+            <Button disabled={!(poolActive)} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
               {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
             </Button>
+            {/* <Button disabled={(block && block < 34466888) ? true : false} text={(block && block > 34466888) ? 'Select' : 'Disable'} to={(block && block > 34466888) ? `/farming/${farm.id}` : ''}>
+              {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
+            </Button> */}
             <br />
             {!IsTomo ? (
               <StyledInsight>

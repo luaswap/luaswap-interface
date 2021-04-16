@@ -160,7 +160,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
         </FarmContainer>
         <InfoBox>
           {
-            'Users who stake LUA in LuaSafe will receive xLUA LP tokens which represent their proportion of LUA staked. Stakers will need to withdraw their xLUA LP tokens in order to receive their LUA reward.'
+            'Users who stake LUA in LuaSafe will receive xLUA LP tokens which represent their proportion of LUA staked. Stakers will need to unstake their xLUA LP tokens in order to receive their LUA reward.'
           }
         </InfoBox>
         <Box width="100%" my={[4, 5]}>

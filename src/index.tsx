@@ -97,14 +97,12 @@ function Updaters() {
 //   const { chainId } = useWeb3React()
 //   const IsTomo = IsTomoChain(chainId)
 //   const supportedPoolsUrl = IsTomo ? TOMO_SUPPORTED_POOL : SUPPORTED_POOL
-//   // console.log(IsTomo)
 //   useEffect(() => {
 //     async function poolSupport() {
 //       let response
 //       try {
 //         response = await fetch(supportedPoolsUrl)
 //         const data = await response.json()
-//         // console.log(data)
 //         //@ts-ignore        
 //         window.pools = data
 //         //@ts-ignore

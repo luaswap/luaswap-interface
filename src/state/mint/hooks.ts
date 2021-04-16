@@ -6,6 +6,7 @@ import { useTotalSupply } from '../../data/TotalSupply'
 
 import { useActiveWeb3React } from '../../hooks'
 import { wrappedCurrency, wrappedCurrencyAmount } from '../../utils/wrappedCurrency'
+import { IsTomoChain } from '../../utils'
 import { AppDispatch, AppState } from '../index'
 import { tryParseAmount } from '../swap/hooks'
 import { useCurrencyBalances } from '../wallet/hooks'
@@ -52,8 +53,14 @@ export function useDerivedMintInfo(
   const [pairState, pair] = usePair(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B])
   const totalSupply = useTotalSupply(pair?.liquidityToken)
 
-  const noLiquidity: boolean =
-    pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
+  let noLiquidity: boolean = true
+  if(IsTomoChain(chainId)) {
+    noLiquidity =
+      pairState === PairState.NOT_EXISTS || totalSupply === undefined || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
+  } else {
+    noLiquidity =
+      pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
+  }
 
   // balances
   const balances = useCurrencyBalances(account ?? undefined, [

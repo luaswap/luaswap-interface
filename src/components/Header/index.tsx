@@ -116,7 +116,7 @@ const StyleNavList = styled.li`
   list-style: none;
   padding: 15px 0;
   position: relative;
-  :hover > ul{
+  :hover > ul {
     display: block;
   }
 `
@@ -233,7 +233,7 @@ const HideSmall = styled.div`
     width: 200px;
     padding: 10px;
     background-color: ${({ theme }) => theme.bg1};
-    color: #c3a56e 
+    color: #c3a56e;
     a {
       color: #ecb34b;
     }
@@ -436,11 +436,13 @@ export default function Header() {
                       </StyleNavList>
                     </>                  
                   <StyleNavList>
-                    <StyleText>Charts <span style={{ fontSize: '11px' }}>↗</span></StyleText>
+                    <StyleText>
+                      Charts <span style={{ fontSize: '11px' }}>↗</span>
+                    </StyleText>
                     <StyleNavSub>
                       <StyleNavList>
                         <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                            Ethereum
+                          Ethereum
                         </StyledExternalLink>
                       </StyleNavList>
                       <StyleNavList>
