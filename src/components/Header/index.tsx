@@ -13,7 +13,7 @@ import { useWindowSize } from '../../hooks/useWindowSize'
 
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
-import { IsTomoChain, getTextNativeToken } from '../../utils'
+import { getTextNativeToken } from '../../utils'
 import { useETHBalances } from '../../state/wallet/hooks'
 import { ExternalLink } from '../../theme'
 
@@ -366,7 +366,7 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
-  const IsTomo = IsTomoChain(chainId)
+  // const IsTomo = IsTomoChain(chainId)
   const { t } = useTranslation()
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
@@ -421,14 +421,11 @@ export default function Header() {
                 <StyleNavMobile>
                   
                     <>
-                    {!IsTomo ? (
                       <StyleNavList>
                         <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
                           Farming
                         </StyledNavLink>
                       </StyleNavList>
-                      ) : ''
-                    }
                       <StyleNavList>
                         <StyledNavLink id="pool-nav-link" to="/lua-safe">
                           {t('LuaSafe')}

@@ -721,6 +721,33 @@ export const tomoSupportedPools = [
   {
     pid:6,
     lpAddresses:{
+      88:'0x08975663ac228c6d208fa32c968569e5939fb634'
+    },
+    tokenAddresses:{
+      88:'0x381B31409e4D220919B2cFF012ED94d70135A59e'
+    },
+    token2Addresses:{
+      88:'0x7262fa193e9590b2e075c3c16170f3f2f32f5c74'
+    },
+    name:'USDT - LUA',
+    symbol:'USDT-LUA LUA-V1 LP',
+    symbolShort:'USDT-LUA',
+    description:`Deposit USDT-LUA LUA-V1 LP Earn LUA`,
+    tokenSymbol:'USDT',
+    token2Symbol:'LUA',
+    icon:'https://raw.githubusercontent.com/tomochain/luaswap-token-list/3dda6df393721f8832dbbd0cc279d4ff8d693276/src/tokens/icons/tomochain/0x381B31409e4D220919B2cFF012ED94d70135A59e.png',
+    icon2:'https://luaswap.org/favicon.png',
+    isHot:false,
+    isNew:true,
+    protocal:'LuaSwap',
+    iconProtocal:'https://luaswap.org/favicon.png',
+    pairLink:'https://info.luaswap.org/tomochain/pair/0x08975663ac228c6d208fa32c968569e5939fb634',
+    addLiquidityLink:'https://app.luaswap.org/#/add/0x381B31409e4D220919B2cFF012ED94d70135A59e/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74',
+    removeLiquidityLink:'https://app.luaswap.org/#/remove/0x381B31409e4D220919B2cFF012ED94d70135A59e/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74'
+  },
+  {
+    pid:7,
+    lpAddresses:{
       88:'0x9376b2088c63715073ba89d9a179c102e506c04d'
     },
     tokenAddresses:{
@@ -729,12 +756,12 @@ export const tomoSupportedPools = [
     token2Addresses:{
       88:'0x381B31409e4D220919B2cFF012ED94d70135A59e'
     },
-    name:'USDT - LUA',
-    symbol:'USDT-LUA LUA-V1 LP',
-    symbolShort:'USDT-LUA',
-    description:`Deposit USDT-LUA LUA-V1 LP Earn LUA`,
-    tokenSymbol:'USDT',
-    token2Symbol:'LUA',
+    name:'ETH - USDT',
+    symbol:'ETH-USDT LUA-V1 LP',
+    symbolShort:'ETH-USDT',
+    description:`Deposit ETH-USDT LUA-V1 LP Earn LUA`,
+    tokenSymbol:'ETH',
+    token2Symbol:'USDT',
     icon:'https://raw.githubusercontent.com/tomochain/luaswap-token-list/master/src/tokens/icons/tomochain/0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b.png',
     icon2:'https://raw.githubusercontent.com/tomochain/luaswap-token-list/3dda6df393721f8832dbbd0cc279d4ff8d693276/src/tokens/icons/tomochain/0x381B31409e4D220919B2cFF012ED94d70135A59e.png',
     isHot:false,
@@ -742,7 +769,7 @@ export const tomoSupportedPools = [
     protocal:'LuaSwap',
     iconProtocal:'https://luaswap.org/favicon.png',
     pairLink:'https://info.luaswap.org/tomochain/pair/0x9376b2088c63715073ba89d9a179c102e506c04d',
-    addLiquidityLink:'https://app.luaswap.org/#/add/0x381B31409e4D220919B2cFF012ED94d70135A59e/0x381B31409e4D220919B2cFF012ED94d70135A59e',
-    removeLiquidityLink:'https://app.luaswap.org/#/remove/0x381B31409e4D220919B2cFF012ED94d70135A59e/0x381B31409e4D220919B2cFF012ED94d70135A59e'
+    addLiquidityLink:'https://app.luaswap.org/#/add/0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b/0x381B31409e4D220919B2cFF012ED94d70135A59e',
+    removeLiquidityLink:'https://app.luaswap.org/#/remove/0x2EAA73Bd0db20c64f53fEbeA7b5F5E5Bccc7fb8b/0x381B31409e4D220919B2cFF012ED94d70135A59e'
   }
 ]
