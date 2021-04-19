@@ -107,7 +107,7 @@ const Balances = memo(() => {
                   <div style={{ flex: 1 }}>
                     <Label text="LUA Circulating Supply" />
                     <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
-                  </div>)
+                  </div>
               </StyledBalance>
             </CardContent>
               <Footnote>          
