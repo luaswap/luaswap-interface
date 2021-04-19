@@ -278,7 +278,9 @@ export const harvest = async (masterChefContract, pid, account, chainId) => {
 
 export const getStaked = async (masterChefContract, pid, account) => {
   try {
-    const { amount } = await masterChefContract.methods.userInfo(pid, account).call()
+    const { amount } = await masterChefContract.methods
+      .userInfo(pid, account)
+      .call({ from: account })
     return new BigNumber(amount)
   } catch {
     return new BigNumber(0)

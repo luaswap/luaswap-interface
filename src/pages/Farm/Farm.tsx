@@ -126,7 +126,7 @@ const Farm: React.FC = () => {
         )}
         <Spacer size="lg" />
         <StyledInfo style={{ color: '#ff9800' }}>
-          👉 Every time you stake and unstake LP tokens, the contract will
+          👉 Every time you stake and unstake LP tokens, the contract will 
           <br />
           automatically harvest LUA rewards for you!
         </StyledInfo>
