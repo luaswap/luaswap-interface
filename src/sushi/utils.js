@@ -120,7 +120,7 @@ export const getPoolWeight = async (masterChefContract, pid) => {
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {
-  return masterChefContract.methods.pendingReward(pid, account).call()
+  return masterChefContract.methods.pendingReward(pid, account).call({from: account})
 }
 
 export const getLPValue = async (masterChefContract, lpContract, tokenContract, token2Contract, pid) => {
