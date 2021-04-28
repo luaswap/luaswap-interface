@@ -228,7 +228,61 @@ export const supportedPools = [
     pairLink: "https://info.luaswap.org/pair/0xd6be3b9780572f0215afb3e4d15751955503cebe",
     addLiquidityLink: "https://app.luaswap.org/#/add/ETH/0xdac17f958d2ee523a2206206994597c13d831ec7",
     removeLiquidityLink: "https://app.luaswap.org/#/remove/ETH/0xdac17f958d2ee523a2206206994597c13d831ec7"
-  },  
+  },
+  {
+    pid: 7,
+    lpAddresses: {
+      1: "0x26Da27Cd29D75BcD925665223B4416025450d756"
+    },
+    tokenAddresses: {
+      1: "0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+    },
+    token2Addresses: {
+      1: "0x476c5e26a75bd202a9683ffd34359c0cc15be0ff"
+    },
+    name: "LUA - SRM",
+    symbol: "LUA-SRM LUA-V1 LP",
+    symbolShort: "LUA-SRM",
+    description: "Deposit LUA-SRM LUA-V1 LP Earn LUA",
+    tokenSymbol: "LUA",
+    token2Symbol: "SRM",
+    icon: "https://luaswap.org/favicon.png",
+    icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/6187.png",
+    isHot: false,
+    isNew: false,
+    protocal: "LuaSwap",
+    iconProtocal: "https://luaswap.org/favicon.png",
+    pairLink: "https://info.luaswap.org/pair/0x26Da27Cd29D75BcD925665223B4416025450d756",
+    addLiquidityLink: "https://app.luaswap.org/#/add/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
+    removeLiquidityLink: "https://app.luaswap.org/#/remove/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+  },
+  {
+    pid: 13,
+    lpAddresses: {
+      1: "0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa"
+    },
+    tokenAddresses: {
+      1: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
+    },
+    token2Addresses: {
+      1: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+    },
+    name: "WBTC - USDC",
+    symbol: "WBTC-USDC LUA-V1 LP",
+    symbolShort: "WBTC-USDC",
+    description: "Deposit WBTC-USDC LUA-V1 LP Earn LUA",
+    tokenSymbol: "WBTC",
+    token2Symbol: "USDC",
+    icon: "https://s2.coinmarketcap.com/static/img/coins/128x128/1.png",
+    icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/3408.png",
+    isHot: false,
+    isNew: false,
+    protocal: "LuaSwap",
+    iconProtocal: "https://luaswap.org/favicon.png",
+    pairLink: "https://info.luaswap.org/pair/0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa",
+    addLiquidityLink: "https://app.luaswap.org/#/add/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    removeLiquidityLink: "https://app.luaswap.org/#/remove/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
+  },
   {
     pid: 4,
     lpAddresses: {
@@ -391,60 +445,7 @@ export const supportedPools = [
     addLiquidityLink: "https://app.luaswap.org/#/add/0x14da230d6726c50f759bc1838717f8ce6373509c/0xdac17f958d2ee523a2206206994597c13d831ec7",
     removeLiquidityLink: "https://app.luaswap.org/#/remove/0x14da230d6726c50f759bc1838717f8ce6373509c/0xdac17f958d2ee523a2206206994597c13d831ec7"
   },
-  {
-    pid: 7,
-    lpAddresses: {
-      1: "0x26Da27Cd29D75BcD925665223B4416025450d756"
-    },
-    tokenAddresses: {
-      1: "0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
-    },
-    token2Addresses: {
-      1: "0x476c5e26a75bd202a9683ffd34359c0cc15be0ff"
-    },
-    name: "LUA - SRM",
-    symbol: "LUA-SRM LUA-V1 LP",
-    symbolShort: "LUA-SRM",
-    description: "Deposit LUA-SRM LUA-V1 LP Earn LUA",
-    tokenSymbol: "LUA",
-    token2Symbol: "SRM",
-    icon: "https://luaswap.org/favicon.png",
-    icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/6187.png",
-    isHot: true,
-    isNew: false,
-    protocal: "LuaSwap",
-    iconProtocal: "https://luaswap.org/favicon.png",
-    pairLink: "https://info.luaswap.org/pair/0x26Da27Cd29D75BcD925665223B4416025450d756",
-    addLiquidityLink: "https://app.luaswap.org/#/add/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
-    removeLiquidityLink: "https://app.luaswap.org/#/remove/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
-  },
-  {
-    pid: 13,
-    lpAddresses: {
-      1: "0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa"
-    },
-    tokenAddresses: {
-      1: "0x2260fac5e5542a773aa44fbcfedf7c193bc2c599"
-    },
-    token2Addresses: {
-      1: "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-    },
-    name: "WBTC - USDC",
-    symbol: "WBTC-USDC LUA-V1 LP",
-    symbolShort: "WBTC-USDC",
-    description: "Deposit WBTC-USDC LUA-V1 LP Earn LUA",
-    tokenSymbol: "WBTC",
-    token2Symbol: "USDC",
-    icon: "https://s2.coinmarketcap.com/static/img/coins/128x128/1.png",
-    icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/3408.png",
-    isHot: true,
-    isNew: false,
-    protocal: "LuaSwap",
-    iconProtocal: "https://luaswap.org/favicon.png",
-    pairLink: "https://info.luaswap.org/pair/0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa",
-    addLiquidityLink: "https://app.luaswap.org/#/add/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-    removeLiquidityLink: "https://app.luaswap.org/#/remove/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-  },
+  
   {
     pid: 10,
     lpAddresses: {
