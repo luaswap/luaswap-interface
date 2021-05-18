@@ -1,16 +1,13 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useActiveWeb3React } from '../../../hooks'
 import Button from '../../../components/ButtonSushi'
 import CardBox from '../../../components/CardBox'
 import CardContent from '../../../components/CardContent'
-// import CardIcon from '../../../components/CardIcon'
 import Label from '../../../components/Label'
 import Value from '../../../components/Value'
 import useEarnings from '../../../hooks/farms/useEarnings'
 import useReward from '../../../hooks/farms/useReward'
 import { getBalanceNumber } from '../../../sushi/format/formatBalance'
-import { IsTomoChain } from '../../../utils'
 // import Lua from '../../../assets/img/lua-icon.svg'
 
 interface HarvestProps {
@@ -18,8 +15,6 @@ interface HarvestProps {
 }
 
 const Harvest: React.FC<HarvestProps> = ({ pid }) => {
-  const { chainId } = useActiveWeb3React()
-  const IsTomo = IsTomoChain(chainId)
   const earnings = useEarnings(pid)
   const [pendingTx, setPendingTx] = useState(false)
   const { onReward } = useReward(pid)
@@ -39,13 +34,13 @@ const Harvest: React.FC<HarvestProps> = ({ pid }) => {
                 During the first 8 weeks since launch, <b>25% of your earned LUA</b> is available to{' '}
                 <b>unlock immediately</b>
               </div> */}
-              {!IsTomo ? (
+              {/* {!IsTomo ? (
                 <div style={{ marginTop: 10, fontSize: 13, color: 'rgb(255,152,0,0.7)' }}>
                   Beginning January 18, 2021, the remaining <b>75% will be unlocked</b> linearly every block{' '}
                   <b>over 1 year</b>.
                 </div>
                 ) : ''
-              }
+              } */}
             </StyledValue>
           </StyledCardHeader>
           <StyledCardActions>
