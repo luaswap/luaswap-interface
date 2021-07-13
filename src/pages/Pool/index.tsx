@@ -28,6 +28,7 @@ import { useFarmingStaked } from '../../hooks/useFarming'
 const PageWrapper = styled(AutoColumn)`
   max-width: 640px;
   width: 100%;
+  margin: 0 auto;
 `
 
 const VoteCard = styled(DataCard)`

@@ -3,10 +3,10 @@ import styled from 'styled-components'
 
 const StyledInfo = styled.div`
   max-width: 420px;
+  margin: 0 auto 20px auto;
   padding: 10px;
   font-size: 13px;
   text-align: center;
-  margin-bottom: 20px;
 `
 export default function NoticeTomoBridge() {
   return (

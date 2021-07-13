@@ -28,6 +28,7 @@ const WarningContainer = styled.div`
   border: 1px solid #f3841e;
   border-radius: 20px;
   overflow: auto;
+  margin: 0 auto;
 `
 
 const StyledWarningIcon = styled(AlertTriangle)`

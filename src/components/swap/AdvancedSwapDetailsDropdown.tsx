@@ -8,6 +8,8 @@ const AdvancedDetailsFooter = styled.div<{ show: boolean }>`
   padding-bottom: 20px;
   margin-top: -2rem;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 400px;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
