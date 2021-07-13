@@ -33,7 +33,7 @@ interface StakeProps {
 }
 
 const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, token2Symbol }) => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
 
   const allowance = useAllowance(lpContract)
@@ -92,7 +92,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
     totalToken = (stakedValue.tokenAmount as any) * shareOfPool
     totalToken2 = (stakedValue.token2Amount as any) * shareOfPool
   }
-  
+
   return (
     <CardBox>
       <CardContent>

@@ -146,8 +146,8 @@ export function useSocksController(): Contract | null {
 }
 
 export function useFarmingContract(): Contract | null {
-  const { chainId } = useActiveWeb3React()  
-  return useContract( chainId === ChainId.TOMOCHAIN_MAINNET ? TOMO_FARMING_ADDRESS : FARMING_ADDRESS, FARMING_ABI)
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId === ChainId.TOMOCHAIN_MAINNET ? TOMO_FARMING_ADDRESS : FARMING_ADDRESS, FARMING_ABI)
 }
 
 export function useTomoRouterContract(): Contract | null {

@@ -8,7 +8,7 @@ import { IsTomoChain } from '../../utils'
 // import styled from 'styled-components'
 // import { SUPPORTED_POOL, TOMO_SUPPORTED_POOL } from '../../constants/abis/farming'
 // import ImgLoader from '../../assets/images/loader.png'
-import {supportedPools,tomoSupportedPools} from '../../sushi/lib/constants'
+import { supportedPools, tomoSupportedPools } from '../../sushi/lib/constants'
 
 export interface SushiContext {
   sushi?: typeof Sushi
@@ -33,7 +33,7 @@ const SushiProvider: React.FC = ({ children }) => {
   window.sushi = sushi
   // @ts-ignore
   window.eth = ethereum && ethereum.provider ? ethereum.provider : null
-  
+
   useEffect(() => {
     const allPools = IsTomo ? tomoSupportedPools : supportedPools
     // @ts-ignore
@@ -53,22 +53,20 @@ const SushiProvider: React.FC = ({ children }) => {
       setSushi(sushiLib)
       window.sushisauce = sushiLib
     } else {
-        const chainId = config.chainId
-        const sushiLib = new Sushi(config.rpc, chainId, false, {
-          defaultAccount: '0x0000000000000000000000000000000000000000',
-          defaultConfirmations: 1,
-          autoGasMultiplier: 1.5,
-          testing: false,
-          defaultGas: '6000000',
-          defaultGasPrice: '1000000000000',
-          accounts: [],
-          ethereumNodeTimeout: 10000
-        })
-        setSushi(sushiLib)
-        window.sushisauce = sushiLib
-      
+      const chainId = config.chainId
+      const sushiLib = new Sushi(config.rpc, chainId, false, {
+        defaultAccount: '0x0000000000000000000000000000000000000000',
+        defaultConfirmations: 1,
+        autoGasMultiplier: 1.5,
+        testing: false,
+        defaultGas: '6000000',
+        defaultGasPrice: '1000000000000',
+        accounts: [],
+        ethereumNodeTimeout: 10000
+      })
+      setSushi(sushiLib)
+      window.sushisauce = sushiLib
     }
-    
   }, [ethereum])
 
   return <Context.Provider value={{ sushi }}>{children}</Context.Provider>

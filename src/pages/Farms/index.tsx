@@ -29,8 +29,10 @@ export default function Farms() {
               $<TotalLockValue />
             </span>{' '}
             Of Total Locked Value
-          </div>) : ''
-        }
+          </div>
+        ) : (
+          ''
+        )}
         {block >= launchBlock && (
           <>
             <Spacer size="lg" />

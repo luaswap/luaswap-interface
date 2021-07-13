@@ -2,7 +2,7 @@ const config = [
   {
     label: 'Home',
     icon: 'HomeIcon',
-    href: 'http://localhost:3001/#/',
+    href: 'http://localhost:3001/#/'
   },
   {
     key: 'trade',
@@ -11,15 +11,15 @@ const config = [
     items: [
       {
         label: 'Swap',
-        href: '/swap',
+        href: '/swap'
       },
       {
         label: 'Liquidity',
-        href: '/pool',
+        href: '/pool'
       },
       {
         label: 'OrderBook',
-        href: 'https://app.luaswap.org/orderbook/#/',
+        href: 'https://app.luaswap.org/orderbook/#/'
       }
     ]
   },
@@ -27,41 +27,41 @@ const config = [
     key: 'farms',
     label: 'Farms',
     icon: 'FarmIcon',
-    href: 'http://localhost:3001/#/farms',
+    href: 'http://localhost:3001/#/farms'
   },
   {
     key: 'ido',
     label: 'IDO',
     icon: 'IfoIcon',
-    href: 'http://localhost:3001/#/idos',
+    href: 'http://localhost:3001/#/idos'
   },
   {
-    key:'info',
+    key: 'info',
     label: 'Info',
     icon: 'ArrowUpIcon',
     items: [
       {
         label: 'Ethereum',
-        href: 'https://info.luaswap.org/home',
+        href: 'https://info.luaswap.org/home'
       },
       {
         label: 'TomoChain',
-        href: 'https://info.luaswap.org/tomochain/home',
+        href: 'https://info.luaswap.org/tomochain/home'
       }
     ]
   },
   {
-    key:'more',
+    key: 'more',
     label: 'More',
     icon: 'MoreIcon',
     items: [
       {
         label: 'About',
-        href: 'https://luaswap.org',
+        href: 'https://luaswap.org'
       },
       {
         label: 'Code',
-        href: 'https://github.com/tomochain',
+        href: 'https://github.com/tomochain'
       }
     ]
   }
@@ -82,13 +82,14 @@ export const socials = [
   },
 ];
 
+
 export type NetworkOption = {
-  name: string,
-  chainId: number,
+  name: string
+  chainId: number
   chainName: string
   nativeCurrency: {
-    name: string,
-    symbol: string,
-    decimals: number,
+    name: string
+    symbol: string
+    decimals: number
   }
 }

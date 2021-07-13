@@ -5,7 +5,7 @@ import { checkPoolActive } from '../../sushi/utils'
 // import debounce from 'debounce'
 
 const usePoolActive = (pid: number) => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
   const [active, setActive] = useState(true)
   const getData = useCallback(async () => {
     setActive(await checkPoolActive(pid, chainId))

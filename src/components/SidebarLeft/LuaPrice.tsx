@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import {Text} from "rebass"
-import { LuaIcon } from "../Svg";
+import React from 'react'
+import styled from 'styled-components'
+import { Text } from 'rebass'
+import { LuaIcon } from '../Svg'
 
 interface Props {
-  luaPriceUsd?: number;
+  luaPriceUsd?: number
 }
 
 const PriceLink = styled.a`
@@ -26,12 +26,12 @@ const PriceText = styled(Text)`
 `
 
 const LuaPrice: React.FC<Props> = ({ luaPriceUsd = 0 }) => {
-    return(
-        <PriceLink href="https://info.luaswap.org/token/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc" target="_blank">
-            <LuaIcon />
-            <PriceText>{`$${luaPriceUsd.toFixed(3)}`}</PriceText>
-        </PriceLink>
-    )
+  return (
+    <PriceLink href="https://info.luaswap.org/token/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc" target="_blank">
+      <LuaIcon />
+      <PriceText>{`$${luaPriceUsd.toFixed(3)}`}</PriceText>
+    </PriceLink>
+  )
 }
 
-export default React.memo(LuaPrice);
+export default React.memo(LuaPrice)

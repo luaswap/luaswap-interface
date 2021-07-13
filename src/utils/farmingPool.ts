@@ -1,6 +1,6 @@
 import axios from 'axios'
 import { Contract } from '@ethersproject/contracts'
-import { ChainId } from '@luaswap/sdk' 
+import { ChainId } from '@luaswap/sdk'
 import { IsTomoChain } from '../utils'
 
 import { TOMO_SUPPORTED_POOL, SUPPORTED_POOL, FARMING_ADDRESS, TOMO_FARMING_ADDRESS } from '../constants/abis/farming'
@@ -34,7 +34,7 @@ export async function getTotalStaked(lpContract: Contract | null, chainId: Chain
   const IsTomo = IsTomoChain(chainId)
   const contractAddress = IsTomo ? TOMO_FARMING_ADDRESS : FARMING_ADDRESS
   try {
-    if (!lpContract) throw new Error('Farming contract is null')     
+    if (!lpContract) throw new Error('Farming contract is null')
     const balance = await lpContract.balanceOf(contractAddress)
     return balance.toString()
   } catch (e) {

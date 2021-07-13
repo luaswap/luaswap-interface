@@ -12,7 +12,7 @@ const CACHE = {
 }
 
 const useLuaCirculatingSupply = () => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
   const sushi = useSushi()
   const [newReward, setNewRewad] = useState<BigNumber>(CACHE.value)
 

@@ -26,7 +26,6 @@ import UniBalanceContent from './UniBalanceContent'
 import { HamburgerCloseIcon, HamburgerIcon } from '../Svg'
 import { setNavMobile } from '../../state/user/actions'
 
-
 // import { MouseoverTooltip } from '../Tooltip'
 
 const HeaderFrame = styled.div`
@@ -50,7 +49,6 @@ const HeaderControls = styled.div`
   flex-direction: row;
   align-items: center;
   justify-self: flex-end;
-
 `
 
 const HeaderElement = styled.div`
@@ -203,13 +201,16 @@ export default function Header() {
         <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
       </Modal>
       <HeaderRow>
-        {width && width < 768 &&
+        {width && width < 768 && (
           <>
-          {isNavOpen ?
-            <HamburgerCloseIcon onClick={handleClick} mr="15px" color="#C3C5CB" style={{ cursor: "pointer" }} />
-          : <HamburgerIcon onClick={handleClick} mr="15px" color="#C3C5CB" style={{ cursor: "pointer" }} />}
-        </>}
-        
+            {isNavOpen ? (
+              <HamburgerCloseIcon onClick={handleClick} mr="15px" color="#C3C5CB" style={{ cursor: 'pointer' }} />
+            ) : (
+              <HamburgerIcon onClick={handleClick} mr="15px" color="#C3C5CB" style={{ cursor: 'pointer' }} />
+            )}
+          </>
+        )}
+
         <Title href=".">
           <UniIcon>
             <img width={'40px'} src={Logo} alt="logo" />

@@ -72,14 +72,14 @@ const BodyWrapper = styled.div`
   z-index: 1;
 `
 
-const MainContent = styled.div<{screen: number}>`
-  margin-left: ${({ screen }) => (screen < 768 ? "0" : "240px")};
-  max-width: ${({ screen }) => (screen < 768 ? "100%" : "calc(100% - 240px)")};
+const MainContent = styled.div<{ screen: number }>`
+  margin-left: ${({ screen }) => (screen < 768 ? '0' : '240px')};
+  max-width: ${({ screen }) => (screen < 768 ? '100%' : 'calc(100% - 240px)')};
   flex-grow: 1;
   padding-top: 100px;
   ${({ theme }) => theme.mediaWidth.upToLarge`
     
-  `};  
+  `};
 `
 const Marginer = styled.div`
   margin-top: 5rem;

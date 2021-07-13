@@ -8,7 +8,7 @@ import BigNumber from 'bignumber.js'
 const CACHE: any = {}
 
 const useNewReward = (pid1 = 0) => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
   CACHE[pid1] = CACHE[pid1] || {
     time: 0,
     old: 10 * 60 * 1000,

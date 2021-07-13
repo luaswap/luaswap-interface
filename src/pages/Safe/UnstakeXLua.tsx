@@ -69,16 +69,17 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   }, [sushi, setTotalSupplyXLua])
 
   const xLuaToLua = myXLua.multipliedBy(totalLuaInSafe).dividedBy(totalSupplyXLua)
-  
-  const trackingReward = IsTomo ? trackingAPYBalanceXLuaTomo
-  .multipliedBy(totalLuaInSafe)
-  .dividedBy(totalSupplyXLua)
-  .minus(10 * 10 ** 18):
-  trackingAPYBalanceXLua
-  .multipliedBy(totalLuaInSafe)
-  .dividedBy(totalSupplyXLua)
-  .minus(10 * 10 ** 18)
-  
+
+  const trackingReward = IsTomo
+    ? trackingAPYBalanceXLuaTomo
+        .multipliedBy(totalLuaInSafe)
+        .dividedBy(totalSupplyXLua)
+        .minus(10 * 10 ** 18)
+    : trackingAPYBalanceXLua
+        .multipliedBy(totalLuaInSafe)
+        .dividedBy(totalSupplyXLua)
+        .minus(10 * 10 ** 18)
+
   const { onLeave } = useLeave()
   const tokenName = 'xLUA'
   const oneDay = 1000 * 60 * 60 * 24 // hours*minutes*seconds*milliseconds

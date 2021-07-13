@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
-import config, {API_URL} from '../config'
+import config, { API_URL } from '../config'
 // import { START_NEW_POOL_AT } from './lib/constants'
 
 BigNumber.config({
@@ -20,9 +20,9 @@ const MaxUint256 = '999999999900000000000000000000000000000'
 
 export async function UnknownBlock(address, method, params, cache, chainId) {
   let apiUrl
-  if(chainId){
+  if (chainId) {
     apiUrl = API_URL[chainId]
-  }else{
+  } else {
     apiUrl = config.apiETH
   }
   const { data } = await axios.post(`${apiUrl}/read/${address}`, {
@@ -30,7 +30,7 @@ export async function UnknownBlock(address, method, params, cache, chainId) {
     params,
     cache
   })
-  
+
   return data.data
 }
 
@@ -120,7 +120,7 @@ export const getPoolWeight = async (masterChefContract, pid) => {
 }
 
 export const getEarned = async (masterChefContract, pid, account) => {
-  return masterChefContract.methods.pendingReward(pid, account).call({from: account})
+  return masterChefContract.methods.pendingReward(pid, account).call({ from: account })
 }
 
 export const getLPValue = async (masterChefContract, lpContract, tokenContract, token2Contract, pid) => {
@@ -194,16 +194,18 @@ export const getSushiSupply = async (sushi, chainId) => {
 }
 
 export const getLuaCirculatingSupply = async (sushi, chainId) => {
-  if(chainId !== 88){
+  if (chainId !== 88) {
     const chef = getMasterChefContract(sushi)
-    
-    const a = new BigNumber(await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true, chainId))
-    
+
+    const a = new BigNumber(
+      await UnknownBlock(sushi.contracts.sushi._address, 'circulatingSupply():(uint256)', [], true, chainId)
+    )
+
     const b = new BigNumber(
       await UnknownBlock(sushi.contracts.sushi._address, 'balanceOf(address):(uint256)', [chef._address], true, chainId)
     )
     return a.minus(b)
-  }else{
+  } else {
     return new BigNumber(0)
   }
 }
@@ -235,12 +237,16 @@ export const checkPoolActive = async (pid, chainId) => {
 export const getNewRewardPerBlock = async (sushi, pid1 = 0, chainId) => {
   if (pid1 === 0) {
     const chef = getMasterChefContract(sushi)
-    return new BigNumber(await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId))
+    return new BigNumber(
+      await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId)
+    )
   } else {
     if (await checkPoolActive(pid1 - 1, chainId)) {
       const chef = getMasterChefContract(sushi)
       const reward = await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId)
-      return new BigNumber(await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId))
+      return new BigNumber(
+        await UnknownBlock(chef._address, 'getNewRewardPerBlock(uint256):(uint256)', [pid1], true, chainId)
+      )
     } else {
       return new BigNumber('0')
     }
@@ -278,9 +284,7 @@ export const harvest = async (masterChefContract, pid, account, chainId) => {
 
 export const getStaked = async (masterChefContract, pid, account) => {
   try {
-    const { amount } = await masterChefContract.methods
-      .userInfo(pid, account)
-      .call({ from: account })
+    const { amount } = await masterChefContract.methods.userInfo(pid, account).call({ from: account })
     return new BigNumber(amount)
   } catch {
     return new BigNumber(0)
