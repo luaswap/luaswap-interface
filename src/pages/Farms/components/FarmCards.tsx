@@ -145,7 +145,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               <StyledDetail>{farm.description}</StyledDetail>
             </StyledDetails>
             <Spacer />
-            <Button disabled={!(poolActive)} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
+            <Button disabled={!poolActive} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
               {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
             </Button>
             {/* <Button disabled={(block && block < 34466888) ? true : false} text={(block && block > 34466888) ? 'Select' : 'Disable'} to={(block && block > 34466888) ? `/farming/${farm.id}` : ''}>
@@ -163,8 +163,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   )}
                 </span>
               </StyledInsight>
-              ): ''
-            }
+            ) : (
+              ''
+            )}
             {!farm.isHot && (
               <>
                 <StyledInsight>

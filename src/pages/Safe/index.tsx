@@ -104,7 +104,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
   const { chainId, library: ethereum } = useWeb3React()
   const [poolKey, setPoolKey] = useState('')
   const [pools, setPools] = useState<PoolItemProps[]>([])
-   const [totalStake, setTotalStake] = useState<BigNumber>(new BigNumber(0))
+  const [totalStake, setTotalStake] = useState<BigNumber>(new BigNumber(0))
   const sushi = useSushi()
   const luaAddress = getSushiAddress(sushi)
   const xLuaAddress = getXLuaAddress(sushi)
@@ -127,7 +127,7 @@ const SafePage: React.FC<SafePageProps> = ({ location }) => {
     const fetchLuaStakeTotal = async () => {
       if (ethereum && ethereum.provider) {
         const luaStakeTotal = await getBalance(ethereum.provider, luaAddress, xLuaAddress)
-      
+
         setTotalStake(new BigNumber(luaStakeTotal))
       }
     }

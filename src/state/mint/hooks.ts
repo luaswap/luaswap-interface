@@ -53,13 +53,14 @@ export function useDerivedMintInfo(
   const [pairState, pair] = usePair(currencies[Field.CURRENCY_A], currencies[Field.CURRENCY_B])
   const totalSupply = useTotalSupply(pair?.liquidityToken)
 
-  let noLiquidity: boolean = true
-  if(IsTomoChain(chainId)) {
+  let noLiquidity = true
+  if (IsTomoChain(chainId)) {
     noLiquidity =
-      pairState === PairState.NOT_EXISTS || totalSupply === undefined || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
+      pairState === PairState.NOT_EXISTS ||
+      totalSupply === undefined ||
+      Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
   } else {
-    noLiquidity =
-      pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
+    noLiquidity = pairState === PairState.NOT_EXISTS || Boolean(totalSupply && JSBI.equal(totalSupply.raw, ZERO))
   }
 
   // balances

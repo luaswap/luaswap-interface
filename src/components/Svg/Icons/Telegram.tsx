@@ -1,9 +1,8 @@
-import React from "react"
-import Svg from "../Svg"
-import { SvgProps } from "../types"
+import React from 'react'
+import Svg from '../Svg'
+import { SvgProps } from '../types'
 
-const Icon: React.FC<SvgProps> = (props) => {
-
+const Icon: React.FC<SvgProps> = props => {
   return (
     <Svg viewBox="-8 -8 64 64" {...props}>
       <path
@@ -12,7 +11,7 @@ const Icon: React.FC<SvgProps> = (props) => {
         clipRule="evenodd"
       ></path>
     </Svg>
-  );
-};
+  )
+}
 
-export default Icon;
+export default Icon
