@@ -248,6 +248,7 @@ const StyledCardAccent = styled.div`
 
 const StyledCards = styled.div`
   width: 900px;
+  margin: 0 auto;
   @media (max-width: 768px) {
     width: 100%;
   }

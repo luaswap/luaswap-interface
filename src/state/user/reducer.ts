@@ -13,7 +13,9 @@ import {
   updateUserExpertMode,
   updateUserSlippageTolerance,
   updateUserDeadline,
-  toggleURLWarning
+  toggleURLWarning,
+  updateUnlock,
+  setNavMobile
 } from './actions'
 
 const currentTimestamp = () => new Date().getTime()
@@ -45,7 +47,8 @@ export interface UserState {
       [key: string]: SerializedPair
     }
   }
-
+  isUnlock: boolean
+  isNavOpen: boolean
   timestamp: number
   URLWarningVisible: boolean
 }
@@ -63,6 +66,8 @@ export const initialState: UserState = {
   tokens: {},
   pairs: {},
   timestamp: currentTimestamp(),
+  isUnlock: false,
+  isNavOpen: false,
   URLWarningVisible: true
 }
 
@@ -99,9 +104,15 @@ export default createReducer(initialState, builder =>
       state.userSlippageTolerance = action.payload.userSlippageTolerance
       state.timestamp = currentTimestamp()
     })
+    .addCase(updateUnlock, (state, action) => {
+      state.isUnlock = action.payload.isUnlock
+    })
     .addCase(updateUserDeadline, (state, action) => {
       state.userDeadline = action.payload.userDeadline
       state.timestamp = currentTimestamp()
+    })
+    .addCase(setNavMobile, (state, action) => {
+      state.isNavOpen = action.payload.isNavOpen
     })
     .addCase(addSerializedToken, (state, { payload: { serializedToken } }) => {
       state.tokens[serializedToken.chainId] = state.tokens[serializedToken.chainId] || {}
@@ -134,5 +145,5 @@ export default createReducer(initialState, builder =>
     })
     .addCase(toggleURLWarning, state => {
       state.URLWarningVisible = !state.URLWarningVisible
-    })
+    })    
 )

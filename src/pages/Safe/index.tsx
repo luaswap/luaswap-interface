@@ -24,6 +24,7 @@ import StakeLua from './StakeLua'
 const PageWrapper = styled(AutoColumn)`
   max-width: 900px;
   width: 100%;
+  margin: 0 auto;
 `
 
 const Header = styled.div`
