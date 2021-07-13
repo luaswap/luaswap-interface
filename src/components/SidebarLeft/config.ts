@@ -71,16 +71,17 @@ export default config
 
 export const socials = [
   {
-    label: 'Telegram',
-    icon: 'TelegramIcon',
-    href: 'https://t.me/tomochain'
+    label: "Telegram",
+    icon: "TelegramIcon",
+    href: "https://t.me/luaswap"
   },
   {
-    label: 'Twitter',
-    icon: 'TwitterIcon',
-    href: 'https://twitter.com/TomoChainANN'
-  }
-]
+    label: "Twitter",
+    icon: "TwitterIcon",
+    href: "https://twitter.com/luaswap",
+  },
+];
+
 
 export type NetworkOption = {
   name: string
