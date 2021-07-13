@@ -73,12 +73,12 @@ export const socials = [
   {
     label: "Telegram",
     icon: "TelegramIcon",
-    href: "https://t.me/tomochain"
+    href: "https://t.me/luaswap"
   },
   {
     label: "Twitter",
     icon: "TwitterIcon",
-    href: "https://twitter.com/TomoChainANN",
+    href: "https://twitter.com/luaswap",
   },
 ];
 
