@@ -657,7 +657,7 @@ export const tomoSupportedPools = [
     tokenSymbol:'TOMO',
     token2Symbol:'SRM',
     icon:'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
-    icon2:'https://raw.githubusercontent.com/tomochain/luaswap-token-list/6ac940b16fb089f75e5f47656ebb39fa3a433b52/src/tokens/icons/tomochain/0xc01643aC912B6a8ffC50CF8c1390934A6142bc91.png',
+    icon2:'https://raw.githubusercontent.com/tomochain/luaswap-token-list/7ab366e49618c07ec8b9c39c1f93c4e58e1429fb/src/tokens/icons/tomochain/0xc01643aC912B6a8ffC50CF8c1390934A6142bc91.png',
     isHot:true,
     isNew:false,
     protocal:'LuaSwap',
