@@ -225,9 +225,9 @@ export default function FullPositionCard({ pair, border, farm }: PositionCardPro
       : [undefined, undefined]
 
   // user pending reward
-  const LUA = IsTomo ? 
-  new Token(ChainId.MAINNET, '0xB1f66997A5760428D3a87D68b90BfE0aE64121cC', 18, 'LUA', 'LUA') : 
-  new Token(ChainId.TOMOCHAIN_MAINNET, '0x7262fa193e9590B2E075c3C16170f3f2f32F5C74', 18, 'LUA', 'LUA')
+  const LUA = IsTomo
+    ? new Token(ChainId.MAINNET, '0xB1f66997A5760428D3a87D68b90BfE0aE64121cC', 18, 'LUA', 'LUA')
+    : new Token(ChainId.TOMOCHAIN_MAINNET, '0x7262fa193e9590B2E075c3C16170f3f2f32F5C74', 18, 'LUA', 'LUA')
   const pendingReward = new TokenAmount(LUA, farm ? farm.pendingReward : '0')
 
   const backgroundColor = useColor(pair?.token0)

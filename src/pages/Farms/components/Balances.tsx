@@ -100,53 +100,56 @@ const Balances = memo(() => {
                 {/* <SushiIcon /> */}
                 <img src={Luas} alt="Total LUA Supply" />
                 <Spacer />
-                  {/* <div style={{ flex: 1 }}>
+                {/* <div style={{ flex: 1 }}>
                     <Label text="Total Supply" />
                     <Value value={totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')}` : '~'} />
                   </div> */}
-                  <div style={{ flex: 1 }}>
-                    <Label text="LUA Circulating Supply" />
-                    <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
-                  </div>
+                <div style={{ flex: 1 }}>
+                  <Label text="LUA Circulating Supply" />
+                  <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
+                </div>
               </StyledBalance>
             </CardContent>
-              <Footnote>          
-                {!IsTomo ? (
-                  <>
-                    Total Supply
-                    <FootnoteValue>
-                      {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
-                      {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
-                    </FootnoteValue>
-                  </>
-                  ) : ' on TomoChain Network'
-                }
-              </Footnote>
-          </Card>
-        </>) : (
-          <CustomCard>
-            <CardContent>
-              <StyledBalances>
-                <StyledBalance>
-                  {/* <SushiIcon /> */}
-                  <img src={Lua} alt="LUA Balance" />
-                  <Spacer />
-                  <div style={{ flex: 1 }}>
-                    <Label text="Your Available LUA Balance" />
-                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
-                  </div>
-                </StyledBalance>
-              </StyledBalances>
-            </CardContent>
             <Footnote>
-              Pending harvest
-              <FootnoteValue>
-                <PendingRewards /> LUA
-              </FootnoteValue>
+              {!IsTomo ? (
+                <>
+                  Total Supply
+                  <FootnoteValue>
+                    {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
+                    {totalSupply
+                      ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA`
+                      : '~'}
+                  </FootnoteValue>
+                </>
+              ) : (
+                ' on TomoChain Network'
+              )}
             </Footnote>
-          </CustomCard>
-        )
-      }
+          </Card>
+        </>
+      ) : (
+        <CustomCard>
+          <CardContent>
+            <StyledBalances>
+              <StyledBalance>
+                {/* <SushiIcon /> */}
+                <img src={Lua} alt="LUA Balance" />
+                <Spacer />
+                <div style={{ flex: 1 }}>
+                  <Label text="Your Available LUA Balance" />
+                  <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
+                </div>
+              </StyledBalance>
+            </StyledBalances>
+          </CardContent>
+          <Footnote>
+            Pending harvest
+            <FootnoteValue>
+              <PendingRewards /> LUA
+            </FootnoteValue>
+          </Footnote>
+        </CustomCard>
+      )}
     </StyledWrapper>
   )
 })

@@ -19,6 +19,7 @@ export const updateUserExpertMode = createAction<{ userExpertMode: boolean }>('u
 export const updateUserSlippageTolerance = createAction<{ userSlippageTolerance: number }>(
   'user/updateUserSlippageTolerance'
 )
+export const updateUnlock = createAction<{ isUnlock: boolean }>('user/updateUnlock')
 export const updateUserDeadline = createAction<{ userDeadline: number }>('user/updateUserDeadline')
 export const addSerializedToken = createAction<{ serializedToken: SerializedToken }>('user/addSerializedToken')
 export const removeSerializedToken = createAction<{ chainId: number; address: string }>('user/removeSerializedToken')
@@ -26,4 +27,5 @@ export const addSerializedPair = createAction<{ serializedPair: SerializedPair }
 export const removeSerializedPair = createAction<{ chainId: number; tokenAAddress: string; tokenBAddress: string }>(
   'user/removeSerializedPair'
 )
+export const setNavMobile = createAction<{ isNavOpen: boolean }>('user/setNavMobile')
 export const toggleURLWarning = createAction<void>('app/toggleURLWarning')

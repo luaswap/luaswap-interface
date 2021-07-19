@@ -1,32 +1,31 @@
-import { ChainId } from '@luaswap/sdk'
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
 import { Text } from 'rebass'
-import { NavLink } from 'react-router-dom'
-import { darken } from 'polished'
-import { useTranslation } from 'react-i18next'
-
+import { ChainId } from '@luaswap/sdk'
 import styled from 'styled-components'
-import { ReactComponent as MenuIcon } from '../../assets/images/menu.svg'
-import { ApplicationModal } from '../../state/application/actions'
-import { useModalOpen, useToggleModal } from '../../state/application/hooks'
+
 import { useWindowSize } from '../../hooks/useWindowSize'
+import { AppDispatch } from '../../state'
 
 import Logo from '../../assets/images/logo.png'
 import { useActiveWeb3React } from '../../hooks'
 import { getTextNativeToken } from '../../utils'
 import { useETHBalances } from '../../state/wallet/hooks'
-import { ExternalLink } from '../../theme'
+import { useIsNavOpen } from '../../state/user/hooks'
 
 import { YellowCard } from '../Card'
 import Settings from '../Settings'
-import Menu from '../Menu'
+// import Menu from '../Menu'
 
-import Row, { RowFixed } from '../Row'
+import { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 import ClaimModal from '../claim/ClaimModal'
 
 import Modal from '../Modal'
 import UniBalanceContent from './UniBalanceContent'
+import { HamburgerCloseIcon, HamburgerIcon } from '../Svg'
+import { setNavMobile } from '../../state/user/actions'
+
 // import { MouseoverTooltip } from '../Tooltip'
 
 const HeaderFrame = styled.div`
@@ -38,20 +37,11 @@ const HeaderFrame = styled.div`
   flex-direction: row;
   width: 100%;
   top: 0;
-  position: relative;
+  position: fixed;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1rem;
   z-index: 2;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-    width: calc(100%);
-    position: relative;
-  `};
-
-  ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-        padding: 0.5rem 1rem;
-  `}
+  background-color: ${({ theme }) => theme.bg1};
 `
 
 const HeaderControls = styled.div`
@@ -59,23 +49,6 @@ const HeaderControls = styled.div`
   flex-direction: row;
   align-items: center;
   justify-self: flex-end;
-
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    flex-direction: row;
-    justify-content: space-between;
-    justify-self: center;
-    width: 100%;
-    max-width: 960px;
-    padding: 1rem;
-    position: fixed;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-    z-index: 99;
-    height: 72px;
-    border-radius: 12px 12px 0 0;
-    background-color: ${({ theme }) => theme.bg1};
-  `};
 `
 
 const HeaderElement = styled.div`
@@ -98,100 +71,6 @@ const HeaderRow = styled(RowFixed)`
   ${({ theme }) => theme.mediaWidth.upToMedium`
    width: 100%;
   `};
-`
-
-const HeaderLinks = styled(Row)`
-  justify-content: center;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    padding: 1rem 0 1rem 1rem;
-    justify-content: flex-end;
-`};
-`
-const StyleNavBox = styled.ul`
-  display: flex;
-  padding-left: 0;
-  margin: 0;
-`
-const StyleNavList = styled.li`
-  list-style: none;
-  padding: 15px 0;
-  position: relative;
-  :hover > ul {
-    display: block;
-  }
-`
-const StyleNavSub = styled.ul`
-  position: absolute;
-  top: 50px;
-  background-color: ${({ theme }) => theme.bg3};
-  padding: 0 5px;
-  border-radius: 8px;
-  display: none;
-  margin: 0;
-  > li {
-    padding: 10px 0;
-    a {
-      font-size: 15px;
-    }
-  }
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    left: -130px;
-    top: 0px;
-    > li {
-      padding: 0;
-    }
-  `}
-`
-
-const StyleNavMobile = styled.ul`
-  position: absolute;
-  top: 5em;
-  background-color: ${({ theme }) => theme.bg3};
-  padding: 0 5px;
-  border-radius: 8px;
-  a {
-    padding: 10px;
-  }
-  > li {
-    padding: 0px;
-  }
-`
-const StyleText = styled(Text)`
-  padding-left: 10px;
-  cursor: pointer;
-  ${({ theme }) => theme.mediaWidth.upToMedium`
-    padding: 10px;
-    margin: 0 12px!important;
-  `}
-`
-const StyledMenuButton = styled.button`
-  width: 50px;
-  border: none;
-  background-color: transparent;
-  margin: 0;
-  padding: 0;
-  height: 35px;
-  background-color: ${({ theme }) => theme.bg3};
-
-  padding: 0.15rem 0.5rem;
-  border-radius: 0.5rem;
-
-  :hover,
-  :focus {
-    cursor: pointer;
-    outline: none;
-    background-color: ${({ theme }) => theme.bg4};
-  }
-
-  svg {
-    margin-top: 2px;
-  }
-`
-
-const StyledMenuIcon = styled(MenuIcon)`
-  path {
-    stroke: ${({ theme }) => theme.text1};
-  }
 `
 
 const LogoText = styled.span`
@@ -217,9 +96,6 @@ const AccountElement = styled.div<{ active: boolean }>`
   :focus {
     border: 1px solid blue;
   }
-  /* :hover {
-    background-color: ${({ theme, active }) => (!active ? theme.bg2 : theme.bg4)};
-  } */
 `
 const HideSmall = styled.div`
   position: relative;
@@ -227,7 +103,6 @@ const HideSmall = styled.div`
     display: none;
     position: absolute;
     bottom: -82px;
-    left: 0;
     border-radius: 10px;
     font-size: 13px;
     width: 200px;
@@ -244,9 +119,8 @@ const HideSmall = styled.div`
     }
   }
   ${({ theme }) => theme.mediaWidth.upToMedium`
-    // display: none;
     .switch-network{
-      bottom: 35px;
+      right: 0;
     }
   `};
 `
@@ -294,64 +168,6 @@ const UniIcon = styled.div`
   }
 `
 
-const activeClassName = 'ACTIVE'
-
-const StyledNavLink = styled(NavLink).attrs({
-  activeClassName
-})`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
-
-  &.${activeClassName} {
-    border-radius: 12px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
-
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-`
-
-const StyledExternalLink = styled(ExternalLink).attrs({
-  activeClassName
-})<{ isActive?: boolean }>`
-  ${({ theme }) => theme.flexRowNoWrap}
-  align-items: left;
-  border-radius: 3rem;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  color: ${({ theme }) => theme.text2};
-  font-size: 1rem;
-  width: fit-content;
-  margin: 0 12px;
-  font-weight: 500;
-
-  &.${activeClassName} {
-    border-radius: 12px;
-    font-weight: 600;
-    color: ${({ theme }) => theme.text1};
-  }
-
-  :hover,
-  :focus {
-    color: ${({ theme }) => darken(0.1, theme.text1)};
-  }
-  // ${({ theme }) => theme.mediaWidth.upToExtraSmall`
-  //     display: none;
-  // `}
-`
 const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
   [ChainId.MAINNET]: 'Ethereum',
   [ChainId.RINKEBY]: 'Rinkeby',
@@ -365,17 +181,19 @@ const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
+  const isNavOpen = useIsNavOpen()
+  const dispatch = useDispatch<AppDispatch>()
   const NATIVE_TOKEN_TEXT = getTextNativeToken(chainId)
-  // const IsTomo = IsTomoChain(chainId)
-  const { t } = useTranslation()
+
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
 
   const [showUniBalanceModal, setShowUniBalanceModal] = useState(false)
 
   const { width } = useWindowSize()
-  const open = useModalOpen(ApplicationModal.MENULEFT)
-  const toggle = useToggleModal(ApplicationModal.MENULEFT)
 
+  const handleClick = () => {
+    dispatch(setNavMobile({ isNavOpen: !isNavOpen }))
+  }
   return (
     <HeaderFrame>
       <ClaimModal />
@@ -383,111 +201,22 @@ export default function Header() {
         <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
       </Modal>
       <HeaderRow>
+        {width && width < 768 && (
+          <>
+            {isNavOpen ? (
+              <HamburgerCloseIcon onClick={handleClick} mr="15px" color="#C3C5CB" style={{ cursor: 'pointer' }} />
+            ) : (
+              <HamburgerIcon onClick={handleClick} mr="15px" color="#C3C5CB" style={{ cursor: 'pointer' }} />
+            )}
+          </>
+        )}
+
         <Title href=".">
           <UniIcon>
             <img width={'40px'} src={Logo} alt="logo" />
             <LogoText>LuaSwap</LogoText>
           </UniIcon>
         </Title>
-        <HeaderLinks>
-          <StyleNavBox>
-            <StyleNavList>
-              <StyledNavLink id={`swap-nav-link`} to={'/swap'}>
-                {t('swap')}
-              </StyledNavLink>
-            </StyleNavList>
-            <StyleNavList>
-              <StyledNavLink
-                id={`pool-nav-link`}
-                to={'/pool'}
-                isActive={(match, { pathname }) =>
-                  Boolean(match) ||
-                  pathname.startsWith('/add') ||
-                  pathname.startsWith('/remove') ||
-                  pathname.startsWith('/create') ||
-                  pathname.startsWith('/find')
-                }
-              >
-                {t('pool')}
-              </StyledNavLink>
-            </StyleNavList>
-          </StyleNavBox>
-          {width && width < 767 ? (
-            <>
-              <StyledMenuButton onClick={toggle}>
-                <StyledMenuIcon />
-              </StyledMenuButton>
-              {open && (
-                <StyleNavMobile>
-                  
-                    <>
-                      <StyleNavList>
-                        <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                          Farming
-                        </StyledNavLink>
-                      </StyleNavList>
-                      <StyleNavList>
-                        <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                          {t('LuaSafe')}
-                        </StyledNavLink>
-                      </StyleNavList>
-                    </>                  
-                  <StyleNavList>
-                    <StyleText>
-                      Charts <span style={{ fontSize: '11px' }}>↗</span>
-                    </StyleText>
-                    <StyleNavSub>
-                      <StyleNavList>
-                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                          Ethereum
-                        </StyledExternalLink>
-                      </StyleNavList>
-                      <StyleNavList>
-                        <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
-                          TomoChain
-                        </StyledExternalLink>
-                      </StyleNavList>
-                    </StyleNavSub>
-                  </StyleNavList>
-                </StyleNavMobile>
-              )}
-            </>
-          ) : (
-            <StyleNavBox>
-              {/* {!IsTomo ? ( */}
-                <StyleNavList>
-                  <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                    Farming
-                  </StyledNavLink>
-                </StyleNavList>
-                {/* ) : ''
-              } */}
-              <StyleNavList>
-                <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                  {t('LuaSafe')}
-                </StyledNavLink>
-              </StyleNavList>
-              
-              <StyleNavList>
-                <StyleText>
-                  Charts <span style={{ fontSize: '11px' }}>↗</span>
-                </StyleText>
-                <StyleNavSub>
-                  <StyleNavList>
-                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/home'}>
-                      Ethereum
-                    </StyledExternalLink>
-                  </StyleNavList>
-                  <StyleNavList>
-                    <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
-                      TomoChain
-                    </StyledExternalLink>
-                  </StyleNavList>
-                </StyleNavSub>
-              </StyleNavList>
-            </StyleNavBox>
-          )}
-        </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
         <HeaderElement>
@@ -515,7 +244,7 @@ export default function Header() {
         </HeaderElement>
         <HeaderElementWrap>
           <Settings />
-          <Menu />
+          {/* <Menu /> */}
         </HeaderElementWrap>
       </HeaderControls>
     </HeaderFrame>

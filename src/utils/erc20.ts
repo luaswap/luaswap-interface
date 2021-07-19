@@ -4,7 +4,7 @@ import { Contract } from 'web3-eth-contract'
 // @ts-ignore
 import { AbiItem } from 'web3-utils'
 import ERC20ABI from '../constants/abi/ERC20.json'
-import config, {RPC_URL} from '../config'
+import config, { RPC_URL } from '../config'
 import { ChainId } from '@luaswap/sdk'
 
 export const getContract = (provider: any, address: string) => {
@@ -26,14 +26,19 @@ export const getAllowance = async (
   }
 }
 
-export const getAllowanceStaking = async (contract: Contract, owner: string, spender: string, chainId: ChainId | undefined): Promise<string> => {
+export const getAllowanceStaking = async (
+  contract: Contract,
+  owner: string,
+  spender: string,
+  chainId: ChainId | undefined
+): Promise<string> => {
   try {
     let contract2
-    if(chainId === 88){
+    if (chainId === 88) {
       contract2 = getContract(RPC_URL[chainId], (contract as any)._address)
-    }else{
+    } else {
       contract2 = contract
-    }    
+    }
 
     const allowance = await contract2.methods.allowance(owner, spender).call()
     return allowance

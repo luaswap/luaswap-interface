@@ -27,7 +27,7 @@ const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol
   // const block = useBlock()
   const stakedValue = useStakedValue(pid)
   const luaPrice = useLuaPrice()
-  
+
   const lpContract = useMemo(() => {
     const e_provider = ethereum && ethereum.provider ? ethereum.provider : null
     return getContract(e_provider as provider, lpTokenAddress)

@@ -70,6 +70,14 @@ export function useIsExpertMode(): boolean {
   return useSelector<AppState, AppState['user']['userExpertMode']>(state => state.user.userExpertMode)
 }
 
+export function useIsUnlock(): boolean {
+  return useSelector<AppState, AppState['user']['isUnlock']>(state => state.user.isUnlock)
+}
+
+export function useIsNavOpen(): boolean {
+  return useSelector<AppState, AppState['user']['isNavOpen']>(state => state.user.isNavOpen)
+}
+
 export function useExpertModeManager(): [boolean, () => void] {
   const dispatch = useDispatch<AppDispatch>()
   const expertMode = useIsExpertMode()

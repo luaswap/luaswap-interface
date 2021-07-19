@@ -103,7 +103,7 @@ function Updaters() {
 //       try {
 //         response = await fetch(supportedPoolsUrl)
 //         const data = await response.json()
-//         //@ts-ignore        
+//         //@ts-ignore
 //         window.pools = data
 //         //@ts-ignore
 //         setPools(data)
@@ -130,17 +130,17 @@ ReactDOM.render(
           <ThemeProvider>
             <ThemedGlobalStyle />
             {/* <PoolsData> */}
-              <SushiProvider>
-                {/* <TransactionProvider> */}
-                <FarmsProvider>
-                  <HashRouter>
-                    <ModalsProvider>
-                      <App />
-                    </ModalsProvider>
-                  </HashRouter>
-                </FarmsProvider>
-                {/* </TransactionProvider> */}
-              </SushiProvider>
+            <SushiProvider>
+              {/* <TransactionProvider> */}
+              <FarmsProvider>
+                <HashRouter>
+                  <ModalsProvider>
+                    <App />
+                  </ModalsProvider>
+                </HashRouter>
+              </FarmsProvider>
+              {/* </TransactionProvider> */}
+            </SushiProvider>
             {/* </PoolsData> */}
           </ThemeProvider>
         </Provider>

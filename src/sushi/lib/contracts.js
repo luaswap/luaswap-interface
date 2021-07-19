@@ -6,7 +6,7 @@ import SushiAbi from './abi/sushi.json'
 import UNIV2PairAbi from './abi/uni_v2_lp.json'
 import WETHAbi from './abi/weth.json'
 import makerAbi from './abi/maker.json'
-import { contractAddresses, supportedPools,tomoSupportedPools } from './constants.js'
+import { contractAddresses, supportedPools, tomoSupportedPools } from './constants.js'
 import * as Types from './types.js'
 
 export class Contracts {
@@ -24,7 +24,7 @@ export class Contracts {
     this.weth = new this.web3.eth.Contract(WETHAbi)
     this.maker = new this.web3.eth.Contract(makerAbi)
     // window.pools <=> supportedPools
-    if(networkId === 88){
+    if (networkId === 88) {
       this.pools = tomoSupportedPools.map(pool =>
         Object.assign(pool, {
           lpAddress: pool.lpAddresses[networkId],
@@ -35,7 +35,7 @@ export class Contracts {
           token2Contract: new this.web3.eth.Contract(ERC20Abi)
         })
       )
-    }else{
+    } else {
       this.pools = supportedPools.map(pool =>
         Object.assign(pool, {
           lpAddress: pool.lpAddresses[networkId],
@@ -59,11 +59,11 @@ export class Contracts {
     // )
     this.setProvider(provider, networkId)
     this.setDefaultAccount(this.web3.eth.defaultAccount)
-  } 
+  }
   setProvider(provider, networkId) {
-    const setProvider = (contract, address) => {     
+    const setProvider = (contract, address) => {
       contract.setProvider(provider)
-      
+
       if (address) contract.options.address = address
       else console.error('Contract address not found in network', networkId)
     }

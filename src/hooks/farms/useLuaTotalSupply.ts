@@ -12,7 +12,7 @@ const CACHE = {
 }
 
 const useLuaCirculatingSupply = () => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
   const sushi = useSushi()
   const [newReward, setNewRewad] = useState<BigNumber>(CACHE.value)
 
@@ -27,7 +27,8 @@ const useLuaCirculatingSupply = () => {
 
       setNewRewad(v)
     }
-    if (sushi && CACHE.time + CACHE.old <= new Date().getTime()) { // && CACHE.time + CACHE.old <= new Date().getTime()
+    if (sushi && CACHE.time + CACHE.old <= new Date().getTime()) {
+      // && CACHE.time + CACHE.old <= new Date().getTime()
       fetchData()
     }
   }, [sushi, setNewRewad])
