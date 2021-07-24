@@ -6,7 +6,7 @@ import { useActiveWeb3React } from '../../hooks'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
-const commit_hash = '7ab366e49618c07ec8b9c39c1f93c4e58e1429fb'
+const commit_hash = '84e8ba9148e16896e4e22690d53b7806d6dbc5ee'
 
 const getTokenLogoURL = (address: string, chainId: ChainId | undefined) => {
   const IsTomo = IsTomoChain(chainId)
