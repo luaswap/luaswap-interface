@@ -72,13 +72,13 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
 
   const trackingReward = IsTomo
     ? trackingAPYBalanceXLuaTomo
-      .multipliedBy(totalLuaInSafe)
-      .dividedBy(totalSupplyXLua)
-      .minus(10 * 10 ** 18)
+        .multipliedBy(totalLuaInSafe)
+        .dividedBy(totalSupplyXLua)
+        .minus(10 * 10 ** 18)
     : trackingAPYBalanceXLua
-      .multipliedBy(totalLuaInSafe)
-      .dividedBy(totalSupplyXLua)
-      .minus(10 * 10 ** 18)
+        .multipliedBy(totalLuaInSafe)
+        .dividedBy(totalSupplyXLua)
+        .minus(10 * 10 ** 18)
 
   const { onLeave } = useLeave()
   const tokenName = 'xLUA'
@@ -114,13 +114,13 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
         <span style={{ fontWeight: 'bold', color: '#4caf50' }}>
           {trackingReward
             ? `${parseFloat(
-              trackingReward
-                .div(totalStakedDay)
-                .div(10 * 10 ** 18)
-                .times(100)
-                .times(365)
-                .toFixed(2)
-            ).toLocaleString('en-US')}%`
+                trackingReward
+                  .div(totalStakedDay)
+                  .div(10 * 10 ** 18)
+                  .times(100)
+                  .times(365)
+                  .toFixed(2)
+              ).toLocaleString('en-US')}%`
             : '~'}
         </span>
       </CardInsight>
