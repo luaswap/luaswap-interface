@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import styled from 'styled-components'
 import Button from '../../../components/ButtonSushi'
@@ -9,20 +9,20 @@ import IconButton from '../../../components/IconButton'
 import { AddIcon } from '../../../components/icons'
 import Label from '../../../components/Label'
 import useAllowance from '../../../hooks/farms/useAllowance'
-import useApprove from '../../../hooks/farms/useApprove'
+// import useApprove from '../../../hooks/farms/useApprove'
 import useModal from '../../../hooks/farms/useModal'
-import useStake from '../../../hooks/farms/useStake'
+// import useStake from '../../../hooks/farms/useStake'
 import useStakedBalance from '../../../hooks/farms/useStakedBalance'
-import useTokenBalance from '../../../hooks/farms/useTokenBalance'
+// import useTokenBalance from '../../../hooks/farms/useTokenBalance'
 import useUnstake from '../../../hooks/farms/useUnstake'
 import { getBalanceNumber } from '../../../sushi/format/formatBalance'
-import DepositModal from './DepositModal'
+// import DepositModal from './DepositModal'
 import WithdrawModal from './WithdrawModal'
 import { getLPTokenStaked } from '../../../sushi/utils'
 import useSushi from '../../../hooks/farms/useSushi'
 import useBlock from '../../../hooks/farms/useBlock'
 import useStakedValue from '../../../hooks/farms/useStakedValue'
-import usePoolActive from '../../../hooks/farms/usePoolActive'
+// import usePoolActive from '../../../hooks/farms/usePoolActive'
 
 interface StakeProps {
   lpContract: any
@@ -33,15 +33,15 @@ interface StakeProps {
 }
 
 const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, token2Symbol }) => {
-  const {chainId} = useWeb3React()
-  const [requestedApproval, setRequestedApproval] = useState(false)
+  const { chainId } = useWeb3React()
+  // const [requestedApproval, setRequestedApproval] = useState(false)
 
   const allowance = useAllowance(lpContract)
-  const { onApprove } = useApprove(lpContract)
+  // const { onApprove } = useApprove(lpContract)
 
-  const tokenBalance = useTokenBalance(lpContract.options.address)
+  // const tokenBalance = useTokenBalance(lpContract.options.address)
   const stakedBalance = useStakedBalance(pid)
-  const poolActive = usePoolActive(pid)
+  // const poolActive = usePoolActive(pid)
 
   const [totalStake, setTotalStake] = useState<BigNumber>()
   const sushi = useSushi()
@@ -58,26 +58,26 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
     }
   }, [sushi, setTotalStake, lpContract, block])
 
-  const { onStake } = useStake(pid)
+  // const { onStake } = useStake(pid)
   const { onUnstake } = useUnstake(pid)
 
-  const [onPresentDeposit] = useModal(<DepositModal max={tokenBalance} onConfirm={onStake} tokenName={tokenName} />)
+  // const [onPresentDeposit] = useModal(<DepositModal max={tokenBalance} onConfirm={onStake} tokenName={tokenName} />)
   const [onPresentWithdraw] = useModal(
     <WithdrawModal max={stakedBalance} onConfirm={onUnstake} tokenName={tokenName} />
   )
 
-  const handleApprove = useCallback(async () => {
-    try {
-      setRequestedApproval(true)
-      const txHash = await onApprove()
-      // user rejected tx or didn't go thru
-      if (!txHash) {
-        setRequestedApproval(false)
-      }
-    } catch (e) {
-      console.log(e)
-    }
-  }, [onApprove, setRequestedApproval])
+  // const handleApprove = useCallback(async () => {
+  //   try {
+  //     setRequestedApproval(true)
+  //     const txHash = await onApprove()
+  //     // user rejected tx or didn't go thru
+  //     if (!txHash) {
+  //       setRequestedApproval(false)
+  //     }
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }, [onApprove, setRequestedApproval])
 
   let shareOfPool = 0
 
@@ -92,7 +92,7 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
     totalToken = (stakedValue.tokenAmount as any) * shareOfPool
     totalToken2 = (stakedValue.token2Amount as any) * shareOfPool
   }
-  
+
   return (
     <CardBox>
       <CardContent>
@@ -126,13 +126,11 @@ const Stake: React.FC<StakeProps> = ({ lpContract, pid, tokenName, tokenSymbol, 
           <StyledCardActions>
             {!allowance.toNumber() ? (
               <Button
-                disabled={requestedApproval}
-                onClick={handleApprove}
-                text={requestedApproval ? 'Approving' : `Approve ${tokenName}`}
+                disabled={true}
               />
             ) : (
               <>
-                <Button disabled={!poolActive} text={'Stake'} onClick={onPresentDeposit} />
+                <Button disabled={true} text={'Stake'} />
                 <StyledActionSpacer />
                 <StyleButtonWrap>
                   <span className="tooltip-unstake">UnStake</span>

@@ -15,7 +15,7 @@ import Stake from './components/Stake'
 
 const Farm: React.FC = () => {
   const { farmId } = useParams() as any
-  
+
   const {
     pid,
     lpToken,
@@ -33,24 +33,24 @@ const Farm: React.FC = () => {
     iconProtocal,
     pairLink,
     addLiquidityLink
-  } = useFarm(farmId) 
-  || {
-    pid: 0,
-    lpToken: '',
-    lpTokenAddress: '',
-    symbolShort: '',
-    tokenSymbol: '',
-    token2Symbol: '',
-    tokenAddress: '',
-    earnToken: '',
-    name: '',
-    icon: '',
-    symbol: '',
-    protocal: '',
-    iconProtocal: '',
-    pairLink: '',
-    addLiquidityLink: ''
-  }
+  } = useFarm(farmId)
+    || {
+      pid: 0,
+      lpToken: '',
+      lpTokenAddress: '',
+      symbolShort: '',
+      tokenSymbol: '',
+      token2Symbol: '',
+      tokenAddress: '',
+      earnToken: '',
+      name: '',
+      icon: '',
+      symbol: '',
+      protocal: '',
+      iconProtocal: '',
+      pairLink: '',
+      addLiquidityLink: ''
+    }
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
@@ -126,7 +126,7 @@ const Farm: React.FC = () => {
         )}
         <Spacer size="lg" />
         <StyledInfo style={{ color: '#ff9800' }}>
-          👉 Every time you stake and unstake LP tokens, the contract will 
+          👉 Every time you stake and unstake LP tokens, the contract will
           <br />
           automatically harvest LUA rewards for you!
         </StyledInfo>

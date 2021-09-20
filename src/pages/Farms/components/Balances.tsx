@@ -149,7 +149,7 @@ const Balances = memo(() => {
           </CustomCard>
           <div style={{ textAlign: "center", marginTop: "20px" }}>
             <Text>You will not receive LUA reward in this farming v1.</Text>&nbsp;
-            <Link href="https://app.luaswap.org/#/farming" target="blank">Please withdraw your LP.</Link>
+            <Link href="https://app.luaswap.org/#/farming" target="blank">Farming V2.</Link>
           </div>
         </div>
       )
