@@ -100,30 +100,31 @@ const Balances = memo(() => {
                 {/* <SushiIcon /> */}
                 <img src={Luas} alt="Total LUA Supply" />
                 <Spacer />
-                  {/* <div style={{ flex: 1 }}>
+                {/* <div style={{ flex: 1 }}>
                     <Label text="Total Supply" />
                     <Value value={totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')}` : '~'} />
                   </div> */}
-                  <div style={{ flex: 1 }}>
-                    <Label text="LUA Circulating Supply" />
-                    <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
-                  </div>
+                <div style={{ flex: 1 }}>
+                  <Label text="LUA Circulating Supply" />
+                  <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
+                </div>
               </StyledBalance>
             </CardContent>
-              <Footnote>          
-                {!IsTomo ? (
-                  <>
-                    Total Supply
-                    <FootnoteValue>
-                      {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
-                      {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
-                    </FootnoteValue>
-                  </>
-                  ) : ' on TomoChain Network'
-                }
-              </Footnote>
+            <Footnote>
+              {!IsTomo ? (
+                <>
+                  Total Supply
+                  <FootnoteValue>
+                    {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
+                    {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
+                  </FootnoteValue>
+                </>
+              ) : ' on TomoChain Network'
+              }
+            </Footnote>
           </Card>
         </>) : (
+        <div style={{ margin: "0 auto" }}>
           <CustomCard>
             <CardContent>
               <StyledBalances>
@@ -145,7 +146,9 @@ const Balances = memo(() => {
               </FootnoteValue>
             </Footnote>
           </CustomCard>
-        )
+          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Withdraw your LP from TOMO Farming V1</Link>
+        </div>
+      )
       }
     </StyledWrapper>
   )
@@ -188,6 +191,17 @@ const StyledBalance = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
+`
+const Link = styled.a`
+  display: block;
+  text-align: center;
+  color: #bb6d24;
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: 14px;
+  &:hover{
+    text-decoration: underline;
+  }
 `
 
 export default Balances
