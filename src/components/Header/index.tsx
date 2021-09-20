@@ -207,7 +207,7 @@ export default function Header() {
         <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />
       </Modal>
       <HeaderRow>
-        <Title href=".">
+        <Title href="https://app.luaswap.org/tomofarming/v1#/">
           <UniIcon>
             <img width={'40px'} src={Logo} alt="logo" />
             <LogoText>LuaSwap</LogoText>
