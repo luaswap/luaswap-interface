@@ -38,7 +38,6 @@ const FarmCards: React.FC = () => {
   const [farms] = useFarms()
   const stakedValue = useAllStakedValue()
   const luaPrice = useLuaPrice()
-
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
       const farmWithStakedValue: FarmWithStakedValue = {

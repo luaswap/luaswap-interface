@@ -100,8 +100,8 @@ export default function App() {
           {/* <TopLevelModals /> */}
           <Web3ReactManager>
             <Switch>
-              <Route exact strict path="/farming" component={Farms} />
-              <Route exact strict path="/farming/:farmId" component={Farm} />
+              <Route exact strict path="/" component={Farms} />
+              <Route exact strict path="/:farmId" component={Farm} />
             </Switch>
           </Web3ReactManager>
           <Marginer />

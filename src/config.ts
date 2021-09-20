@@ -3,7 +3,7 @@ import { ChainId } from '@luaswap/sdk'
 export default {
   rpc: 'https://wallet.tomochain.com/api/luaswap/rpc',
   rpcTomochain: 'https://rpc.tomochain.com',
-  chainId: 1,
+  chainId: 88,
   apiETH: 'https://wallet.tomochain.com/api/luaswap',
   apiTOMO: 'https://wallet.tomochain.com/api/luaswap/tomochain'
 }
