@@ -125,7 +125,6 @@ const Balances = memo(() => {
           </Card>
         </>) : (
         <div style={{ margin: "0 auto" }}>
-          <Paragraph>CLOSED - TomoChain Farming v1</Paragraph>
           <CustomCard>
             <CardContent>
               <StyledBalances>
@@ -147,10 +146,7 @@ const Balances = memo(() => {
               </FootnoteValue>
             </Footnote>
           </CustomCard>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <Text>You will not receive LUA reward in this farming v1.</Text>&nbsp;
-            <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Please withdraw your LP.</Link>
-          </div>
+          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Withdraw your LP from TOMO Farming V1</Link>
         </div>
       )
       }
@@ -164,7 +160,6 @@ const CustomCard = styled.div`
   overflow: hidden;
   display: inline-block;
   margin: 0 auto;
-  width: 100%;
 `
 const Footnote = styled.div`
   font-size: 14px;
@@ -197,17 +192,8 @@ const StyledBalance = styled.div`
   display: flex;
   flex: 1;
 `
-const Paragraph = styled.h2`
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 20px;
-  color: #bb6226;
-`
-const Text = styled.span`
-  font-size: 14px;
-`
 const Link = styled.a`
+  display: block;
   text-align: center;
   color: #bb6d24;
   text-decoration: none;
