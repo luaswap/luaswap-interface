@@ -124,27 +124,34 @@ const Balances = memo(() => {
             </Footnote>
           </Card>
         </>) : (
-        <CustomCard>
-          <CardContent>
-            <StyledBalances>
-              <StyledBalance>
-                {/* <SushiIcon /> */}
-                <img src={Lua} alt="LUA Balance" />
-                <Spacer />
-                <div style={{ flex: 1 }}>
-                  <Label text="Your Available LUA Balance" />
-                  <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
-                </div>
-              </StyledBalance>
-            </StyledBalances>
-          </CardContent>
-          <Footnote>
-            Pending harvest
-            <FootnoteValue>
-              <PendingRewards /> LUA
-            </FootnoteValue>
-          </Footnote>
-        </CustomCard>
+        <div style={{ margin: "0 auto" }}>
+          <Paragraph>CLOSED - TomoChain Farming v1</Paragraph>
+          <CustomCard>
+            <CardContent>
+              <StyledBalances>
+                <StyledBalance>
+                  {/* <SushiIcon /> */}
+                  <img src={Lua} alt="LUA Balance" />
+                  <Spacer />
+                  <div style={{ flex: 1 }}>
+                    <Label text="Your Available LUA Balance" />
+                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
+                  </div>
+                </StyledBalance>
+              </StyledBalances>
+            </CardContent>
+            <Footnote>
+              Pending harvest
+              <FootnoteValue>
+                <PendingRewards /> LUA
+              </FootnoteValue>
+            </Footnote>
+          </CustomCard>
+          <div style={{ textAlign: "center", marginTop: "20px" }}>
+            <Text>You will not receive LUA reward in this farming v1.</Text>&nbsp;
+            <Link href="https://app.luaswap.org/#/farming" target="blank">Please withdraw your LP.</Link>
+          </div>
+        </div>
       )
       }
     </StyledWrapper>
@@ -157,6 +164,7 @@ const CustomCard = styled.div`
   overflow: hidden;
   display: inline-block;
   margin: 0 auto;
+  width: 100%;
 `
 const Footnote = styled.div`
   font-size: 14px;
@@ -188,6 +196,26 @@ const StyledBalance = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
+`
+const Paragraph = styled.h2`
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 20px;
+  color: #bb6226;
+`
+const Text = styled.span`
+  font-size: 14px;
+`
+const Link = styled.a`
+  text-align: center;
+  color: #bb6d24;
+  text-decoration: none;
+  margin-top: 10px;
+  font-size: 14px;
+  &:hover{
+    text-decoration: underline;
+  }
 `
 
 export default Balances
