@@ -128,27 +128,30 @@ const Balances = memo(() => {
           </Card>
         </>
       ) : (
-        <CustomCard>
-          <CardContent>
-            <StyledBalances>
-              <StyledBalance>
-                {/* <SushiIcon /> */}
-                <img src={Lua} alt="LUA Balance" />
-                <Spacer />
-                <div style={{ flex: 1 }}>
-                  <Label text="Your Available LUA Balance" />
-                  <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
-                </div>
-              </StyledBalance>
-            </StyledBalances>
-          </CardContent>
-          <Footnote>
-            Pending harvest
-            <FootnoteValue>
-              <PendingRewards /> LUA
-            </FootnoteValue>
-          </Footnote>
-        </CustomCard>
+        <div style={{ margin: "0 auto" }}>
+          <CustomCard>
+            <CardContent>
+              <StyledBalances>
+                <StyledBalance>
+                  {/* <SushiIcon /> */}
+                  <img src={Lua} alt="LUA Balance" />
+                  <Spacer />
+                  <div style={{ flex: 1 }}>
+                    <Label text="Your Available LUA Balance" />
+                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
+                  </div>
+                </StyledBalance>
+              </StyledBalances>
+            </CardContent>
+            <Footnote>
+              Pending harvest
+              <FootnoteValue>
+                <PendingRewards /> LUA
+              </FootnoteValue>
+            </Footnote>
+          </CustomCard>
+          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Withdraw your LP from TOMO Farming V1</Link>
+        </div>
       )}
     </StyledWrapper>
   )
@@ -191,6 +194,13 @@ const StyledBalance = styled.div`
   align-items: center;
   display: flex;
   flex: 1;
+`
+const Link = styled.a`
+  display: block;
+  text-align: center;
+  color: #bb6d24;
+  margin-top: 10px;
+  font-size: 14px;
 `
 
 export default Balances

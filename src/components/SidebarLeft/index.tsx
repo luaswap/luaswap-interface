@@ -19,7 +19,7 @@ import MenuLink from './MenuLink'
 import LuaPrice from './LuaPrice'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
-const HeaderRow = styled(Row)<{ screen: number; isOpen: boolean }>`
+const HeaderRow = styled(Row) <{ screen: number; isOpen: boolean }>`
   width: 240px;
   position: fixed;
   padding-top: 73px;
@@ -46,9 +46,11 @@ const StyleActive = styled.div<{ isActive: boolean }>`
   color: ${({ theme }) => theme.text2};
   text-decoration: none;
   flex-grow: 1;
-  background-color: ${({ isActive, theme }) => (isActive ? `${theme.bg4}` : 'none')};
+  border-top-left-radius: 25px;
+  border-bottom-left-radius: 25px;
+  background-color: ${({ isActive, theme }) => (isActive ? `${theme.bg2}` : 'none')};
   :hover {
-    background-color: ${({ theme }) => theme.bg4};
+    background-color: ${({ theme }) => theme.bg2};
   }
   a {
     text-decoration: none;
@@ -59,7 +61,7 @@ const StyleActive = styled.div<{ isActive: boolean }>`
 const ParentHover = styled(Flex)`
   padding: 5px 15px;
   :hover {
-    background-color: ${({ theme }) => theme.bg4};
+    background-color: ${({ theme }) => theme.bg2};
   }
 `
 const ParentLabel = styled.div`
@@ -73,7 +75,7 @@ const MobileOverlay = styled.div`
   top: 0;
   bottom: 0;
   width: 100%;
-  background-color: ${({ theme }) => theme.bg4};
+  background-color: ${({ theme }) => theme.bg2};
   opacity: 0.7;
   z-index: 2;
 `

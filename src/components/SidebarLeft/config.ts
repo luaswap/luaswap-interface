@@ -1,39 +1,36 @@
 const config = [
   {
-    label: 'Home',
-    icon: 'HomeIcon',
-    href: 'http://localhost:3001/#/'
+    label: 'Swap',
+    icon: 'TradeIcon',
+    href: '/swap'
   },
   {
-    key: 'trade',
-    label: 'Trade',
-    icon: 'TradeIcon',
-    items: [
-      {
-        label: 'Swap',
-        href: '/swap'
-      },
-      {
-        label: 'Liquidity',
-        href: '/pool'
-      },
-      {
-        label: 'OrderBook',
-        href: 'https://app.luaswap.org/orderbook/#/'
-      }
-    ]
+    label: 'Pools',
+    icon: 'PoolIcon',
+    href: '/pool'
   },
   {
     key: 'farms',
     label: 'Farms',
     icon: 'FarmIcon',
-    href: 'http://localhost:3001/#/farms'
+    href: '/farming'
+  },
+  {
+    key: 'luasafe',
+    label: 'LuaSafe',
+    icon: 'ArrowRenew',
+    href: '/lua-safe'
+  },
+  {
+    label: 'Orderbook',
+    icon: 'Groups',
+    href: 'https://app.luaswap.org/orderbook/#/'
   },
   {
     key: 'ido',
-    label: 'IDO',
+    label: 'LuaStarter',
     icon: 'IfoIcon',
-    href: 'http://localhost:3001/#/idos'
+    href: 'https://app.luaswap.org/idos'
   },
   {
     key: 'info',
