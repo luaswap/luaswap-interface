@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react'
 import BigNumber from 'bignumber.js'
 
 import { useActiveWeb3React } from '../../hooks'
-import { IsTomoChain } from '../../utils'
+// import { IsTomoChain } from '../../utils'
 import { getMasterChefContract } from '../../sushi/utils'
 import useSushi from './useSushi'
 import axios from 'axios'
@@ -28,7 +28,7 @@ const CACHE: { time: any; old: any; value: any } = {
 const useAllStakedValue = () => {
   const [balances, setBalance] = useState(CACHE.value as Array<StakedValue>)
   const { chainId } = useActiveWeb3React()
-  const IsTomo = IsTomoChain(chainId)
+  // const IsTomo = IsTomoChain(chainId)
   const sushi = useSushi()
   // const farms = getFarms(sushi)
   const masterChefContract = getMasterChefContract(sushi)
@@ -57,7 +57,7 @@ const useAllStakedValue = () => {
     //       ),
     //   ),
     // )
-    const apiUrl = IsTomo ? config.apiTOMO : config.apiETH
+    const apiUrl = chainId === 1 ? config.apiETH : config.apiTOMO
     const { data: balances } = await axios.get(`${apiUrl}/pools`)
 
     CACHE.time = new Date().getTime()

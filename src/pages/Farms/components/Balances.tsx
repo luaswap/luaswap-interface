@@ -5,7 +5,7 @@ import styled from 'styled-components'
 
 import { useWeb3React } from '@web3-react/core'
 
-import Card from '../../../components/CardBox'
+// import Card from '../../../components/CardBox'
 import CardContent from '../../../components/CardContent'
 import Label from '../../../components/Label'
 import Spacer from '../../../components/Spacer'
@@ -16,10 +16,10 @@ import useSushi from '../../../hooks/farms/useSushi'
 import { getSushiAddress } from '../../../sushi/utils'
 import { getBalanceNumber } from '../../../sushi/format/formatBalance'
 import Lua from '../../../assets/images/lua-icon.svg'
-import Luas from '../../../assets/images/luas-icon.svg'
-import useLuaTotalSupply from '../../../hooks/farms/useLuaTotalSupply'
-import useLuaCirculatingSupply from '../../../hooks/farms/useLuaCirculatingSupply'
-import { IsTomoChain } from '../../../utils'
+// import Luas from '../../../assets/images/luas-icon.svg'
+// import useLuaTotalSupply from '../../../hooks/farms/useLuaTotalSupply'
+// import useLuaCirculatingSupply from '../../../hooks/farms/useLuaCirculatingSupply'
+// import { IsTomoChain } from '../../../utils'
 
 const PendingRewards: React.FC = () => {
   const [start, setStart] = useState(0)
@@ -62,98 +62,42 @@ const PendingRewards: React.FC = () => {
 }
 
 const Balances = memo(() => {
-  const totalSupply = useLuaTotalSupply()
-  const circulatingSupply = useLuaCirculatingSupply()
+  // const totalSupply = useLuaTotalSupply()
+  // const circulatingSupply = useLuaCirculatingSupply()
   const sushi = useSushi()
   const sushiBalance = useTokenBalance(getSushiAddress(sushi))
-  const { chainId, account } = useWeb3React()
-  const IsTomo = IsTomoChain(chainId)
+  const { account } = useWeb3React()
+  // const IsTomo = IsTomoChain(chainId)
   return (
     <StyledWrapper>
-      {!IsTomo ? (
-        <>
-          <Card>
-            <CardContent>
-              <StyledBalances>
-                <StyledBalance>
-                  {/* <SushiIcon /> */}
-                  <img src={Lua} alt="LUA Balance" />
-                  <Spacer />
-                  <div style={{ flex: 1 }}>
-                    <Label text="Your Available LUA Balance" />
-                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
-                  </div>
-                </StyledBalance>
-              </StyledBalances>
-            </CardContent>
-            <Footnote>
-              Pending harvest
-              <FootnoteValue>
-                <PendingRewards /> LUA
-              </FootnoteValue>
-            </Footnote>
-          </Card>
-          <Spacer />
-          <Card>
-            <CardContent>
+      <div style={{ margin: "0 auto" }}>
+        <Paragraph>CLOSED - TomoChain Farming v1</Paragraph>
+        <CustomCard>
+          <CardContent>
+            <StyledBalances>
               <StyledBalance>
                 {/* <SushiIcon /> */}
-                <img src={Luas} alt="Total LUA Supply" />
+                <img src={Lua} alt="LUA Balance" />
                 <Spacer />
-                {/* <div style={{ flex: 1 }}>
-                    <Label text="Total Supply" />
-                    <Value value={totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')}` : '~'} />
-                  </div> */}
                 <div style={{ flex: 1 }}>
-                  <Label text="LUA Circulating Supply" />
-                  <Value value={circulatingSupply ? getBalanceNumber(circulatingSupply) : '~'} />
+                  <Label text="Your Available LUA Balance" />
+                  <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
                 </div>
               </StyledBalance>
-            </CardContent>
-            <Footnote>
-              {!IsTomo ? (
-                <>
-                  Total Supply
-                  <FootnoteValue>
-                    {/* {newReward ? `${getBalanceNumber(newReward)} LUA` : 'Loading...'} */}
-                    {totalSupply ? `${parseFloat(getBalanceNumber(totalSupply).toFixed(2)).toLocaleString('en-US')} LUA` : '~'}
-                  </FootnoteValue>
-                </>
-              ) : ' on TomoChain Network'
-              }
-            </Footnote>
-          </Card>
-        </>) : (
-        <div style={{ margin: "0 auto" }}>
-          <Paragraph>CLOSED - TomoChain Farming v1</Paragraph>
-          <CustomCard>
-            <CardContent>
-              <StyledBalances>
-                <StyledBalance>
-                  {/* <SushiIcon /> */}
-                  <img src={Lua} alt="LUA Balance" />
-                  <Spacer />
-                  <div style={{ flex: 1 }}>
-                    <Label text="Your Available LUA Balance" />
-                    <Value value={!!account ? getBalanceNumber(sushiBalance) : 'Locked'} />
-                  </div>
-                </StyledBalance>
-              </StyledBalances>
-            </CardContent>
-            <Footnote>
-              Pending harvest
-              <FootnoteValue>
-                <PendingRewards /> LUA
-              </FootnoteValue>
-            </Footnote>
-          </CustomCard>
-          <div style={{ textAlign: "center", marginTop: "20px" }}>
-            <Text>You will not receive LUA reward in this farming v1.</Text>&nbsp;
-            <Link href="https://app.luaswap.org/#/farming" target="blank">Farming V2.</Link>
-          </div>
+            </StyledBalances>
+          </CardContent>
+          <Footnote>
+            Pending harvest
+            <FootnoteValue>
+              <PendingRewards /> LUA
+            </FootnoteValue>
+          </Footnote>
+        </CustomCard>
+        <div style={{ textAlign: "center", marginTop: "20px" }}>
+          <Text>You will not receive LUA reward in this farming v1.</Text>&nbsp;
+          <Link href="https://app.luaswap.org/#/farming" target="blank">Farming V2.</Link>
         </div>
-      )
-      }
+      </div>
     </StyledWrapper>
   )
 })

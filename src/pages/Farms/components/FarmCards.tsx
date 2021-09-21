@@ -60,7 +60,6 @@ const FarmCards: React.FC = () => {
     },
     [[]]
   )
-
   return (
     <StyledCards>
       {!!rows[0].length ? (
@@ -151,7 +150,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
             </Button> */}
             <br />
-            {!IsTomo ? (
+            {!IsTomo && chainId === 1 ? (
               <StyledInsight>
                 <span>Total Locked Value</span>
                 <span>

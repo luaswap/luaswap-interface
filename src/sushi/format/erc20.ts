@@ -7,7 +7,7 @@ import ERC20ABI from '../../constants/abi/ERC20.json'
 import config from '../../config'
 
 export const getContract = (provider: any, address: string) => {
-  const web3 = new Web3((provider as any) || config.rpc)
+  const web3 = new Web3((provider as any) || config.rpcTomochain)
   const contract = new web3.eth.Contract((ERC20ABI.abi as unknown) as AbiItem, address)
   return contract
 }

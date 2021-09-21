@@ -23,11 +23,11 @@ interface ApyProps {
 const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol, token2Symbol }) => {
   const sushi = useSushi()
   const { chainId, library: ethereum } = useWeb3React()
-  const ID = chainId === 88 ? 88 : 1
+  const ID = chainId === 1 ? 1 : 88
   // const block = useBlock()
   const stakedValue = useStakedValue(pid)
   const luaPrice = useLuaPrice()
-  
+
   const lpContract = useMemo(() => {
     const e_provider = ethereum && ethereum.provider ? ethereum.provider : null
     return getContract(e_provider as provider, lpTokenAddress)
@@ -51,20 +51,20 @@ const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol
         <StyledLabel>APY</StyledLabel>
         <StyledContent>
           {newReward &&
-          stakedValue &&
-          luaPrice &&
-          stakedValue.usdValue &&
-          stakedValue.totalToken2Value &&
-          stakedValue.poolWeight
+            stakedValue &&
+            luaPrice &&
+            stakedValue.usdValue &&
+            stakedValue.totalToken2Value &&
+            stakedValue.poolWeight
             ? `${parseFloat(
-                luaPrice
-                  .times(NUMBER_BLOCKS_PER_YEAR[ID])
-                  .times(newReward.div(10 ** 18))
-                  .div(stakedValue.usdValue)
-                  .div(10 ** 8)
-                  .times(100)
-                  .toFixed(2)
-              ).toLocaleString('en-US')}%`
+              luaPrice
+                .times(NUMBER_BLOCKS_PER_YEAR[ID])
+                .times(newReward.div(10 ** 18))
+                .div(stakedValue.usdValue)
+                .div(10 ** 8)
+                .times(100)
+                .toFixed(2)
+            ).toLocaleString('en-US')}%`
             : 'loading'}
         </StyledContent>
       </StyledBox>

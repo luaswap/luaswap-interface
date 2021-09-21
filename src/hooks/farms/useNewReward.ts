@@ -8,7 +8,7 @@ import BigNumber from 'bignumber.js'
 const CACHE: any = {}
 
 const useNewReward = (pid1 = 0) => {
-  const {chainId} = useWeb3React()
+  const { chainId } = useWeb3React()
   CACHE[pid1] = CACHE[pid1] || {
     time: 0,
     old: 10 * 60 * 1000,
@@ -19,7 +19,7 @@ const useNewReward = (pid1 = 0) => {
 
   useEffect(() => {
     async function fetchData() {
-      const v = chainId === 88 ? new BigNumber(0) : await getNewRewardPerBlock(sushi, pid1, chainId)
+      const v = chainId === 88 || !chainId ? new BigNumber(0) : await getNewRewardPerBlock(sushi, pid1, chainId)
       CACHE[pid1].time = new Date().getTime()
       CACHE[pid1].value = v
 
