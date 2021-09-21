@@ -19,7 +19,7 @@ import MenuLink from './MenuLink'
 import LuaPrice from './LuaPrice'
 import { useOnClickOutside } from '../../hooks/useOnClickOutside'
 
-const HeaderRow = styled(Row) <{ screen: number; isOpen: boolean }>`
+const HeaderRow = styled(Row)<{ screen: number; isOpen: boolean }>`
   width: 240px;
   position: fixed;
   padding-top: 73px;

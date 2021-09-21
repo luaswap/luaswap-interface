@@ -676,7 +676,7 @@ export const tomoSupportedPools = [
       'https://app.luaswap.org/#/add/0x381B31409e4D220919B2cFF012ED94d70135A59e/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74',
     removeLiquidityLink:
       'https://app.luaswap.org/#/remove/0x381B31409e4D220919B2cFF012ED94d70135A59e/0x7262fa193e9590b2e075c3c16170f3f2f32f5c74'
-  },
+  }
   // {
   //   pid: 5,
   //   lpAddresses: {

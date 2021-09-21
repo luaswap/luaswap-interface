@@ -128,7 +128,7 @@ const Balances = memo(() => {
           </Card>
         </>
       ) : (
-        <div style={{ margin: "0 auto" }}>
+        <div style={{ margin: '0 auto' }}>
           <CustomCard>
             <CardContent>
               <StyledBalances>
@@ -150,7 +150,9 @@ const Balances = memo(() => {
               </FootnoteValue>
             </Footnote>
           </CustomCard>
-          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Withdraw your LP from TOMO Farming V1</Link>
+          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">
+            Withdraw your LP from TOMO Farming V1
+          </Link>
         </div>
       )}
     </StyledWrapper>
