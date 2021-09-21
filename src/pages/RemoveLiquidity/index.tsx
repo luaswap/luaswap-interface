@@ -85,8 +85,8 @@ export default function RemoveLiquidity({
     [Field.LIQUIDITY_PERCENT]: parsedAmounts[Field.LIQUIDITY_PERCENT].equalTo('0')
       ? '0'
       : parsedAmounts[Field.LIQUIDITY_PERCENT].lessThan(new Percent('1', '100'))
-      ? '<1'
-      : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
+        ? '<1'
+        : parsedAmounts[Field.LIQUIDITY_PERCENT].toFixed(0),
     [Field.LIQUIDITY]:
       independentField === Field.LIQUIDITY ? typedValue : parsedAmounts[Field.LIQUIDITY]?.toSignificant(6) ?? '',
     [Field.CURRENCY_A]:
@@ -425,9 +425,8 @@ export default function RemoveLiquidity({
     )
   }
 
-  const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencyA?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`
+  const pendingText = `Removing ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencyA?.symbol
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencyB?.symbol}`
 
   const liquidityPercentChangeCallback = useCallback(
     (value: number) => {
@@ -439,8 +438,8 @@ export default function RemoveLiquidity({
   const oneCurrencyIsETH = currencyA === ETHER || currencyB === ETHER || currencyA === TOMO || currencyB === TOMO
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
-        (currencyB && currencyEquals(WETH[chainId], currencyB)))
+    ((currencyA && currencyEquals(WETH[chainId], currencyA)) ||
+      (currencyB && currencyEquals(WETH[chainId], currencyB)))
   )
 
   const handleSelectCurrencyA = useCallback(
@@ -583,27 +582,24 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${
-                              currencyA === ETHER || currencyA === TOMO ? WETH[chainId].address : currencyIdA
-                            }/${currencyB === ETHER || currencyB === TOMO ? WETH[chainId].address : currencyIdB}`}
+                            to={`/remove/${currencyA === ETHER || currencyA === TOMO ? WETH[chainId].address : currencyIdA
+                              }/${currencyB === ETHER || currencyB === TOMO ? WETH[chainId].address : currencyIdB}`}
                           >
                             Receive W{NATIVE_TOKEN_TEXT}
                           </StyledInternalLink>
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
-                            to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WETH[chainId]) && IsTomo
+                            to={`/remove/${currencyA && currencyEquals(currencyA, WETH[chainId]) && IsTomo
                                 ? 'TOMO'
                                 : currencyA && currencyEquals(currencyA, WETH[chainId])
-                                ? 'ETH'
-                                : currencyIdA
-                            }/${
-                              currencyB && currencyEquals(currencyB, WETH[chainId]) && IsTomo
+                                  ? 'ETH'
+                                  : currencyIdA
+                              }/${currencyB && currencyEquals(currencyB, WETH[chainId]) && IsTomo
                                 ? 'TOMO'
                                 : currencyB && currencyEquals(currencyB, WETH[chainId])
-                                ? 'ETH'
-                                : currencyIdB
-                            }`}
+                                  ? 'ETH'
+                                  : currencyIdB
+                              }`}
                           >
                             Receive {NATIVE_TOKEN_TEXT}
                           </StyledInternalLink>
@@ -738,7 +734,7 @@ export default function RemoveLiquidity({
       </AppBody>
 
       {pair ? (
-        <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
+        <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem', marginLeft: "auto", marginRight: "auto" }}>
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
       ) : null}

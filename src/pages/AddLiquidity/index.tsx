@@ -65,8 +65,8 @@ export default function AddLiquidity({
 
   const oneCurrencyIsWETH = Boolean(
     chainId &&
-      ((currencyA && currencyEquals(currencyA, WETH[chainId])) ||
-        (currencyB && currencyEquals(currencyB, WETH[chainId])))
+    ((currencyA && currencyEquals(currencyA, WETH[chainId])) ||
+      (currencyB && currencyEquals(currencyB, WETH[chainId])))
   )
 
   const toggleWalletModal = useWalletModalToggle() // toggle wallet when disconnected
@@ -275,9 +275,8 @@ export default function AddLiquidity({
     )
   }
 
-  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${
-    currencies[Field.CURRENCY_A]?.symbol
-  } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
+  const pendingText = `Supplying ${parsedAmounts[Field.CURRENCY_A]?.toSignificant(6)} ${currencies[Field.CURRENCY_A]?.symbol
+    } and ${parsedAmounts[Field.CURRENCY_B]?.toSignificant(6)} ${currencies[Field.CURRENCY_B]?.symbol}`
   const handleCurrencyASelect = useCallback(
     (currencyA: Currency) => {
       const newCurrencyIdA = currencyId(currencyA)
@@ -471,7 +470,7 @@ export default function AddLiquidity({
       </AppBody>
 
       {pair && !noLiquidity && pairState !== PairState.INVALID ? (
-        <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem' }}>
+        <AutoColumn style={{ minWidth: '20rem', width: '100%', maxWidth: '400px', marginTop: '1rem', marginLeft: "auto", marginRight: "auto" }}>
           <MinimalPositionCard showUnwrapped={oneCurrencyIsWETH} pair={pair} />
         </AutoColumn>
       ) : null}
