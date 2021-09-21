@@ -325,7 +325,7 @@ const StyledNavLink = styled(NavLink).attrs({
 
 const StyledExternalLink = styled(ExternalLink).attrs({
   activeClassName
-})<{ isActive?: boolean }>`
+}) <{ isActive?: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
   border-radius: 3rem;
@@ -419,19 +419,24 @@ export default function Header() {
               </StyledMenuButton>
               {open && (
                 <StyleNavMobile>
-                  
-                    <>
-                      <StyleNavList>
-                        <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                          Farming
-                        </StyledNavLink>
-                      </StyleNavList>
-                      <StyleNavList>
-                        <StyledNavLink id="pool-nav-link" to="/lua-safe">
-                          {t('LuaSafe')}
-                        </StyledNavLink>
-                      </StyleNavList>
-                    </>                  
+
+                  <>
+                    <StyleNavList>
+                      <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                        Farming
+                      </StyledNavLink>
+                    </StyleNavList>
+                    <StyleNavList>
+                      <StyledNavLink id="pool-nav-link" to="/lua-safe">
+                        {t('LuaSafe')}
+                      </StyledNavLink>
+                    </StyleNavList>
+                    <StyleNavList>
+                      <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
+                        Orderbook
+                      </StyledExternalLink>
+                    </StyleNavList>
+                  </>
                   <StyleNavList>
                     <StyleText>
                       Charts <span style={{ fontSize: '11px' }}>↗</span>
@@ -455,19 +460,25 @@ export default function Header() {
           ) : (
             <StyleNavBox>
               {/* {!IsTomo ? ( */}
-                <StyleNavList>
-                  <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
-                    Farming
-                  </StyledNavLink>
-                </StyleNavList>
-                {/* ) : ''
+              <StyleNavList>
+                <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
+                  Farming
+                </StyledNavLink>
+              </StyleNavList>
+              {/* ) : ''
               } */}
               <StyleNavList>
                 <StyledNavLink id="pool-nav-link" to="/lua-safe">
                   {t('LuaSafe')}
                 </StyledNavLink>
               </StyleNavList>
-              
+
+              <StyleNavList>
+                <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
+                  Orderbook
+                </StyledExternalLink>
+              </StyleNavList>
+
               <StyleNavList>
                 <StyleText>
                   Charts <span style={{ fontSize: '11px' }}>↗</span>
