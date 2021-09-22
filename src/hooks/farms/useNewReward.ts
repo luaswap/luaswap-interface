@@ -19,7 +19,7 @@ const useNewReward = (pid1 = 0) => {
 
   useEffect(() => {
     async function fetchData() {
-      const v = chainId === 88 ? new BigNumber(0) : await getNewRewardPerBlock(sushi, pid1, chainId)
+      const v = await getNewRewardPerBlock(sushi, pid1, chainId)
       CACHE[pid1].time = new Date().getTime()
       CACHE[pid1].value = v
 

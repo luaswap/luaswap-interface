@@ -51,20 +51,20 @@ const Apy: React.FC<ApyProps> = ({ pid, lpTokenAddress, symbolShort, tokenSymbol
         <StyledLabel>APY</StyledLabel>
         <StyledContent>
           {newReward &&
-          stakedValue &&
-          luaPrice &&
-          stakedValue.usdValue &&
-          stakedValue.totalToken2Value &&
-          stakedValue.poolWeight
+            stakedValue &&
+            luaPrice &&
+            stakedValue.usdValue &&
+            stakedValue.totalToken2Value &&
+            stakedValue.poolWeight
             ? `${parseFloat(
-                luaPrice
-                  .times(NUMBER_BLOCKS_PER_YEAR[ID])
-                  .times(newReward.div(10 ** 18))
-                  .div(stakedValue.usdValue)
-                  .div(10 ** 8)
-                  .times(100)
-                  .toFixed(2)
-              ).toLocaleString('en-US')}%`
+              luaPrice
+                .times(NUMBER_BLOCKS_PER_YEAR[ID])
+                .times(newReward.div(10 ** 18))
+                .div(stakedValue.usdValue)
+                .div(10 ** 8)
+                .times(100)
+                .toFixed(2)
+            ).toLocaleString('en-US')}%`
             : 'loading'}
         </StyledContent>
       </StyledBox>
