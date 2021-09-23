@@ -22,7 +22,7 @@ const config = [
     href: '/lua-safe'
   },
   {
-    label: 'Orderbook',
+    label: 'Limit Order',
     icon: 'Groups',
     href: 'https://app.luaswap.org/orderbook/#/'
   },
