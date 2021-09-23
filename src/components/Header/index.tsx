@@ -433,7 +433,7 @@ export default function Header() {
                     </StyleNavList>
                     <StyleNavList>
                       <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
-                        Orderbook
+                        Limit Order
                       </StyledExternalLink>
                     </StyleNavList>
                   </>
@@ -475,7 +475,7 @@ export default function Header() {
 
               <StyleNavList>
                 <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
-                  Orderbook
+                  Limit Order
                 </StyledExternalLink>
               </StyleNavList>
 
