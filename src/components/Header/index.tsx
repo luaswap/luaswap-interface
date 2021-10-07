@@ -436,7 +436,7 @@ export default function Header() {
                       </StyledExternalLink>
                     </StyleNavList>
                     <StyleNavList>
-                      <StyledExternalLink id={`luastarter-nav-link`} href={'#'}>
+                      <StyledExternalLink id={`luastarter-nav-link`} href={'https://app.luaswap.org/ido/'}>
                         LuaStarter
                       </StyledExternalLink>
                     </StyleNavList>
@@ -483,7 +483,7 @@ export default function Header() {
                 </StyledExternalLink>
               </StyleNavList>
               <StyleNavList>
-                <StyledExternalLink id={`luastarter-nav-link`} href={'#'}>
+                <StyledExternalLink id={`luastarter-nav-link`} href={'https://app.luaswap.org/ido/'}>
                   LuaStarter
                 </StyledExternalLink>
               </StyleNavList>
