@@ -146,7 +146,7 @@ const Balances = memo(() => {
               </FootnoteValue>
             </Footnote>
           </CustomCard>
-          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Unstake you LP tokens from ended farming pools <br/> on TomoChain</Link>
+          <Link href="https://app.luaswap.org/tomofarming/v1" target="blank">Unstake your LP tokens from ended farming pools <br/> on TomoChain</Link>
         </div>
       )
       }
