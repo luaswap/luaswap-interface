@@ -325,7 +325,7 @@ const StyledNavLink = styled(NavLink).attrs({
 
 const StyledExternalLink = styled(ExternalLink).attrs({
   activeClassName
-}) <{ isActive?: boolean }>`
+})<{ isActive?: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
   align-items: left;
   border-radius: 3rem;
@@ -419,7 +419,6 @@ export default function Header() {
               </StyledMenuButton>
               {open && (
                 <StyleNavMobile>
-
                   <>
                     <StyleNavList>
                       <StyledNavLink id={`swap-nav-link`} to={'/farming'}>
@@ -433,7 +432,12 @@ export default function Header() {
                     </StyleNavList>
                     <StyleNavList>
                       <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
-                        Orderbook
+                        Limit Order
+                      </StyledExternalLink>
+                    </StyleNavList>
+                    <StyleNavList>
+                      <StyledExternalLink id={`luastarter-nav-link`} href={'https://app.luaswap.org/ido/'}>
+                        LuaStarter
                       </StyledExternalLink>
                     </StyleNavList>
                   </>
@@ -475,10 +479,14 @@ export default function Header() {
 
               <StyleNavList>
                 <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
-                  Orderbook
+                  Limit Order
                 </StyledExternalLink>
               </StyleNavList>
-
+              <StyleNavList>
+                <StyledExternalLink id={`luastarter-nav-link`} href={'https://app.luaswap.org/ido/'}>
+                  LuaStarter
+                </StyledExternalLink>
+              </StyleNavList>
               <StyleNavList>
                 <StyleText>
                   Charts <span style={{ fontSize: '11px' }}>↗</span>
