@@ -25,7 +25,7 @@ const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
   4: 'rinkeby.',
   5: 'goerli.',
   42: 'kovan.',
-  88: 'scan.',
+  88: '',
   89: 'scan.testnet.',
   99: 'scan.devnet.'
 }
@@ -35,7 +35,7 @@ const NETWORK_DOMAIN: { [chainId in ChainId]: string } = {
   4: 'etherscan.io',
   5: 'etherscan.io',
   42: 'etherscan.io',
-  88: 'tomochain.com',
+  88: 'tomoscan.io',
   89: 'tomochain.com',
   99: 'tomochain.com'
 }
@@ -45,7 +45,7 @@ const BLOCK_LINK: { [chainId in ChainId]: string } = {
   4: 'block',
   5: 'block',
   42: 'block',
-  88: 'blocks',
+  88: 'block',
   89: 'blocks',
   99: 'blocks'
 }
@@ -55,7 +55,7 @@ const TOKEN: { [chainId in ChainId]: string } = {
   4: 'token',
   5: 'token',
   42: 'token',
-  88: 'tokens',
+  88: 'token',
   89: 'tokens',
   99: 'tokens'
 }
