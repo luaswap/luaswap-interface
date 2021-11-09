@@ -426,6 +426,11 @@ export default function Header() {
                       </StyledNavLink>
                     </StyleNavList>
                     <StyleNavList>
+                      <StyledExternalLink id="dualfarm-nav-link" href={'https://app.luaswap.org/ido/#/dual-farm'}>
+                        Dual Farm
+                      </StyledExternalLink>
+                    </StyleNavList>
+                    <StyleNavList>
                       <StyledNavLink id="pool-nav-link" to="/lua-safe">
                         {t('LuaSafe')}
                       </StyledNavLink>
@@ -471,6 +476,11 @@ export default function Header() {
               </StyleNavList>
               {/* ) : ''
               } */}
+              <StyleNavList>
+                <StyledExternalLink id="dualfarm-nav-link" href={'https://app.luaswap.org/ido/#/dual-farm'}>
+                  Dual Farm
+                </StyledExternalLink>
+              </StyleNavList>
               <StyleNavList>
                 <StyledNavLink id="pool-nav-link" to="/lua-safe">
                   {t('LuaSafe')}
