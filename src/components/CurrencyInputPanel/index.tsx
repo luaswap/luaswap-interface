@@ -1,18 +1,23 @@
 import { Currency, Pair } from '@luaswap/sdk'
-import React, { useState, useContext, useCallback } from 'react'
+import React, { useEffect, useState, useContext, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
+import { X } from 'react-feather'
 import styled, { ThemeContext } from 'styled-components'
 import { darken } from 'polished'
 import { useCurrencyBalance } from '../../state/wallet/hooks'
+import { useActiveWeb3React } from '../../hooks'
+
 import CurrencySearchModal from '../SearchModal/CurrencySearchModal'
 import CurrencyLogo from '../CurrencyLogo'
 import DoubleCurrencyLogo from '../DoubleLogo'
 import { RowBetween } from '../Row'
+import { AutoColumn } from '../Column'
 import { TYPE } from '../../theme'
 import { Input as NumericalInput } from '../NumericalInput'
 import { ReactComponent as DropDown } from '../../assets/images/dropdown.svg'
+import Modal from '../../components/Modal'
+import ModalTitle from '../../components/ModalTitle'
 
-import { useActiveWeb3React } from '../../hooks'
-import { useTranslation } from 'react-i18next'
 
 const InputRow = styled.div<{ selected: boolean }>`
   ${({ theme }) => theme.flexRowNoWrap}
@@ -113,6 +118,27 @@ const StyledBalanceMax = styled.button`
     margin-right: 0.5rem;
   `};
 `
+const ContentWrapper = styled(AutoColumn)`
+  width: 100%;
+  padding: 1rem;
+  grid-row-gap: 9px;
+  position: relative;
+`
+const LinkMigrate = styled.a`
+  display: inline-block;
+  margin: 20px auto;
+  color: #000;
+  text-decoration: none;
+  background-color: #00e8b4;
+  padding: 10px 20px;
+  border-radius: 8px;
+`
+const CloseIcon = styled(X)<{ onClick: () => void }>`
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+`
 
 interface CurrencyInputPanelProps {
   value: string
@@ -148,11 +174,14 @@ export default function CurrencyInputPanel({
   id,
   showCommonBases,
   customBalanceText
+  
 }: CurrencyInputPanelProps) {
   const { t } = useTranslation()
 
   const [modalOpen, setModalOpen] = useState(false)
+  const [isOpenMigrate, setIsOpenMigrate] = useState(false)
   const { account } = useActiveWeb3React()
+  
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const theme = useContext(ThemeContext)
 
@@ -160,6 +189,15 @@ export default function CurrencyInputPanel({
     setModalOpen(false)
   }, [setModalOpen])
 
+  const handleDismissMigrate= useCallback(() => {
+    setIsOpenMigrate(false)
+  }, [setIsOpenMigrate])
+  useEffect(()=>{
+    // @ts-ignore
+    if(currency && currency.address && currency.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b'){      
+      setIsOpenMigrate(true)
+    }
+  },[currency])
   return (
     <InputPanel id={id}>
       <Container hideInput={hideInput}>
@@ -232,6 +270,15 @@ export default function CurrencyInputPanel({
             </Aligner>
           </CurrencySelect>
         </InputRow>
+        <Modal isOpen={isOpenMigrate} onDismiss={handleDismissMigrate} maxWidth={600}>          
+          <ContentWrapper gap="lg">
+            <CloseIcon onClick={handleDismissMigrate} />
+            <ModalTitle text='Migrate TRC21 ETH'/>
+            <TYPE.white style={{fontWeight:"normal", textAlign:"center", marginBottom: "10px"}}>TomoBridge is migrating TRC21 wrapped ETH to TRC20 wrapped ETH.</TYPE.white>
+            <TYPE.white style={{fontWeight:"normal", textAlign:"center"}}>Please follow this migration tool to migrate your TRC21 ETH.</TYPE.white>
+            <LinkMigrate href="https://migrate.tomochain.com/" target="blank">Migrate TRC21 ETH</LinkMigrate>
+          </ContentWrapper>
+        </Modal>
       </Container>
       {!disableCurrencySelect && onCurrencySelect && (
         <CurrencySearchModal

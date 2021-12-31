@@ -44,7 +44,11 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, mobile, isOpen, ...r
 
     align-self: ${({ mobile }) => (mobile ? 'flex-end' : 'center')};
 
-    max-width: 420px;
+    ${({ maxWidth }) =>
+    maxWidth &&
+      css`
+        max-width: ${maxWidth}px;
+      `}
     ${({ maxHeight }) =>
       maxHeight &&
       css`
@@ -79,6 +83,7 @@ interface ModalProps {
   onDismiss?: () => void
   minHeight?: number | false
   maxHeight?: number
+  maxWidth?: number
   initialFocusRef?: React.RefObject<any>
   children?: React.ReactNode | React.ReactNode[]
 }
@@ -88,6 +93,7 @@ export default function Modal({
   onDismiss = () => {},
   minHeight = false,
   maxHeight = 90,
+  maxWidth = 420,
   initialFocusRef,
   children
 }: ModalProps) {
@@ -126,6 +132,7 @@ export default function Modal({
                 aria-label="dialog content"
                 minHeight={minHeight}
                 maxHeight={maxHeight}
+                maxWidth={maxWidth}
                 mobile={isMobile}
               >
                 {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}

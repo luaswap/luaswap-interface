@@ -2,7 +2,7 @@ import { Currency, JSBI, TokenAmount, TOMO } from '@luaswap/sdk'
 import BigNumber from 'bignumber.js'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Plus } from 'react-feather'
+import { Plus, X } from 'react-feather'
 import { Text } from 'rebass'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
@@ -12,6 +12,7 @@ import { getNativeToken } from '../../utils'
 import { ButtonDropdownLight } from '../../components/Button'
 import { LightCard } from '../../components/Card'
 import { AutoColumn, ColumnCenter } from '../../components/Column'
+import { TYPE } from '../../theme'
 import CurrencyLogo from '../../components/CurrencyLogo'
 import { CreatePairTitle } from '../../components/NavigationTabs'
 import { MinimalPositionCard } from '../../components/PositionCard'
@@ -31,6 +32,8 @@ import { currencyId } from '../../utils/currencyId'
 import AppBody from '../AppBody'
 import { Dots } from '../Pool/styleds'
 import NoticeTomoBridge from '../../components/NoticeGeneral/bridge'
+import Modal from '../../components/Modal'
+import ModalTitle from '../../components/ModalTitle'
 
 const StyledLink = styled(Link)`
   color: #fff;
@@ -40,6 +43,27 @@ const StyledLink = styled(Link)`
   margin-bottom: 20px;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.primary1};
+`
+const ContentWrapper = styled(AutoColumn)`
+  width: 100%;
+  padding: 1rem;
+  grid-row-gap: 9px;
+  position: relative;
+`
+const LinkMigrate = styled.a`
+  display: inline-block;
+  margin: 20px auto;
+  color: #000;
+  text-decoration: none;
+  background-color: #00e8b4;
+  padding: 10px 20px;
+  border-radius: 8px;
+`
+const CloseIcon = styled(X)<{ onClick: () => void }>`
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
 `
 enum Fields {
   TOKEN0 = 0,
@@ -52,6 +76,7 @@ export default function CreatePair() {
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
   const [ loading, setLoading ] = useState<boolean>(false)
+  const [isOpenMigrate, setIsOpenMigrate] = useState(false)
 
   const [currency0, setCurrency0] = useState<Currency | null>(NATIVE_TOKEN)
   const [currency1, setCurrency1] = useState<Currency | null>(null)
@@ -63,6 +88,18 @@ export default function CreatePair() {
       addPair(pair)
     }
   }, [pair, addPair])
+
+  useEffect(() => {
+    // @ts-ignore
+    if((currency0 && currency0.address && currency0.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b') ||(currency1 && currency1.address && currency1.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b')){
+      setIsOpenMigrate(true)
+    }
+  }, [currency0, currency1])
+
+  const handleDismissMigrate= useCallback(() => {
+    setIsOpenMigrate(false)
+  }, [setIsOpenMigrate])
+
   const validPairNoLiquidity: boolean =
     pairState === PairState.NOT_EXISTS ||
     Boolean(
@@ -297,6 +334,15 @@ export default function CreatePair() {
           selectedCurrency={(activeField === Fields.TOKEN0 ? currency1 : currency0) ?? undefined}
         />
       </AppBody>
+      <Modal isOpen={isOpenMigrate} onDismiss={handleDismissMigrate} maxWidth={600}>          
+        <ContentWrapper gap="lg">
+          <CloseIcon onClick={handleDismissMigrate} />
+          <ModalTitle text='Migrate TRC21 ETH'/>
+          <TYPE.white style={{fontWeight:"normal", textAlign:"center", marginBottom: "10px"}}>TomoBridge is migrating TRC21 wrapped ETH to TRC20 wrapped ETH.</TYPE.white>
+          <TYPE.white style={{fontWeight:"normal", textAlign:"center"}}>Please follow this migration tool to migrate your TRC21 ETH.</TYPE.white>
+          <LinkMigrate href="https://migrate.tomochain.com/" target="blank">Migrate TRC21 ETH</LinkMigrate>
+        </ContentWrapper>
+      </Modal>
     </>
   )
 }
