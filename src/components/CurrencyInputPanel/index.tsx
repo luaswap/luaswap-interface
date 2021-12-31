@@ -181,7 +181,6 @@ export default function CurrencyInputPanel({
   const [modalOpen, setModalOpen] = useState(false)
   const [isOpenMigrate, setIsOpenMigrate] = useState(false)
   const { account, chainId } = useActiveWeb3React()
-  
   const selectedCurrencyBalance = useCurrencyBalance(account ?? undefined, currency ?? undefined)
   const theme = useContext(ThemeContext)
 
@@ -197,7 +196,7 @@ export default function CurrencyInputPanel({
     if(chainId === 88 && currency && currency.address && currency.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b'){      
       setIsOpenMigrate(true)
     }
-  },[currency])
+  },[currency, chainId])
   return (
     <InputPanel id={id}>
       <Container hideInput={hideInput}>
