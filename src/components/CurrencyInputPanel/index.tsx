@@ -121,17 +121,16 @@ const StyledBalanceMax = styled.button`
 const ContentWrapper = styled(AutoColumn)`
   width: 100%;
   padding: 1rem;
-  grid-row-gap: 9px;
+  grid-row-gap: 8px;
   position: relative;
 `
 const LinkMigrate = styled.a`
   display: inline-block;
-  margin: 20px auto;
-  color: #000;
+  color: ${({ theme }) => theme.primary1};
   text-decoration: none;
-  background-color: ${({ theme }) => theme.primary1};
-  padding: 10px 20px;
-  border-radius: 8px;
+  &:hover{
+    text-decoration: underline;
+  }
 `
 const CloseIcon = styled(X)<{ onClick: () => void }>`
   cursor: pointer;
@@ -273,9 +272,9 @@ export default function CurrencyInputPanel({
           <ContentWrapper gap="lg">
             <CloseIcon onClick={handleDismissMigrate} />
             <ModalTitle text='Migrate TRC21 ETH'/>
-            <TYPE.white style={{fontWeight:"normal", textAlign:"center", marginBottom: "10px"}}>TomoBridge is migrating TRC21 wrapped ETH to TRC20 wrapped ETH.</TYPE.white>
-            <TYPE.white style={{fontWeight:"normal", textAlign:"center"}}>Please follow this migration tool to migrate your TRC21 ETH.</TYPE.white>
-            <LinkMigrate href="https://migrate.tomochain.com/" target="blank">Migrate TRC21 ETH</LinkMigrate>
+            <TYPE.white style={{fontWeight:"normal",textAlign:"center",lineHeight:"26px", marginBottom: "15px"}}>
+              We are migrating TRC21 wrapped ETH to TRC20 wrapped ETH (called tETH). Please follow this <LinkMigrate href="https://migrate.tomochain.com/" target="blank">migration tool</LinkMigrate> to migrate your TRC21 ETH
+            </TYPE.white>            
           </ContentWrapper>
         </Modal>
       </Container>
