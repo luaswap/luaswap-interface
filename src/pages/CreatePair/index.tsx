@@ -91,7 +91,7 @@ export default function CreatePair() {
 
   useEffect(() => {
     // @ts-ignore
-    if((currency0 && currency0.address && currency0.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b') ||(currency1 && currency1.address && currency1.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b')){
+    if(chainId === 88 && ((currency0 && currency0.address && currency0.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b') ||(currency1 && currency1.address && currency1.address.toLowerCase() === '0x2eaa73bd0db20c64f53febea7b5f5e5bccc7fb8b'))){
       setIsOpenMigrate(true)
     }
   }, [currency0, currency1])
