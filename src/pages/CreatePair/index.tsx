@@ -55,7 +55,7 @@ const LinkMigrate = styled.a`
   margin: 20px auto;
   color: #000;
   text-decoration: none;
-  background-color: #00e8b4;
+  background-color: ${({ theme }) => theme.primary1};
   padding: 10px 20px;
   border-radius: 8px;
 `
