@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="images/192x192_App_Icon.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="images/512x512_App_Icon.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>LuaSwap Maintenance</title>
+    <style>
+      body{
+        background-color: #242828;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        box-sizing: border-box;
+      }
+      #maintenance{
+        width: 100%;
+        height: 100vh;
+        position: relative;
+      }
+      #maintenance .content{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        padding-top: 50px;
+        padding-bottom: 50px;
+      }
+      #maintenance .content img{
+          max-width: 400px;
+      }
+      .content .desc{
+        color: #a9a9a9;
+        font-size: 30px;
+        line-height: 1.7em;
+      }
+      .content .social{
+        list-style: none;
+      }
+      .content .social li{
+        display: inline-block;
+        padding: 5px;
+        margin-right: 20px;
+      }
+
+      .content .social li a{
+        display: block;
+      }
+      @media(max-width: 600px){
+        #maintenance .content{
+          width: 100%;
+        }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div id="maintenance">
+        <div class="content">
+          <div class="m-icon">
+            <img src="images/maintenance.svg" alt="Maintenance">
+          </div>
+          <div class="">
+            <p class="desc">The team is working on LuaSwap upgraded version. For more information, please refer to:</p>
+            <ul class="social">
+              <li><a href="https://twitter.com/LuaSwap"><img src="images/twitter.png" alt=""></a></li>
+              <li><a href="https://t.me/LuaSwap"><img src="images/telegram.png" alt=""></a></li>
+            </ul>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

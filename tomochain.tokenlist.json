@@ -1,0 +1,45 @@
+{
+  "name": "TomoChain",
+  "logoURI": "https://tomochain.com/wp-content/uploads/2020/02/favicon3x4-150x150.png",
+  "keywords": ["Defi", "tomochain"],
+  "tags": {
+    "defi": {
+      "name": "TomoChain Tokens",
+      "description": "Token listed by TomoChain"
+    }
+  },
+  "timestamp": "2020-08-16T00:00:00+00:00",
+  "tokens": [
+    {
+      "name": "LuaToken",
+      "address": "0x7262fa193e9590b2e075c3c16170f3f2f32f5c74",
+      "symbol": "LUA",
+      "decimals": 18,
+      "chainId": 88,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xB1f66997A5760428D3a87D68b90BfE0aE64121cC/logo.png"
+    },
+    {
+      "chainId": 89,
+      "address": "0xc7ecCc9da22aBAAf9cfe311BFD9a55437eA05c2c",
+      "symbol": "USDT",
+      "name": "Tether",
+      "decimals": 6,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xdAC17F958D2ee523a2206206994597C13D831ec7/logo.png",
+      "tags": ["defi"]
+    },
+    {
+      "chainId": 89,
+      "address": "0xf55F13Fde623c00d6b0C7bfc6557735040aA6a08",
+      "symbol": "ETH",
+      "name": "Ethereum",
+      "decimals": 6,
+      "logoURI": "https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2/logo.png",
+      "tags": ["defi"]
+    }
+  ],
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 3
+  }
+}
