@@ -24,13 +24,13 @@ const config = [
   {
     label: 'Limit Order',
     icon: 'Groups',
-    href: 'https://app.luaswap.org/orderbook/#/'
+    href: 'http://orderbook.luaswap.org/'
   },
   {
     key: 'ido',
     label: 'LuaStarter',
     icon: 'IfoIcon',
-    href: 'https://app.luaswap.org/idos'
+    href: 'http://ido.luaswap.org/'
   },
   {
     key: 'info',
