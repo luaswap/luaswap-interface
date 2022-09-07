@@ -426,7 +426,7 @@ export default function Header() {
                       </StyledNavLink>
                     </StyleNavList>
                     <StyleNavList>
-                      <StyledExternalLink id="dualfarm-nav-link" href={'https://app.luaswap.org/ido/#/dual-farm'}>
+                      <StyledExternalLink id="dualfarm-nav-link" href={'https://ido.luaswap.org/#/dual-farm'}>
                         Dual Farm
                       </StyledExternalLink>
                     </StyleNavList>
@@ -436,12 +436,12 @@ export default function Header() {
                       </StyledNavLink>
                     </StyleNavList>
                     <StyleNavList>
-                      <StyledExternalLink id={`orderbook-nav-link`} href={'https://app.luaswap.org/orderbook/#/'}>
+                      <StyledExternalLink id={`orderbook-nav-link`} href={'http://orderbook.luaswap.org/'}>
                         Limit Order
                       </StyledExternalLink>
                     </StyleNavList>
                     <StyleNavList>
-                      <StyledExternalLink id={`luastarter-nav-link`} href={'https://app.luaswap.org/ido/'}>
+                      <StyledExternalLink id={`luastarter-nav-link`} href={'https://ido.luaswap.org/'}>
                         LuaStarter
                       </StyledExternalLink>
                     </StyleNavList>
