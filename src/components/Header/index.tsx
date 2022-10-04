@@ -461,6 +461,14 @@ export default function Header() {
                           TomoChain
                         </StyledExternalLink>
                       </StyleNavList>
+                      <StyleNavList>
+                        <StyledExternalLink
+                          id={`stake-nav-link`}
+                          href={'https://www.geckoterminal.com/tomochain/luaswap/pools'}
+                        >
+                          GeckoTerminal
+                        </StyledExternalLink>
+                      </StyleNavList>
                     </StyleNavSub>
                   </StyleNavList>
                 </StyleNavMobile>
@@ -510,6 +518,14 @@ export default function Header() {
                   <StyleNavList>
                     <StyledExternalLink id={`stake-nav-link`} href={'https://info.luaswap.org/tomochain/home'}>
                       TomoChain
+                    </StyledExternalLink>
+                  </StyleNavList>
+                  <StyleNavList>
+                    <StyledExternalLink
+                      id={`stake-nav-link`}
+                      href={'https://www.geckoterminal.com/tomochain/luaswap/pools'}
+                    >
+                      GeckoTerminal
                     </StyledExternalLink>
                   </StyleNavList>
                 </StyleNavSub>
