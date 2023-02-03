@@ -33,6 +33,7 @@ import Farm from './Farm'
 import { RedirectPathToSwapOnly, RedirectToSwap } from './Swap/redirects' // OpenClaimAddressModalAndRedirectToSwap
 import SafePage from './Safe'
 import CreatePair from './CreatePair'
+import NotiShow from '../components/NotiShow'
 // import Vote from './Vote'
 // import VotePage from './Vote/VotePage'
 
@@ -133,6 +134,7 @@ export default function App() {
           </Web3ReactManager>
           <Marginer />
         </BodyWrapper>
+        <NotiShow />
       </AppWrapper>
     </Suspense>
   )
