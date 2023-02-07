@@ -16,7 +16,8 @@ export default function NotiShow() {
             right: '20px',
             borderRadius: '10px',
             padding: '15px',
-            display: 'flex'
+            display: 'flex',
+            zIndex: '10'
           }}
         >
           <div
