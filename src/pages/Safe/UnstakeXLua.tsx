@@ -56,7 +56,7 @@ const UnstakeXLua: React.FC<UnstakeXLuaProps> = ({ xLuaAddress }) => {
   const [totalSupplyXLua, setTotalSupplyXLua] = useState<BigNumber>(new BigNumber(0))
   const [pendingTx, setPendingTx] = useState(false)
   const trackingAPYBalanceXLua = useTokenBalance(xLuaAddress, '0xdEad000000000000000000000000000000000000')
-  const trackingAPYBalanceXLuaTomo = useTokenBalance(xLuaAddress, '0x854f882771b61b26e91F8644dc0c9c94301FaD2d')
+  const trackingAPYBalanceXLuaTomo = useTokenBalance(xLuaAddress, '0xdEad000000000000000000000000000000000000')
 
   useEffect(() => {
     async function fetchTotalSupplyXLua() {
