@@ -5,7 +5,7 @@ import { hex } from 'wcag-contrast'
 import { Token, ChainId } from '@luaswap/sdk'
 import { IsTomoChain } from '../utils'
 
-const commit_hash = '043e2e03c2ae6248abf2a8a1ea2703628580f380'
+const commit_hash = '50a3655b7208da2ae1c942a0c2d157bb10aa48d4'
 
 async function getColorFromToken(token: Token): Promise<string | null> {
   if (token.chainId === ChainId.RINKEBY && token.address === '0xc7AD46e0b8a400Bb3C915120d284AafbA8fc4735') {
@@ -14,7 +14,7 @@ async function getColorFromToken(token: Token): Promise<string | null> {
   const IsTomo = IsTomoChain(token.chainId)
   let path
   if (IsTomo) {
-    path = `https://raw.githubusercontent.com/tomochain/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${token.address}.png`
+    path = `https://raw.githubusercontent.com/luaswap/luaswap-token-list/${commit_hash}/src/tokens/icons/tomochain/${token.address}.png`
   } else {
     path = `https://raw.githubusercontent.com/trustwallet/assets/master/blockchains/ethereum/assets/${token.address}/logo.png`
   }

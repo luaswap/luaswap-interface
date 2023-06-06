@@ -1,7 +1,7 @@
 // the LuaSwap Default token list lives here
 
 export const DEFAULT_TOKEN_LIST_URL =
-  'https://raw.githubusercontent.com/tomochain/luaswap-token-list/master/build/luaswap-default.tokenlist.json'
+  'https://raw.githubusercontent.com/luaswap/luaswap-token-list/master/build/luaswap-default.tokenlist.json'
 
 // export const DEFAULT_TOKEN_LIST_URL = 'https://raw.githubusercontent.com/tomochain/luaswap-interface/Tinh/public/tomochain.tokenlist.json'
 
