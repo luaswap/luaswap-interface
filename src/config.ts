@@ -1,11 +1,11 @@
 import { ChainId } from '@luaswap/sdk'
 
 export default {
-  rpc: 'https://wallet.tomochain.com/api/luaswap/rpc',
+  rpc: 'https://rpc-farm.luaswap.org/rpc',
   rpcTomochain: 'https://rpc.tomochain.com',
   chainId: 1,
-  apiETH: 'https://wallet.tomochain.com/api/luaswap',
-  apiTOMO: 'https://wallet.tomochain.com/api/luaswap/tomochain'
+  apiETH: 'https://rpc-farm.luaswap.org',
+  apiTOMO: 'https://rpc-farm.luaswap.org/tomochain'
 }
 
 export const START_REWARD_AT_BLOCK: { [chainId in ChainId]: number } = {
@@ -31,7 +31,7 @@ export const NUMBER_BLOCKS_PER_YEAR: { [chainId in ChainId]: number } = {
 }
 
 export const RPC_URL: { [chainId in ChainId]: string } = {
-  1: 'https://wallet.tomochain.com/api/luaswap/rpc',
+  1: 'https://rpc-farm.luaswap.org/rpc',
   3: '',
   4: '',
   5: '',
@@ -42,12 +42,12 @@ export const RPC_URL: { [chainId in ChainId]: string } = {
 }
 
 export const API_URL: { [chainId in ChainId]: string } = {
-  1: 'https://wallet.tomochain.com/api/luaswap',
+  1: 'https://rpc-farm.luaswap.org',
   3: '',
   4: '',
   5: '',
   42: '',
-  88: 'https://wallet.tomochain.com/api/luaswap/tomochain',
+  88: 'https://rpc-farm.luaswap.org/tomochain',
   89: '',
   99: ''
 }

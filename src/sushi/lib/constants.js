@@ -256,60 +256,60 @@ export const supportedPools = [
     addLiquidityLink: "https://app.luaswap.org/#/add/0x05d3606d5c81eb9b7b18530995ec9b29da05faba/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
     removeLiquidityLink: "https://app.luaswap.org/#/remove/0x05d3606d5c81eb9b7b18530995ec9b29da05faba/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
   },
-  {
-    pid: 7,
-    lpAddresses: {
-      1: "0x26Da27Cd29D75BcD925665223B4416025450d756"
-    },
-    tokenAddresses: {
-      1: "0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
-    },
-    token2Addresses: {
-      1: "0x476c5e26a75bd202a9683ffd34359c0cc15be0ff"
-    },
-    name: "LUA - SRM",
-    symbol: "LUA-SRM LUA-V1 LP",
-    symbolShort: "LUA-SRM",
-    description: "Deposit LUA-SRM LUA-V1 LP Earn LUA",
-    tokenSymbol: "LUA",
-    token2Symbol: "SRM",
-    icon: "https://luaswap.org/favicon.png",
-    icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/6187.png",
-    isHot: false,
-    isNew: false,
-    protocal: "LuaSwap",
-    iconProtocal: "https://luaswap.org/favicon.png",
-    pairLink: "https://info.luaswap.org/pair/0x26Da27Cd29D75BcD925665223B4416025450d756",
-    addLiquidityLink: "https://app.luaswap.org/#/add/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
-    removeLiquidityLink: "https://app.luaswap.org/#/remove/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
-  },
-  {
-    pid: 8,
-    lpAddresses: {
-      1: "0x38F9307839A8E82b071EA6Fcbef029814Ed88fcb"
-    },
-    tokenAddresses: {
-      1: "0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
-    },
-    token2Addresses: {
-      1: "0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9"
-    },
-    name: "LUA - FTT",
-    symbol: "LUA-FTT LUA-V1 LP",
-    symbolShort: "LUA-FTT",
-    description: "Deposit LUA-FTT LUA-V1 LP Earn LUA",
-    tokenSymbol: "LUA",
-    token2Symbol: "FTT",
-    icon: "https://luaswap.org/favicon.png",
-    icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/4195.png",
-    isHot: false,
-    isNew: false,
-    protocal: "LuaSwap",
-    iconProtocal: "https://luaswap.org/favicon.png",
-    pairLink: "https://info.luaswap.org/pair/0x38F9307839A8E82b071EA6Fcbef029814Ed88fcb",
-    addLiquidityLink: "https://app.luaswap.org/#/add/0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
-    removeLiquidityLink: "https://app.luaswap.org/#/remove/0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
-  },
+  // {
+  //   pid: 7,
+  //   lpAddresses: {
+  //     1: "0x26Da27Cd29D75BcD925665223B4416025450d756"
+  //   },
+  //   tokenAddresses: {
+  //     1: "0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+  //   },
+  //   token2Addresses: {
+  //     1: "0x476c5e26a75bd202a9683ffd34359c0cc15be0ff"
+  //   },
+  //   name: "LUA - SRM",
+  //   symbol: "LUA-SRM LUA-V1 LP",
+  //   symbolShort: "LUA-SRM",
+  //   description: "Deposit LUA-SRM LUA-V1 LP Earn LUA",
+  //   tokenSymbol: "LUA",
+  //   token2Symbol: "SRM",
+  //   icon: "https://luaswap.org/favicon.png",
+  //   icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/6187.png",
+  //   isHot: false,
+  //   isNew: false,
+  //   protocal: "LuaSwap",
+  //   iconProtocal: "https://luaswap.org/favicon.png",
+  //   pairLink: "https://info.luaswap.org/pair/0x26Da27Cd29D75BcD925665223B4416025450d756",
+  //   addLiquidityLink: "https://app.luaswap.org/#/add/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
+  //   removeLiquidityLink: "https://app.luaswap.org/#/remove/0x476c5e26a75bd202a9683ffd34359c0cc15be0ff/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+  // },
+  // {
+  //   pid: 8,
+  //   lpAddresses: {
+  //     1: "0x38F9307839A8E82b071EA6Fcbef029814Ed88fcb"
+  //   },
+  //   tokenAddresses: {
+  //     1: "0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+  //   },
+  //   token2Addresses: {
+  //     1: "0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9"
+  //   },
+  //   name: "LUA - FTT",
+  //   symbol: "LUA-FTT LUA-V1 LP",
+  //   symbolShort: "LUA-FTT",
+  //   description: "Deposit LUA-FTT LUA-V1 LP Earn LUA",
+  //   tokenSymbol: "LUA",
+  //   token2Symbol: "FTT",
+  //   icon: "https://luaswap.org/favicon.png",
+  //   icon2: "https://s2.coinmarketcap.com/static/img/coins/128x128/4195.png",
+  //   isHot: false,
+  //   isNew: false,
+  //   protocal: "LuaSwap",
+  //   iconProtocal: "https://luaswap.org/favicon.png",
+  //   pairLink: "https://info.luaswap.org/pair/0x38F9307839A8E82b071EA6Fcbef029814Ed88fcb",
+  //   addLiquidityLink: "https://app.luaswap.org/#/add/0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc",
+  //   removeLiquidityLink: "https://app.luaswap.org/#/remove/0x50d1c9771902476076ecfc8b2a83ad6b9355a4c9/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc"
+  // },
 
   {
     pid: 2,

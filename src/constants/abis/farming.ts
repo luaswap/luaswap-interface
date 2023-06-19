@@ -1,8 +1,8 @@
 import FARMING_ABI from './farming.json'
 
-const TOMO_SUPPORTED_POOL = 'https://wallet.tomochain.com/api/luaswap/tomochain/supportedPools'
+const TOMO_SUPPORTED_POOL = 'https://rpc-farm.luaswap.org/tomochain/supportedPools'
 
-const SUPPORTED_POOL = 'https://wallet.tomochain.com/api/luaswap/supportedPools'
+const SUPPORTED_POOL = 'https://rpc-farm.luaswap.org/supportedPools'
 
 const FARMING_ADDRESS = '0xb67D7a6644d9E191Cac4DA2B88D6817351C7fF62'
 

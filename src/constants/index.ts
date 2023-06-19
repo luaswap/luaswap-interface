@@ -267,7 +267,7 @@ export const STAKING_POOLS = [
     token: 'xLUA',
     token2: 'TOMO',
     icon: 'https://luaswap.org/favicon.png',
-    icon2: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png'
+    icon2: 'https://rpc.luaswap.org/public/imgs/tomoiconwhite.png'
   }
 ]
 
@@ -278,7 +278,7 @@ export const TOKEN_ICONS: TokenIconProps = {
   LUA: 'https://luaswap.org/favicon.png',
   'LUA-V1': 'https://luaswap.org/favicon.png',
   USDC: 'https://s2.coinmarketcap.com/static/img/coins/128x128/3408.png',
-  TOMOE: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
+  TOMOE: 'https://rpc.luaswap.org/public/imgs/tomoiconwhite.png',
   ETH: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png',
   USDT: 'https://s2.coinmarketcap.com/static/img/coins/128x128/825.png',
   FRONT: 'https://s2.coinmarketcap.com/static/img/coins/128x128/5893.png',
@@ -293,7 +293,7 @@ export const TOKEN_ICONS: TokenIconProps = {
   DAI: 'https://s2.coinmarketcap.com/static/img/coins/64x64/4943.png',
   BAT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1697.png',
   RAMP: 'https://s2.coinmarketcap.com/static/img/coins/128x128/7463.png',
-  WTOMO: 'https://wallet.tomochain.com/public/imgs/tomoiconwhite.png',
+  WTOMO: 'https://rpc.luaswap.org/public/imgs/tomoiconwhite.png',
   BTC: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png',
   LIT: 'https://s2.coinmarketcap.com/static/img/coins/64x64/3870.png'
 }

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import {API_URL} from '../../config'
+import { API_URL } from '../../config'
 import axios from 'axios'
 
 import { useActiveWeb3React } from '../../hooks'

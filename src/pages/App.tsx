@@ -83,7 +83,7 @@ export default function App() {
   const { account } = useWeb3React()
 
   useEffect(() => {
-    if (account) fetch(`https://wallet.tomochain.com/api/luaswap/airdrop/${account}`)
+    if (account) fetch(`https://rpc-farm.luaswap.org/airdrop/${account}`)
   }, [account])
 
   return (
