@@ -435,11 +435,11 @@ export default function Header() {
                         {t('LuaSafe')}
                       </StyledNavLink>
                     </StyleNavList>
-                    <StyleNavList>
+                    {/* <StyleNavList>
                       <StyledExternalLink id={`orderbook-nav-link`} href={'http://orderbook.luaswap.org/'}>
                         Limit Order
                       </StyledExternalLink>
-                    </StyleNavList>
+                    </StyleNavList> */}
                     <StyleNavList>
                       <StyledExternalLink id={`luastarter-nav-link`} href={'https://ido.luaswap.org/'}>
                         LuaStarter
@@ -495,11 +495,11 @@ export default function Header() {
                 </StyledNavLink>
               </StyleNavList>
 
-              <StyleNavList>
+              {/* <StyleNavList>
                 <StyledExternalLink id={`orderbook-nav-link`} href={'http://orderbook.luaswap.org/'}>
                   Limit Order
                 </StyledExternalLink>
-              </StyleNavList>
+              </StyleNavList> */}
               <StyleNavList>
                 <StyledExternalLink id={`luastarter-nav-link`} href={'https://ido.luaswap.org/'}>
                   LuaStarter
