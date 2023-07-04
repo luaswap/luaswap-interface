@@ -39,16 +39,19 @@ const FarmCards: React.FC = () => {
   const stakedValue = useAllStakedValue()
   const luaPrice = useLuaPrice()
 
+  console.log(stakedValue, 'stakedValue')
+
   const rows = farms.reduce<FarmWithStakedValue[][]>(
     (farmRows, farm, i) => {
+      const findedstakedValue = stakedValue.find(st => st.pid.toString() === farm.pid.toString())
       const farmWithStakedValue: FarmWithStakedValue = {
         ...farm,
-        tokenAmount: (stakedValue[i] || {}).tokenAmount || new BigNumber(0),
-        token2Amount: (stakedValue[i] || {}).token2Amount || new BigNumber(0),
-        totalToken2Value: (stakedValue[i] || {}).totalToken2Value || new BigNumber(0),
-        tokenPriceInToken2: (stakedValue[i] || {}).tokenPriceInToken2 || new BigNumber(0),
-        poolWeight: (stakedValue[i] || {}).poolWeight || new BigNumber(0),
-        usdValue: (stakedValue[i] || {}).usdValue || new BigNumber(0),
+        tokenAmount: (findedstakedValue || {}).tokenAmount || new BigNumber(0),
+        token2Amount: (findedstakedValue || {}).token2Amount || new BigNumber(0),
+        totalToken2Value: (findedstakedValue || {}).totalToken2Value || new BigNumber(0),
+        tokenPriceInToken2: (findedstakedValue || {}).tokenPriceInToken2 || new BigNumber(0),
+        poolWeight: (findedstakedValue || {}).poolWeight || new BigNumber(0),
+        usdValue: (findedstakedValue || {}).usdValue || new BigNumber(0),
         luaPrice
       }
       const newFarmRows = [...farmRows]
@@ -62,6 +65,7 @@ const FarmCards: React.FC = () => {
     [[]]
   )
 
+  // console.log(rows, 'rows')
   return (
     <StyledCards>
       {!!rows[0].length ? (
@@ -145,7 +149,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
               <StyledDetail>{farm.description}</StyledDetail>
             </StyledDetails>
             <Spacer />
-            <Button disabled={!(poolActive)} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
+            <Button disabled={!poolActive} text={poolActive ? 'Select' : undefined} to={`/farming/${farm.id}`}>
               {!poolActive && <Countdown date={new Date(startTime * 1000)} renderer={renderer} />}
             </Button>
             {/* <Button disabled={(block && block < 34466888) ? true : false} text={(block && block > 34466888) ? 'Select' : 'Disable'} to={(block && block > 34466888) ? `/farming/${farm.id}` : ''}>
@@ -163,8 +167,9 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   )}
                 </span>
               </StyledInsight>
-            ) : ''
-            }
+            ) : (
+              ''
+            )}
             {!farm.isHot && (
               <>
                 <StyledInsight>
@@ -183,14 +188,14 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm }) => {
                   <span style={{ fontWeight: 'bold', color: '#4caf50' }}>
                     {newReward && farm.poolWeight && farm.luaPrice && farm.usdValue
                       ? `${parseFloat(
-                        farm.luaPrice
-                          .times(NUMBER_BLOCKS_PER_YEAR[ID])
-                          .times(newReward.div(10 ** 18))
-                          .div(farm.usdValue)
-                          .div(10 ** 8)
-                          .times(100)
-                          .toFixed(2)
-                      ).toLocaleString('en-US')}%`
+                          farm.luaPrice
+                            .times(NUMBER_BLOCKS_PER_YEAR[ID])
+                            .times(newReward.div(10 ** 18))
+                            .div(farm.usdValue)
+                            .div(10 ** 8)
+                            .times(100)
+                            .toFixed(2)
+                        ).toLocaleString('en-US')}%`
                       : '~'}
                   </span>
                 </StyledInsight>

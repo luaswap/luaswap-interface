@@ -177,35 +177,35 @@ export const supportedPools = [
     addLiquidityLink: 'https://app.luaswap.org/#/add/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc/ETH',
     removeLiquidityLink: 'https://app.luaswap.org/#/remove/0xb1f66997a5760428d3a87d68b90bfe0ae64121cc/ETH'
   },
-  {
-    pid: 13,
-    lpAddresses: {
-      1: '0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa'
-    },
-    tokenAddresses: {
-      1: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
-    },
-    token2Addresses: {
-      1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-    },
-    name: 'WBTC - USDC',
-    symbol: 'WBTC-USDC LUA-V1 LP',
-    symbolShort: 'WBTC-USDC',
-    description: 'Deposit WBTC-USDC LUA-V1 LP Earn LUA',
-    tokenSymbol: 'WBTC',
-    token2Symbol: 'USDC',
-    icon: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png',
-    icon2: 'https://s2.coinmarketcap.com/static/img/coins/128x128/3408.png',
-    isHot: false,
-    isNew: false,
-    protocal: 'LuaSwap',
-    iconProtocal: 'https://luaswap.org/favicon.png',
-    pairLink: 'https://info.luaswap.org/pair/0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa',
-    addLiquidityLink:
-      'https://app.luaswap.org/#/add/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
-    removeLiquidityLink:
-      'https://app.luaswap.org/#/remove/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
-  },
+  // {
+  //   pid: 13,
+  //   lpAddresses: {
+  //     1: '0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa'
+  //   },
+  //   tokenAddresses: {
+  //     1: '0x2260fac5e5542a773aa44fbcfedf7c193bc2c599'
+  //   },
+  //   token2Addresses: {
+  //     1: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+  //   },
+  //   name: 'WBTC - USDC',
+  //   symbol: 'WBTC-USDC LUA-V1 LP',
+  //   symbolShort: 'WBTC-USDC',
+  //   description: 'Deposit WBTC-USDC LUA-V1 LP Earn LUA',
+  //   tokenSymbol: 'WBTC',
+  //   token2Symbol: 'USDC',
+  //   icon: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png',
+  //   icon2: 'https://s2.coinmarketcap.com/static/img/coins/128x128/3408.png',
+  //   isHot: false,
+  //   isNew: false,
+  //   protocal: 'LuaSwap',
+  //   iconProtocal: 'https://luaswap.org/favicon.png',
+  //   pairLink: 'https://info.luaswap.org/pair/0x66E10dEa0019dC7353D2e4106E9b84f1CFc17CBa',
+  //   addLiquidityLink:
+  //     'https://app.luaswap.org/#/add/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48',
+  //   removeLiquidityLink:
+  //     'https://app.luaswap.org/#/remove/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48'
+  // },
   {
     startAt: 1605601513,
     pid: 15,
