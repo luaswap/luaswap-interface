@@ -22,23 +22,33 @@ export default function Farms() {
   return (
     <>
       <Container>
-        <p style={{ marginBottom: '20px' }}>
-          LuaSwap started as a community project to support TomoChain in its early days. The project never raised money
-          and its mission has ended. Therefore, LuaSwap will stop all the services and close down the operation on March
-          31, 2024. We hope all the best for Viction and its ecosystem. Lua token can be converted 1 to 1 to Cha token
-          of{' '}
-          <a
-            href="https://cha.finance"
-            target="_blank"
-            style={{
-              color: '#6C7BFF'
-            }}
-            rel="noreferrer"
-          >
-            Cha.finance
-          </a>{' '}
-          project Notes: You should withdraw all your fund from LuaSwap: LuaSwap Pool, Lua Farming, Lua Starter
-        </p>
+        <div
+          style={{
+            marginBottom: '20px',
+            background: '#ff6565',
+            padding: '20px',
+            borderRadius: '10px'
+          }}
+        >
+          <p style={{ marginBottom: '20px', color: '#fff' }}>
+            LuaSwap started as a community project to support TomoChain in its early days. The project never raised
+            money and its mission has ended. Therefore, LuaSwap will stop all the services and close down the operation
+            on March 31, 2024. We hope all the best for Viction and its ecosystem. Lua token can be converted 1 to 1 to
+            Cha token of{' '}
+            <a
+              href="https://cha.finance"
+              target="_blank"
+              style={{
+                color: '#6C7BFF'
+              }}
+              rel="noreferrer"
+            >
+              Cha.finance
+            </a>{' '}
+            project Notes: You should withdraw all your fund from LuaSwap: LuaSwap Pool, Lua Farming, Lua Starter
+          </p>
+        </div>
+
         {!IsTomo ? (
           <div style={{ fontWeight: 'bold', fontSize: 22, color: '#ffffff', textAlign: 'center' }}>
             LuaSwap Currently Has{' '}

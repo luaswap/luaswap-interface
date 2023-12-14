@@ -267,8 +267,17 @@ export default function Swap() {
   return (
     <>
       <Flex justifyContent="center">
-        <div style={{ width: '60%', minWidth: '350px' }}>
-          <p style={{ marginBottom: '20px' }}>
+        <div
+          style={{
+            width: '60%',
+            minWidth: '350px',
+            marginBottom: '20px',
+            background: '#ff6565',
+            padding: '20px',
+            borderRadius: '10px'
+          }}
+        >
+          <p style={{ marginBottom: '20px', color: '#fff' }}>
             LuaSwap started as a community project to support TomoChain in its early days. The project never raised
             money and its mission has ended. Therefore, LuaSwap will stop all the services and close down the operation
             on March 31, 2024. We hope all the best for Viction and its ecosystem. Lua token can be converted 1 to 1 to
