@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useEffect, useMemo, useState } from 're
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
 import { isMobile } from 'react-device-detect'
-import { Text } from 'rebass'
+import { Flex, Text } from 'rebass'
 import { ThemeContext } from 'styled-components'
 import AddressInputPanel from '../../components/AddressInputPanel'
 import { ButtonError, ButtonLight, ButtonPrimary, ButtonConfirmed } from '../../components/Button'
@@ -267,6 +267,27 @@ export default function Swap() {
   ])
   return (
     <>
+      <Flex justifyContent="center">
+        <div style={{ width: '60%', minWidth: '350px' }}>
+          <p style={{ marginBottom: '20px' }}>
+            LuaSwap started as a community project to support TomoChain in its early days. The project never raised
+            money and its mission has ended. Therefore, LuaSwap will stop all the services and close down the operation
+            on March 31, 2024. We hope all the best for Viction and its ecosystem. Lua token can be converted 1 to 1 to
+            Cha token of{' '}
+            <a
+              href="https://cha.finance"
+              target="_blank"
+              style={{
+                color: '#6C7BFF'
+              }}
+              rel="noreferrer"
+            >
+              Cha.finance
+            </a>{' '}
+            project Notes: You should withdraw all your fund from LuaSwap: LuaSwap Pool, Lua Farming, Lua Starter
+          </p>
+        </div>
+      </Flex>
       <NoticeTomoBridge />
       <TokenWarningModal
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
