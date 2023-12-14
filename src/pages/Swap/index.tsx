@@ -2,7 +2,7 @@ import { CurrencyAmount, JSBI, Token, Trade } from '@luaswap/sdk'
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { ArrowDown } from 'react-feather'
 import ReactGA from 'react-ga'
-import { Text } from 'rebass'
+import { Flex, Text } from 'rebass'
 import { isMobile } from 'react-device-detect'
 import { ThemeContext } from 'styled-components'
 import AddressInputPanel from '../../components/AddressInputPanel'
@@ -106,18 +106,18 @@ export default function Swap() {
     toggledVersion === Version.v2 && isTradeBetter(v2Trade, v1Trade, BETTER_TRADE_LINK_THRESHOLD)
       ? Version.v1
       : toggledVersion === Version.v1 && isTradeBetter(v1Trade, v2Trade)
-        ? Version.v2
-        : undefined
+      ? Version.v2
+      : undefined
 
   const parsedAmounts = showWrap
     ? {
-      [Field.INPUT]: parsedAmount,
-      [Field.OUTPUT]: parsedAmount
-    }
+        [Field.INPUT]: parsedAmount,
+        [Field.OUTPUT]: parsedAmount
+      }
     : {
-      [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
-      [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
-    }
+        [Field.INPUT]: independentField === Field.INPUT ? parsedAmount : trade?.inputAmount,
+        [Field.OUTPUT]: independentField === Field.OUTPUT ? parsedAmount : trade?.outputAmount
+      }
 
   const { onSwitchTokens, onCurrencySelection, onUserInput, onChangeRecipient } = useSwapActionHandlers()
   const isValid = !swapInputError
@@ -202,8 +202,8 @@ export default function Swap() {
             recipient === null
               ? 'Swap w/o Send'
               : (recipientAddress ?? recipient) === account
-                ? 'Swap w/o Send + recipient'
-                : 'Swap w/ Send',
+              ? 'Swap w/o Send + recipient'
+              : 'Swap w/ Send',
           label: [
             trade?.inputAmount?.currency?.symbol,
             trade?.outputAmount?.currency?.symbol,
@@ -266,6 +266,27 @@ export default function Swap() {
   ])
   return (
     <>
+      <Flex justifyContent="center">
+        <div style={{ width: '60%', minWidth: '350px' }}>
+          <p style={{ marginBottom: '20px' }}>
+            LuaSwap started as a community project to support TomoChain in its early days. The project never raised
+            money and its mission has ended. Therefore, LuaSwap will stop all the services and close down the operation
+            on March 31, 2024. We hope all the best for Viction and its ecosystem. Lua token can be converted 1 to 1 to
+            Cha token of{' '}
+            <a
+              href="https://cha.finance"
+              target="_blank"
+              style={{
+                color: '#6C7BFF'
+              }}
+              rel="noreferrer"
+            >
+              Cha.finance
+            </a>{' '}
+            project Notes: You should withdraw all your fund from LuaSwap: LuaSwap Pool, Lua Farming, Lua Starter
+          </p>
+        </div>
+      </Flex>
       <NoticeTomoBridge />
       <TokenWarningModal
         isOpen={urlLoadedTokens.length > 0 && !dismissTokenWarning}
@@ -456,8 +477,8 @@ export default function Swap() {
                   {swapInputError
                     ? swapInputError
                     : priceImpactSeverity > 3 && !isExpertMode
-                      ? `Price Impact Too High`
-                      : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
+                    ? `Price Impact Too High`
+                    : `Swap${priceImpactSeverity > 2 ? ' Anyway' : ''}`}
                 </Text>
               </ButtonError>
             )}
